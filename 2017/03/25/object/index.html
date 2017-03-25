@@ -71,7 +71,7 @@
 <link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="stackoverflow,python,object," />
 
 
 
@@ -87,15 +87,22 @@
 
 
 
-<meta name="description" content="stay hungry,stay foolish">
-<meta property="og:type" content="website">
-<meta property="og:title" content="MMMMMCCLXXVII">
-<meta property="og:url" content="http://www.mmmmmcclxxvii.cn/index.html">
+<meta name="description" content="what does ‘super’ do in python下面两个的区别是？
+123class Child(SomeBaseClass):    def __init__(self):		super(Child, self).__init__()
+和123class Child(SomeBaseClass):    def __init__(self):		SomeBaseClass.__ini">
+<meta property="og:type" content="article">
+<meta property="og:title" content="project of stackoverflow - python object(一)">
+<meta property="og:url" content="http://www.mmmmmcclxxvii.cn/2017/03/25/object/index.html">
 <meta property="og:site_name" content="MMMMMCCLXXVII">
-<meta property="og:description" content="stay hungry,stay foolish">
+<meta property="og:description" content="what does ‘super’ do in python下面两个的区别是？
+123class Child(SomeBaseClass):    def __init__(self):		super(Child, self).__init__()
+和123class Child(SomeBaseClass):    def __init__(self):		SomeBaseClass.__ini">
+<meta property="og:updated_time" content="2017-03-25T14:37:56.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="MMMMMCCLXXVII">
-<meta name="twitter:description" content="stay hungry,stay foolish">
+<meta name="twitter:title" content="project of stackoverflow - python object(一)">
+<meta name="twitter:description" content="what does ‘super’ do in python下面两个的区别是？
+123class Child(SomeBaseClass):    def __init__(self):		super(Child, self).__init__()
+和123class Child(SomeBaseClass):    def __init__(self):		SomeBaseClass.__ini">
 
 
 
@@ -123,13 +130,13 @@
 
 
 
-  <link rel="canonical" href="http://www.mmmmmcclxxvii.cn/"/>
+  <link rel="canonical" href="http://www.mmmmmcclxxvii.cn/2017/03/25/object/"/>
 
 
 
 
 
-  <title> MMMMMCCLXXVII </title>
+  <title> project of stackoverflow - python object(一) | MMMMMCCLXXVII </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="en">
@@ -154,9 +161,7 @@
     
   
 
-  <div class="container sidebar-position-left 
-   page-home 
- ">
+  <div class="container sidebar-position-left page-post-detail ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -249,9 +254,9 @@
         <div class="content-wrap">
           <div id="content" class="content">
             
-  <section id="posts" class="posts-expand">
+
+  <div id="posts" class="posts-expand">
     
-      
 
   
 
@@ -281,10 +286,7 @@
             
             
               
-                
-                <a class="post-title-link" href="/2017/03/25/object/" itemprop="url">
-                  project of stackoverflow - python object(一)
-                </a>
+                project of stackoverflow - python object(一)
               
             
           </h1>
@@ -335,6 +337,16 @@
 
           
             
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a class="cloud-tie-join-count" href="/2017/03/25/object/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count join-count" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
           
 
           
@@ -368,9 +380,7 @@
       
 
       
-        
-          
-            <h1 id="what-does-‘super’-do-in-python"><a href="#what-does-‘super’-do-in-python" class="headerlink" title="what does ‘super’ do in python"></a><a href="http://stackoverflow.com/questions/222877/what-does-super-do-in-python" target="_blank" rel="external">what does ‘super’ do in python</a></h1><p>下面两个的区别是？</p>
+        <h1 id="what-does-‘super’-do-in-python"><a href="#what-does-‘super’-do-in-python" class="headerlink" title="what does ‘super’ do in python"></a><a href="http://stackoverflow.com/questions/222877/what-does-super-do-in-python" target="_blank" rel="external">what does ‘super’ do in python</a></h1><p>下面两个的区别是？</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Child</span><span class="params">(SomeBaseClass)</span>:</span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self)</span>:</span></div><div class="line">		super(Child, self).__init__()</div></pre></td></tr></table></figure>
 <p>和<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Child</span><span class="params">(SomeBaseClass)</span>:</span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self)</span>:</span></div><div class="line">		SomeBaseClass.__init__(self)</div></pre></td></tr></table></figure></p>
 <p>我在单个继承中已经看到<code>super</code> 被用的很多了。我能知道为什么要在多重继承的时候用它，但是还是不清楚在这种情况用它的好处。</p>
@@ -429,182 +439,76 @@
 </blockquote>
 <p>并不要求你要从随机的类中多种继承。除非<code>foo</code>是被特意设计成在多重继承的时候将兄弟类的重写。D不应该存在。</p>
 
-          
+      
+    </div>
+
+    <div>
+      
         
+
       
     </div>
 
     <div>
       
-    </div>
+        
 
-    <div>
       
     </div>
 
     <div>
+      
+        
+
       
     </div>
 
     <footer class="post-footer">
       
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://www.mmmmmcclxxvii.cn/2017/03/23/hello-world/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Crayon Chaney">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/uploads/myface.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="MMMMMCCLXXVII">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2017/03/23/hello-world/" itemprop="url">
-                  Hello World
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-03-23T20:04:11+08:00">
-                2017-03-23
-              </time>
-            
-
-            
-
-            
-          </span>
-
+        <div class="post-tags">
           
-
+            <a href="/tags/stackoverflow/" rel="tag"># stackoverflow</a>
           
-            
+            <a href="/tags/python/" rel="tag"># python</a>
           
-
+            <a href="/tags/object/" rel="tag"># object</a>
           
-          
-             <span id="/2017/03/23/hello-world/" class="leancloud_visitors" data-flag-title="Hello World">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">Visitors </span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
         </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
       
 
       
         
-          
-            <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo new <span class="string">"My New Post"</span></div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo server</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="external">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo generate</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo deploy</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
       
 
       
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/03/23/hello-world/" rel="next" title="Hello World">
+                <i class="fa fa-chevron-left"></i> Hello World
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
 
       
-
-      
-      
-        <div class="post-eof"></div>
       
     </footer>
   </article>
 
 
-    
-  </section>
 
-  
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -612,6 +516,12 @@
 
 
           
+  <div class="comments" id="comments">
+    
+      <div id="cloud-tie-wrapper" class="cloud-tie-wrapper"></div>
+    
+  </div>
+
 
         </div>
         
@@ -631,8 +541,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel sidebar-panel-active">
+      <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/uploads/myface.png"
@@ -694,6 +613,22 @@
 
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#what-does-‘super’-do-in-python"><span class="nav-number">1.</span> <span class="nav-text">what does ‘super’ do in python</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#区别是什么？"><span class="nav-number">1.0.0.0.0.1.</span> <span class="nav-text">区别是什么？</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#向前兼容间接-？？-（Indirection-with-Forward-Compatibility"><span class="nav-number">1.0.0.0.0.2.</span> <span class="nav-text">向前兼容间接 ？？ （Indirection with Forward Compatibility)</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#依赖注入-Dependency-Injection"><span class="nav-number">1.0.0.0.0.3.</span> <span class="nav-text">依赖注入 Dependency Injection</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#结论"><span class="nav-number">1.0.0.0.0.4.</span> <span class="nav-text">结论</span></a></li></ol></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#我的："><span class="nav-number">1.1.</span> <span class="nav-text">我的：</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -801,6 +736,10 @@
   
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
 
   
 
