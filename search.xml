@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search>
+  
+  
+    
+    <entry>
+      <title><![CDATA[project of stackoverflow - python object(一)]]></title>
+      <url>http://www.mmmmmcclxxvii.cn/2017/03/25/object/</url>
+      <content type="html"><![CDATA[<h1 id="what-does-‘super’-do-in-python"><a href="#what-does-‘super’-do-in-python" class="headerlink" title="what does ‘super’ do in python"></a><a href="http://stackoverflow.com/questions/222877/what-does-super-do-in-python" target="_blank" rel="external">what does ‘super’ do in python</a></h1><p>下面两个的区别是？</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Child</span><span class="params">(SomeBaseClass)</span>:</span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self)</span>:</span></div><div class="line">		super(Child, self).__init__()</div></pre></td></tr></table></figure>
+<p>和<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Child</span><span class="params">(SomeBaseClass)</span>:</span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self)</span>:</span></div><div class="line">		SomeBaseClass.__init__(self)</div></pre></td></tr></table></figure></p>
+<p>我在单个继承中已经看到<code>super</code> 被用的很多了。我能知道为什么要在多重继承的时候用它，但是还是不清楚在这种情况用它的好处。</p>
+<hr>
+<p>180票的回答：（John Millikin)</p>
+<p>在单一继承用<code>super</code>的好处很小–只是你不再需要硬编码基类名字到方法里面去了</p>
+<p>然后，在多重继承里，不用<code>super()</code>几乎是不可能的。这包括常见的习语，像是mixins，interface,abstract classes等，<br>这能让你的代码在之后延伸。如果以后有人想写一个拓展<code>Child</code> 和 mixin的类，他们的代码不会很好的工作。</p>
+<hr>
+<p>75票的回答：</p>
+<p><strong>区别是什么？</strong></p>
+<p><code>SomeBaseClass.__init__(self)</code>意思是调用<code>SomeBaseClass</code>的<code>__init__</code>方法<br>然后，<code>super(Child,self).__init__()</code>意思是从<code>Child</code>类的MRO的父类中调用一个绑定方法<code>__init__</code><br>如果实例是Child的子类，有可能在方法解释顺序中的下一个父类是不一样的？？？</p>
+<p><strong>向前兼容间接 ？？ （Indirection with Forward Compatibility) </strong></p>
+<p>这能给你什么？对于单重继承，问题中给出的例子几乎等同于静态分析。然而使用<code>super</code> 提供了具有向前兼容性的间接层<br>向前兼容对于经验丰富的开发者来说是很重要的。你希望你的代码在做出一些细微的改动之后还能工作。当您查看修订历史记录时，您希望准确地查看何时更改了哪些内容。</p>
+<p>你可能先从单重继承开始，但是当你增加另外的基类，你只需要改变基类的顺序（change the line with the bases）<br>（if the bases change in a class you inherit from）如果类继承关系变了（比如增加了一个mixin)，其实你就没做什么改变。<br>尤其在python2中，要想给super正确的方法参数是很难的。如果你知道你在单重继承下正确的使用<code>super</code>，这样是的调试就容易一点了</p>
+<p><strong>依赖注入 Dependency Injection </strong></p>
+<p>其他人可以使用你的代码然后插入一些父类到方法解释中(method resolution):</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">SomeBaseClass</span><span class="params">(object)</span>:</span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self)</span>:</span></div><div class="line">		print(<span class="string">'SomeBaseClass.__init__(self) called'</span>)</div><div class="line">			</div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">UnsuperChild</span><span class="params">(SomeBaseClass)</span>:</span></div><div class="line">	<span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self)</span>:</span></div><div class="line">		print(<span class="string">'UnsuperChild.__init__(self) called'</span>)</div><div class="line">		SomeBaseClass.__init__(self)</div><div class="line">							</div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">SuperChild</span><span class="params">(SomeBaseClass)</span>:</span></div><div class="line">	<span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self)</span>:</span></div><div class="line">		print(<span class="string">'SuperChild.__init__(self) called'</span>)</div><div class="line">		super(SuperChild, self).__init__()</div></pre></td></tr></table></figure>
+<p>现在你增加其他类，然后在Foo和Bar之间插入一个类</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">InjectMe</span><span class="params">(SomeBaseClass)</span>:</span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self)</span>:</span></div><div class="line">		print(<span class="string">'InjectMe.__init__(self) called'</span>)</div><div class="line">		super(InjectMe, self).__init__()</div><div class="line">				</div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">UnsuperInjector</span><span class="params">(UnsuperChild, InjectMe)</span>:</span> <span class="keyword">pass</span></div><div class="line">					</div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">SuperInjector</span><span class="params">(SuperChild, InjectMe)</span>:</span> <span class="keyword">pass</span></div></pre></td></tr></table></figure>
+<p>使用un-super子类未能注入依赖，因为你是用的子类在自己执行打印后调用的是硬编码方法</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&gt;&gt;&gt; </span>o = UnsuperInjector()</div><div class="line">UnsuperChild.__init__(self) called</div><div class="line">SomeBaseClass.__init__(self) called</div></pre></td></tr></table></figure>
+<p>然而使用<code>super</code>的子类能正确的依赖注入</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&gt;&gt;&gt; </span>o2 = SuperInjector()</div><div class="line">SuperChild.__init__(self) called</div><div class="line">InjectMe.__init__(self) called</div><div class="line">SomeBaseClass.__init__(self) called</div></pre></td></tr></table></figure>
+<p>(我：因为super按照MRO来寻找next类的，不是就是去找父类SomeBaseClass,<br>因为SuperInjector的MRO是自身&gt; UnsuperChild &gt; InjectMe &gt; SomeBaseClass &gt; object</p>
+<p>还有就是 super 不是在SuperChild内么，为什么要按SuperInjector的MRO来？？<br>这里应该是因为SuperInjector的init没有定义，然后是用的supserchild的，但是还是按照自身的MRO来。<br>怎么做实验</p>
+<p>)</p>
+<p><strong>结论</strong><br>一直使用<code>super</code>来引用父类就好了</p>
+<p>你想要引用的父类是MRO下一个类，而不是你看到的继承的关系</p>
+<p>不使用<code>super</code> 回让你代码的使用者多了很多不必要的限制</p>
+<hr>
+<h1 id="我的："><a href="#我的：" class="headerlink" title="我的："></a>我的：</h1><p>一个例子就是<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">from</span> collections imoprt Counter, OrderedDict</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">OrderedCounter</span><span class="params">(Counter, OrderedDict)</span>:</span></div><div class="line">	<span class="keyword">pass</span></div><div class="line"></div><div class="line">oc = OrderedCounter(<span class="string">"abracadabra"</span>)</div></pre></td></tr></table></figure></p>
+<p>之前还一直奇怪这个为什么类里面pass，什么都不用写就能结合，现在知道是因为有super<br>相当于我先把参数传递到Counter初始化，然后因为有super找到的是下一个MRO，然后到OrderedDict初始化<br>相当于两个工序，先count再order。</p>
+<hr>
+<h1 id="How-does-Python’s-super-actually-work-in-the-general-case"><a href="#How-does-Python’s-super-actually-work-in-the-general-case" class="headerlink" title="How does Python’s super() actually work, in the general case?"></a><a href="http://stackoverflow.com/questions/33290894/how-does-pythons-super-actually-work-in-the-general-case/33291315?noredirect=1#comment72867412_33291315" target="_blank" rel="external">How does Python’s super() actually work, in the general case?</a></h1><p>现在有很多有关<code>super()</code>的资源，包括<a href="https://rhettinger.wordpress.com/2011/05/26/super-considered-super/" target="_blank" rel="external">这个</a>博客写的，还有很多stackoverflow上的问题。但是我感觉它们都没有解释它在普遍情况下是怎么工作的，也就是底层的实现。</p>
+<p>考虑下面的这个继承层次：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">A</span><span class="params">(object)</span>:</span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">foo</span><span class="params">(self)</span>:</span></div><div class="line">		<span class="keyword">print</span> <span class="string">'A foo'</span></div><div class="line">			</div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">B</span><span class="params">(A)</span>:</span></div><div class="line">	<span class="function"><span class="keyword">def</span> <span class="title">foo</span><span class="params">(self)</span>:</span></div><div class="line">		<span class="keyword">print</span> <span class="string">'B foo before'</span></div><div class="line">		super(B, self).foo()</div><div class="line">		<span class="keyword">print</span> <span class="string">'B foo after'</span></div><div class="line">										</div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">C</span><span class="params">(A)</span>:</span></div><div class="line">	<span class="function"><span class="keyword">def</span> <span class="title">foo</span><span class="params">(self)</span>:</span></div><div class="line">		<span class="keyword">print</span> <span class="string">'C foo before'</span></div><div class="line">		super(C, self).foo()</div><div class="line">		<span class="keyword">print</span> <span class="string">'C foo after'</span></div><div class="line">																	</div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">D</span><span class="params">(B, C)</span>:</span></div><div class="line">	<span class="function"><span class="keyword">def</span> <span class="title">foo</span><span class="params">(self)</span>:</span></div><div class="line">		<span class="keyword">print</span> <span class="string">'D foo before'</span></div><div class="line">		super(D, self).foo()</div><div class="line">		<span class="keyword">print</span> <span class="string">'D foo after'</span></div></pre></td></tr></table></figure>
+<p>如果你读过python的方法解释顺序的规则，你就知道上面的MRO是（D,B,C,A,object)。 这是被D.<strong>mro</strong>决定的<br><code>(&lt;class &#39;__main__.D&#39;&gt;, &lt;class &#39;__main__.B&#39;&gt;, &lt;class &#39;__main__.C&#39;&gt;, &lt;class &#39;__main__.A&#39;&gt;, &lt;type &#39;object&#39;&gt;))</code></p>
+<p>和<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">d = D()</div><div class="line">d.foo()</div></pre></td></tr></table></figure></p>
+<p>打印出的：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">D foo before</div><div class="line">B foo before</div><div class="line">C foo before</div><div class="line">A foo</div><div class="line">C foo after</div><div class="line">B foo after</div><div class="line">D foo after</div></pre></td></tr></table></figure>
+<p>结果符合MRO。 但是，考虑上面的B中的<code>super(B,self).foo()</code> 实际调用的是<code>C.foo</code>，这个是在<code>b=B()</code>中；<code>b.foo()</code> 会直接到<code>A.foo</code> 很显然使用<code>super(B,self).foo()</code>不是<code>A.foo(self)</code>的快捷键，虽然有时是</p>
+<p>很显然<code>super()</code>是有意识的在意之前的调用，然后尝试着去跟随总的MRO链。我觉得有两个方法能完成这个。<br>第一个是做了一些类似在链中将<code>super</code>对象传递给下一个方法的<code>self</code>参数,像原来<code>self</code>对象那样，但是包含了这个信息，但是这样似乎会破坏很多东西(<code>super(D,d) is d</code>是False)，然后做了一些实验，我觉得这个方法不可行。</p>
+<p>另外一个方法是类似全局变量来保存MRO和现在的链上的位置。我想象中的<code>super</code>算法是这样的：</p>
+<ol>
+<li>我们当前有工作的环境吗？如果没有，创建一个队列，获取MRO，将除了第一个之外的所有元素入队列</li>
+<li>将当前上下文的MRO队列中pop一个元素，在构建<code>super</code>实例的时候将它作为当前的class</li>
+<li>当访问<code>super</code>实例的一个方法的时候，在当前class上寻找，然后调用它</li>
+</ol>
+<p>但是，这样却没有解释类似使用不一样的基类当作第一个参数来调用<code>super</code>，或者调用不同方法。（这段好别扭）<br>我想知道这个的更普遍的算法。而且，如果这样的context存在的话，我能看吗？我能破坏他么？这当然是一个糟糕的想法，但是python希望你成为一个成熟的人尽管你不是。</p>
+<p>这同样也引入了好多设计的考量。如果我写的B只考虑了它和A的联系，然后又有其他人写了C，还有其他人写了D，我的<code>B.foo()</code>方法必须找到一个能兼容<code>C.foo()</code>的方法来调用<code>super</code>，尽管我在写它的时候C不存在。如果我想要我的类能很简单的扩展，那我必须要考虑这些。但是我不清楚这是不是比简单的将所有的<code>foo</code>的特征设置成一样来的更复杂。还有一个问题就是什么时候将代码放在<code>super</code>之前，什么时候之后，即使在仅考虑B的基类的时候它没有什么区别</p>
+<hr>
+<p>7票的回答：</p>
+<blockquote>
+<p>super() is then obviously aware of the previous calls before it</p>
+</blockquote>
+<p>它不是。当你做<code>super(B,self).foo</code>,<code>super</code>知道你的MRO因为它会从<code>type(self).__mro__</code>中得到。然后它知道应该在MRO的B后面那里开始寻找<code>foo</code>，一个粗略的纯 python写的应该是这样的：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">super</span><span class="params">(object)</span>:</span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, klass, obj)</span>:</span></div><div class="line">		self.klass = klass</div><div class="line">		self.obj = obj</div><div class="line">	<span class="function"><span class="keyword">def</span> <span class="title">__getattr__</span><span class="params">(self, attrname)</span>:</span></div><div class="line">		classes = iter(type(self.obj).__mro__)</div><div class="line"></div><div class="line">		<span class="comment"># search the MRO to find self.klass</span></div><div class="line">		<span class="keyword">for</span> klass <span class="keyword">in</span> classes:</div><div class="line">			<span class="keyword">if</span> klass <span class="keyword">is</span> self.klass:</div><div class="line">				<span class="keyword">break</span></div><div class="line"></div><div class="line">		<span class="comment"># start searching for attrname at the next class after self.klass</span></div><div class="line">		<span class="keyword">for</span> klass <span class="keyword">in</span> classes:</div><div class="line">			<span class="keyword">if</span> attrname <span class="keyword">in</span> klass.__dict__:</div><div class="line">				attr = klass.__dict__[attrname]</div><div class="line">				<span class="keyword">break</span></div><div class="line">		<span class="keyword">else</span>:</div><div class="line">			<span class="keyword">raise</span> AttributeError</div><div class="line"></div><div class="line">		<span class="comment"># handle methods and other descriptors</span></div><div class="line">		<span class="keyword">try</span>:</div><div class="line">			<span class="keyword">return</span> attr.__get__(self.obj, type(self.obj))</div><div class="line">		<span class="keyword">except</span> AttributeError:</div><div class="line">			<span class="keyword">return</span> attr</div></pre></td></tr></table></figure></p>
+<blockquote>
+<p>If I wrote B thinking only of its relation to A, then later someone else writes C and a third person writes D, my B.foo() method has to call super in a way that is compatible with C.foo() even though it didn’t exist at the time I wrote it!</p>
+</blockquote>
+<p>并不要求你要从随机的类中多种继承。除非<code>foo</code>是被特意设计成在多重继承的时候将兄弟类的重写。D不应该存在。</p>
+]]></content>
+      
+        <categories>
+            
+            <category> stackoverflow </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> stackoverflow </tag>
+            
+            <tag> python </tag>
+            
+            <tag> object </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[Hello World]]></title>
+      <url>http://www.mmmmmcclxxvii.cn/2017/03/23/hello-world/</url>
+      <content type="html"><![CDATA[<p>Welcome to <a href="https://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
+<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo new <span class="string">"My New Post"</span></div></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
+<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo server</div></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="external">Server</a></p>
+<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo generate</div></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p>
+<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo deploy</div></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
+]]></content>
+      
+        
+    </entry>
+    
+  
+  
+</search>
