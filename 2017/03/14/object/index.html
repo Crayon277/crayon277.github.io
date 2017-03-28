@@ -10,14 +10,23 @@
 <html class="theme-next mist use-motion" lang="en">
 <head>
   <meta charset="UTF-8"/>
-<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" /> <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
 
 
 
 <meta http-equiv="Cache-Control" content="no-transform" />
 <meta http-equiv="Cache-Control" content="no-siteapp" />
 
+<script>
+	(function(){
+		if(''){
+			if(prompt('Enter PASSWORD','') !== ''){
+				alert('有入侵者！！！');
+				history.back();
+			}
+		}
+	})();
+</script>
 
 
 
@@ -91,22 +100,16 @@
 
 
 
-<meta name="description" content="what does ‘super’ do in python下面两个的区别是？
-123class Child(SomeBaseClass):    def __init__(self):		super(Child, self).__init__()
-和123class Child(SomeBaseClass):    def __init__(self):		SomeBaseClass.__ini">
+<meta name="description" content="搬运stackoverflow有关python的问题 之 object部分 （一）">
 <meta property="og:type" content="article">
 <meta property="og:title" content="project of stackoverflow - python object(一)">
-<meta property="og:url" content="http://www.mmmmmcclxxvii.cn/2017/03/25/object/index.html">
+<meta property="og:url" content="http://www.mmmmmcclxxvii.cn/2017/03/14/object/index.html">
 <meta property="og:site_name" content="MMMMMCCLXXVII">
-<meta property="og:description" content="what does ‘super’ do in python下面两个的区别是？
-123class Child(SomeBaseClass):    def __init__(self):		super(Child, self).__init__()
-和123class Child(SomeBaseClass):    def __init__(self):		SomeBaseClass.__ini">
-<meta property="og:updated_time" content="2017-03-26T10:39:11.000Z">
+<meta property="og:description" content="搬运stackoverflow有关python的问题 之 object部分 （一）">
+<meta property="og:updated_time" content="2017-03-27T15:00:07.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="project of stackoverflow - python object(一)">
-<meta name="twitter:description" content="what does ‘super’ do in python下面两个的区别是？
-123class Child(SomeBaseClass):    def __init__(self):		super(Child, self).__init__()
-和123class Child(SomeBaseClass):    def __init__(self):		SomeBaseClass.__ini">
+<meta name="twitter:description" content="搬运stackoverflow有关python的问题 之 object部分 （一）">
 
 
 
@@ -134,7 +137,7 @@
 
 
 
-  <link rel="canonical" href="http://www.mmmmmcclxxvii.cn/2017/03/25/object/"/>
+  <link rel="canonical" href="http://www.mmmmmcclxxvii.cn/2017/03/14/object/"/>
 
 
 
@@ -322,7 +325,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://www.mmmmmcclxxvii.cn/2017/03/25/object/">
+    <link itemprop="mainEntityOfPage" href="http://www.mmmmmcclxxvii.cn/2017/03/14/object/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Crayon Chaney">
@@ -358,13 +361,25 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-03-25T22:30:18+08:00">
-                2017-03-25
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-03-14T22:27:10+08:00">
+                2017-03-14
               </time>
             
 
             
+              <span class="post-meta-divider">|</span>
+            
 
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Post modified</span>
+              
+              <time title="Post modified" itemprop="dateModified" datetime="2017-03-27T23:00:07+08:00">
+                2017-03-27
+              </time>
             
           </span>
 
@@ -399,7 +414,7 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a class="cloud-tie-join-count" href="/2017/03/25/object/#comments" itemprop="discussionUrl">
+                <a class="cloud-tie-join-count" href="/2017/03/14/object/#comments" itemprop="discussionUrl">
                   <span class="post-comments-count join-count" itemprop="commentCount"></span>
                 </a>
               </span>
@@ -408,7 +423,7 @@
 
           
           
-             <span id="/2017/03/25/object/" class="leancloud_visitors" data-flag-title="project of stackoverflow - python object(一)">
+             <span id="/2017/03/14/object/" class="leancloud_visitors" data-flag-title="project of stackoverflow - python object(一)">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -425,6 +440,10 @@
           
 
           
+              <div class="post-description">
+                  搬运stackoverflow有关python的问题 之 object部分 （一）
+              </div>
+          
 
         </div>
       </header>
@@ -440,6 +459,7 @@
         <h1 id="what-does-‘super’-do-in-python"><a href="#what-does-‘super’-do-in-python" class="headerlink" title="what does ‘super’ do in python"></a><a href="http://stackoverflow.com/questions/222877/what-does-super-do-in-python" target="_blank" rel="external">what does ‘super’ do in python</a></h1><p>下面两个的区别是？</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Child</span><span class="params">(SomeBaseClass)</span>:</span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self)</span>:</span></div><div class="line">		super(Child, self).__init__()</div></pre></td></tr></table></figure>
 <p>和<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Child</span><span class="params">(SomeBaseClass)</span>:</span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self)</span>:</span></div><div class="line">		SomeBaseClass.__init__(self)</div></pre></td></tr></table></figure></p>
+<a id="more"></a>
 <p>我在单个继承中已经看到<code>super</code> 被用的很多了。我能知道为什么要在多重继承的时候用它，但是还是不清楚在这种情况用它的好处。</p>
 <hr>
 <p>180票的回答：（John Millikin)</p>
@@ -542,7 +562,7 @@
     </li>
     <li class="post-copyright-link">
       <strong>Post link:</strong>
-      <a href="http://www.mmmmmcclxxvii.cn/2017/03/25/object/" title="project of stackoverflow - python object(一)">http://www.mmmmmcclxxvii.cn/2017/03/25/object/</a>
+      <a href="http://www.mmmmmcclxxvii.cn/2017/03/14/object/" title="project of stackoverflow - python object(一)">http://www.mmmmmcclxxvii.cn/2017/03/14/object/</a>
     </li>
     <li class="post-copyright-license">
       <strong>Copyright Notice: </strong>
@@ -572,22 +592,6 @@
       
 
       
-        <div class="post-nav">
-          <div class="post-nav-next post-nav-item">
-            
-              <a href="/2017/03/23/hello-world/" rel="next" title="Hello World">
-                <i class="fa fa-chevron-left"></i> Hello World
-              </a>
-            
-          </div>
-
-          <span class="post-nav-divider"></span>
-
-          <div class="post-nav-prev post-nav-item">
-            
-          </div>
-        </div>
-      
 
       
       
@@ -597,6 +601,29 @@
 
 
     <div class="post-spread">
+      
+        <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+  <a class="jiathis_button_tsina"></a>
+  <a class="jiathis_button_tqq"></a>
+  <a class="jiathis_button_weixin"></a>
+  <a class="jiathis_button_cqq"></a>
+  <a class="jiathis_button_douban"></a>
+  <a class="jiathis_button_renren"></a>
+  <a class="jiathis_button_qzone"></a>
+  <a class="jiathis_button_kaixin001"></a>
+  <a class="jiathis_button_copy"></a>
+  <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank"></a>
+  <a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" >
+  var jiathis_config={
+    hideMore:false
+  }
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+
       
     </div>
   </div>
@@ -649,7 +676,7 @@
                alt="Crayon Chaney" />
           <p class="site-author-name" itemprop="name">Crayon Chaney</p>
            
-              <p class="site-description motion-element" itemprop="description">stay hungry,stay foolish</p>
+              <p class="site-description motion-element" itemprop="description">I'm CY. Nice to meet you. \nFine, Thank you, and you?</p>
           
         </div>
         <nav class="site-state motion-element">
@@ -657,7 +684,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-count">1</span>
                 <span class="site-state-item-name">posts</span>
               </a>
             </div>
@@ -903,6 +930,17 @@
         
 
         <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/Crayon277" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
           
         </div>
 
@@ -1332,6 +1370,28 @@
   
 
   
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
 
   
 

@@ -10,14 +10,23 @@
 <html class="theme-next mist use-motion" lang="en">
 <head>
   <meta charset="UTF-8"/>
-<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" /> <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
 
 
 
 <meta http-equiv="Cache-Control" content="no-transform" />
 <meta http-equiv="Cache-Control" content="no-siteapp" />
 
+<script>
+	(function(){
+		if(''){
+			if(prompt('Enter PASSWORD','') !== ''){
+				alert('有入侵者！！！');
+				history.back();
+			}
+		}
+	})();
+</script>
 
 
 
@@ -73,7 +82,7 @@
 <link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="next,blog" />
 
 
 
@@ -91,15 +100,15 @@
 
 
 
-<meta name="description" content="stay hungry,stay foolish">
+<meta name="description" content="I&apos;m CY. Nice to meet you. \nFine, Thank you, and you?">
 <meta property="og:type" content="website">
 <meta property="og:title" content="MMMMMCCLXXVII">
 <meta property="og:url" content="http://www.mmmmmcclxxvii.cn/tags/stackoverflow/index.html">
 <meta property="og:site_name" content="MMMMMCCLXXVII">
-<meta property="og:description" content="stay hungry,stay foolish">
+<meta property="og:description" content="I&apos;m CY. Nice to meet you. \nFine, Thank you, and you?">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="MMMMMCCLXXVII">
-<meta name="twitter:description" content="stay hungry,stay foolish">
+<meta name="twitter:description" content="I&apos;m CY. Nice to meet you. \nFine, Thank you, and you?">
 
 
 
@@ -321,7 +330,7 @@
 
       <h1 class="post-title">
         
-            <a class="post-title-link" href="/2017/03/25/object/" itemprop="url">
+            <a class="post-title-link" href="/2017/03/14/object/" itemprop="url">
               
                 <span itemprop="name">project of stackoverflow - python object(一)</span>
               
@@ -331,9 +340,10 @@
 
       <div class="post-meta">
         <time class="post-time" itemprop="dateCreated"
-              datetime="2017-03-25T22:30:18+08:00"
-              content="2017-03-25" >
-          03-25
+              /* datetime="2017-03-14T22:27:10+08:00" */
+			  datetime = "1489501630000"
+              content="2017-03-14" >
+          03-14
         </time>
       </div>
 
@@ -379,7 +389,7 @@
                alt="Crayon Chaney" />
           <p class="site-author-name" itemprop="name">Crayon Chaney</p>
            
-              <p class="site-description motion-element" itemprop="description">stay hungry,stay foolish</p>
+              <p class="site-description motion-element" itemprop="description">I'm CY. Nice to meet you. \nFine, Thank you, and you?</p>
           
         </div>
         <nav class="site-state motion-element">
@@ -387,7 +397,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-count">1</span>
                 <span class="site-state-item-name">posts</span>
               </a>
             </div>
@@ -633,6 +643,17 @@
         
 
         <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/Crayon277" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
           
         </div>
 
@@ -1042,6 +1063,28 @@
   
 
   
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
 
   
 
