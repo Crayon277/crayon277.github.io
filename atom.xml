@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://www.mmmmmcclxxvii.cn/"/>
-  <updated>2017-03-27T15:00:07.000Z</updated>
+  <updated>2017-03-29T14:50:38.000Z</updated>
   <id>http://www.mmmmmcclxxvii.cn/</id>
   
   <author>
@@ -14,6 +14,76 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>python name and values</title>
+    <link href="http://www.mmmmmcclxxvii.cn/2017/03/29/python-name-and-values/"/>
+    <id>http://www.mmmmmcclxxvii.cn/2017/03/29/python-name-and-values/</id>
+    <published>2017-03-29T13:54:00.000Z</published>
+    <updated>2017-03-29T14:50:38.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>阅读 <a href="https://nedbatchelder.com/text/names.html" target="_blank" rel="external">Facts and myths about Python names and values</a> 做的摘记<br>内容不是很深，只是这里面提到了一些需要注意的点。最主要还是<code>name</code>和<code>value</code>的区别<br><a id="more"></a></p>
+<h1 id="Fact-Names-have-no-type-values-have-no-scope"><a href="#Fact-Names-have-no-type-values-have-no-scope" class="headerlink" title="Fact: Names have no type, values have no scope."></a>Fact: Names have no type, values have no scope.</h1><blockquote>
+<p>Just as names have no type, values have no scope. When we say that a function has a local variable, we mean that the name is scoped to the function: you can’t use the name outside the function, and when the function returns, the name is destroyed. But as we’ve seen, if the name’s value has other references, it will live on beyond the function call. It is a local name, not a local value.</p>
+</blockquote>
+<p>翻译：</p>
+<p>就跟名字没有类型一样，数值是没有作用范围的。当我们说一个函数有局部变量的时候，我们只是说的是名字只在函数作用域中起作用而已，你不能在函数外使用这个名字，当函数返回的时候，这个名字也就摧毁了。但是，如果这个名字指向的数值还有其他引用，它就会继续生存下去，不管这个函数了。局部变量，而不是局部数值。</p>
+<h1 id="Fact-Values-can’t-be-deleted-only-names-can"><a href="#Fact-Values-can’t-be-deleted-only-names-can" class="headerlink" title="Fact: Values can’t be deleted, only names can."></a>Fact: Values can’t be deleted, only names can.</h1><blockquote>
+<p>Python’s memory management is so central to its behavior, not only do you not have to delete values, but there is no way to delete values. You may have seen the del statement:</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">nums = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]</div><div class="line"><span class="keyword">del</span> nums</div></pre></td></tr></table></figure>
+<blockquote>
+<p>This does not delete the value nums, it deletes the name nums. The name is removed from its scope, and then the usual reference counting kicks in: if nums’ value had only that one reference, then the value will be reclaimed. But if it had other references, then it will not.</p>
+</blockquote>
+<h1 id="Fact-Assignment-never-copies-data"><a href="#Fact-Assignment-never-copies-data" class="headerlink" title="Fact: Assignment never copies data."></a>Fact: Assignment never copies data.</h1><blockquote>
+<p>Mutable means that the value has methods that can change the value in-place. Immutable means that the value can never change, instead when you think you are changing the value, you are really making new values from old ones.</p>
+</blockquote>
+<p>比如：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">x = <span class="number">3</span></div><div class="line">y = x</div></pre></td></tr></table></figure></p>
+<p><code>x</code>和<code>y</code>只是一起指向了<code>3</code>而已，并没有给<code>y</code>再来一个<code>3</code>。这里<code>x</code>,<code>y</code>是<code>name</code>，<code>3</code>是<code>value</code><br>上面说到的<code>Mutable</code>是什么意思，也就是因为这个赋值不拷贝数据的特性，当<code>y</code>变了的时候，比如<code>y+=1</code>，那<code>x</code>还变不变？这里就要考虑到可变类型和不可变类型了</p>
+<p>Immutable values:</p>
+<ol>
+<li>numbers</li>
+<li>strings</li>
+<li>tuples </li>
+</ol>
+<p>Mutable values:</p>
+<ol>
+<li>lists</li>
+<li>dicts</li>
+<li>user-defined objects</li>
+</ol>
+<p>那在上面<code>y+=1</code>之后，其实是给<code>y</code>重新<code>reference</code>到了4</p>
+<p>关于mutable的直接截图：</p>
+<p><img src="http://onexs3cnv.bkt.clouddn.com/list_mutate_value.png" alt="list_mutate"></p>
+<hr>
+<h1 id="Fact-Python-passes-function-arguments-by-assigning-to-them"><a href="#Fact-Python-passes-function-arguments-by-assigning-to-them" class="headerlink" title="Fact: Python passes function arguments by assigning to them."></a>Fact: Python passes function arguments by assigning to them.</h1><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">def my_func(x,y)</div><div class="line">	return x+y</div><div class="line">print(my_func(8,9))</div></pre></td></tr></table></figure>
+<blockquote>
+<p>The names x and y are local to the function, so when the function returns, those names go away. But if the values they refer to are still referenced by other names, the values live on.</p>
+</blockquote>
+<p><strong>注意</strong>，这里就出现<code>name</code>和<code>value</code>的区别了，可以这样理解，<code>value</code>就是一个实物，<code>name</code>只是这个实物的标签，我可以贴很多标签，而看到这个标签，我就联想到这个实物，实物可以有多个标签，一个标签只能对应一个实物。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">augment_twice</span><span class="params">(a_list,val)</span>:</span></div><div class="line">	a_list.append(val)</div><div class="line">	a_list.append(val)</div><div class="line"></div><div class="line">nums = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>]</div><div class="line">augment_twice(nums, <span class="number">4</span>)</div><div class="line">print(nums) <span class="comment">#[1,2,3,4,4]</span></div></pre></td></tr></table></figure>
+<h2 id=""><a href="#" class="headerlink" title=""></a><img src="http://onexs3cnv.bkt.clouddn.com/Screen%20Shot%202017-03-29%20at%2010.23.49%20PM.png" alt="before"></h2><h2 id="-1"><a href="#-1" class="headerlink" title=""></a><img src="http://onexs3cnv.bkt.clouddn.com/Screen%20Shot%202017-03-29%20at%2010.23.55%20PM.png" alt="after"></h2><p>虚线框表示本地<code>name</code>在一个新的<code>frame</code>里面，而参数传递只是一种赋值操作，<code>a_list</code> “指向” <code>nums</code>指向的<code>value</code>,而<code>list</code>类型是可变数据类型，所以任何<code>name</code>对它的改变都是就地的，可以通过<code>id()</code>操作来查看是否改变了地址</p>
+<p>另外一个程序</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">augment_twice_bad</span><span class="params">(a_list,val)</span>:</span></div><div class="line">	a_list = a_list + [val,val]</div><div class="line">nums = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>]</div><div class="line">augment_twice_bad(nums,<span class="number">4</span>)</div><div class="line">print(nums) <span class="comment">#[1,2,3]</span></div></pre></td></tr></table></figure>
+<p>这个跟上面的程序就不同在函数里面一个是用<code>.append()</code>来增加元素，一个则用加法然后赋值，赋值，赋值，重要的事情说三遍，这是个赋值操作，一旦出现赋值，就相当于等式左边的<code>name</code><strong>rebind</strong>出现在等式右边的<code>value</code></p>
+<h2 id="-2"><a href="#-2" class="headerlink" title=""></a><img src="http://onexs3cnv.bkt.clouddn.com/Screen%20Shot%202017-03-29%20at%2010.35.39%20PM.png" alt="bad_before"></h2><p><img src="http://onexs3cnv.bkt.clouddn.com/Screen%20Shot%202017-03-29%20at%2010.35.45%20PM.png" alt="bad_after"></p>
+<blockquote>
+<p>It’s really important to keep in mind the difference between mutating a value in place, and rebinding a name. augment_twice worked because it mutated the value passed in, so that mutation was available after the function returned. augment_twice_bad used an assignment to rebind a local name, so the changes weren’t visible outside the function.</p>
+</blockquote>
+<h1 id="其他的-facts-myths都知道了，上面的需要注意一下就可以了。过"><a href="#其他的-facts-myths都知道了，上面的需要注意一下就可以了。过" class="headerlink" title="其他的 facts, myths都知道了，上面的需要注意一下就可以了。过"></a>其他的 facts, myths都知道了，上面的需要注意一下就可以了。过</h1>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;阅读 &lt;a href=&quot;https://nedbatchelder.com/text/names.html&quot;&gt;Facts and myths about Python names and values&lt;/a&gt; 做的摘记&lt;br&gt;内容不是很深，只是这里面提到了一些需要注意的点。最主要还是&lt;code&gt;name&lt;/code&gt;和&lt;code&gt;value&lt;/code&gt;的区别&lt;br&gt;&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="python" scheme="http://www.mmmmmcclxxvii.cn/categories/python/"/>
+    
+    
+      <category term="python" scheme="http://www.mmmmmcclxxvii.cn/tags/python/"/>
+    
+  </entry>
   
   <entry>
     <title>project of stackoverflow - python object(一)</title>
@@ -95,9 +165,9 @@
       <category term="stackoverflow" scheme="http://www.mmmmmcclxxvii.cn/categories/stackoverflow/"/>
     
     
-      <category term="stackoverflow" scheme="http://www.mmmmmcclxxvii.cn/tags/stackoverflow/"/>
-    
       <category term="python" scheme="http://www.mmmmmcclxxvii.cn/tags/python/"/>
+    
+      <category term="stackoverflow" scheme="http://www.mmmmmcclxxvii.cn/tags/stackoverflow/"/>
     
       <category term="object" scheme="http://www.mmmmmcclxxvii.cn/tags/object/"/>
     
