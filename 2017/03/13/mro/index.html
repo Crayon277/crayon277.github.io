@@ -82,7 +82,7 @@
 <link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="next,blog" />
+  <meta name="keywords" content="python,mro,python-object," />
 
 
 
@@ -100,15 +100,28 @@
 
 
 
-<meta name="description" content="...../..---/--.../--.../">
-<meta property="og:type" content="website">
-<meta property="og:title" content="MMMMMCCLXXVII">
-<meta property="og:url" content="http://www.mmmmmcclxxvii.cn/categories/python/index.html">
+<meta name="description" content="其实我一直觉得遇到什么障碍再去学什么是效率比较高的，这时候是带着问题去解决问题，比起干看，没有与实际相结合，要有用多了。所以等你真正遇到这个问题了，再来看看。 这个MRO是理解super方法的前序 ,以下考虑的都是多重继承，单重继承讨论这个就没什么价值了。
+Method Resolution Order
+In computing, the C3 superclass linearization i">
+<meta property="og:type" content="article">
+<meta property="og:title" content="understanding MRO">
+<meta property="og:url" content="http://www.mmmmmcclxxvii.cn/2017/03/13/mro/index.html">
 <meta property="og:site_name" content="MMMMMCCLXXVII">
-<meta property="og:description" content="...../..---/--.../--.../">
+<meta property="og:description" content="其实我一直觉得遇到什么障碍再去学什么是效率比较高的，这时候是带着问题去解决问题，比起干看，没有与实际相结合，要有用多了。所以等你真正遇到这个问题了，再来看看。 这个MRO是理解super方法的前序 ,以下考虑的都是多重继承，单重继承讨论这个就没什么价值了。
+Method Resolution Order
+In computing, the C3 superclass linearization i">
+<meta property="og:image" content="http://onexs3cnv.bkt.clouddn.com/Screen%20Shot%202017-03-30%20at%207.18.59%20PM.png">
+<meta property="og:image" content="http://onexs3cnv.bkt.clouddn.com/Screen%20Shot%202017-03-30%20at%207.39.09%20PM.png">
+<meta property="og:image" content="http://www.cafepy.com/article/python_attributes_and_methods/images/simple_hierarchy.png">
+<meta property="og:image" content="http://www.cafepy.com/article/python_attributes_and_methods/images/beads_on_strings.png">
+<meta property="og:image" content="http://www.cafepy.com/article/python_attributes_and_methods/images/beads_on_strings_solved.png">
+<meta property="og:updated_time" content="2017-03-30T13:05:36.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="MMMMMCCLXXVII">
-<meta name="twitter:description" content="...../..---/--.../--.../">
+<meta name="twitter:title" content="understanding MRO">
+<meta name="twitter:description" content="其实我一直觉得遇到什么障碍再去学什么是效率比较高的，这时候是带着问题去解决问题，比起干看，没有与实际相结合，要有用多了。所以等你真正遇到这个问题了，再来看看。 这个MRO是理解super方法的前序 ,以下考虑的都是多重继承，单重继承讨论这个就没什么价值了。
+Method Resolution Order
+In computing, the C3 superclass linearization i">
+<meta name="twitter:image" content="http://onexs3cnv.bkt.clouddn.com/Screen%20Shot%202017-03-30%20at%207.18.59%20PM.png">
 
 
 
@@ -136,13 +149,13 @@
 
 
 
-  <link rel="canonical" href="http://www.mmmmmcclxxvii.cn/categories/python/"/>
+  <link rel="canonical" href="http://www.mmmmmcclxxvii.cn/2017/03/13/mro/"/>
 
 
 
 
 
-  <title> Category: python | MMMMMCCLXXVII </title>
+  <title> understanding MRO | MMMMMCCLXXVII </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="en">
@@ -177,7 +190,7 @@
     
   
 
-  <div class="container sidebar-position-left  ">
+  <div class="container sidebar-position-left page-post-detail ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -314,106 +327,317 @@
           <div id="content" class="content">
             
 
-  <section id="posts" class="posts-collapse">
-    <div class="collection-title">
-      <h2 >
-        python
-        <small>Category</small>
-      </h2>
-    </div>
-
+  <div id="posts" class="posts-expand">
     
-      
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h1 class="post-title">
-        
-            <a class="post-title-link" href="/2017/03/29/python-name-and-values/" itemprop="url">
-              
-                <span itemprop="name">python name and values</span>
-              
-            </a>
-        
-      </h1>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              /* datetime="2017-03-29T21:54:00+08:00" */
-			  datetime = "1490795640000"
-              content="2017-03-29" >
-          03-29
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-    
-      
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h1 class="post-title">
-        
-            <a class="post-title-link" href="/2017/03/13/mro/" itemprop="url">
-              
-                <span itemprop="name">understanding MRO</span>
-              
-            </a>
-        
-      </h1>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              /* datetime="2017-03-13T17:28:31+08:00" */
-			  datetime = "1489397311000"
-              content="2017-03-13" >
-          03-13
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-    
-      
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h1 class="post-title">
-        
-            <a class="post-title-link" href="/2017/03/08/descriptor/" itemprop="url">
-              
-                <span itemprop="name">descriptor</span>
-              
-            </a>
-        
-      </h1>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              /* datetime="2017-03-08T08:50:01+08:00" */
-			  datetime = "1488934201000"
-              content="2017-03-08" >
-          03-08
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-    
-  </section>
 
   
 
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://www.mmmmmcclxxvii.cn/2017/03/13/mro/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Crayon Chaney">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/myface.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="MMMMMCCLXXVII">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                understanding MRO
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-03-13T17:28:31+08:00">
+                2017-03-13
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Post modified</span>
+              
+              <time title="Post modified" itemprop="dateModified" datetime="2017-03-30T21:05:36+08:00">
+                2017-03-30
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/python/" itemprop="url" rel="index">
+                    <span itemprop="name">python</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a class="cloud-tie-join-count" href="/2017/03/13/mro/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count join-count" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+             <span id="/2017/03/13/mro/" class="leancloud_visitors" data-flag-title="understanding MRO">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">Visitors </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>其实我一直觉得遇到什么障碍再去学什么是效率比较高的，这时候是带着问题去解决问题，比起干看，没有与实际相结合，要有用多了。所以等你真正遇到这个问题了，再来看看。<strong> 这个<code>MRO</code>是理解<code>super</code>方法的前序 </strong>,以下考虑的都是多重继承，单重继承讨论这个就没什么价值了。</p>
+<h1 id="Method-Resolution-Order"><a href="#Method-Resolution-Order" class="headerlink" title="Method Resolution Order"></a>Method Resolution Order</h1><blockquote>
+<p>In computing, the C3 superclass linearization is an algorithm used primarily to obtain the order in which methods should be inherited (the “linearization”) in the presence of multiple inheritance, and is often termed Method Resolution Order (MRO)<br>from wikipedia – <a href="https://en.wikipedia.org/wiki/C3_linearization" target="_blank" rel="external">C3 linearization</a></p>
+</blockquote>
+<p>这里引进这个概念。因为在继承中，会有子类继承父类当中的一些元素或方法，但是在多重继承中，到底是哪一个呢？这里就涉及到了<code>MRO</code>，方法解释顺序。可以想像一个列表，里面是继承关系的顺序，当调用子类的方法，或访问子类的元素的时候，就按照这个顺序依次的查找。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">A</span><span class="params">(object)</span>:</span></div><div class="line">	<span class="keyword">pass</span></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">B</span><span class="params">(object)</span>:</span></div><div class="line">	<span class="keyword">pass</span></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">C</span><span class="params">(B)</span>:</span></div><div class="line">	<span class="keyword">pass</span></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">D</span><span class="params">(A,B,C)</span>:</span></div><div class="line">	<span class="keyword">pass</span></div></pre></td></tr></table></figure>
+<p>你可以试一下，这个<code>D</code>类是定义不了的，会报错<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">Traceback (most recent call last):</div><div class="line">  File <span class="string">"&lt;stdin&gt;"</span>, line <span class="number">1</span>, <span class="keyword">in</span> &lt;module&gt;</div><div class="line">TypeError: Error when calling the metaclass bases</div><div class="line">  Cannot create a consistent method resolution</div><div class="line">order (MRO) <span class="keyword">for</span> bases object, B, C</div></pre></td></tr></table></figure></p>
+<p>这里是因为破坏了<code>MRO</code>的一个(<code>monotomic</code>)单调性规定：</p>
+<blockquote>
+<p>if C1 precedes C2 in the linearization of C, then C1 precedes C2 in the linearization of any subclass of C.</p>
+</blockquote>
+<p>通过C3算法得出的<code>MRO</code>就可以满足上面的这个要求</p>
+<h1 id="C3-linearization"><a href="#C3-linearization" class="headerlink" title="C3 linearization"></a>C3 linearization</h1><p>先定义几个符号表示：<br><code>C1C2....CN</code> 表示一个[C1,C2,C3….CN]的解决顺序列表，在这样的一个列表中，<code>head</code>是<code>C1</code>，<strong>其余的</strong>都叫做<code>tail</code>。<br>注意：是从C2到最后都算tail.<br><code>C+(C1C2...CN) = CC1C2...CN</code> 表示<code>[C] + [C1,C2...CN]</code><br><code>L[C]</code>表示<code>linearization of class C</code>，规定<code>L[O] = O</code>,<code>O</code>表示<code>object</code></p>
+<p>算法可以描述为一个递归的过程：</p>
+<blockquote>
+<p>the linearization of C is the Sum of C plus the merge of the linearizations of the parents and the list of the parents.<br><code>L[C(B1B2...BN)] = C + merge(L[B1],...L[BN],B1...BN)</code><br>顺序很重要，一一对应的。</p>
+</blockquote>
+<p>merge 算法描述为(原文)：</p>
+<blockquote>
+<p>take the head of the first list, i.e L[B1][0]; if this head is not in the tail of any of the other lists, then add it to the linearization of C and remove it from the lists in the merge, otherwise look at the head of the next list and take it. if it is a good head, then report the operation until all the class are removed or it is impossible to find good heads. If fail, python will refuse to create the class C and will raise an exception.</p>
+</blockquote>
+<h2 id="没看懂直接看例子。"><a href="#没看懂直接看例子。" class="headerlink" title="没看懂直接看例子。"></a>没看懂直接看例子。</h2><p><img src="http://onexs3cnv.bkt.clouddn.com/Screen%20Shot%202017-03-30%20at%207.18.59%20PM.png" alt="example-class-inherit"></p>
+<p>写出各个的<code>linearization</code>（这个翻译成啥我也不知道）<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">L[O] = O</div><div class="line">L[E] = EO</div><div class="line">L[D] = DO</div><div class="line">L[F] = FO</div><div class="line">L[B] = B + merge(L[D],L[E],DE)</div><div class="line">     = B + merge(DO,EO,DE)</div></pre></td></tr></table></figure></p>
+<p>这里是要<code>merge</code>3个<code>list</code>，<code>DO</code>,<code>EO</code>,<code>DE</code>，从第一个<code>DO</code>开始，它的<code>head</code>是<code>D</code>，然后看<code>D</code>是否出现在其他<code>list</code>的<code>tail</code>中中，注意<code>tail</code>是指除了<code>head</code>其余的所有。比如有一个<code>list</code>是<code>ADCBEF</code>,那<code>D</code>出现在第2个位置也算是在<code>tail</code>中，而不是在最后一个位置才算是<code>tail</code>。也就是说只有<code>D</code>出现在其他<code>list</code>首位置的时候，或者就根本没有<code>D</code>，这个<code>D</code>算是一个<code>good head</code>，然后将<code>D</code>加入<code>B</code>的linearization中，如果<code>D</code>不满足上面的条件，那么顺推到下一个<code>list</code> <code>EO</code>中的<code>E</code>，如果再不满足，继续顺推，都不满足的话就<code>raise an exception</code>。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">L[B] = B + merge(L[D],L[E],DE)</div><div class="line">     = B + merge(DO,EO,DE)</div><div class="line">	 = B + D + merge(O,EO,E) <span class="comment">#再从第一个list O 开始去第一个元素O，但O不满足，出现在了第二个EO的tail中，顺延</span></div><div class="line">	 = B + D + E + merge(O,O)</div><div class="line">	 = B + D + E + O</div><div class="line">	 = BDEO</div></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">L[C] = C + merge(DO,FO,DF)</div><div class="line">	 = C + D + merge(O,FO,F)</div><div class="line">	 = C + D + F + merge(O,O)</div><div class="line">	 = CDFO</div></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">L[A] = A + merge(L[B],L[C],BC)</div><div class="line">	 = A + merge(BDEO,CDFO,BC)</div><div class="line">	 = A + B + merge(DEO,CDFO,C)</div><div class="line">	 = A + B + C + merge(DEO,DFO)</div><div class="line">	 = A + B + C + D + merge(EO,FO)</div><div class="line">	 = A + B + C + D + E + merge(O,FO)</div><div class="line">	 = A + B + C + D + E + F + merge(O,O)</div><div class="line">	 = A + B + C + D + E + F + O</div><div class="line">	 = ABCDEFO</div></pre></td></tr></table></figure>
+<hr>
+<h2 id="另一个例子–-不能生成mro"><a href="#另一个例子–-不能生成mro" class="headerlink" title="另一个例子– 不能生成mro"></a>另一个例子– 不能生成mro</h2><p><img src="http://onexs3cnv.bkt.clouddn.com/Screen%20Shot%202017-03-30%20at%207.39.09%20PM.png" alt="bad-example"></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">L[O] = O</div><div class="line">L[X] = XO</div><div class="line">L[Y] = YO</div><div class="line">L[A] = AXYO </div><div class="line">L[B] = BYXO <span class="comment">#这两个其实也应该通过上面那个merge算法算出来的，只不过这里一眼就能看出来</span></div></pre></td></tr></table></figure>
+<p>关键看类C<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">L[C] = C + merge(AXYO,BYXO,AB)</div><div class="line">	 = C + A + merge(XYO,BYXO,B)</div><div class="line">	 = C + A + B + merge(XYO,YXO)</div></pre></td></tr></table></figure></p>
+<p>到了这里就做不下去了，这里<code>XYO</code>,<code>YXO</code>，不管第一个<code>X</code>还是第二个的<code>Y</code>，都不行！！</p>
+<blockquote>
+<p>X is in the tail of YXO whereas Y is in the tail of XYO<br>因此算法结束.<code>raise an error refuese to create class C</code></p>
+</blockquote>
+<h1 id="快速判别能否生成MRO的方法"><a href="#快速判别能否生成MRO的方法" class="headerlink" title="快速判别能否生成MRO的方法"></a>快速判别能否生成MRO的方法</h1><p>以下来自 <a href="http://www.cafepy.com/article/python_attributes_and_methods/python_attributes_and_methods.html" target="_blank" rel="external">python Attributes and Methods</a><br><img src="http://www.cafepy.com/article/python_attributes_and_methods/images/simple_hierarchy.png" alt="simple hierarchy"><br>现在要定义一个新的类<code>class N(A,B,C)</code><br><img src="http://www.cafepy.com/article/python_attributes_and_methods/images/beads_on_strings.png" alt="game abacus style beads"><br>画的稍微歪了，第一排全是<code>O</code>，那ok，<code>result</code>中也生成<code>O</code>放在顶部，第二排，<code>BBC</code>，不一样，要全部一样才能放在最后的<code>result</code>中，所以这个是失败的。</p>
+<p>如果将类<code>N</code>的定义改为<code>class N(A,C,B)</code><br><img src="http://www.cafepy.com/article/python_attributes_and_methods/images/beads_on_strings_solved.png" alt="solved-beads on strings"></p>
+<hr>
+<p>以上深入了解以下这个机制就可以，在编程的时候可以调用<code>__mro__</code>属性来查看一个类的<code>mro</code>，了解这个更有助于你理解你写的程序，比如<code>super</code>，比如描述符当中也会用到这个概念</p>
+<hr>
+<p>出处：</p>
+<ol>
+<li><a href="https://www.python.org/download/releases/2.3/mro/" target="_blank" rel="external">The Python 2.3 Method Resolution Order</a></li>
+<li><a href="http://www.cafepy.com/article/python_attributes_and_methods/python_attributes_and_methods.html" target="_blank" rel="external">python Attributes and Methods</a></li>
+</ol>
+
+      
+    </div>
+
+	<div>
+		
+			<div>
+	
+		<div style="text-align:center;color: #ccc;font-size:14px;">------好了就这样了<i class="fa fa-heart"></i>欢迎指点------</div>
+	
+</div>
+
+		
+	</div>
+
+    <div>
+      
+        
+<div id="wechat_subscriber" style="display: block; padding: 10px 0; margin: 20px auto; width: 100%; text-align: center">
+    <img id="wechat_subscriber_qcode" src="/uploads/wechat.jpg" alt="Crayon Chaney wechat" style="width: 200px; max-width: 100%;"/>
+    <div>You can contact me via wechat as an alternative option of leaving a message below</div>
+</div>
+
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+  <ul class="post-copyright">
+    <li class="post-copyright-author">
+      <strong>Post author:</strong>
+      Crayon Chaney
+    </li>
+    <li class="post-copyright-link">
+      <strong>Post link:</strong>
+      <a href="http://www.mmmmmcclxxvii.cn/2017/03/13/mro/" title="understanding MRO">http://www.mmmmmcclxxvii.cn/2017/03/13/mro/</a>
+    </li>
+    <li class="post-copyright-license">
+      <strong>Copyright Notice: </strong>
+      All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> unless stating additionally.
+    </li>
+  </ul>
+
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/python/" rel="tag"><i class="fa fa-tag"></i> python</a>
+          
+            <a href="/tags/mro/" rel="tag"><i class="fa fa-tag"></i> mro</a>
+          
+            <a href="/tags/python-object/" rel="tag"><i class="fa fa-tag"></i> python-object</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/03/08/descriptor/" rel="next" title="descriptor">
+                <i class="fa fa-chevron-left"></i> descriptor
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/03/14/object/" rel="prev" title="project of stackoverflow - python object(一)">
+                project of stackoverflow - python object(一) <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+  <a class="jiathis_button_tsina"></a>
+  <a class="jiathis_button_tqq"></a>
+  <a class="jiathis_button_weixin"></a>
+  <a class="jiathis_button_cqq"></a>
+  <a class="jiathis_button_douban"></a>
+  <a class="jiathis_button_renren"></a>
+  <a class="jiathis_button_qzone"></a>
+  <a class="jiathis_button_kaixin001"></a>
+  <a class="jiathis_button_copy"></a>
+  <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank"></a>
+  <a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" >
+  var jiathis_config={
+    hideMore:false
+  }
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+
+      
+    </div>
+  </div>
 
 
           </div>
@@ -421,6 +645,12 @@
 
 
           
+  <div class="comments" id="comments">
+    
+      <div id="cloud-tie-wrapper" class="cloud-tie-wrapper"></div>
+    
+  </div>
+
 
         </div>
         
@@ -440,8 +670,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel sidebar-panel-active">
+      <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/uploads/myface.jpg"
@@ -728,6 +967,22 @@
       </section>
 
       
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Method-Resolution-Order"><span class="nav-number">1.</span> <span class="nav-text">Method Resolution Order</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#C3-linearization"><span class="nav-number">2.</span> <span class="nav-text">C3 linearization</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#没看懂直接看例子。"><span class="nav-number">2.1.</span> <span class="nav-text">没看懂直接看例子。</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#另一个例子–-不能生成mro"><span class="nav-number">2.2.</span> <span class="nav-text">另一个例子– 不能生成mro</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#快速判别能否生成MRO的方法"><span class="nav-number">3.</span> <span class="nav-text">快速判别能否生成MRO的方法</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
 
       
 
@@ -834,6 +1089,10 @@
   
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
 
   
 

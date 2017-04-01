@@ -4,6 +4,54 @@
 
     
   <url>
+    <loc>http://www.mmmmmcclxxvii.cn/2017/03/08/descriptor/</loc>
+    <lastmod>2017-04-01T11:36:48.000Z</lastmod>
+    <data>
+        <display>
+        <title>descriptor</title>
+        <pubTime>2017-03-08T00:50:01.000Z</pubTime>
+        
+        <tag>python</tag>
+         
+        <tag>descriptor</tag>
+         
+        <tag>object</tag>
+         
+         
+           
+             
+              <breadCrumb title="python" url="http://www.mmmmmcclxxvii.cn/categories/python/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.mmmmmcclxxvii.cn/2017/03/13/mro/</loc>
+    <lastmod>2017-03-30T13:05:36.000Z</lastmod>
+    <data>
+        <display>
+        <title>understanding MRO</title>
+        <pubTime>2017-03-13T09:28:31.000Z</pubTime>
+        
+        <tag>python</tag>
+         
+        <tag>mro</tag>
+         
+        <tag>python-object</tag>
+         
+         
+           
+             
+              <breadCrumb title="python" url="http://www.mmmmmcclxxvii.cn/categories/python/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://www.mmmmmcclxxvii.cn/2017/03/29/python-name-and-values/</loc>
     <lastmod>2017-03-29T14:50:38.000Z</lastmod>
     <data>
@@ -33,9 +81,9 @@
         
         <tag>python</tag>
          
-        <tag>stackoverflow</tag>
-         
         <tag>object</tag>
+         
+        <tag>stackoverflow</tag>
          
          
            
