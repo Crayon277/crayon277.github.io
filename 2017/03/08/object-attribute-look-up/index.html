@@ -82,7 +82,7 @@
 <link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="python," />
+  <meta name="keywords" content="python,object," />
 
 
 
@@ -100,22 +100,16 @@
 
 
 
-<meta name="description" content="阅读 Facts and myths about Python names and values 做的摘记内容不是很深，只是这里面提到了一些需要注意的点。最主要还是name和value的区别">
+<meta name="description" content="分为实例调用和类调用，两者查找属性的流程是不一样的">
 <meta property="og:type" content="article">
-<meta property="og:title" content="python name and values">
-<meta property="og:url" content="http://www.mmmmmcclxxvii.cn/2017/03/29/python-name-and-values/index.html">
+<meta property="og:title" content="python中的对象属性查找">
+<meta property="og:url" content="http://www.mmmmmcclxxvii.cn/2017/03/08/object-attribute-look-up/index.html">
 <meta property="og:site_name" content="MMMMMCCLXXVII">
-<meta property="og:description" content="阅读 Facts and myths about Python names and values 做的摘记内容不是很深，只是这里面提到了一些需要注意的点。最主要还是name和value的区别">
-<meta property="og:image" content="http://onexs3cnv.bkt.clouddn.com/list_mutate_value.png">
-<meta property="og:image" content="http://onexs3cnv.bkt.clouddn.com/Screen%20Shot%202017-03-29%20at%2010.23.49%20PM.png">
-<meta property="og:image" content="http://onexs3cnv.bkt.clouddn.com/Screen%20Shot%202017-03-29%20at%2010.23.55%20PM.png">
-<meta property="og:image" content="http://onexs3cnv.bkt.clouddn.com/Screen%20Shot%202017-03-29%20at%2010.35.39%20PM.png">
-<meta property="og:image" content="http://onexs3cnv.bkt.clouddn.com/Screen%20Shot%202017-03-29%20at%2010.35.45%20PM.png">
-<meta property="og:updated_time" content="2017-03-29T14:50:38.000Z">
+<meta property="og:description" content="分为实例调用和类调用，两者查找属性的流程是不一样的">
+<meta property="og:updated_time" content="2017-04-02T01:19:02.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="python name and values">
-<meta name="twitter:description" content="阅读 Facts and myths about Python names and values 做的摘记内容不是很深，只是这里面提到了一些需要注意的点。最主要还是name和value的区别">
-<meta name="twitter:image" content="http://onexs3cnv.bkt.clouddn.com/list_mutate_value.png">
+<meta name="twitter:title" content="python中的对象属性查找">
+<meta name="twitter:description" content="分为实例调用和类调用，两者查找属性的流程是不一样的">
 
 
 
@@ -143,13 +137,13 @@
 
 
 
-  <link rel="canonical" href="http://www.mmmmmcclxxvii.cn/2017/03/29/python-name-and-values/"/>
+  <link rel="canonical" href="http://www.mmmmmcclxxvii.cn/2017/03/08/object-attribute-look-up/"/>
 
 
 
 
 
-  <title> python name and values | MMMMMCCLXXVII </title>
+  <title> python中的对象属性查找 | MMMMMCCLXXVII </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="en">
@@ -331,7 +325,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://www.mmmmmcclxxvii.cn/2017/03/29/python-name-and-values/">
+    <link itemprop="mainEntityOfPage" href="http://www.mmmmmcclxxvii.cn/2017/03/08/object-attribute-look-up/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Crayon Chaney">
@@ -352,7 +346,7 @@
             
             
               
-                python name and values
+                python中的对象属性查找
               
             
           </h1>
@@ -367,8 +361,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-03-29T21:54:00+08:00">
-                2017-03-29
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-03-08T22:06:02+08:00">
+                2017-03-08
               </time>
             
 
@@ -383,8 +377,8 @@
               
                 <span class="post-meta-item-text">Post modified</span>
               
-              <time title="Post modified" itemprop="dateModified" datetime="2017-03-29T22:50:38+08:00">
-                2017-03-29
+              <time title="Post modified" itemprop="dateModified" datetime="2017-04-02T09:19:02+08:00">
+                2017-04-02
               </time>
             
           </span>
@@ -420,7 +414,7 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a class="cloud-tie-join-count" href="/2017/03/29/python-name-and-values/#comments" itemprop="discussionUrl">
+                <a class="cloud-tie-join-count" href="/2017/03/08/object-attribute-look-up/#comments" itemprop="discussionUrl">
                   <span class="post-comments-count join-count" itemprop="commentCount"></span>
                 </a>
               </span>
@@ -429,7 +423,7 @@
 
           
           
-             <span id="/2017/03/29/python-name-and-values/" class="leancloud_visitors" data-flag-title="python name and values">
+             <span id="/2017/03/08/object-attribute-look-up/" class="leancloud_visitors" data-flag-title="python中的对象属性查找">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -446,6 +440,10 @@
           
 
           
+              <div class="post-description">
+                  分为实例调用和类调用，两者查找属性的流程是不一样的
+              </div>
+          
 
         </div>
       </header>
@@ -458,55 +456,24 @@
       
 
       
-        <p>阅读 <a href="https://nedbatchelder.com/text/names.html" target="_blank" rel="external">Facts and myths about Python names and values</a> 做的摘记<br>内容不是很深，只是这里面提到了一些需要注意的点。最主要还是<code>name</code>和<code>value</code>的区别<br><a id="more"></a></p>
-<h1 id="Fact-Names-have-no-type-values-have-no-scope"><a href="#Fact-Names-have-no-type-values-have-no-scope" class="headerlink" title="Fact: Names have no type, values have no scope."></a>Fact: Names have no type, values have no scope.</h1><blockquote>
-<p>Just as names have no type, values have no scope. When we say that a function has a local variable, we mean that the name is scoped to the function: you can’t use the name outside the function, and when the function returns, the name is destroyed. But as we’ve seen, if the name’s value has other references, it will live on beyond the function call. It is a local name, not a local value.</p>
+        <p><a href="http://www.betterprogramming.com/object-attribute-lookup-in-python.html" target="_blank" rel="external">原文链接</a></p>
+<p>这里面已经讲的很详细了。暂时还没有自己的深刻的思考和理解，就先搬运过来。</p>
+<h1 id="Instance-attribute-look-up-实例属性查找"><a href="#Instance-attribute-look-up-实例属性查找" class="headerlink" title="Instance attribute look up 实例属性查找"></a>Instance attribute look up 实例属性查找</h1><blockquote>
+<p>The implementation works through a precedence chain that gives data descriptors priority over instance variables, instance variables priority over non-data descriptors, and assigns lowest priority to getattr() if provided.</p>
 </blockquote>
-<p>翻译：</p>
-<p>就跟名字没有类型一样，数值是没有作用范围的。当我们说一个函数有局部变量的时候，我们只是说的是名字只在函数作用域中起作用而已，你不能在函数外使用这个名字，当函数返回的时候，这个名字也就摧毁了。但是，如果这个名字指向的数值还有其他引用，它就会继续生存下去，不管这个函数了。局部变量，而不是局部数值。</p>
-<h1 id="Fact-Values-can’t-be-deleted-only-names-can"><a href="#Fact-Values-can’t-be-deleted-only-names-can" class="headerlink" title="Fact: Values can’t be deleted, only names can."></a>Fact: Values can’t be deleted, only names can.</h1><blockquote>
-<p>Python’s memory management is so central to its behavior, not only do you not have to delete values, but there is no way to delete values. You may have seen the del statement:</p>
-</blockquote>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">nums = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]</div><div class="line"><span class="keyword">del</span> nums</div></pre></td></tr></table></figure>
-<blockquote>
-<p>This does not delete the value nums, it deletes the name nums. The name is removed from its scope, and then the usual reference counting kicks in: if nums’ value had only that one reference, then the value will be reclaimed. But if it had other references, then it will not.</p>
-</blockquote>
-<h1 id="Fact-Assignment-never-copies-data"><a href="#Fact-Assignment-never-copies-data" class="headerlink" title="Fact: Assignment never copies data."></a>Fact: Assignment never copies data.</h1><blockquote>
-<p>Mutable means that the value has methods that can change the value in-place. Immutable means that the value can never change, instead when you think you are changing the value, you are really making new values from old ones.</p>
-</blockquote>
-<p>比如：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">x = <span class="number">3</span></div><div class="line">y = x</div></pre></td></tr></table></figure></p>
-<p><code>x</code>和<code>y</code>只是一起指向了<code>3</code>而已，并没有给<code>y</code>再来一个<code>3</code>。这里<code>x</code>,<code>y</code>是<code>name</code>，<code>3</code>是<code>value</code><br>上面说到的<code>Mutable</code>是什么意思，也就是因为这个赋值不拷贝数据的特性，当<code>y</code>变了的时候，比如<code>y+=1</code>，那<code>x</code>还变不变？这里就要考虑到可变类型和不可变类型了</p>
-<p>Immutable values:</p>
+<p>现在有一个类<code>C</code>和一个实例<code>c = C()</code>，现在调用<code>c.name</code>，相当于在实例<code>c</code>中查找<code>name</code>属性，流程如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line">Get the Class from Instance</div><div class="line">Call the Class&apos;s special method __getattribute__.All objects have a default __getattribute__</div><div class="line">	Get the Class&apos;s __mro__ as ClassParents</div><div class="line">	For each ClassParent in ClassParents</div><div class="line">		if the Attribute is in the ClassParent&apos;s __dict__</div><div class="line">			if this attribute is data descriptor</div><div class="line">				return the result from calling the data descriptor&apos;s special method __get__()</div><div class="line">				Breaking the for each(do not continue searching the same Attribute any further)</div><div class="line">	</div><div class="line">	If the Attribute is in Instance&apos;s __dict__</div><div class="line">		return the value as it is(even if the value is a data descriptor)</div><div class="line">		#这个意思是即使是描述符也直接返回这个对象，不会去调用__get__(),返回值类似&lt;__main__ descriptor object at Ox..&gt;</div><div class="line">	For each ClassParent in ClassParents</div><div class="line">		if the Attribute is in the ClassParent&apos;s __dict__</div><div class="line">			if is a non-data descriptor</div><div class="line">				return the result from calling the non-data descriptor&apos;s special method __get__()</div><div class="line">			if it is Not a descriptor</div><div class="line">				return the value</div><div class="line">	</div><div class="line">	If Class has the special method __getattr__</div><div class="line">		return the result from calling the Class&apos;s special method __getattr__</div><div class="line">	</div><div class="line">	Raise an AttributeError</div></pre></td></tr></table></figure></p>
+<p>有几个点要记住！</p>
 <ol>
-<li>numbers</li>
-<li>strings</li>
-<li>tuples </li>
+<li>descriptors are invoked by the <code>getattribute()</code> method</li>
+<li>overriding <code>getattribute()</code> prevents automatic descriptor calls</li>
+<li><code>getattribute()</code> is only available with new style classes and objects</li>
+<li><code>object.getattribute()</code> and <code>type.getattribute()</code> make different calls to <code>get()</code></li>
+<li>data descriptors always override instance dictionaries.</li>
+<li>non-data descriptors may be overridden by instance dictionaries.</li>
 </ol>
-<p>Mutable values:</p>
-<ol>
-<li>lists</li>
-<li>dicts</li>
-<li>user-defined objects</li>
-</ol>
-<p>那在上面<code>y+=1</code>之后，其实是给<code>y</code>重新<code>reference</code>到了4</p>
-<p>关于mutable的直接截图：</p>
-<p><img src="http://onexs3cnv.bkt.clouddn.com/list_mutate_value.png" alt="list_mutate"></p>
-<hr>
-<h1 id="Fact-Python-passes-function-arguments-by-assigning-to-them"><a href="#Fact-Python-passes-function-arguments-by-assigning-to-them" class="headerlink" title="Fact: Python passes function arguments by assigning to them."></a>Fact: Python passes function arguments by assigning to them.</h1><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">def my_func(x,y)</div><div class="line">	return x+y</div><div class="line">print(my_func(8,9))</div></pre></td></tr></table></figure>
-<blockquote>
-<p>The names x and y are local to the function, so when the function returns, those names go away. But if the values they refer to are still referenced by other names, the values live on.</p>
-</blockquote>
-<p><strong>注意</strong>，这里就出现<code>name</code>和<code>value</code>的区别了，可以这样理解，<code>value</code>就是一个实物，<code>name</code>只是这个实物的标签，我可以贴很多标签，而看到这个标签，我就联想到这个实物，实物可以有多个标签，一个标签只能对应一个实物。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">augment_twice</span><span class="params">(a_list,val)</span>:</span></div><div class="line">	a_list.append(val)</div><div class="line">	a_list.append(val)</div><div class="line"></div><div class="line">nums = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>]</div><div class="line">augment_twice(nums, <span class="number">4</span>)</div><div class="line">print(nums) <span class="comment">#[1,2,3,4,4]</span></div></pre></td></tr></table></figure>
-<h2 id=""><a href="#" class="headerlink" title=""></a><img src="http://onexs3cnv.bkt.clouddn.com/Screen%20Shot%202017-03-29%20at%2010.23.49%20PM.png" alt="before"></h2><h2 id="-1"><a href="#-1" class="headerlink" title=""></a><img src="http://onexs3cnv.bkt.clouddn.com/Screen%20Shot%202017-03-29%20at%2010.23.55%20PM.png" alt="after"></h2><p>虚线框表示本地<code>name</code>在一个新的<code>frame</code>里面，而参数传递只是一种赋值操作，<code>a_list</code> “指向” <code>nums</code>指向的<code>value</code>,而<code>list</code>类型是可变数据类型，所以任何<code>name</code>对它的改变都是就地的，可以通过<code>id()</code>操作来查看是否改变了地址</p>
-<p>另外一个程序</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">augment_twice_bad</span><span class="params">(a_list,val)</span>:</span></div><div class="line">	a_list = a_list + [val,val]</div><div class="line">nums = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>]</div><div class="line">augment_twice_bad(nums,<span class="number">4</span>)</div><div class="line">print(nums) <span class="comment">#[1,2,3]</span></div></pre></td></tr></table></figure>
-<p>这个跟上面的程序就不同在函数里面一个是用<code>.append()</code>来增加元素，一个则用加法然后赋值，赋值，赋值，重要的事情说三遍，这是个赋值操作，一旦出现赋值，就相当于等式左边的<code>name</code><strong>rebind</strong>出现在等式右边的<code>value</code></p>
-<h2 id="-2"><a href="#-2" class="headerlink" title=""></a><img src="http://onexs3cnv.bkt.clouddn.com/Screen%20Shot%202017-03-29%20at%2010.35.39%20PM.png" alt="bad_before"></h2><p><img src="http://onexs3cnv.bkt.clouddn.com/Screen%20Shot%202017-03-29%20at%2010.35.45%20PM.png" alt="bad_after"></p>
-<blockquote>
-<p>It’s really important to keep in mind the difference between mutating a value in place, and rebinding a name. augment_twice worked because it mutated the value passed in, so that mutation was available after the function returned. augment_twice_bad used an assignment to rebind a local name, so the changes weren’t visible outside the function.</p>
-</blockquote>
-<h1 id="其他的-facts-myths都知道了，上面的需要注意一下就可以了。过"><a href="#其他的-facts-myths都知道了，上面的需要注意一下就可以了。过" class="headerlink" title="其他的 facts, myths都知道了，上面的需要注意一下就可以了。过"></a>其他的 facts, myths都知道了，上面的需要注意一下就可以了。过</h1>
+<h1 id="Class-attribute-look-up-类属性的查找"><a href="#Class-attribute-look-up-类属性的查找" class="headerlink" title="Class attribute look up 类属性的查找"></a>Class attribute look up 类属性的查找</h1><p>一个<code>metaclass</code> <code>M</code>，和一个<code>M</code>的实例，类<code>C</code>，这时候调用<code>C.name</code>的流程：<br>其实和实例访问一一对应，就是各自都升了一个level<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line">Get the MetaClass from Class</div><div class="line">Call the Metaclass&apos;s special method __getattribute__</div><div class="line">	Get the Metaclass&apos;s __mro__ as MetaParents</div><div class="line">	For each MetaParent in MetaParents</div><div class="line">		if the Attribute is in the MetaParent&apos;s __dict__</div><div class="line">			if is a data descriptor</div><div class="line">				return the result from calling the data descriptor&apos;s special method __get__()</div><div class="line">	</div><div class="line">	Get the Class&apos;s __mro__ as ClassParents</div><div class="line">	For each ClassParent in ClassParents</div><div class="line">		if the Attribute is in the ClassParents&apos;s __dict__</div><div class="line">			if is a(data or non-data) descriptor</div><div class="line">				return the result from calling the descriptor&apos;s special method __get__()</div><div class="line">				# 实例在这层上不会调用__get__()</div><div class="line">			else</div><div class="line">				return the value</div><div class="line">	</div><div class="line">	For each MetaParent in MetaParents</div><div class="line">		if the Attribute is in the MetaParents&apos;s __dict__</div><div class="line">			if is a non-data descriptor</div><div class="line">				return the result from calling the non-data descriptor&apos;s special method __get__()</div><div class="line">			if it is NOT a descriptor</div><div class="line">				return the value</div><div class="line">	</div><div class="line">	If MetaClass has the special method __getattr__</div><div class="line">		return the result from calling the MetaClass&apos;s special method __getattr__</div><div class="line">	</div><div class="line">	Raises an AttributeError</div></pre></td></tr></table></figure></p>
+<h1 id="例子"><a href="#例子" class="headerlink" title="例子"></a><a href="https://gist.github.com/Crayon277/cd05d4c058a5e11c7bd202aa44fff876" target="_blank" rel="external">例子</a></h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div><div class="line">121</div><div class="line">122</div><div class="line">123</div><div class="line">124</div><div class="line">125</div><div class="line">126</div><div class="line">127</div><div class="line">128</div><div class="line">129</div><div class="line">130</div><div class="line">131</div><div class="line">132</div><div class="line">133</div><div class="line">134</div><div class="line">135</div><div class="line">136</div><div class="line">137</div><div class="line">138</div><div class="line">139</div><div class="line">140</div><div class="line">141</div><div class="line">142</div><div class="line">143</div><div class="line">144</div><div class="line">145</div><div class="line">146</div><div class="line">147</div><div class="line">148</div><div class="line">149</div><div class="line">150</div><div class="line">151</div><div class="line">152</div><div class="line">153</div><div class="line">154</div><div class="line">155</div><div class="line">156</div><div class="line">157</div><div class="line">158</div><div class="line">159</div><div class="line">160</div><div class="line">161</div><div class="line">162</div><div class="line">163</div><div class="line">164</div><div class="line">165</div><div class="line">166</div><div class="line">167</div><div class="line">168</div><div class="line">169</div><div class="line">170</div><div class="line">171</div><div class="line">172</div><div class="line">173</div><div class="line">174</div><div class="line">175</div><div class="line">176</div><div class="line">177</div><div class="line">178</div><div class="line">179</div><div class="line">180</div><div class="line">181</div><div class="line">182</div><div class="line">183</div><div class="line">184</div><div class="line">185</div><div class="line">186</div><div class="line">187</div><div class="line">188</div><div class="line">189</div><div class="line">190</div><div class="line">191</div><div class="line">192</div><div class="line">193</div><div class="line">194</div><div class="line">195</div><div class="line">196</div><div class="line">197</div><div class="line">198</div><div class="line">199</div></pre></td><td class="code"><pre><div class="line">#!/usr/bin/env python</div><div class="line"># coding=utf-8</div><div class="line"></div><div class="line">class Desc(object): # 定一个非数据描述符</div><div class="line">    def __init__(self, msg):</div><div class="line">        self.msg = msg</div><div class="line">    </div><div class="line">    def __get__(self, instance, owner=None):</div><div class="line">        return &quot;&#123;0&#125;: &#123;1&#125;&quot;.format(self.typ, self.msg) # self.typ是啥？？？？</div><div class="line"></div><div class="line">    </div><div class="line">class NonDesc(Desc):</div><div class="line">    # non-data descriptor </div><div class="line">    typ = &apos;NonDesc&apos;</div><div class="line"></div><div class="line"></div><div class="line">class DataDesc(Desc):</div><div class="line">    # data descriptor</div><div class="line">    typ = &apos;DataDesc&apos;</div><div class="line"></div><div class="line">    def __set__(self, instance, value):</div><div class="line">        pass</div><div class="line"></div><div class="line">    def __delete__(self, instance):</div><div class="line">        pass</div><div class="line"></div><div class="line"></div><div class="line">class M(type):</div><div class="line">    x = &apos;x from M&apos;</div><div class="line">    y = NonDesc(&apos;y from cls M&apos;)</div><div class="line">    z = DataDesc(&apos;z from cls M&apos;)</div><div class="line">    </div><div class="line">    def __getattr__(self, name):</div><div class="line">        return &quot;getattr M &#123;0&#125;&quot;.format(name)</div><div class="line"></div><div class="line"></div><div class="line">class A(object):</div><div class="line">    #t = &apos;t from A&apos;</div><div class="line">    #u = NonDesc(&apos;u from cls A&apos;)</div><div class="line">    #v = DataDesc(&apos;v from cls A&apos;)</div><div class="line">    x = &apos;x from A&apos;</div><div class="line">    y = NonDesc(&apos;y from cls A&apos;)</div><div class="line">    z = DataDesc(&apos;z from cls A&apos;)</div><div class="line"></div><div class="line"></div><div class="line">class B(A):</div><div class="line">    &quot;&quot;&quot;</div><div class="line">    metaclass is M</div><div class="line">    &quot;&quot;&quot;</div><div class="line">    __metaclass__ = M</div><div class="line">    &quot;&quot;&quot;</div><div class="line">    这个metaclass什么用？？？？</div><div class="line">    &quot;&quot;&quot;</div><div class="line">    </div><div class="line">    </div><div class="line">class C(B):</div><div class="line">    &quot;&quot;&quot;</div><div class="line">    metaclass is inherited from C</div><div class="line">    &quot;&quot;&quot;</div><div class="line">    def __getattr__(self, name):</div><div class="line">        return &quot;getattr C: &#123;0&#125;&quot;.format(name)</div><div class="line">    </div><div class="line"></div><div class="line">c = C()</div><div class="line">print &apos;******&apos;</div><div class="line">print &apos;c.__class__&apos;, c.__class__  #其实就是type(c), 还有注意c是新式类，格式应该是&lt;class &apos;__main__.C&apos;&gt;之类的</div><div class="line">print &apos;c.__class__.__getattribute__&apos;, c.__class__.__getattribute__ # 因为c.__class__也是一个对象</div><div class="line"># &lt;slot wrapper &apos;__getattribute__&apos; of &apos;object&apos; objects&gt;</div><div class="line">print &apos;c.__class__.__mro__&apos;, c.__class__.__mro__ # method resolution order C B A O</div><div class="line"></div><div class="line">print &apos;******&apos;</div><div class="line">print &apos;c.x&apos;, c.x </div><div class="line">&quot;&quot;&quot;</div><div class="line">父类们寻找顺序是根据c.__class__.__mro__ 来的</div><div class="line">c先去寻找父类们中有没有x的描述符，没有，然后在自己的__dict__中找x，也咩有，然后再去父类们的__dict__中找</div><div class="line">有没有这个属性名的non-data 描述符，没有，不是描述符而是直接属性的呢？A中有，返回A中的x值</div><div class="line">&quot;&quot;&quot;</div><div class="line">print &apos;c.y&apos;, c.y</div><div class="line">&quot;&quot;&quot;</div><div class="line">同上，父类的顺序不废话了</div><div class="line">最终在第三阶段找到A中的y，它是一个non-data descriptor，NonDesc: y from cls A</div><div class="line">&quot;&quot;&quot;</div><div class="line">print &apos;c.z&apos;, c.z</div><div class="line">&quot;&quot;&quot;</div><div class="line">在第一个阶段中的A中找到z 是一个data descriptor，饭后 DataDesc: z from cls A</div><div class="line">&quot;&quot;&quot;</div><div class="line">print &apos;c.nope&apos;, c.nope</div><div class="line">&quot;&quot;&quot;</div><div class="line">当前三个阶段都找不到的时候，如果类中有定义__getattr__，就到这里去，没有报错</div><div class="line">这里所有三个阶段没有nope属性，然后到了__getattr__，返回 getattr C: nope</div><div class="line">&quot;&quot;&quot;</div><div class="line"></div><div class="line">c.t = &apos;t from obj c&apos;</div><div class="line">c.u = NonDesc(&apos;u from obj c&apos;)</div><div class="line">c.v = DataDesc(&apos;v from obj c&apos;)</div><div class="line">c.x = &apos;x from obj c&apos;</div><div class="line">c.y = NonDesc(&apos;y from obj c&apos;)</div><div class="line">c.z = DataDesc(&apos;z from obj c&apos;)</div><div class="line"></div><div class="line">print &apos;******&apos;</div><div class="line">print &apos;c.t&apos;, c.t</div><div class="line">&quot;&quot;&quot;</div><div class="line">如上，在第二个阶段找到t, 返回 t from obj c</div><div class="line">&quot;&quot;&quot;</div><div class="line">print &apos;c.u&apos;, c.u</div><div class="line">&quot;&quot;&quot;</div><div class="line">在第二个阶段在c字典里面找到，不管是值还是descriptor ，这里会调用__get__()  NonDesc: u from obj c</div><div class="line">update:更正</div><div class="line">因为在</div><div class="line">&quot;&quot;&quot;</div><div class="line">print &apos;c.v&apos;, c.v</div><div class="line">&quot;&quot;&quot;</div><div class="line">在第二阶段c字典里找到, 调用__get__() ，返回 DataDesc: v from obj c</div><div class="line">&quot;&quot;&quot;</div><div class="line">print &apos;c.x&apos;, c.x</div><div class="line">&quot;&quot;&quot;</div><div class="line">因为在第一阶段是在类父类中找描述符，虽然A中有属性x但不是描述符，因此进入第二个阶段，在实例字典中找，不管是不是描述符</div><div class="line">只要名字对了就返回. 这里在这个阶段返回x from obj c</div><div class="line">&quot;&quot;&quot;</div><div class="line">print &apos;c.y&apos;, c.y</div><div class="line">&quot;&quot;&quot;</div><div class="line">同上，返回的是 NonDesc: y from obj c</div><div class="line">&quot;&quot;&quot;</div><div class="line">print &apos;c.z&apos;, c.z</div><div class="line">&quot;&quot;&quot;</div><div class="line">同上，返回的是 DataDesc: z from obj c</div><div class="line">&quot;&quot;&quot;</div><div class="line"></div><div class="line">print &apos;******&apos;  # 这里是用到 class attribute look up 。 以上是对实例进行点运算</div><div class="line">print &quot;C.x&quot;, C.x</div><div class="line">&quot;&quot;&quot;</div><div class="line">因为B的metaclass是M了，C继承B，C现在的metaclass也是M</div><div class="line">现在要将上面的所有概念都升级，原来class变成metaclass，原来instance变成class</div><div class="line">先根据metaclass里的mro决定先后顺序metaparents</div><div class="line">因为这里是类属性访问，C类的metaclass是M，M.__mro__ 是 (&lt;class &apos;__main__.M&apos;&gt;, &lt;type &apos;type&apos;&gt;, &lt;type &apos;object&apos;&gt;)</div><div class="line">按顺序找x的描述符，但M中没有x的描述符，然后type，object都没有。</div><div class="line">进入第二个阶段，先计算C.__mro__,按照顺序依次访问类字典C,B,A,O ， </div><div class="line">如果有属性重名，先要描述符，不然只要是在__dict__中就返回</div><div class="line">c中没有x,然后去B，B里面也咩有x，到A中，有x但是不是描述符，没关系直接返回,因为也没有名字为x的描述符了。</div><div class="line">返回x from A</div><div class="line">&quot;&quot;&quot;</div><div class="line">print &quot;C.y&quot;, C.y</div><div class="line">&quot;&quot;&quot;</div><div class="line">同上，虽然在M中有y但是是非数据描述符，在第2阶段中的A类中找到y非数据描述符,返回 NonDesc: y from cls A</div><div class="line">&quot;&quot;&quot;</div><div class="line">print &quot;C.z&quot;, C.z</div><div class="line">&quot;&quot;&quot;</div><div class="line">这是在第一个阶段中的M里找到z数据描述符， 返回 DataDesc: z from cls M</div><div class="line">&quot;&quot;&quot;</div><div class="line">print &quot;C.nope&quot;, C.nope</div><div class="line">&quot;&quot;&quot;</div><div class="line">上面三个阶段都没有，进入第四个阶段，这个阶段不是去C中的__getattr__，因为上面说了都升了一级，现在是在</div><div class="line">M中的__getattr__，如果M里面没有__getattr__，那么就回报错，现在M有，返回 getattr M nope</div><div class="line">&quot;&quot;&quot;</div><div class="line"></div><div class="line">C.t = &apos;t from obj C&apos;</div><div class="line">C.u = NonDesc(&apos;u from obj C&apos;)</div><div class="line">C.v = DataDesc(&apos;v from obj C&apos;)</div><div class="line">C.x = &apos;x from obj C&apos;</div><div class="line">C.y = NonDesc(&apos;y from obj C&apos;)</div><div class="line">C.z = DataDesc(&apos;z from obj C&apos;)</div><div class="line"></div><div class="line">&quot;&quot;&quot;</div><div class="line">如果是类属性访问，好像没有A，B什么事 !!!!</div><div class="line">写在流程搞错之前，之前在第二阶段没有计算类的__mro__</div><div class="line">重新看一下流程</div><div class="line">&quot;&quot;&quot;</div><div class="line">print &apos;******&apos;</div><div class="line">print &quot;C.t&quot;, C.t</div><div class="line">&quot;&quot;&quot;</div><div class="line">因为metaclass以及mro中都没有t，进入下一个阶段</div><div class="line">在第二阶段中现在C类中有t这个属性了，返回 t from obj C</div><div class="line">&quot;&quot;&quot;</div><div class="line">print &quot;C.u&quot;, C.u</div><div class="line">&quot;&quot;&quot;</div><div class="line">同上，在第二阶段中C类的__dict__中找到，返回 NonDesc: u from obj C</div><div class="line">&quot;&quot;&quot;</div><div class="line">print &quot;C.v&quot;, C.v</div><div class="line">&quot;&quot;&quot;</div><div class="line">同上，在第二阶段中返回 DataDesc: v from obj C</div><div class="line">&quot;&quot;&quot;</div><div class="line">print &quot;C.x&quot;, C.x</div><div class="line">&quot;&quot;&quot;</div><div class="line">和M中有重名，但是因为M中的不是数据描述符，这个的优先级高，在第二阶段返回 x from obj C</div><div class="line">虽然A中也有x，但是mro顺序C排在A前面</div><div class="line">&quot;&quot;&quot;</div><div class="line">print &quot;C.y&quot;, C.y</div><div class="line">&quot;&quot;&quot;</div><div class="line">同上，有重名，但是M中是非数据描述符，第一阶段过，到第二阶段，返回 NonDesc: y from obj C</div><div class="line">然后A中同理</div><div class="line">&quot;&quot;&quot;</div><div class="line">print &quot;C.z&quot;, C.z</div><div class="line">&quot;&quot;&quot;</div><div class="line">重名，但是z在M中是数据描述符，在第一阶段就返回 DataDesc: z from cls M</div><div class="line">&quot;&quot;&quot;</div><div class="line">print &quot;C.nope&quot;, C.nope</div><div class="line">&quot;&quot;&quot;</div><div class="line">这个没有变 getattr M nope</div><div class="line">&quot;&quot;&quot;</div></pre></td></tr></table></figure>
+
       
     </div>
 
@@ -550,7 +517,7 @@
     </li>
     <li class="post-copyright-link">
       <strong>Post link:</strong>
-      <a href="http://www.mmmmmcclxxvii.cn/2017/03/29/python-name-and-values/" title="python name and values">http://www.mmmmmcclxxvii.cn/2017/03/29/python-name-and-values/</a>
+      <a href="http://www.mmmmmcclxxvii.cn/2017/03/08/object-attribute-look-up/" title="python中的对象属性查找">http://www.mmmmmcclxxvii.cn/2017/03/08/object-attribute-look-up/</a>
     </li>
     <li class="post-copyright-license">
       <strong>Copyright Notice: </strong>
@@ -568,6 +535,8 @@
           
             <a href="/tags/python/" rel="tag"><i class="fa fa-tag"></i> python</a>
           
+            <a href="/tags/object/" rel="tag"><i class="fa fa-tag"></i> object</a>
+          
         </div>
       
 
@@ -579,8 +548,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/03/14/object/" rel="next" title="project of stackoverflow - python object(一)">
-                <i class="fa fa-chevron-left"></i> project of stackoverflow - python object(一)
+              <a href="/2017/03/08/descriptor/" rel="next" title="descriptor">
+                <i class="fa fa-chevron-left"></i> descriptor
               </a>
             
           </div>
@@ -588,6 +557,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/03/13/mro/" rel="prev" title="understanding MRO">
+                understanding MRO <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -965,7 +938,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Fact-Names-have-no-type-values-have-no-scope"><span class="nav-number">1.</span> <span class="nav-text">Fact: Names have no type, values have no scope.</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Fact-Values-can’t-be-deleted-only-names-can"><span class="nav-number">2.</span> <span class="nav-text">Fact: Values can’t be deleted, only names can.</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Fact-Assignment-never-copies-data"><span class="nav-number">3.</span> <span class="nav-text">Fact: Assignment never copies data.</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Fact-Python-passes-function-arguments-by-assigning-to-them"><span class="nav-number">4.</span> <span class="nav-text">Fact: Python passes function arguments by assigning to them.</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#"><span class="nav-number">4.1.</span> <span class="nav-text"></span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#-1"><span class="nav-number">4.2.</span> <span class="nav-text"></span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#-2"><span class="nav-number">4.3.</span> <span class="nav-text"></span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#其他的-facts-myths都知道了，上面的需要注意一下就可以了。过"><span class="nav-number">5.</span> <span class="nav-text">其他的 facts, myths都知道了，上面的需要注意一下就可以了。过</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Instance-attribute-look-up-实例属性查找"><span class="nav-number">1.</span> <span class="nav-text">Instance attribute look up 实例属性查找</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Class-attribute-look-up-类属性的查找"><span class="nav-number">2.</span> <span class="nav-text">Class attribute look up 类属性的查找</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#例子"><span class="nav-number">3.</span> <span class="nav-text">例子</span></a></li></ol></div>
             
 
           </div>
