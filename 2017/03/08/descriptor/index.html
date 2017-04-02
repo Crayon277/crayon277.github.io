@@ -82,7 +82,7 @@
 <link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="python,object,descriptor," />
+  <meta name="keywords" content="python,descriptor,object," />
 
 
 
@@ -111,7 +111,7 @@ In general, a descriptor is an object attribute with “binding behavior”,">
 
 In general, a descriptor is an object attribute with “binding behavior”,">
 <meta property="og:image" content="http://onexs3cnv.bkt.clouddn.com/descriptor-example-student.png">
-<meta property="og:updated_time" content="2017-04-01T13:59:16.000Z">
+<meta property="og:updated_time" content="2017-04-02T02:19:46.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="descriptor">
 <meta name="twitter:description" content="其实自己没有深入的研究源码，这篇也是基于阅读一些官方文档和他人的博客做的总结。我这里的思路是从描述符的渊源到为什么有这个描述符，然后怎么用这里先直接给出描述符的定义，先有个印象，如果一开始阅读感觉没什么联系，没关系，最终那些点将连成线的。官方的定义：
@@ -385,8 +385,8 @@ In general, a descriptor is an object attribute with “binding behavior”,">
               
                 <span class="post-meta-item-text">Post modified</span>
               
-              <time title="Post modified" itemprop="dateModified" datetime="2017-04-01T21:59:16+08:00">
-                2017-04-01
+              <time title="Post modified" itemprop="dateModified" datetime="2017-04-02T10:19:46+08:00">
+                2017-04-02
               </time>
             
           </span>
@@ -477,7 +477,7 @@ In general, a descriptor is an object attribute with “binding behavior”,">
 <p>Descriptor are the mechanism behind properties, methods,  static methods, class methods and <code>super()</code><br>from – <a href="https://docs.python.org/2/howto/descriptor.html#definition-and-introduction" target="_blank" rel="external">Descriptor HowTo Guide</a></p>
 </blockquote>
 <hr>
-<h1 id="访问属性"><a href="#访问属性" class="headerlink" title="访问属性"></a>访问属性</h1><p>[Todo] 这里将访问属性的另做一个页面把<br>建议先把下面的看了再来看这个</p>
+<h1 id="访问属性"><a href="#访问属性" class="headerlink" title="访问属性"></a>访问属性</h1><p><a href="http://www.mmmmmcclxxvii.cn/2017/03/08/object-attribute-look-up/">查找属性的访问顺序</a><br>建议先把下面的看了再来看这个</p>
 <p>我之所以说先看下面，又不得不把这个主题先放上来，是因为其实描述符归根结底，目前看到就是对属性的取值赋值操作，<strong>只不过是对这个操作封装了一下</strong>而已。<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">a.attr = <span class="number">1</span></div><div class="line">tmp = a.attr</div></pre></td></tr></table></figure></p>
 <p>一般的取值赋值就是这样子的，如果<code>attr</code>事先在类里面定义好了的<code>self.attr = arg</code> 上面的<code>a.attr = 1</code>其实就是重新将“标签”<code>a.attr</code>贴到<code>1</code>数值上去，如果没有那就是动态生成<code>attr</code>属性。<br><strong>但是这样的赋值太单一了，什么意思，也就是说，如果我要对赋入的值做下额外的检查，比如学生的成绩，不可能出现负数，身高也不可能出现负数。所以想到了在<code>__init__</code>当中增加一些逻辑代码进行检查</strong><br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self,score)</span>:</span></div><div class="line">	<span class="keyword">assert</span> score&gt;=<span class="number">0</span>,<span class="string">"value error"</span></div><div class="line">	self.score = score</div></pre></td></tr></table></figure></p>
 <p>但是这样只是在初始化的时候，像<code>a = A(-1)</code>会报错，那之后如果<code>a.score = -100</code>像这样的误操作，也没人阻止。那我们又有了另一种思路<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_score</span><span class="params">(self)</span>:</span></div><div class="line">	<span class="keyword">return</span> self.score</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">set_score</span><span class="params">(self,new_score)</span>:</span></div><div class="line">	<span class="keyword">assert</span> new_score&gt;=<span class="number">0</span>,<span class="string">"value error"</span></div><div class="line">	self.score = new_score</div></pre></td></tr></table></figure></p>
@@ -578,9 +578,9 @@ In general, a descriptor is an object attribute with “binding behavior”,">
           
             <a href="/tags/python/" rel="tag"><i class="fa fa-tag"></i> python</a>
           
-            <a href="/tags/object/" rel="tag"><i class="fa fa-tag"></i> object</a>
-          
             <a href="/tags/descriptor/" rel="tag"><i class="fa fa-tag"></i> descriptor</a>
+          
+            <a href="/tags/object/" rel="tag"><i class="fa fa-tag"></i> object</a>
           
         </div>
       
@@ -592,6 +592,10 @@ In general, a descriptor is an object attribute with “binding behavior”,">
       
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/03/01/zlt-project/" rel="next" title="zlt-project">
+                <i class="fa fa-chevron-left"></i> zlt-project
+              </a>
             
           </div>
 
@@ -698,7 +702,7 @@ In general, a descriptor is an object attribute with “binding behavior”,">
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">5</span>
+                <span class="site-state-item-count">6</span>
                 <span class="site-state-item-name">posts</span>
               </a>
             </div>
@@ -720,7 +724,7 @@ In general, a descriptor is an object attribute with “binding behavior”,">
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-count">7</span>
                 <span class="site-state-item-name">tags</span>
               </a>
             </div>
