@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://www.mmmmmcclxxvii.cn/"/>
-  <updated>2017-04-04T06:21:28.000Z</updated>
+  <updated>2017-04-04T15:34:18.000Z</updated>
   <id>http://www.mmmmmcclxxvii.cn/</id>
   
   <author>
@@ -14,6 +14,108 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Interesting experience -- challenge school master swimming</title>
+    <link href="http://www.mmmmmcclxxvii.cn/2017/04/04/swimming-with-master/"/>
+    <id>http://www.mmmmmcclxxvii.cn/2017/04/04/swimming-with-master/</id>
+    <published>2017-04-04T15:14:56.000Z</published>
+    <updated>2017-04-04T15:34:18.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>–update–<br>其实现在想想，可能当初会有更成熟的做法。</p>
+<hr>
+<a id="more"></a>
+<p>我写在了公号里。MMMMMCCLXXVII<br><img src="http://onexs3cnv.bkt.clouddn.com/Screen%20Shot%202017-04-04%20at%2011.30.45%20PM.png" alt="official account"></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;–update–&lt;br&gt;其实现在想想，可能当初会有更成熟的做法。&lt;/p&gt;
+&lt;hr&gt;
+    
+    </summary>
+    
+      <category term="life" scheme="http://www.mmmmmcclxxvii.cn/categories/life/"/>
+    
+    
+      <category term="rock the boat" scheme="http://www.mmmmmcclxxvii.cn/tags/rock-the-boat/"/>
+    
+      <category term="life" scheme="http://www.mmmmmcclxxvii.cn/tags/life/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Intro to hadoop and MapReduce -- Note(一)</title>
+    <link href="http://www.mmmmmcclxxvii.cn/2017/04/04/big-data/"/>
+    <id>http://www.mmmmmcclxxvii.cn/2017/04/04/big-data/</id>
+    <published>2017-04-04T12:26:09.000Z</published>
+    <updated>2017-04-04T14:40:22.000Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="Definition-of-Big-Data"><a href="#Definition-of-Big-Data" class="headerlink" title="Definition of Big Data"></a>Definition of Big Data</h1><p>可能有些人认为几个<code>terebytes</code>的数据量是大数据，但这个量不是标准的，所以一个合理的定义是</p>
+<blockquote>
+<p>It’s data that’s too big to be processed on a single machine.</p>
+</blockquote>
+<h2 id="Quiz-Chanllenges-with-Big-Data"><a href="#Quiz-Chanllenges-with-Big-Data" class="headerlink" title="Quiz: Chanllenges with Big Data"></a>Quiz: Chanllenges with Big Data</h2><p><del>- most data is worthless</del></p>
+<ul>
+<li>data is created fast</li>
+<li>data from different sources in various formats</li>
+</ul>
+<p>most data is not worthless, but actually does have a lot of value.</p>
+<h1 id="The-3-V’s-of-big-data"><a href="#The-3-V’s-of-big-data" class="headerlink" title="The 3 V’s of big data"></a>The 3 V’s of big data</h1><h2 id="Volume"><a href="#Volume" class="headerlink" title="Volume"></a>Volume</h2><p>总结：量大。需要考虑那些能提供有用信息</p>
+<blockquote>
+<p>But in order to store it, you’ll need a way to scale your storage capacity up to massive volume. Hadoop, which stores data in a distributed way across multiple machines, does that</p>
+</blockquote>
+<h2 id="Variety"><a href="#Variety" class="headerlink" title="Variety"></a>Variety</h2><p>就是说我们如果用像MySQL,Oracle这种数据库，数据必须要适合他们的格式，但是现在我们处理的数据很大部分都是<code>unstructured</code>或者是<code>semi-structured</code>.<br>比方说现在打客服热线不都有一个提示说是会录音，一种存储是语音识别成文字保存起来，另一种是直接存储成mp3格式然后让相应的软件解码如果后面要用的话。那hadoop不管你的数据是什么样的格式，</p>
+<blockquote>
+<p>you can just store the data in its raw format, and manipulate and reformat it later.</p>
+</blockquote>
+<h3 id="example"><a href="#example" class="headerlink" title="example"></a>example</h3><blockquote>
+<p>Sometimes the most unlikely data can be extremely useful and lead to savings due to better planning. </p>
+</blockquote>
+<p><img src="http://onexs3cnv.bkt.clouddn.com/Screen%20Shot%202017-04-04%20at%209.39.47%20PM.png" alt="optimize choice"></p>
+<p>比方说现在要通知附近的货车到中心取货，基于位置的系统就会通知最近的车辆过来。但往往，这个最近，不是最佳的选择。也许那里有交通堵塞，也许最近的车辆过来需要过羊肠小道，那里的路比较难走，也许是要绕一大圈才能到中心。更需要考虑的是，这辆车上也许没有足够的空间了，这辆车没有油了。所以以下都是需要考虑的</p>
+<ul>
+<li>Current GPS location fromi all trucks</li>
+<li>Current itineraries for all trucks</li>
+<li>Current traffic speed in related areas as reported by services such as waze</li>
+<li>Current load of trucks by volume and weight</li>
+<li>Fuel efficiency of the different vehicles</li>
+</ul>
+<blockquote>
+<p>The world we live in is extremely complex, and there are a lot of variables to consider that you can tweak to get large benefits.</p>
+<h2 id="Velocity"><a href="#Velocity" class="headerlink" title="Velocity"></a>Velocity</h2><p>实时更新？？<br>If we can’t store it as it arrives, we’ll end up discarding some of it, and that’s what we absolutely want to avoid.</p>
+</blockquote>
+<h1 id="history-of-hadoop"><a href="#history-of-hadoop" class="headerlink" title="history of hadoop"></a>history of hadoop</h1><p>来自hadoop 之父 Doug Cutting</p>
+<blockquote>
+<p>So, let me tell you how Hadoop came to be. About ten years ago in around 2003, I was working on an Open Source web search engine called Nutch, and we knew it needed to be something very scalable, because the Web was you know, billions of pages. terabytes, petabytes, of data, that we needed to be able to process, and we set about doing the best job we could and it was tough. We got things up and running on four or five machines, not very well, and around that time Google published some papers about how they were doing things internally. Published a paper about their distributed file system, TFS. and about their processing, framework, MapReduce. So my partner and I, at the time, in this project, Mike Cafarella. said about trying to reimplement these in Open Source. So that more people could use them than just folks at Google. Took us a couple of years, and we had Nutch up and running on, instead of four or five machines, on, 20 to 40 machines. It wasn’t perfect, it wasn’t totally reliable, but it worked. And we realize that to get it to the point where it was scaled to thousands of machines, and be as bullet proof as it needed to be, would take more than just the two of us, working part time.</p>
+<p>Around that time, Yahoo approached me and said they were interested in investing in this. So I went to work for Yahoo in January of 2006. First thing I did there, was, we took the parts of Nutch that were a distributed computing platform, and put them into a separate project. A new project christened Hadoop. Over the next couple years, with, Yahoo’s help, and the help of others, we took Hadoop, and really got it to the point where it did scale to petabytes, and running on thousands of processors. And doing so quite reliably. </p>
+<p>It spread to lots of companies, and mostly in the Internet sector, and became quite a success. after that, we, we started to see a bunch of other projects grow up around it. And Hadoop’s grown to be the kernel of a, which, pretty much an operating system for big data. We’ve got tools that, allow you to, more easily do, MapReduce programming, so, you can develop using SQL or a data flow language called Pig. And we’ve also got the beginnings of higher­level tools. We’ve got interactive SQL with Impala. We’ve got Search. and so we’re really seeing this develop to being a general purpose platform for data processing. that scale’s much better and that it is much more flexible than anything that’s, that’s, else is out there.</p>
+</blockquote>
+<h1 id="hadoop-cluster"><a href="#hadoop-cluster" class="headerlink" title="hadoop cluster"></a>hadoop cluster</h1><p><img src="http://onexs3cnv.bkt.clouddn.com/Screen%20Shot%202017-04-04%20at%2010.04.35%20PM.png" alt="cluster"><br>hadoop存储数据的方法是一个分布式的文件系统叫做<code>HDFS</code>。处理数据是通过<code>MapReduce</code>。<br>核心思想就是将数据分块，然后在集群中存储，也就是各个计算机搭建的一个网络吧。那这样的好处就是我们不用从中心取数据然后再操作，我们直接在集群中就地处理数据，后续还可以继续扩大集群的规模</p>
+<h1 id="hadoop-Ecosystem"><a href="#hadoop-Ecosystem" class="headerlink" title="hadoop Ecosystem"></a>hadoop Ecosystem</h1><p><img src="http://onexs3cnv.bkt.clouddn.com/Screen%20Shot%202017-04-04%20at%2010.31.42%20PM.png" alt="ecosystem"></p>
+<blockquote>
+<p>Core hadoop consists of HDFS and MapReduce<br>hadoop的生态系统。以hadoop为核心的，打造的周边产品，主要的目的就是降低使用hadoop的难度和门槛。<br>比如编写<code>MapReduce</code>的程序不是一件容易的事，有些没有编程经验的就可以用<code>Pig</code>，<code>Hive</code>，这种类似SQL语句来操作数据，但这两个都是将语句翻译为<code>MapReduce</code>然后再到集群上执行。<br>因为<code>Hive</code>和<code>Pig</code>它们本质上还是<code>MapReduce</code>的工作量，所以花费的时间可能更多。所以另一个开源项目<code>Impala</code>，它是允许直接用<code>SQL</code>语句来操作数据，不用经过<code>MapReduce</code>（具体现在我也不懂），所以这样就很快了<br>其他的也就类似了。</p>
+</blockquote>
+<p>Cloudera hadoop版的其实就是把这些都给你打包好了，你不用在一个一个去弄了。</p>
+<p>核心还是hadoop的<code>HDFS</code>和<code>MapReduce</code></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;Definition-of-Big-Data&quot;&gt;&lt;a href=&quot;#Definition-of-Big-Data&quot; class=&quot;headerlink&quot; title=&quot;Definition of Big Data&quot;&gt;&lt;/a&gt;Definition of Big Da
+    
+    </summary>
+    
+      <category term="bigdata" scheme="http://www.mmmmmcclxxvii.cn/categories/bigdata/"/>
+    
+    
+      <category term="hadoop" scheme="http://www.mmmmmcclxxvii.cn/tags/hadoop/"/>
+    
+      <category term="mapreduce" scheme="http://www.mmmmmcclxxvii.cn/tags/mapreduce/"/>
+    
+      <category term="udacity" scheme="http://www.mmmmmcclxxvii.cn/tags/udacity/"/>
+    
+  </entry>
   
   <entry>
     <title>seven-principle</title>
@@ -199,11 +301,11 @@
       <category term="stackoverflow" scheme="http://www.mmmmmcclxxvii.cn/categories/stackoverflow/"/>
     
     
+      <category term="stackoverflow" scheme="http://www.mmmmmcclxxvii.cn/tags/stackoverflow/"/>
+    
       <category term="python" scheme="http://www.mmmmmcclxxvii.cn/tags/python/"/>
     
       <category term="object" scheme="http://www.mmmmmcclxxvii.cn/tags/object/"/>
-    
-      <category term="stackoverflow" scheme="http://www.mmmmmcclxxvii.cn/tags/stackoverflow/"/>
     
   </entry>
   
