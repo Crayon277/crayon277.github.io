@@ -4,8 +4,54 @@
 
     
   <url>
+    <loc>http://www.mmmmmcclxxvii.cn/2016/12/03/python-types-and-objects/</loc>
+    <lastmod>2017-04-04T09:12:57.000Z</lastmod>
+    <data>
+        <display>
+        <title>python types and objects</title>
+        <pubTime>2016-12-03T00:02:26.000Z</pubTime>
+        
+        <tag>python</tag>
+         
+        <tag>object</tag>
+         
+        <tag>type</tag>
+         
+         
+           
+             
+              <breadCrumb title="python" url="http://www.mmmmmcclxxvii.cn/categories/python/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.mmmmmcclxxvii.cn/2017/04/04/seven-principle/</loc>
+    <lastmod>2017-04-04T06:21:28.000Z</lastmod>
+    <data>
+        <display>
+        <title>seven-principle</title>
+        <pubTime>2017-04-04T05:58:52.000Z</pubTime>
+        
+        <tag>life</tag>
+         
+        <tag>principle</tag>
+         
+         
+           
+             
+              <breadCrumb title="life" url="http://www.mmmmmcclxxvii.cn/categories/life/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://www.mmmmmcclxxvii.cn/2017/03/01/zlt-project/</loc>
-    <lastmod>2017-04-02T02:59:57.000Z</lastmod>
+    <lastmod>2017-04-02T03:10:32.000Z</lastmod>
     <data>
         <display>
         <title>zlt-project</title>
@@ -14,6 +60,8 @@
         <tag>python</tag>
          
         <tag>project</tag>
+         
+        <tag>Tkinter</tag>
          
          
            
@@ -35,9 +83,9 @@
         
         <tag>python</tag>
          
-        <tag>descriptor</tag>
-         
         <tag>object</tag>
+         
+        <tag>descriptor</tag>
          
          
            

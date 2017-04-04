@@ -82,7 +82,7 @@
 <link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="python,object,stackoverflow," />
+  <meta name="keywords" content="python,object,type," />
 
 
 
@@ -100,16 +100,33 @@
 
 
 
-<meta name="description" content="搬运stackoverflow有关python的问题 之 object部分 （一）">
+<meta name="description" content="Python Types and Objects这篇文章解释了：
+
+什么是&amp;lt;type &amp;#39;type&amp;#39;&amp;gt;和
+用户自定义的类和实例是怎么联系在一起的以及和内建类型的联系
+什么是metaclass元类">
 <meta property="og:type" content="article">
-<meta property="og:title" content="project of stackoverflow - python object(一)">
-<meta property="og:url" content="http://www.mmmmmcclxxvii.cn/2017/03/14/object/index.html">
+<meta property="og:title" content="python types and objects">
+<meta property="og:url" content="http://www.mmmmmcclxxvii.cn/2016/12/03/python-types-and-objects/index.html">
 <meta property="og:site_name" content="MMMMMCCLXXVII">
-<meta property="og:description" content="搬运stackoverflow有关python的问题 之 object部分 （一）">
-<meta property="og:updated_time" content="2017-03-27T15:00:07.000Z">
+<meta property="og:description" content="Python Types and Objects这篇文章解释了：
+
+什么是&amp;lt;type &amp;#39;type&amp;#39;&amp;gt;和
+用户自定义的类和实例是怎么联系在一起的以及和内建类型的联系
+什么是metaclass元类">
+<meta property="og:image" content="http://onexs3cnv.bkt.clouddn.com/Screen%20Shot%202017-04-04%20at%202.56.02%20PM.png">
+<meta property="og:image" content="http://onexs3cnv.bkt.clouddn.com/Screen%20Shot%202017-04-04%20at%202.42.19%20PM.png">
+<meta property="og:image" content="http://onexs3cnv.bkt.clouddn.com/Screen%20Shot%202017-04-04%20at%203.35.31%20PM.png">
+<meta property="og:image" content="http://www.cafepy.com/article/python_types_and_objects/images/relationships_transitivity.png">
+<meta property="og:updated_time" content="2017-04-04T09:12:57.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="project of stackoverflow - python object(一)">
-<meta name="twitter:description" content="搬运stackoverflow有关python的问题 之 object部分 （一）">
+<meta name="twitter:title" content="python types and objects">
+<meta name="twitter:description" content="Python Types and Objects这篇文章解释了：
+
+什么是&amp;lt;type &amp;#39;type&amp;#39;&amp;gt;和
+用户自定义的类和实例是怎么联系在一起的以及和内建类型的联系
+什么是metaclass元类">
+<meta name="twitter:image" content="http://onexs3cnv.bkt.clouddn.com/Screen%20Shot%202017-04-04%20at%202.56.02%20PM.png">
 
 
 
@@ -137,13 +154,13 @@
 
 
 
-  <link rel="canonical" href="http://www.mmmmmcclxxvii.cn/2017/03/14/object/"/>
+  <link rel="canonical" href="http://www.mmmmmcclxxvii.cn/2016/12/03/python-types-and-objects/"/>
 
 
 
 
 
-  <title> project of stackoverflow - python object(一) | MMMMMCCLXXVII </title>
+  <title> python types and objects | MMMMMCCLXXVII </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="en">
@@ -325,7 +342,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://www.mmmmmcclxxvii.cn/2017/03/14/object/">
+    <link itemprop="mainEntityOfPage" href="http://www.mmmmmcclxxvii.cn/2016/12/03/python-types-and-objects/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Crayon Chaney">
@@ -346,7 +363,7 @@
             
             
               
-                project of stackoverflow - python object(一)
+                python types and objects
               
             
           </h1>
@@ -361,8 +378,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-03-14T22:27:10+08:00">
-                2017-03-14
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-12-03T08:02:26+08:00">
+                2016-12-03
               </time>
             
 
@@ -377,8 +394,8 @@
               
                 <span class="post-meta-item-text">Post modified</span>
               
-              <time title="Post modified" itemprop="dateModified" datetime="2017-03-27T23:00:07+08:00">
-                2017-03-27
+              <time title="Post modified" itemprop="dateModified" datetime="2017-04-04T17:12:57+08:00">
+                2017-04-04
               </time>
             
           </span>
@@ -396,8 +413,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/stackoverflow/" itemprop="url" rel="index">
-                    <span itemprop="name">stackoverflow</span>
+                  <a href="/categories/python/" itemprop="url" rel="index">
+                    <span itemprop="name">python</span>
                   </a>
                 </span>
 
@@ -414,7 +431,7 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a class="cloud-tie-join-count" href="/2017/03/14/object/#comments" itemprop="discussionUrl">
+                <a class="cloud-tie-join-count" href="/2016/12/03/python-types-and-objects/#comments" itemprop="discussionUrl">
                   <span class="post-comments-count join-count" itemprop="commentCount"></span>
                 </a>
               </span>
@@ -423,7 +440,7 @@
 
           
           
-             <span id="/2017/03/14/object/" class="leancloud_visitors" data-flag-title="project of stackoverflow - python object(一)">
+             <span id="/2016/12/03/python-types-and-objects/" class="leancloud_visitors" data-flag-title="python types and objects">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -440,10 +457,6 @@
           
 
           
-              <div class="post-description">
-                  搬运stackoverflow有关python的问题 之 object部分 （一）
-              </div>
-          
 
         </div>
       </header>
@@ -456,68 +469,88 @@
       
 
       
-        <h1 id="what-does-‘super’-do-in-python"><a href="#what-does-‘super’-do-in-python" class="headerlink" title="what does ‘super’ do in python"></a><a href="http://stackoverflow.com/questions/222877/what-does-super-do-in-python" target="_blank" rel="external">what does ‘super’ do in python</a></h1><p>下面两个的区别是？</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Child</span><span class="params">(SomeBaseClass)</span>:</span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self)</span>:</span></div><div class="line">		super(Child, self).__init__()</div></pre></td></tr></table></figure>
-<p>和<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Child</span><span class="params">(SomeBaseClass)</span>:</span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self)</span>:</span></div><div class="line">		SomeBaseClass.__init__(self)</div></pre></td></tr></table></figure></p>
+        <p><a href="http://www.cafepy.com/article/python_types_and_objects/python_types_and_objects.html" target="_blank" rel="external">Python Types and Objects</a><br>这篇文章解释了：</p>
+<ul>
+<li>什么是<code>&lt;type &#39;type&#39;&gt;</code>和<type 'object'=""></type></li>
+<li>用户自定义的类和实例是怎么联系在一起的以及和内建类型的联系</li>
+<li>什么是<code>metaclass</code>元类</li>
+</ul>
 <a id="more"></a>
-<p>我在单个继承中已经看到<code>super</code> 被用的很多了。我能知道为什么要在多重继承的时候用它，但是还是不清楚在这种情况用它的好处。</p>
+<h1 id="type和object"><a href="#type和object" class="headerlink" title="type和object"></a><code>type</code>和<code>object</code></h1><p>从之前的学习面向对象编程来看，我们可以通过继承来定义一个类，也可以查看一个对象属于哪个类。其实这就可以抽象出两种关系<br><img src="http://onexs3cnv.bkt.clouddn.com/Screen%20Shot%202017-04-04%20at%202.56.02%20PM.png" alt="relationship"><br>图中虚线就是<code>type</code>，表示一个<strong>对象</strong>(又称‘实例’)的类型是尖头指向的那个<br>图中的实线是<code>base</code>，表示一个<strong>类</strong>的基类是尖头指向的那个</p>
+<blockquote>
+<p>the type and base(if exist) are important, coz they define special relationships an object with other objects.</p>
+</blockquote>
+<p>因为在python中一切皆为对象，所以<code>base</code>到头了就是<code>object</code>，这个是在python中一切类的祖宗。<br>而因为python中一切皆为对象, 它就有类型，<code>object</code>也是一个对象，它的类型就是<code>type</code>，<code>type</code>本身也是一个对象，为了满足python这样的设定，它的类型就是它自己。<strong><code>type</code>既是一个对象，也是一个类</strong>。就说我们自己定义了一个类<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&gt;&gt;&gt; </span><span class="class"><span class="keyword">class</span> <span class="title">A</span><span class="params">(object)</span>:</span></div><div class="line"><span class="meta">... </span>    <span class="keyword">pass</span></div><div class="line">...</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>A.__bases__</div><div class="line">(&lt;type <span class="string">'object'</span>&gt;,)</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>A.__class__</div><div class="line">&lt;type <span class="string">'type'</span>&gt;</div></pre></td></tr></table></figure></p>
+<p>他也有类型，就是<code>type</code>类型</p>
+<blockquote>
+<p>keep in mind that the types and bases of objects just other objects</p>
+</blockquote>
+<p>既然像类也是一种”对象”,那它是谁的对象？？答案就是<code>metaclass</code>，<code>type</code>就是<code>metaclass</code>。<br>先有鸡还是先有蛋？<br><img src="http://onexs3cnv.bkt.clouddn.com/Screen%20Shot%202017-04-04%20at%202.42.19%20PM.png" alt="explain"></p>
+<h2 id="类和类型的统一"><a href="#类和类型的统一" class="headerlink" title="类和类型的统一"></a>类和类型的统一</h2><p>这个问题在知乎上有一个解答不错</p>
+<blockquote>
+<p>旧式类的实现不够好，类是类，实例是实例，类的类型是classobj，实例的类型是instance，两者的联系只在于<strong>class</strong>，这和内置对象是不同的，int对象的类型就是int，同时int()返回的也是int类型的对象，内置对象和自定义对象不同就对代码统一实现带来很大困难。比如说有段代码输入一个对象，返回一个默认构造的同类型对象，本来应该写作type(obj)()，现在就必须写成：obj.<strong>class</strong>() if hasattr(obj, ‘<strong>class</strong>‘) else type(obj)()。如果想用自定义的类去替代一些系统内置类型，比如说自定义一个dictionary，这样的不一致就会出问题新式类之后自定义类和内置类型就一致了：1. 所有类型的类型都是type2. 所有类型调用的结果都是构造，返回这个类型的实例3. 所有类型都是object的子类这样就不再需要区分自定义类和类型了。实现这件事其实并不容易，理性上来想，type的基类是object，而object的类型是type，这是一个先有鸡还是先有蛋的问题。Python通过对这几个类的特殊处理实现了这样的逻辑。</p>
+<p>作者：灵剑<br>链接：<a href="https://www.zhihu.com/question/38803693/answer/103128686" target="_blank" rel="external">https://www.zhihu.com/question/38803693/answer/103128686</a><br>来源：知乎<br>著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。</p>
+</blockquote>
 <hr>
-<p>180票的回答：（John Millikin)</p>
-<p>在单一继承用<code>super</code>的好处很小–只是你不再需要硬编码基类名字到方法里面去了</p>
-<p>然后，在多重继承里，不用<code>super()</code>几乎是不可能的。这包括常见的习语，像是mixins，interface,abstract classes等，<br>这能让你的代码在之后延伸。如果以后有人想写一个拓展<code>Child</code> 和 mixin的类，他们的代码不会很好的工作。</p>
-<hr>
-<p>75票的回答：</p>
-<p><strong>区别是什么？</strong></p>
-<p><code>SomeBaseClass.__init__(self)</code>意思是调用<code>SomeBaseClass</code>的<code>__init__</code>方法<br>然后，<code>super(Child,self).__init__()</code>意思是从<code>Child</code>类的MRO的父类中调用一个绑定方法<code>__init__</code><br>如果实例是Child的子类，有可能在方法解释顺序中的下一个父类是不一样的？？？</p>
-<p><strong>向前兼容间接 ？？ （Indirection with Forward Compatibility) </strong></p>
-<p>这能给你什么？对于单重继承，问题中给出的例子几乎等同于静态分析。然而使用<code>super</code> 提供了具有向前兼容性的间接层<br>向前兼容对于经验丰富的开发者来说是很重要的。你希望你的代码在做出一些细微的改动之后还能工作。当您查看修订历史记录时，您希望准确地查看何时更改了哪些内容。</p>
-<p>你可能先从单重继承开始，但是当你增加另外的基类，你只需要改变基类的顺序（change the line with the bases）<br>（if the bases change in a class you inherit from）如果类继承关系变了（比如增加了一个mixin)，其实你就没做什么改变。<br>尤其在python2中，要想给super正确的方法参数是很难的。如果你知道你在单重继承下正确的使用<code>super</code>，这样是的调试就容易一点了</p>
-<p><strong>依赖注入 Dependency Injection </strong></p>
-<p>其他人可以使用你的代码然后插入一些父类到方法解释中(method resolution):</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">SomeBaseClass</span><span class="params">(object)</span>:</span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self)</span>:</span></div><div class="line">		print(<span class="string">'SomeBaseClass.__init__(self) called'</span>)</div><div class="line">			</div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">UnsuperChild</span><span class="params">(SomeBaseClass)</span>:</span></div><div class="line">	<span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self)</span>:</span></div><div class="line">		print(<span class="string">'UnsuperChild.__init__(self) called'</span>)</div><div class="line">		SomeBaseClass.__init__(self)</div><div class="line">							</div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">SuperChild</span><span class="params">(SomeBaseClass)</span>:</span></div><div class="line">	<span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self)</span>:</span></div><div class="line">		print(<span class="string">'SuperChild.__init__(self) called'</span>)</div><div class="line">		super(SuperChild, self).__init__()</div></pre></td></tr></table></figure>
-<p>现在你增加其他类，然后在Foo和Bar之间插入一个类</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">InjectMe</span><span class="params">(SomeBaseClass)</span>:</span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self)</span>:</span></div><div class="line">		print(<span class="string">'InjectMe.__init__(self) called'</span>)</div><div class="line">		super(InjectMe, self).__init__()</div><div class="line">				</div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">UnsuperInjector</span><span class="params">(UnsuperChild, InjectMe)</span>:</span> <span class="keyword">pass</span></div><div class="line">					</div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">SuperInjector</span><span class="params">(SuperChild, InjectMe)</span>:</span> <span class="keyword">pass</span></div></pre></td></tr></table></figure>
-<p>使用un-super子类未能注入依赖，因为你是用的子类在自己执行打印后调用的是硬编码方法</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&gt;&gt;&gt; </span>o = UnsuperInjector()</div><div class="line">UnsuperChild.__init__(self) called</div><div class="line">SomeBaseClass.__init__(self) called</div></pre></td></tr></table></figure>
-<p>然而使用<code>super</code>的子类能正确的依赖注入</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&gt;&gt;&gt; </span>o2 = SuperInjector()</div><div class="line">SuperChild.__init__(self) called</div><div class="line">InjectMe.__init__(self) called</div><div class="line">SomeBaseClass.__init__(self) called</div></pre></td></tr></table></figure>
-<p>(我：因为super按照MRO来寻找next类的，不是就是去找父类SomeBaseClass,<br>因为SuperInjector的MRO是自身&gt; UnsuperChild &gt; InjectMe &gt; SomeBaseClass &gt; object</p>
-<p>还有就是 super 不是在SuperChild内么，为什么要按SuperInjector的MRO来？？<br>这里应该是因为SuperInjector的init没有定义，然后是用的supserchild的，但是还是按照自身的MRO来。<br>怎么做实验</p>
-<p>)</p>
-<p><strong>结论</strong><br>一直使用<code>super</code>来引用父类就好了</p>
-<p>你想要引用的父类是MRO下一个类，而不是你看到的继承的关系</p>
-<p>不使用<code>super</code> 回让你代码的使用者多了很多不必要的限制</p>
-<hr>
-<h1 id="我的："><a href="#我的：" class="headerlink" title="我的："></a>我的：</h1><p>一个例子就是<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">from</span> collections imoprt Counter, OrderedDict</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">OrderedCounter</span><span class="params">(Counter, OrderedDict)</span>:</span></div><div class="line">	<span class="keyword">pass</span></div><div class="line"></div><div class="line">oc = OrderedCounter(<span class="string">"abracadabra"</span>)</div></pre></td></tr></table></figure></p>
-<p>之前还一直奇怪这个为什么类里面pass，什么都不用写就能结合，现在知道是因为有super<br>相当于我先把参数传递到Counter初始化，然后因为有super找到的是下一个MRO，然后到OrderedDict初始化<br>相当于两个工序，先count再order。</p>
-<hr>
-<h1 id="How-does-Python’s-super-actually-work-in-the-general-case"><a href="#How-does-Python’s-super-actually-work-in-the-general-case" class="headerlink" title="How does Python’s super() actually work, in the general case?"></a><a href="http://stackoverflow.com/questions/33290894/how-does-pythons-super-actually-work-in-the-general-case/33291315?noredirect=1#comment72867412_33291315" target="_blank" rel="external">How does Python’s super() actually work, in the general case?</a></h1><p>现在有很多有关<code>super()</code>的资源，包括<a href="https://rhettinger.wordpress.com/2011/05/26/super-considered-super/" target="_blank" rel="external">这个</a>博客写的，还有很多stackoverflow上的问题。但是我感觉它们都没有解释它在普遍情况下是怎么工作的，也就是底层的实现。</p>
-<p>考虑下面的这个继承层次：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">A</span><span class="params">(object)</span>:</span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">foo</span><span class="params">(self)</span>:</span></div><div class="line">		<span class="keyword">print</span> <span class="string">'A foo'</span></div><div class="line">			</div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">B</span><span class="params">(A)</span>:</span></div><div class="line">	<span class="function"><span class="keyword">def</span> <span class="title">foo</span><span class="params">(self)</span>:</span></div><div class="line">		<span class="keyword">print</span> <span class="string">'B foo before'</span></div><div class="line">		super(B, self).foo()</div><div class="line">		<span class="keyword">print</span> <span class="string">'B foo after'</span></div><div class="line">										</div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">C</span><span class="params">(A)</span>:</span></div><div class="line">	<span class="function"><span class="keyword">def</span> <span class="title">foo</span><span class="params">(self)</span>:</span></div><div class="line">		<span class="keyword">print</span> <span class="string">'C foo before'</span></div><div class="line">		super(C, self).foo()</div><div class="line">		<span class="keyword">print</span> <span class="string">'C foo after'</span></div><div class="line">																	</div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">D</span><span class="params">(B, C)</span>:</span></div><div class="line">	<span class="function"><span class="keyword">def</span> <span class="title">foo</span><span class="params">(self)</span>:</span></div><div class="line">		<span class="keyword">print</span> <span class="string">'D foo before'</span></div><div class="line">		super(D, self).foo()</div><div class="line">		<span class="keyword">print</span> <span class="string">'D foo after'</span></div></pre></td></tr></table></figure>
-<p>如果你读过python的方法解释顺序的规则，你就知道上面的MRO是（D,B,C,A,object)。 这是被D.<strong>mro</strong>决定的<br><code>(&lt;class &#39;__main__.D&#39;&gt;, &lt;class &#39;__main__.B&#39;&gt;, &lt;class &#39;__main__.C&#39;&gt;, &lt;class &#39;__main__.A&#39;&gt;, &lt;type &#39;object&#39;&gt;))</code></p>
-<p>和<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">d = D()</div><div class="line">d.foo()</div></pre></td></tr></table></figure></p>
-<p>打印出的：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">D foo before</div><div class="line">B foo before</div><div class="line">C foo before</div><div class="line">A foo</div><div class="line">C foo after</div><div class="line">B foo after</div><div class="line">D foo after</div></pre></td></tr></table></figure>
-<p>结果符合MRO。 但是，考虑上面的B中的<code>super(B,self).foo()</code> 实际调用的是<code>C.foo</code>，这个是在<code>b=B()</code>中；<code>b.foo()</code> 会直接到<code>A.foo</code> 很显然使用<code>super(B,self).foo()</code>不是<code>A.foo(self)</code>的快捷键，虽然有时是</p>
-<p>很显然<code>super()</code>是有意识的在意之前的调用，然后尝试着去跟随总的MRO链。我觉得有两个方法能完成这个。<br>第一个是做了一些类似在链中将<code>super</code>对象传递给下一个方法的<code>self</code>参数,像原来<code>self</code>对象那样，但是包含了这个信息，但是这样似乎会破坏很多东西(<code>super(D,d) is d</code>是False)，然后做了一些实验，我觉得这个方法不可行。</p>
-<p>另外一个方法是类似全局变量来保存MRO和现在的链上的位置。我想象中的<code>super</code>算法是这样的：</p>
+<h1 id="自定义类和内建类型"><a href="#自定义类和内建类型" class="headerlink" title="自定义类和内建类型"></a>自定义类和内建类型</h1><p>图片来自那个文章顶部那个链接,这篇文章写的很详细了<br><img src="http://onexs3cnv.bkt.clouddn.com/Screen%20Shot%202017-04-04%20at%203.35.31%20PM.png" alt="python objects map"></p>
+<blockquote>
 <ol>
-<li>我们当前有工作的环境吗？如果没有，创建一个队列，获取MRO，将除了第一个之外的所有元素入队列</li>
-<li>将当前上下文的MRO队列中pop一个元素，在构建<code>super</code>实例的时候将它作为当前的class</li>
-<li>当访问<code>super</code>实例的一个方法的时候，在当前class上寻找，然后调用它</li>
+<li>Dashed lines cross spacial boundaries (i.e. go from object to meta-object). Only exception is <type 'type'=""> (which is good, otherwise we would need another space to the left of it, and another, and another…).</type></li>
+<li>Solid lines do not cross space boundaries. Again, <type 'type'=""> -&gt; <type 'object'=""> is an exception.</type></type></li>
+<li>Solid lines are not allowed in the rightmost space. These objects are too concrete to be subclassed.</li>
+<li>Dashed line arrow heads are not allowed rightmost space. These objects are too concrete to be instantiated.</li>
+<li>Left two spaces contain types. Rightmost space contains non-types.</li>
+<li>If we created a new object by subclassing <type 'type'=""> it would be in the leftmost space, and would also be both a subclass and instance of <type 'type'="">.</type></type></li>
 </ol>
-<p>但是，这样却没有解释类似使用不一样的基类当作第一个参数来调用<code>super</code>，或者调用不同方法。（这段好别扭）<br>我想知道这个的更普遍的算法。而且，如果这样的context存在的话，我能看吗？我能破坏他么？这当然是一个糟糕的想法，但是python希望你成为一个成熟的人尽管你不是。</p>
-<p>这同样也引入了好多设计的考量。如果我写的B只考虑了它和A的联系，然后又有其他人写了C，还有其他人写了D，我的<code>B.foo()</code>方法必须找到一个能兼容<code>C.foo()</code>的方法来调用<code>super</code>，尽管我在写它的时候C不存在。如果我想要我的类能很简单的扩展，那我必须要考虑这些。但是我不清楚这是不是比简单的将所有的<code>foo</code>的特征设置成一样来的更复杂。还有一个问题就是什么时候将代码放在<code>super</code>之前，什么时候之后，即使在仅考虑B的基类的时候它没有什么区别</p>
+</blockquote>
+<h2 id="两个对象"><a href="#两个对象" class="headerlink" title="两个对象"></a>两个对象</h2><p>python中分<code>Type</code>对象和<code>Non-Type</code>对象，这个<code>Non-Type</code>不是一个正式的概念，只是这么称呼，这类对象，比如2，就是2，2怎么再派生？怎么再实例化，不行，所以是<strong>too concrete</strong>。怎么判断，只要<code>type(obj)</code>出来的是<code>&lt;type &#39;type&#39;&gt;</code>就是<code>Type</code>对象，不然就是<code>Non-Type</code>对象</p>
+<blockquote>
+<ul>
+<li>Type objects - can create instances, can be subclassed.</li>
+<li>Non-type objects - cannot create instances, cannot be subclassed.</li>
+<li><code>objectname.__class__</code> exists for every object and points the type of the object.</li>
+<li><code>objectname.__bases__</code> exists for every type object and points the superclasses of the object. It is empty only for <code>&lt;type &#39;object&#39;&gt;</code>.</li>
+<li>Some non-type objects can be created using special Python syntax. For example, <code>[1, 2, 3]</code> creates an instance of <code>&lt;type &#39;list&#39;&gt;</code>.</li>
+</ul>
+</blockquote>
+<h2 id="两个动作"><a href="#两个动作" class="headerlink" title="两个动作"></a>两个动作</h2><p>两种关系对应两种动作可以生成两种对象。有可能是<code>Type</code>对象,也有可能是<code>Non-Type</code>对象。<br>两个动作就是<code>subclassing</code>和<code>instantiating</code>.</p>
+<h3 id="subclassing"><a href="#subclassing" class="headerlink" title="subclassing"></a>subclassing</h3><p>这个动作具体就是<code>class</code>语句,定义一个类，或者说定一个<code>type</code>，</p>
+<blockquote>
+<p>This means you can create a new object that is somewhat similar to existing type objects.</p>
+<p>To create a new object using subclassing, we use the class statement and specify the bases (and, optionally, the type) of the new object. This always creates a type object.</p>
+</blockquote>
+<p><del>这段代码抽象代表的就是一个类</del></p>
+<h3 id="instantiating"><a href="#instantiating" class="headerlink" title="instantiating"></a>instantiating</h3><p>这个动作就是实例化，由一个<code>type</code>实例化出对象，<code>type</code>相当于一个工厂的模型，具体就是通过<code>()</code>操作。</p>
+<blockquote>
+<p>To create a new object using instantiation, we use the call operator (()) on the type object we want to use. This may create a type or a non-type object, <strong>depending on which type object was used</strong>.</p>
+<p>This means you can create a new object that is an instance of the existing type object.</p>
+</blockquote>
+<p>python中的内建类型是在启动python后生成的。比如<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&gt;&gt;&gt; </span>type(list)</div><div class="line">&lt;type <span class="string">'type'</span>&gt;</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>list.__bases__</div><div class="line">(&lt;type <span class="string">'object'</span>&gt;,) <span class="comment"># list是从object派生而来了</span></div><div class="line"><span class="meta">&gt;&gt;&gt; </span>ml = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>]</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>type(ml)</div><div class="line">&lt;type <span class="string">'list'</span>&gt;</div></pre></td></tr></table></figure></p>
+<p>如果问<code>[1,2,3]</code>是什么类型啊？列表类型啊。列表类型是什么类型啊？<code>type</code>类型啊。<code>type</code>类型是什么类型啊？<code>type</code>类型。。。当我们创建{‘a’:1,’b’:2},(1,2)这种，是从<code>&lt;type &#39;list&#39;&gt;</code>,<code>&lt;type &#39;dict&#39;&gt;</code>实例化出来的，也就是相应的<code>type</code>，包括自定义。</p>
+<h1 id="metaclass"><a href="#metaclass" class="headerlink" title="metaclass"></a>metaclass</h1><p>很重要的一点就是，当我<code>class</code>语句定义了一个类，我就自动的有了一个<code>type</code>，其实也就是说<code>__class__</code>（新式类）<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">C</span><span class="params">(object)</span>:</span></div><div class="line">	<span class="keyword">pass</span></div></pre></td></tr></table></figure></p>
+<p><code>type(C)</code>就已经定了。它是根据所继承的父类的<code>type</code>延续下来的，因为<code>object</code>的类型是<code>type</code>所以<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">&gt;&gt;&gt;type(C)</div><div class="line">&lt;type <span class="string">'type'</span>&gt;</div></pre></td></tr></table></figure></p>
+<p>那其实这样追溯下去，因为<code>object</code>类型是<code>type</code>类，所以所有的类都是<code>type</code>类。除了<code>Non-Type</code>对象的类型是相对应的类。所以那幅图的前面两列的虚线都指到<code>type</code>。<br>这里有一个问题就是它是由继承关系决定的，那如果是多重继承呢？是继承哪个？<br><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line">&gt;&gt;&gt; class M1(type):</div><div class="line">...     pass</div><div class="line">...</div><div class="line">&gt;&gt;&gt; class M2(type):</div><div class="line">...     pass</div><div class="line">...</div><div class="line">&gt;&gt;&gt; class A(object):</div><div class="line">...     __metaclass__ = M1</div><div class="line">...</div><div class="line">&gt;&gt;&gt; class B(object):</div><div class="line">...     __metaclass__ = M2</div><div class="line">...</div><div class="line">&gt;&gt;&gt; type(A)</div><div class="line">&lt;class '__main__.M1'&gt;</div><div class="line">&gt;&gt;&gt; type(B)</div><div class="line">&lt;class '__main__.M2'&gt;</div><div class="line">&gt;&gt;&gt; class C(A,B):</div><div class="line">...     pass</div><div class="line">...</div><div class="line">Traceback (most recent call last):</div><div class="line">  File "&lt;stdin&gt;", line 1, in &lt;module&gt;</div><div class="line">  TypeError: Error when calling the metaclass bases</div><div class="line">      metaclass conflict: the metaclass of a derived class must be a (non-strict) subclass of the metaclasses of all its bases</div></pre></td></tr></table></figure></p>
+<p>如果大家的<code>metaclass</code>都一样，那就没得说了，如果不一样，那么就会混乱，这时候要指定。什么时候会不一样呢？一般情况下都是<code>type</code>，除非自己定义<code>specialType</code>然后派生。但<strong>建议是不要用这个特性</strong>。</p>
+<p>另一个问题就是，到底怎么自定义<code>specialType</code>？上面例子已经给出答案了。<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">C</span><span class="params">(object)</span>:</span></div><div class="line">	__metaclass__ = specialType</div></pre></td></tr></table></figure></p>
+<h1 id="隐式关系"><a href="#隐式关系" class="headerlink" title="隐式关系"></a>隐式关系</h1><p>图片来自文章顶部链接文章中的：<br><a href="http://www.cafepy.com/article/python_types_and_objects/python_types_and_objects.html" target="_blank" rel="external"><img src="http://www.cafepy.com/article/python_types_and_objects/images/relationships_transitivity.png" alt="transitivity of relationships"></a></p>
+<p><code>issubclass</code>问的是一个<code>class</code>是不是<code>subclass</code> of 另一个<code>class</code>。<code>class</code>和<code>class</code>之间的关系<br><code>isinstance</code>问的是一个<code>object</code>是不是<code>instance</code> of 另一个<code>class</code>。<code>object</code>和<code>class</code>之间的关系</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&gt;&gt;&gt; </span>isinstance(type,type) <span class="comment">#虚线，type指向自己 </span></div><div class="line"><span class="keyword">True</span></div><div class="line"><span class="meta">&gt;&gt;&gt; </span>isinstance(type,object) <span class="comment">#因为type是自身的实例，type又是object的子类，所以type是object的实例</span></div><div class="line"><span class="keyword">True</span></div><div class="line"><span class="meta">&gt;&gt;&gt; </span>isinstance(object,object) <span class="comment">#因为object是type的实例，type又是object的子类，所以object是object的实例</span></div><div class="line"><span class="keyword">True</span></div><div class="line"><span class="meta">&gt;&gt;&gt; </span>isinstance(object,type) <span class="comment"># 虚线</span></div><div class="line"><span class="keyword">True</span></div><div class="line"><span class="meta">&gt;&gt;&gt; </span>issubclass(type,type) <span class="comment"># A class is considered a subclass of itself</span></div><div class="line"><span class="keyword">True</span></div><div class="line"><span class="meta">&gt;&gt;&gt; </span>issubclass(type,object) <span class="comment"># 实线</span></div><div class="line"><span class="keyword">True</span></div><div class="line"><span class="meta">&gt;&gt;&gt; </span>issubclass(object,object) <span class="comment"># 任何类都是object的子类</span></div><div class="line"><span class="keyword">True</span></div><div class="line"><span class="meta">&gt;&gt;&gt; </span>issubclass(object,type) <span class="comment"># object在类的金字塔顶端，它上面就没人啦</span></div><div class="line"><span class="keyword">False</span></div></pre></td></tr></table></figure>
+<blockquote>
+<p><a href="https://docs.python.org/2/library/functions.html#issubclass" target="_blank" rel="external">A class is considered a subclass of itself</a></p>
+</blockquote>
 <hr>
-<p>7票的回答：</p>
+<h1 id="Q-amp-A"><a href="#Q-amp-A" class="headerlink" title="Q&amp;A"></a>Q&amp;A</h1><ol>
+<li><p><code>class</code>,<code>object</code>,<code>instance</code>的关系</p>
 <blockquote>
-<p>super() is then obviously aware of the previous calls before it</p>
+<p>An object is an instance of a class, and may be called a class instance or class object; instantiation is then also known as construction. Not all classes can be instantiated – abstract classes cannot be instantiated, while classes that can be instantiated are called concrete classes.</p>
 </blockquote>
-<p>它不是。当你做<code>super(B,self).foo</code>,<code>super</code>知道你的MRO因为它会从<code>type(self).__mro__</code>中得到。然后它知道应该在MRO的B后面那里开始寻找<code>foo</code>，一个粗略的纯 python写的应该是这样的：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">super</span><span class="params">(object)</span>:</span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, klass, obj)</span>:</span></div><div class="line">		self.klass = klass</div><div class="line">		self.obj = obj</div><div class="line">	<span class="function"><span class="keyword">def</span> <span class="title">__getattr__</span><span class="params">(self, attrname)</span>:</span></div><div class="line">		classes = iter(type(self.obj).__mro__)</div><div class="line"></div><div class="line">		<span class="comment"># search the MRO to find self.klass</span></div><div class="line">		<span class="keyword">for</span> klass <span class="keyword">in</span> classes:</div><div class="line">			<span class="keyword">if</span> klass <span class="keyword">is</span> self.klass:</div><div class="line">				<span class="keyword">break</span></div><div class="line"></div><div class="line">		<span class="comment"># start searching for attrname at the next class after self.klass</span></div><div class="line">		<span class="keyword">for</span> klass <span class="keyword">in</span> classes:</div><div class="line">			<span class="keyword">if</span> attrname <span class="keyword">in</span> klass.__dict__:</div><div class="line">				attr = klass.__dict__[attrname]</div><div class="line">				<span class="keyword">break</span></div><div class="line">		<span class="keyword">else</span>:</div><div class="line">			<span class="keyword">raise</span> AttributeError</div><div class="line"></div><div class="line">		<span class="comment"># handle methods and other descriptors</span></div><div class="line">		<span class="keyword">try</span>:</div><div class="line">			<span class="keyword">return</span> attr.__get__(self.obj, type(self.obj))</div><div class="line">		<span class="keyword">except</span> AttributeError:</div><div class="line">			<span class="keyword">return</span> attr</div></pre></td></tr></table></figure></p>
+</li>
+<li><p>How does python really create a new object?</p>
 <blockquote>
-<p>If I wrote B thinking only of its relation to A, then later someone else writes C and a third person writes D, my B.foo() method has to call super in a way that is compatible with C.foo() even though it didn’t exist at the time I wrote it!</p>
+<p>Internally, when python creates a new object, it always uses a type and creates an instance of that object. Specifically it uses the <strong>new</strong>() and <strong>init</strong>() methods of the type. In a sense, the type serves as a factory that can churn out new objects, the type of these manufactured objects will be the type object used to create them. This is why every object has a type.</p>
 </blockquote>
-<p>并不要求你要从随机的类中多种继承。除非<code>foo</code>是被特意设计成在多重继承的时候将兄弟类的重写。D不应该存在。</p>
+</li>
+</ol>
 
       
     </div>
@@ -562,7 +595,7 @@
     </li>
     <li class="post-copyright-link">
       <strong>Post link:</strong>
-      <a href="http://www.mmmmmcclxxvii.cn/2017/03/14/object/" title="project of stackoverflow - python object(一)">http://www.mmmmmcclxxvii.cn/2017/03/14/object/</a>
+      <a href="http://www.mmmmmcclxxvii.cn/2016/12/03/python-types-and-objects/" title="python types and objects">http://www.mmmmmcclxxvii.cn/2016/12/03/python-types-and-objects/</a>
     </li>
     <li class="post-copyright-license">
       <strong>Copyright Notice: </strong>
@@ -582,7 +615,7 @@
           
             <a href="/tags/object/" rel="tag"><i class="fa fa-tag"></i> object</a>
           
-            <a href="/tags/stackoverflow/" rel="tag"><i class="fa fa-tag"></i> stackoverflow</a>
+            <a href="/tags/type/" rel="tag"><i class="fa fa-tag"></i> type</a>
           
         </div>
       
@@ -595,18 +628,14 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/03/13/mro/" rel="next" title="understanding MRO">
-                <i class="fa fa-chevron-left"></i> understanding MRO
-              </a>
-            
           </div>
 
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/03/29/python-name-and-values/" rel="prev" title="python name and values">
-                python name and values <i class="fa fa-chevron-right"></i>
+              <a href="/2017/03/01/zlt-project/" rel="prev" title="zlt-project">
+                zlt-project <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -985,7 +1014,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#what-does-‘super’-do-in-python"><span class="nav-number">1.</span> <span class="nav-text">what does ‘super’ do in python</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#我的："><span class="nav-number">2.</span> <span class="nav-text">我的：</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#How-does-Python’s-super-actually-work-in-the-general-case"><span class="nav-number">3.</span> <span class="nav-text">How does Python’s super() actually work, in the general case?</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#type和object"><span class="nav-number">1.</span> <span class="nav-text">type和object</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#类和类型的统一"><span class="nav-number">1.1.</span> <span class="nav-text">类和类型的统一</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#自定义类和内建类型"><span class="nav-number">2.</span> <span class="nav-text">自定义类和内建类型</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#两个对象"><span class="nav-number">2.1.</span> <span class="nav-text">两个对象</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#两个动作"><span class="nav-number">2.2.</span> <span class="nav-text">两个动作</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#subclassing"><span class="nav-number">2.2.1.</span> <span class="nav-text">subclassing</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#instantiating"><span class="nav-number">2.2.2.</span> <span class="nav-text">instantiating</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#metaclass"><span class="nav-number">3.</span> <span class="nav-text">metaclass</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#隐式关系"><span class="nav-number">4.</span> <span class="nav-text">隐式关系</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Q-amp-A"><span class="nav-number">5.</span> <span class="nav-text">Q&A</span></a></li></ol></div>
             
 
           </div>
