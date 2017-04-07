@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://www.mmmmmcclxxvii.cn/"/>
-  <updated>2017-04-06T15:01:53.000Z</updated>
+  <updated>2017-04-07T07:08:24.000Z</updated>
   <id>http://www.mmmmmcclxxvii.cn/</id>
   
   <author>
@@ -14,6 +14,94 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>用R画出下面这样子的形式的图</title>
+    <link href="http://www.mmmmmcclxxvii.cn/2017/04/07/r-lines/"/>
+    <id>http://www.mmmmmcclxxvii.cn/2017/04/07/r-lines/</id>
+    <published>2017-04-07T05:35:06.000Z</published>
+    <updated>2017-04-07T07:08:24.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>用到什么学什么</p>
+<h1 id="plot的使用"><a href="#plot的使用" class="headerlink" title="plot的使用"></a>plot的使用</h1><p>官方的description</p>
+<blockquote>
+<p>Generic function for plotting of R objects. For more details about the graphical parameter arguments, see par.</p>
+<p>For simple scatter plots, plot.default will be used. However, there are plot methods for many R objects, including functions, data.frames, density objects, etc. Use methods(plot) and the documentation for these.</p>
+<p>plot(x, y, …)</p>
+</blockquote>
+<p>这里先用到plot的一个type参数</p>
+<blockquote>
+<p>what type of plot should be drawn. Possible types are</p>
+<p>“p” for points,</p>
+<p>“l” for lines,</p>
+<p>“b” for both,</p>
+<p>“c” for the lines part alone of “b”,</p>
+<p>“o” for both ‘overplotted’,</p>
+<p>“h” for ‘histogram’ like (or ‘high-density’) vertical lines,</p>
+<p>“s” for stair steps,</p>
+<p>“S” for other steps, see ‘Details’ below,</p>
+<p>“n” for no plotting.</p>
+</blockquote>
+<p>这里有个<code>&quot;n&quot;</code>的参数值可以选择，也就是什么都不会打印，先看个例子<br><figure class="highlight r"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">x &lt;- seq(-pi,pi,length = <span class="number">100</span>)</div><div class="line">plot(x,sin(x),type=<span class="string">'p'</span>)</div><div class="line">plot(x,sin(x),type=<span class="string">'l'</span>)</div><div class="line">plot(x,sin(x),type=<span class="string">'n'</span>)</div></pre></td></tr></table></figure></p>
+<p>分别是这样色儿的<br><img src="http://onexs3cnv.bkt.clouddn.com/Rplot-sin.png" alt="points"><br><img src="http://onexs3cnv.bkt.clouddn.com/Rplot-sin-line.png" alt="line"><br><img src="http://onexs3cnv.bkt.clouddn.com/Rplot-sine-none.png" alt="none"><br>看最后一个，也就是什么都没画。什么都没有有什么用！？<br><strong>存在即合理</strong>，它可以用来弄一个画布，然后再在上面画其他图形</p>
+<p>比如：<br><figure class="highlight r"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&gt; plot(c(<span class="number">0</span>,<span class="number">10</span>),c(<span class="number">0</span>,<span class="number">10</span>))</div></pre></td></tr></table></figure></p>
+<p><img src="http://onexs3cnv.bkt.clouddn.com/Rplot-canvas-with-something.png" alt="with points"></p>
+<p>这里<code>plot</code>的<code>x</code>,<code>y</code>参数是用向量指定的，<code>x</code>坐标的放一起，<code>y</code>坐标的放一起，其实坐标点是<code>(0,0)</code>,和<code>(10,10)</code>，在这两个坐标上，默认是画了两个小圆圈。但是如果我想要一个有坐标系的这样的一个画布，我就可以</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&gt; plot(c(<span class="number">0</span>,<span class="number">10</span>),c(<span class="number">0</span>,<span class="number">10</span>),type=<span class="string">'n'</span>)</div></pre></td></tr></table></figure>
+<p><img src="http://onexs3cnv.bkt.clouddn.com/Rplot-canvas-blank.png" alt="no points canvas"></p>
+<p>而这里<code>x</code>,<code>y</code>的作用就是撑开画布坐标系的大小，我如果<code>plot(c(0,50),c(0,50),type=&#39;n&#39;)</code>，那坐标系就变大了。</p>
+<h1 id="lines"><a href="#lines" class="headerlink" title="lines"></a>lines</h1><blockquote>
+<p>A generic function taking coordinates given in various ways and joining the corresponding points with line segments.<br>lines(x, …)</p>
+<h2 id="Default-S3-method"><a href="#Default-S3-method" class="headerlink" title="Default S3 method:"></a>Default S3 method:</h2><p>lines(x, y = NULL, type = “l”, …)</p>
+</blockquote>
+<p>就是根据像<code>plot</code>那样<code>x</code>,<code>y</code>解释的意思，将两点连起来，<del>同时用<code>type</code>指定的样式画出这点线</del><br>这个说法有点不正确，好像是说<code>type</code>指定的是线的样式，比如实线，虚线，不是的。<code>lty</code>这个参数才是指定“线样式的”</p>
+<p>我这里看到了<code>lines(x,...)</code>说明可以不用指定<code>y</code>，那画出来是什么？？<br><figure class="highlight r"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">&gt; plot(c(<span class="number">0</span>,<span class="number">10</span>),c(<span class="number">0</span>,<span class="number">10</span>),type=<span class="string">'n'</span>)</div><div class="line">&gt; lines(c(<span class="number">0</span>,<span class="number">1</span>))</div><div class="line">&gt; lines(c(<span class="number">5</span>,<span class="number">9</span>))</div><div class="line">&gt; lines(c(<span class="number">2</span>,<span class="number">4</span>))</div><div class="line">&gt; lines(c(<span class="number">10</span>,<span class="number">1</span>))</div><div class="line">&gt; lines(c(<span class="number">4</span>,<span class="number">7</span>))</div></pre></td></tr></table></figure></p>
+<p><img src="http://onexs3cnv.bkt.clouddn.com/Rplot-line%28x%29.png" alt="line(x)"><br>可以看出来给出的<code>c(a,b)</code>，a,b都是表示纵坐标，默认好像横坐标是1到2，那这样就是画<code>(1,a)</code>到<code>(2,b)</code>的线？<br>至少实验出来是这样的<br><figure class="highlight r"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&gt; lines(c(<span class="number">4</span>,<span class="number">7</span>,<span class="number">6</span>))</div></pre></td></tr></table></figure></p>
+<p><img src="http://onexs3cnv.bkt.clouddn.com/Rplot-line%28x%29-456.png" alt="line(x)456"><br>三个向量元素，那上面的猜测是对的，现在是画<code>(1,a)</code>,<code>(2,b)</code>,<code>(3,c)</code>的线段，估计向量元素增多，就是横坐标到4，5，6了吧</p>
+<h2 id="lines-的type"><a href="#lines-的type" class="headerlink" title="lines 的type"></a>lines 的type</h2><blockquote>
+<p>lines(x, y, type = “l”, …)<br>type<br>character indicating the type of plotting; actually any of the types as in plot.default.</p>
+</blockquote>
+<p>说是根据<code>plot</code>的<code>type</code>来，一开始我觉得这不跟<code>lty</code>参数重复了么，其实两个是不一样的<br><figure class="highlight r"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">&gt; plot(c(<span class="number">0</span>,<span class="number">10</span>),c(<span class="number">0</span>,<span class="number">10</span>),type=<span class="string">'n'</span>)</div><div class="line">&gt; lines(c(<span class="number">2</span>,<span class="number">4</span>),c(<span class="number">3</span>,<span class="number">8</span>),type = <span class="string">"s"</span>)</div><div class="line">&gt; lines(c(<span class="number">6</span>,<span class="number">7</span>),c(<span class="number">3</span>,<span class="number">8</span>),type = <span class="string">"s"</span>,lty=<span class="number">2</span>)</div><div class="line">&gt; lines(c(<span class="number">6</span>,<span class="number">7</span>),c(<span class="number">3</span>,<span class="number">8</span>),type = <span class="string">"l"</span>,lty=<span class="number">3</span>)</div></pre></td></tr></table></figure></p>
+<p><img src="http://onexs3cnv.bkt.clouddn.com/Rplot-type-lty.png" alt="type-lty"><br>当<code>type=&quot;s&quot;</code>是，画的是折线！！！，<code>s</code>解释为step，相当于画的是曼哈顿路径。<br><code>lty</code>才是线是什么样子的形式的。而<code>type</code>应该是画的什么什么形状吧，不知道怎么描述</p>
+<h3 id="lty的实验"><a href="#lty的实验" class="headerlink" title="lty的实验"></a>lty的实验</h3><figure class="highlight r"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">plot(c(<span class="number">1</span>,<span class="number">6</span>),c(<span class="number">1</span>,<span class="number">1</span>),type=<span class="string">'l'</span>,lty=<span class="number">1</span>,ylim=c(<span class="number">0</span>,<span class="number">8</span>))</div><div class="line"><span class="keyword">for</span>(i <span class="keyword">in</span> <span class="number">2</span>:<span class="number">6</span>)&#123;</div><div class="line">  lines(c(<span class="number">1</span>,<span class="number">6</span>),c(i,i),type = <span class="string">'l'</span>,lty=i)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><img src="http://onexs3cnv.bkt.clouddn.com/Rplot-lty.png" alt="lty"></p>
+<h1 id="text"><a href="#text" class="headerlink" title="text"></a>text</h1><p>在画布上写文本吧<br>直接看实验<br><figure class="highlight r"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&gt; plot(c(<span class="number">0</span>,<span class="number">10</span>),c(<span class="number">0</span>,<span class="number">10</span>),type=<span class="string">'n'</span>)</div><div class="line">&gt; text(c(<span class="number">5</span>,<span class="number">1</span>),c(<span class="number">3</span>,<span class="number">3</span>),<span class="number">1</span>)</div><div class="line">&gt; text(c(<span class="number">5</span>,<span class="number">8</span>),c(<span class="number">2</span>,<span class="number">3</span>),c(<span class="string">"A"</span>,<span class="string">"B"</span>))</div></pre></td></tr></table></figure></p>
+<p><img src="http://onexs3cnv.bkt.clouddn.com/Rplot-text.png" alt="text"></p>
+<h1 id="points"><a href="#points" class="headerlink" title="points"></a>points</h1><p>画点。主要是<code>pch</code>,<code>cex</code>这两个参数有点意思</p>
+<blockquote>
+<p>pch<br>plotting ‘character’, i.e., symbol to use. This can either be a single character or an integer code for one of a set of graphics symbols. The full set of S symbols is available with pch = 0:18, see the examples below. (NB: R uses circles instead of the octagons used in S.)</p>
+<p>Value pch = “.” (equivalently pch = 46) is handled specially. It is a rectangle of side 0.01 inch (scaled by cex). In addition, if cex = 1 (the default), each side is at least one pixel (1/72 inch on the pdf, postscript and xfig devices).</p>
+<p>For other text symbols, cex = 1 corresponds to the default fontsize of the device, often specified by an argument pointsize. For pch in 0:25 the default size is about 75% of the character height (see par(“cin”)).</p>
+<p>cex<br>character (or symbol) expansion: a numerical vector. This works as a multiple of par(“cex”).</p>
+</blockquote>
+<p>目前我的理解就是pch就是点的样式，cex就是指定大小</p>
+<h2 id="pch-实验"><a href="#pch-实验" class="headerlink" title="pch 实验"></a>pch 实验</h2><figure class="highlight r"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">plot(c(<span class="number">0</span>,<span class="number">10</span>),c(<span class="number">0</span>,<span class="number">10</span>),type=<span class="string">'n'</span>)</div><div class="line">line.draw = <span class="number">9</span></div><div class="line"><span class="keyword">for</span>(i <span class="keyword">in</span> <span class="number">1</span>:<span class="number">25</span>)&#123;</div><div class="line">	<span class="keyword">if</span>((i-<span class="number">1</span>) %% <span class="number">5</span>==<span class="number">0</span>)&#123;</div><div class="line">		line.draw = line.draw - <span class="number">1</span></div><div class="line">	&#125;</div><div class="line">	points((i-<span class="number">1</span>)%%<span class="number">5</span>,line.draw,pch=i)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><img src="http://onexs3cnv.bkt.clouddn.com/Rplot-points-pch.png" alt="pch"></p>
+<h1 id="回到题目"><a href="#回到题目" class="headerlink" title="回到题目"></a>回到题目</h1><p>画这样的一个三角形。思路就是用<code>points</code>画大一点的圆圈，<code>text</code>来写<code>A</code>这中标签，然后<code>lines</code>来画线，没什么难度<br><figure class="highlight r"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">plot(c(<span class="number">0</span>,<span class="number">10</span>),c(<span class="number">0</span>,<span class="number">10</span>),type = <span class="string">'n'</span>)</div><div class="line">lines(c(<span class="number">3</span>,<span class="number">5</span>),c(<span class="number">4</span>,<span class="number">9</span>),type = <span class="string">'l'</span>,lty=<span class="number">1</span>)</div><div class="line">lines(c(<span class="number">5</span>,<span class="number">7</span>),c(<span class="number">9</span>,<span class="number">4</span>),type = <span class="string">'l'</span>,lty=<span class="number">1</span>)</div><div class="line">lines(c(<span class="number">3</span>,<span class="number">7</span>),c(<span class="number">4</span>,<span class="number">4</span>),type = <span class="string">'l'</span>,lty=<span class="number">1</span>,xlim=c(<span class="number">2.5</span>,<span class="number">6.7</span>))</div><div class="line">points(<span class="number">5</span>,<span class="number">9</span>,pch=<span class="number">1</span>,cex = <span class="number">5</span>)</div><div class="line">text(<span class="number">5</span>,<span class="number">9</span>,<span class="string">'A'</span>)</div><div class="line">points(<span class="number">3</span>,<span class="number">4</span>,pch=<span class="number">1</span>,cex = <span class="number">5</span>)</div><div class="line">text(<span class="number">3</span>,<span class="number">4</span>,<span class="string">'B'</span>)</div><div class="line">points(<span class="number">7</span>,<span class="number">4</span>,pch=<span class="number">1</span>,cex = <span class="number">5</span>)</div><div class="line">text(<span class="number">7</span>,<span class="number">4</span>,<span class="string">'C'</span>)</div></pre></td></tr></table></figure></p>
+<p>不过我这样，太啰嗦了啊</p>
+<p>R中的最常用的对象就是向量，很多运算都支持向量操作。可以用向量<br><figure class="highlight r"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">plot(c(<span class="number">0</span>,<span class="number">10</span>),c(<span class="number">0</span>,<span class="number">10</span>),type = <span class="string">'n'</span>)</div><div class="line">x &lt;- c(<span class="number">3</span>,<span class="number">5</span>,<span class="number">7</span>)</div><div class="line">y &lt;- c(<span class="number">4</span>,<span class="number">9</span>,<span class="number">4</span>)</div><div class="line">points(x,y,cex=<span class="number">5</span>)</div><div class="line">text(x,y,c(<span class="string">"A"</span>,<span class="string">"B"</span>,<span class="string">"C"</span>))</div><div class="line">lines(x,y,type=<span class="string">'l'</span>)</div></pre></td></tr></table></figure></p>
+<p><img src="http://onexs3cnv.bkt.clouddn.com/Rplot-plot-triangle-vector.png" alt="triangle-vector"></p>
+<p><code>lines(x,y)</code> , 这个<code>x</code>，<code>y</code>的坐标，相当于这里，两个坐标的<code>x</code>都提取出来到<code>x</code>，两个坐标的<code>y</code>都提取出来到<code>y</code>，相当于起始点终点的<code>x</code>坐标放一起，起始点终点的<code>y</code>坐标放一起.感觉python中的<code>map(None,x,y)</code> 后就是<code>[(3,4),(5,9),(7,4)]</code> 其实就是各点的坐标</p>
+<p>但是是不闭合的，为什么，其实两个组合确定一条线，可能<code>lines</code>中的向量，<code>x</code>先是<code>(3,5)</code>,在是<code>(5,7)</code>,<code>y</code>对应，但后面没有回去<code>(7，3)</code>。要手动添加<br><figure class="highlight r"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">lints(c(x,<span class="number">3</span>),c(y,<span class="number">4</span>),type=<span class="string">'l'</span>)</div></pre></td></tr></table></figure></p>
+<p>这样就和开篇的fancybox的图片里面一样了。</p>
+]]></content>
+    
+    <summary type="html">
+    
+      主要是plot, lines, text , points 四个函数的使用
+    
+    </summary>
+    
+      <category term="R" scheme="http://www.mmmmmcclxxvii.cn/categories/R/"/>
+    
+    
+      <category term="R-piece" scheme="http://www.mmmmmcclxxvii.cn/tags/R-piece/"/>
+    
+      <category term="R" scheme="http://www.mmmmmcclxxvii.cn/tags/R/"/>
+    
+      <category term="plot" scheme="http://www.mmmmmcclxxvii.cn/tags/plot/"/>
+    
+  </entry>
   
   <entry>
     <title>自我约束-开会</title>
@@ -277,7 +365,7 @@
     
     <summary type="html">
     
-      &lt;p&gt;阅读 &lt;a href=&quot;https://nedbatchelder.com/text/names.html&quot;&gt;Facts and myths about Python names and values&lt;/a&gt; 做的摘记&lt;br&gt;内容不是很深，只是这里面提到了一些需要注意的点。最主要还是&lt;code&gt;name&lt;/code&gt;和&lt;code&gt;value&lt;/code&gt;的区别&lt;br&gt;&lt;/p&gt;
+      &lt;p&gt;阅读 &lt;a href=&quot;https://nedbatchelder.com/text/names.html&quot;&gt;Facts and myths about Python names and values&lt;/a&gt; 做的摘记&lt;br&gt;内容不是很深，只是这里面提到了一些需要注意的点。最主要还是&lt;code&gt;name&lt;/code&gt;和&lt;code&gt;value&lt;/code&gt;的区别&lt;br&gt;
     
     </summary>
     
@@ -759,7 +847,7 @@
     
       &lt;p&gt;&lt;a href=&quot;http://www.cafepy.com/article/python_types_and_objects/python_types_and_objects.html&quot;&gt;Python Types and Objects&lt;/a&gt;&lt;br&gt;这篇文章解释了：&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;什么是&lt;code&gt;&amp;lt;type &amp;#39;type&amp;#39;&amp;gt;&lt;/code&gt;和&lt;type &#39;object&#39;=&quot;&quot;&gt;&lt;/type&gt;&lt;/li&gt;
+&lt;li&gt;什么是&lt;code&gt;&amp;lt;type &amp;#39;type&amp;#39;&amp;gt;&lt;/code&gt;和&lt;type &#39;object&#39;&gt;&lt;/li&gt;
 &lt;li&gt;用户自定义的类和实例是怎么联系在一起的以及和内建类型的联系&lt;/li&gt;
 &lt;li&gt;什么是&lt;code&gt;metaclass&lt;/code&gt;元类&lt;/li&gt;
 &lt;/ul&gt;
