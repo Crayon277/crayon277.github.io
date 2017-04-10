@@ -55,6 +55,135 @@
   </entry>
   
   <entry>
+    <title>用r做一个简单的统计词频的程序</title>
+    <link href="http://www.mmmmmcclxxvii.cn/2017/04/08/r-text-mining-word-frequency/"/>
+    <id>http://www.mmmmmcclxxvii.cn/2017/04/08/r-text-mining-word-frequency/</id>
+    <published>2017-04-08T06:31:23.000Z</published>
+    <updated>2017-04-10T10:11:47.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>要求：<br>假设<code>文件1</code>中有内容<code>a b c c</code>,<code>文件2</code>中有<code>a b d</code><br>现在要统计成如下的样子：</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>a</th>
+<th>b</th>
+<th>c</th>
+<th>d</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>文件1</td>
+<td>1</td>
+<td>1</td>
+<td>2</td>
+<td>0</td>
+</tr>
+<tr>
+<td>文件2</td>
+<td>1</td>
+<td>1</td>
+<td>0</td>
+<td>1</td>
+</tr>
+</tbody>
+</table>
+<p>用到R中的table函数</p>
+<a id="more"></a>
+<h1 id="预备"><a href="#预备" class="headerlink" title="预备"></a>预备</h1><h2 id="table"><a href="#table" class="headerlink" title="table"></a>table</h2><blockquote>
+<p>table uses the cross-classifying factors to build a contingency table of the counts at each combination of factor levels.</p>
+</blockquote>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">&gt; f1</div><div class="line">[<span class="number">1</span>] <span class="string">"a"</span> <span class="string">"b"</span> <span class="string">"c"</span> <span class="string">"c"</span></div><div class="line">&gt; table(f1)</div><div class="line">f1</div><div class="line">a b c </div><div class="line"><span class="number">1</span> <span class="number">1</span> <span class="number">2</span></div></pre></td></tr></table></figure>
+<p>文档中说了<code>table</code>使用<code>facter</code>中的<code>level</code>来生成统计项，然后记录各项出现的次数。</p>
+<h2 id="factor"><a href="#factor" class="headerlink" title="factor"></a>factor</h2><figure class="highlight r"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">set.seed(<span class="number">102</span>)                           <span class="comment"># This yields a good illustration.</span></div><div class="line">x &lt;- sample(<span class="number">1</span>:<span class="number">3</span>, <span class="number">15</span>, replace=<span class="literal">TRUE</span>)</div><div class="line">education &lt;- factor(x, labels=c(<span class="string">"None"</span>, <span class="string">"School"</span>, <span class="string">"College"</span>))</div></pre></td></tr></table></figure>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">&gt; x</div><div class="line">[<span class="number">1</span>] <span class="number">2</span> <span class="number">2</span> <span class="number">3</span> <span class="number">2</span> <span class="number">1</span> <span class="number">2</span> <span class="number">3</span> <span class="number">1</span> <span class="number">3</span> <span class="number">2</span> <span class="number">3</span> <span class="number">3</span> <span class="number">3</span> <span class="number">2</span> <span class="number">2</span></div><div class="line">&gt;education</div><div class="line">[<span class="number">1</span>] School  School  College School  None    School  College None    College</div><div class="line">[<span class="number">10</span>] School  College College College School  School </div><div class="line">Levels: None School College</div></pre></td></tr></table></figure>
+<p>上面可以看出labels就是实现一种转化么。默认是<code>lables = levels(x)</code></p>
+<h1 id="解题思路"><a href="#解题思路" class="headerlink" title="解题思路"></a>解题思路</h1><p>因为<code>文件1</code>中没有d，但统计的时候还是要有它的项，当然值是0。所以我们要有一个<code>level</code>是包含所有的项的<br><figure class="highlight r"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">&gt; table(factor(f1,levels=c(<span class="string">'a'</span>,<span class="string">'b'</span>,<span class="string">'c'</span>,<span class="string">'d'</span>)))</div><div class="line"></div><div class="line">a b c d </div><div class="line"><span class="number">1</span> <span class="number">1</span> <span class="number">2</span> <span class="number">0</span></div></pre></td></tr></table></figure></p>
+<p>这里有另一个话题就是读取文件还可以用<code>readLines</code>函数，不过<br><figure class="highlight r"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">&gt; readLines(file.choose())</div><div class="line">[<span class="number">1</span>] <span class="string">"a b c c"</span></div></pre></td></tr></table></figure></p>
+<p>可以看到，这是一个向量，<code>scan</code>读进来直接是分开的。<br>所以如果用readLines的话，还要用<code>strsplit</code>函数进行分割，就和python中的<code>split</code>函数一样<br>还有我这里用<code>file.choose()</code>来手动选择文件，因为在mac上不知道为什么绝对路径传进去都有问题。[Todo]</p>
+<h2 id="简单情况"><a href="#简单情况" class="headerlink" title="简单情况"></a>简单情况</h2><p>现在将情况简单化一点，现在假设只有一个文件，现在统计的<code>文件1</code>等就是第1行，依次类推。</p>
+<h3 id="先得到所有的词，每个词是一个元素，像scan那样"><a href="#先得到所有的词，每个词是一个元素，像scan那样" class="headerlink" title="先得到所有的词，每个词是一个元素，像scan那样"></a>先得到所有的词，每个词是一个元素，像<code>scan</code>那样</h3><figure class="highlight r"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">dat &lt;- readLines(file.choose())</div><div class="line">rownum &lt;- length(dat)</div><div class="line">word &lt;- <span class="literal">NULL</span></div><div class="line"><span class="keyword">for</span>(i <span class="keyword">in</span> <span class="number">1</span>:rownum)&#123;</div><div class="line">	di &lt;- dat[i]</div><div class="line">	di &lt;- strsplit(di,split=<span class="string">' '</span>)[[<span class="number">1</span>]]</div><div class="line">	word &lt;- c(word,di)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="得到所有的项"><a href="#得到所有的项" class="headerlink" title="得到所有的项"></a>得到所有的项</h3><p>其实也就是数学里面的集合么。估计<code>Levels</code>就是集合实现的<br><figure class="highlight r"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&gt; factor(word)</div><div class="line">[<span class="number">1</span>] a b c c a b d</div><div class="line">Levels: a b c d</div></pre></td></tr></table></figure></p>
+<p>这样就得到了所需要的所有项<code>a</code>,<code>b</code>,<code>c</code>,<code>d</code></p>
+<p>那其实因子<code>a b c c a b d</code>它是按顺序来的，那其实对第一行的统计就可以<code>table(factor(word[1:len_row_1]))</code><br>那<code>len_row_1</code>怎么得来，就可以在原来的<code>for</code>循环中直接用<code>length</code>计算出<br><figure class="highlight r"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">dat &lt;- readLines(file.choose())</div><div class="line">rownum &lt;- length(dat)</div><div class="line">len &lt;- rep(<span class="number">0</span>,rownum) <span class="comment">#</span></div><div class="line">word &lt;- <span class="literal">NULL</span></div><div class="line"><span class="keyword">for</span>(i <span class="keyword">in</span> <span class="number">1</span>:rownum)&#123;</div><div class="line">	di &lt;- dat[i]</div><div class="line">	di &lt;- strsplit(di,split = <span class="string">' '</span>)[[<span class="number">1</span>]]</div><div class="line">	word &lt;- c(word,di)</div><div class="line">	len[i] &lt;- length(di) <span class="comment">#</span></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>多了有<code>#</code>号标记的这两行</p>
+<h3 id="统计"><a href="#统计" class="headerlink" title="统计"></a>统计</h3><p>事先先生成<code>rownum</code>行然后<code>length(levels(factor(word)))</code>列的矩阵，之后往里面塞就行了<br><figure class="highlight r"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">f &lt;- factor(word)</div><div class="line">l &lt;- levels(f)</div><div class="line">m &lt;- matrix(<span class="number">0</span>,nrow = rownum,ncol = length(l))</div></pre></td></tr></table></figure></p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">&gt; m</div><div class="line">     [,<span class="number">1</span>] [,<span class="number">2</span>] [,<span class="number">3</span>] [,<span class="number">4</span>]</div><div class="line">[<span class="number">1</span>,]    <span class="number">0</span>    <span class="number">0</span>    <span class="number">0</span>    <span class="number">0</span></div><div class="line">[<span class="number">2</span>,]    <span class="number">0</span>    <span class="number">0</span>    <span class="number">0</span>    <span class="number">0</span></div></pre></td></tr></table></figure>
+<p>因为我们现在有了<code>len</code><br><figure class="highlight r"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">&gt; len</div><div class="line">[<span class="number">1</span>] <span class="number">4</span> <span class="number">3</span></div></pre></td></tr></table></figure></p>
+<p><code>4</code>意思是文件第一行的元素个数，<code>3</code>就是第二行的<br>然后我们可以用数组的知识，也就是类似c语言中的两个指针来移动了<br><figure class="highlight r"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">start &lt;- <span class="number">1</span></div><div class="line"><span class="keyword">for</span>(i <span class="keyword">in</span> <span class="number">1</span>:rownum)&#123; <span class="comment"># 这里我一开始忘了写1:，只是rownum，导致一直bug</span></div><div class="line">	end &lt;- start+len[i] - <span class="number">1</span></div><div class="line">	m[i,]&lt;-table(factor(word[start:end],levels = l))</div><div class="line">	start &lt;- end+<span class="number">1</span></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">&gt; m</div><div class="line">     [,<span class="number">1</span>] [,<span class="number">2</span>] [,<span class="number">3</span>] [,<span class="number">4</span>]</div><div class="line">[<span class="number">1</span>,]    <span class="number">1</span>    <span class="number">1</span>    <span class="number">2</span>    <span class="number">0</span></div><div class="line">[<span class="number">2</span>,]    <span class="number">1</span>    <span class="number">1</span>    <span class="number">0</span>    <span class="number">1</span></div></pre></td></tr></table></figure>
+<p>弄的好看一点<br><figure class="highlight r"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">&gt; colnames(m)&lt;-c(<span class="string">'a'</span>,<span class="string">'b'</span>,<span class="string">'c'</span>,<span class="string">'d'</span>)</div><div class="line">&gt; m</div><div class="line">     a b c d</div><div class="line">[<span class="number">1</span>,] <span class="number">1</span> <span class="number">1</span> <span class="number">2</span> <span class="number">0</span></div><div class="line">[<span class="number">2</span>,] <span class="number">1</span> <span class="number">1</span> <span class="number">0</span> <span class="number">1</span></div></pre></td></tr></table></figure></p>
+<h2 id="复杂情况"><a href="#复杂情况" class="headerlink" title="复杂情况"></a>复杂情况</h2><p>就是要前面的步骤，要读取多个文件。其实后面步骤都是一样的。只是一个是将多文件的内容放在一个文件的每一行，同样我们需要知道所有的项，也就是levels。多出来的工作也就是我们要读多个文件，然后进行拼接而已。<br>没什么难度，只是代码的优雅程度不一样而已。</p>
+<h3 id="R下的文件目录操作"><a href="#R下的文件目录操作" class="headerlink" title="R下的文件目录操作"></a>R下的文件目录操作</h3><ul>
+<li><code>dir.create(&#39;newdir&#39;)</code>：创建文件夹</li>
+<li><code>unlink(&#39;directory&#39;,recursive=TRUE)</code>:删除文件夹，若有文件一并删除</li>
+<li><code>file.create(&#39;newfile&#39;)</code>: 创建一个新文件，若存在则会覆盖原文件</li>
+<li><code>cat(&#39;hello world&#39;,file=&#39;newfile&#39;,append=TRUE)</code>: 文件加入一行内容</li>
+<li><code>file.append(&#39;file1&#39;,&#39;file2&#39;)</code>: 将<code>file2</code>的内容添加到<code>file1</code>的后面</li>
+<li><code>file.copy(&#39;source&#39;,&#39;des&#39;)</code>:拷贝文件<code>source</code>到文件<code>des</code></li>
+<li><code>file.show(&#39;filename&#39;)</code>： 显示文件内容</li>
+<li><code>file.remove(&#39;filea&#39;,&#39;fileb&#39;)</code>: 删除文件</li>
+<li><code>list.files()</code>：显示当前工作目录下的文件列表</li>
+</ul>
+<p>这里可以借助<code>list.files()</code>来搭桥。知道了目录下的文件列表，我们就可以用循环了</p>
+<h3 id="合并数据"><a href="#合并数据" class="headerlink" title="合并数据"></a>合并数据</h3><figure class="highlight r"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">f &lt;- <span class="keyword">function</span>(x)&#123;</div><div class="line">	data &lt;- readLines(x)</div><div class="line">	<span class="keyword">return</span>(strsplit(data,split=<span class="string">' '</span>))</div><div class="line">&#125;</div><div class="line">	</div><div class="line">dir_path &lt;- <span class="string">'/Users/Crayon_277/Develop/Project/R/homework/3'</span></div><div class="line">files &lt;- list.files(dir_path,pattern = <span class="string">'[0-9]+.txt$'</span>,full.names = <span class="literal">T</span>)</div><div class="line">	</div><div class="line">result &lt;- lapply(files,f)</div></pre></td></tr></table></figure>
+<p><code>list.files</code>中的<code>full.names</code>参数为<code>false</code>的时候<br><figure class="highlight r"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">&gt; files</div><div class="line">[<span class="number">1</span>] <span class="string">"1.txt"</span>      <span class="string">"2.txt"</span></div></pre></td></tr></table></figure></p>
+<p>当为<code>T</code>的时候<br><figure class="highlight r"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&gt; files</div><div class="line">[<span class="number">1</span>] <span class="string">"/Users/Crayon_277/Develop/Project/R/homework/3/1.txt"</span></div><div class="line">[<span class="number">2</span>] <span class="string">"/Users/Crayon_277/Develop/Project/R/homework/3/2.txt"</span></div></pre></td></tr></table></figure></p>
+<p>区别就一目了然了</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">&gt; result</div><div class="line">[[<span class="number">1</span>]]</div><div class="line">[[<span class="number">1</span>]][[<span class="number">1</span>]]</div><div class="line">[<span class="number">1</span>] <span class="string">"a"</span> <span class="string">"b"</span> <span class="string">"c"</span> <span class="string">"c"</span></div><div class="line"></div><div class="line"></div><div class="line">[[<span class="number">2</span>]]</div><div class="line">[[<span class="number">2</span>]][[<span class="number">1</span>]]</div><div class="line">[<span class="number">1</span>] <span class="string">"a"</span> <span class="string">"b"</span> <span class="string">"d"</span></div></pre></td></tr></table></figure>
+<p>然后可以在用<code>for</code>语句拼接，或者一开始直接用<code>for</code>遍历</p>
+<blockquote>
+<p>lapply returns a list of the same length as X, each element of which is the result of applying FUN to the corresponding element of X.<br>lapply就类似python中的map</p>
+</blockquote>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;要求：&lt;br&gt;假设&lt;code&gt;文件1&lt;/code&gt;中有内容&lt;code&gt;a b c c&lt;/code&gt;,&lt;code&gt;文件2&lt;/code&gt;中有&lt;code&gt;a b d&lt;/code&gt;&lt;br&gt;现在要统计成如下的样子：&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;&lt;/th&gt;
+&lt;th&gt;a&lt;/th&gt;
+&lt;th&gt;b&lt;/th&gt;
+&lt;th&gt;c&lt;/th&gt;
+&lt;th&gt;d&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;文件1&lt;/td&gt;
+&lt;td&gt;1&lt;/td&gt;
+&lt;td&gt;1&lt;/td&gt;
+&lt;td&gt;2&lt;/td&gt;
+&lt;td&gt;0&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;文件2&lt;/td&gt;
+&lt;td&gt;1&lt;/td&gt;
+&lt;td&gt;1&lt;/td&gt;
+&lt;td&gt;0&lt;/td&gt;
+&lt;td&gt;1&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;用到R中的table函数&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="R" scheme="http://www.mmmmmcclxxvii.cn/categories/R/"/>
+    
+    
+      <category term="R" scheme="http://www.mmmmmcclxxvii.cn/tags/R/"/>
+    
+      <category term="text-mining" scheme="http://www.mmmmmcclxxvii.cn/tags/text-mining/"/>
+    
+      <category term="R-piece" scheme="http://www.mmmmmcclxxvii.cn/tags/R-piece/"/>
+    
+  </entry>
+  
+  <entry>
     <title>用R画出下面这样子的形式的图</title>
     <link href="http://www.mmmmmcclxxvii.cn/2017/04/07/r-lines/"/>
     <id>http://www.mmmmmcclxxvii.cn/2017/04/07/r-lines/</id>
@@ -134,9 +263,9 @@
       <category term="R" scheme="http://www.mmmmmcclxxvii.cn/categories/R/"/>
     
     
-      <category term="R-piece" scheme="http://www.mmmmmcclxxvii.cn/tags/R-piece/"/>
-    
       <category term="R" scheme="http://www.mmmmmcclxxvii.cn/tags/R/"/>
+    
+      <category term="R-piece" scheme="http://www.mmmmmcclxxvii.cn/tags/R-piece/"/>
     
       <category term="plot" scheme="http://www.mmmmmcclxxvii.cn/tags/plot/"/>
     
@@ -973,7 +1102,7 @@
     <link href="http://www.mmmmmcclxxvii.cn/2016/10/04/encoding/"/>
     <id>http://www.mmmmmcclxxvii.cn/2016/10/04/encoding/</id>
     <published>2016-10-04T01:47:42.000Z</published>
-    <updated>2017-04-10T05:54:39.000Z</updated>
+    <updated>2017-04-10T05:58:08.000Z</updated>
     
     <content type="html"><![CDATA[<p>这篇很长！！！先看一下目录。</p>
 <p>更新：</p>
@@ -1100,6 +1229,7 @@
 <li><a href="http://stackoverflow.com/questions/39807985/python-write-file-dealing-with-encode" target="_blank" rel="external">python write file dealing with encode</a></li>
 <li><a href="http://nedbatchelder.com/text/unipain.html" target="_blank" rel="external">Pragmatic Unicode</a></li>
 <li><a href="http://noalgo.info/578.html" target="_blank" rel="external">Python编程的中文问题</a></li>
+<li><a href="https://gist.github.com/x7hub/178c87f323fbad57ff91" target="_blank" rel="external">Python2字符编码问题小结</a></li>
 </ol>
 <hr>
 <p>1,2,4,7,13,14 推荐要看一下</p>
@@ -1136,11 +1266,11 @@
       <category term="砍树人" scheme="http://www.mmmmmcclxxvii.cn/categories/%E7%A0%8D%E6%A0%91%E4%BA%BA/"/>
     
     
-      <category term="encode" scheme="http://www.mmmmmcclxxvii.cn/tags/encode/"/>
-    
       <category term="python" scheme="http://www.mmmmmcclxxvii.cn/tags/python/"/>
     
       <category term="unicode" scheme="http://www.mmmmmcclxxvii.cn/tags/unicode/"/>
+    
+      <category term="encode" scheme="http://www.mmmmmcclxxvii.cn/tags/encode/"/>
     
       <category term="utf-8" scheme="http://www.mmmmmcclxxvii.cn/tags/utf-8/"/>
     

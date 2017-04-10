@@ -4,18 +4,42 @@
 
     
   <url>
+    <loc>http://www.mmmmmcclxxvii.cn/2017/04/08/r-text-mining-word-frequency/</loc>
+    <lastmod>2017-04-10T10:11:47.000Z</lastmod>
+    <data>
+        <display>
+        <title>用r做一个简单的统计词频的程序</title>
+        <pubTime>2017-04-08T06:31:23.000Z</pubTime>
+        
+        <tag>R</tag>
+         
+        <tag>text-mining</tag>
+         
+        <tag>R-piece</tag>
+         
+         
+           
+             
+              <breadCrumb title="R" url="http://www.mmmmmcclxxvii.cn/categories/R/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://www.mmmmmcclxxvii.cn/2016/10/04/encoding/</loc>
-    <lastmod>2017-04-10T05:54:39.000Z</lastmod>
+    <lastmod>2017-04-10T05:58:08.000Z</lastmod>
     <data>
         <display>
         <title>编码总结</title>
         <pubTime>2016-10-04T01:47:42.000Z</pubTime>
         
-        <tag>encode</tag>
-         
         <tag>python</tag>
          
         <tag>unicode</tag>
+         
+        <tag>encode</tag>
          
         <tag>utf-8</tag>
          
@@ -59,9 +83,9 @@
         <title>用R画出下面这样子的形式的图</title>
         <pubTime>2017-04-07T05:35:06.000Z</pubTime>
         
-        <tag>R-piece</tag>
-         
         <tag>R</tag>
+         
+        <tag>R-piece</tag>
          
         <tag>plot</tag>
          
