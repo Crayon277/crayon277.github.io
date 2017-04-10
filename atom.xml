@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://www.mmmmmcclxxvii.cn/"/>
-  <updated>2017-04-07T07:08:24.000Z</updated>
+  <updated>2017-04-10T05:36:01.000Z</updated>
   <id>http://www.mmmmmcclxxvii.cn/</id>
   
   <author>
@@ -14,6 +14,45 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>vim的字符编码</title>
+    <link href="http://www.mmmmmcclxxvii.cn/2017/04/10/vim-encoding/"/>
+    <id>http://www.mmmmmcclxxvii.cn/2017/04/10/vim-encoding/</id>
+    <published>2017-04-10T04:43:00.000Z</published>
+    <updated>2017-04-10T05:36:01.000Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="vim中的编码"><a href="#vim中的编码" class="headerlink" title="vim中的编码"></a>vim中的编码</h1><p>vim 有四个跟字符编码方式有关的选项，encoding、fileencoding、fileencodings、termencoding (这些选项可能的取值请参考 Vim 在线帮助 :help encoding-names)</p>
+<ul>
+<li>encoding: Vim 内部使用的字符编码方式，包括 Vim 的 buffer (缓冲区)、菜单文本、消息文本等。默认是根据你的locale选择.用户手册上建议只在 .vimrc 中改变它的值，事实上似乎也只有在.vimrc 中改变它的值才有意义。你可以用另外一种编码来编辑和保存文件，如你的vim的encoding为utf-8,所编辑的文件采用cp936编码,vim会自动将读入的文件转成utf-8(vim的能读懂的方式），而当你写入文件时,又会自动转回成cp936（文件的保存编码). </li>
+<li>fileencoding: Vim 中当前编辑的文件的字符编码方式，Vim 保存文件时也会将文件保存为这种字符编码方式 (不管是否新文件都如此)。 </li>
+<li>fileencodings: Vim自动探测fileencoding的顺序列表， 启动时会按照它所列出的字符编码方式逐一探测即将打开的文件的字符编码方式，并且将 fileencoding 设置为最终探测到的字符编码方式。因此最好将Unicode 编码方式放到这个列表的最前面，将拉丁语系编码方式 latin1 放到最后面。 </li>
+<li>termencoding: Vim 所工作的终端 (或者 Windows 的 Console 窗口) 的字符编码方式。如果vim所在的term与vim编码相同，则无需设置。如其不然，你可以用vim的termencoding选项将自动转换成term的编码.这个选项在 Windows 下对我们常用的 GUI 模式的 gVim 无效，而对 Console 模式的Vim 而言就是 Windows 控制台的代码页，并且通常我们不需要改变它。 </li>
+</ul>
+<p>最主要的就是关注一下<code>encoding</code>和<code>fileencoding</code>，总结就是前者是vim内部处理字符的用的。vim中可能会处理不一样的编码的字符，然后都化为统一的格式进行处理是最明智的。后者是文件的编码格式。</p>
+<p>上面也说的很清楚了，文件读入时，若是<code>fileencoding</code>和<code>encoding</code>不一致，会先转化成<code>encoding</code>，统一处理，最后保存的时候再转化回<code>fileencoding</code>。转化的过程就是通过<code>unicode</code>这个第二层过渡。看<a href="http://www.mmmmmcclxxvii.cn/2016/10/04/encoding/">编码总结</a></p>
+<h1 id="vim的多字符编码方式支持工作流程"><a href="#vim的多字符编码方式支持工作流程" class="headerlink" title="vim的多字符编码方式支持工作流程"></a>vim的多字符编码方式支持工作流程</h1><ol>
+<li>Vim 启动，根据 <code>.vimrc</code> 中设置的<code>encoding</code> 的值来设置 buffer、菜单文本、消息文的字符编码方式。 </li>
+<li>读取需要编辑的文件，根据<code>fileencodings</code> 中列出的字符编码方式逐一探测该文件编码方式。并设置<code>fileencoding</code>为探测到的，看起来是正确的 字符编码方式。 </li>
+<li>对比<code>fileencoding</code>和<code>encoding</code>的值，若不同则调用<code>iconv</code>将文件内容转换为<code>encoding</code>所描述的字符编码方式，并且把转换后的内容放到为此文件开辟的<code>buffer</code>里，此时我们就可以开始编辑这个文件了。注意，完成这一步动作需要调用外部的<code>iconv.dll</code>，你需要保证这个文件存在于<code>$VIMRUNTIME</code>或者其他列在<code>PATH</code>环境变量中的目录里。 </li>
+<li>编辑完成后保存文件时，再次对比<code>fileencoding</code>和<code>encoding</code>的值。若不同，再次调用<code>iconv</code>将即将保存的 buffer 中的文本转换为<code>fileencoding</code>所描述的字符编码方式，并保存到指定的文件中。同样，这需要调用<code>iconv.dll</code>由于<code>Unicode</code>能够包含几乎所有的语言的字符，而且<code>Unicode</code>的<code>UTF-8</code>编码方式又是非常具有性价比的编码方式 (空间消耗比<code>UCS-2</code>小)，因此建议<code>encoding</code>的值设置为<code>utf-8</code>。这么做的另一个理由是<code>encoding</code>设置为<code>utf-8</code>时，Vim 自动探测文件的编码方式会更准确 (或许这个理由才是主要的 ;)。我们在中文 Windows 里编辑的文件，为了兼顾与其他软件的兼容性，文件编码还是设置为<code>GB2312/GBK</code> 比较合适，因此<code>fileencoding</code>建议设置为 chinese (chinese 是个别名，在 Unix 里表示 gb2312，在 Windows 里表示cp936，也就是 GBK 的代码页)。 </li>
+</ol>
+]]></content>
+    
+    <summary type="html">
+    
+      对vim中`encoding`,`filenecoding`,`fileencodings`,`termencoding`的区别做个认识
+    
+    </summary>
+    
+      <category term="砍树人" scheme="http://www.mmmmmcclxxvii.cn/categories/%E7%A0%8D%E6%A0%91%E4%BA%BA/"/>
+    
+    
+      <category term="encode" scheme="http://www.mmmmmcclxxvii.cn/tags/encode/"/>
+    
+      <category term="utf-8" scheme="http://www.mmmmmcclxxvii.cn/tags/utf-8/"/>
+    
+  </entry>
   
   <entry>
     <title>用R画出下面这样子的形式的图</title>
@@ -1097,9 +1136,9 @@
       <category term="砍树人" scheme="http://www.mmmmmcclxxvii.cn/categories/%E7%A0%8D%E6%A0%91%E4%BA%BA/"/>
     
     
-      <category term="encode" scheme="http://www.mmmmmcclxxvii.cn/tags/encode/"/>
-    
       <category term="python" scheme="http://www.mmmmmcclxxvii.cn/tags/python/"/>
+    
+      <category term="encode" scheme="http://www.mmmmmcclxxvii.cn/tags/encode/"/>
     
       <category term="unicode" scheme="http://www.mmmmmcclxxvii.cn/tags/unicode/"/>
     

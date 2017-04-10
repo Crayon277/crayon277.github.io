@@ -82,7 +82,7 @@
 <link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="next,blog" />
+  <meta name="keywords" content="encode,utf-8," />
 
 
 
@@ -100,16 +100,16 @@
 
 
 
-<meta name="description" content="...../..---/--.../--.../">
-<meta property="og:type" content="website">
-<meta property="og:title" content="tags">
-<meta property="og:url" content="http://www.mmmmmcclxxvii.cn/tags/index.html">
+<meta name="description" content="对vim中`encoding`,`filenecoding`,`fileencodings`,`termencoding`的区别做个认识">
+<meta property="og:type" content="article">
+<meta property="og:title" content="vim的字符编码">
+<meta property="og:url" content="http://www.mmmmmcclxxvii.cn/2017/04/10/vim-encoding/index.html">
 <meta property="og:site_name" content="MMMMMCCLXXVII">
-<meta property="og:description" content="...../..---/--.../--.../">
-<meta property="og:updated_time" content="2017-03-26T02:40:52.000Z">
+<meta property="og:description" content="对vim中`encoding`,`filenecoding`,`fileencodings`,`termencoding`的区别做个认识">
+<meta property="og:updated_time" content="2017-04-10T05:36:01.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="tags">
-<meta name="twitter:description" content="...../..---/--.../--.../">
+<meta name="twitter:title" content="vim的字符编码">
+<meta name="twitter:description" content="对vim中`encoding`,`filenecoding`,`fileencodings`,`termencoding`的区别做个认识">
 
 
 
@@ -137,19 +137,13 @@
 
 
 
-  <link rel="canonical" href="http://www.mmmmmcclxxvii.cn/tags/"/>
+  <link rel="canonical" href="http://www.mmmmmcclxxvii.cn/2017/04/10/vim-encoding/"/>
 
 
 
 
 
-  <title>
-  
-
-  
-    tags | MMMMMCCLXXVII
-  
-</title>
+  <title> vim的字符编码 | MMMMMCCLXXVII </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="en">
@@ -184,7 +178,7 @@
     
   
 
-  <div class="container sidebar-position-left  ">
+  <div class="container sidebar-position-left page-post-detail ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -322,25 +316,283 @@
             
 
   <div id="posts" class="posts-expand">
-  <header class="post-header">
+    
 
-	<h1 class="post-title" itemprop="name headline">tags</h1>
+  
 
+  
+  
+  
 
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://www.mmmmmcclxxvii.cn/2017/04/10/vim-encoding/">
 
-</header>
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Crayon Chaney">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/myface.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="MMMMMCCLXXVII">
+    </span>
 
     
-    
-      <div class="tag-cloud">
-        <div class="tag-cloud-title">
-            22 tags in total
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                vim的字符编码
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-04-10T12:43:00+08:00">
+                2017-04-10
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Post modified</span>
+              
+              <time title="Post modified" itemprop="dateModified" datetime="2017-04-10T13:36:01+08:00">
+                2017-04-10
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/砍树人/" itemprop="url" rel="index">
+                    <span itemprop="name">砍树人</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a class="cloud-tie-join-count" href="/2017/04/10/vim-encoding/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count join-count" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+             <span id="/2017/04/10/vim-encoding/" class="leancloud_visitors" data-flag-title="vim的字符编码">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">Visitors </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+              <div class="post-description">
+                  对vim中`encoding`,`filenecoding`,`fileencodings`,`termencoding`的区别做个认识
+              </div>
+          
+
         </div>
-        <div class="tag-cloud-tags">
-          <a href="/tags/R/" style="font-size: 12px; color: #ccc">R</a> <a href="/tags/R-piece/" style="font-size: 12px; color: #ccc">R-piece</a> <a href="/tags/Tkinter/" style="font-size: 12px; color: #ccc">Tkinter</a> <a href="/tags/descriptor/" style="font-size: 12px; color: #ccc">descriptor</a> <a href="/tags/encode/" style="font-size: 15.6px; color: #a7a7a7">encode</a> <a href="/tags/hadoop/" style="font-size: 15.6px; color: #a7a7a7">hadoop</a> <a href="/tags/life/" style="font-size: 26.4px; color: #363636">life</a> <a href="/tags/mapreduce/" style="font-size: 15.6px; color: #a7a7a7">mapreduce</a> <a href="/tags/mro/" style="font-size: 12px; color: #ccc">mro</a> <a href="/tags/namaste/" style="font-size: 19.2px; color: #818181">namaste</a> <a href="/tags/object/" style="font-size: 22.8px; color: #5c5c5c">object</a> <a href="/tags/plot/" style="font-size: 12px; color: #ccc">plot</a> <a href="/tags/principle/" style="font-size: 12px; color: #ccc">principle</a> <a href="/tags/project/" style="font-size: 12px; color: #ccc">project</a> <a href="/tags/python/" style="font-size: 30px; color: #111">python</a> <a href="/tags/python-object/" style="font-size: 12px; color: #ccc">python-object</a> <a href="/tags/rock-the-boat/" style="font-size: 12px; color: #ccc">rock the boat</a> <a href="/tags/stackoverflow/" style="font-size: 12px; color: #ccc">stackoverflow</a> <a href="/tags/type/" style="font-size: 12px; color: #ccc">type</a> <a href="/tags/udacity/" style="font-size: 15.6px; color: #a7a7a7">udacity</a> <a href="/tags/unicode/" style="font-size: 12px; color: #ccc">unicode</a> <a href="/tags/utf-8/" style="font-size: 15.6px; color: #a7a7a7">utf-8</a>
-        </div>
-      </div>
+      </header>
     
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="vim中的编码"><a href="#vim中的编码" class="headerlink" title="vim中的编码"></a>vim中的编码</h1><p>vim 有四个跟字符编码方式有关的选项，encoding、fileencoding、fileencodings、termencoding (这些选项可能的取值请参考 Vim 在线帮助 :help encoding-names)</p>
+<ul>
+<li>encoding: Vim 内部使用的字符编码方式，包括 Vim 的 buffer (缓冲区)、菜单文本、消息文本等。默认是根据你的locale选择.用户手册上建议只在 .vimrc 中改变它的值，事实上似乎也只有在.vimrc 中改变它的值才有意义。你可以用另外一种编码来编辑和保存文件，如你的vim的encoding为utf-8,所编辑的文件采用cp936编码,vim会自动将读入的文件转成utf-8(vim的能读懂的方式），而当你写入文件时,又会自动转回成cp936（文件的保存编码). </li>
+<li>fileencoding: Vim 中当前编辑的文件的字符编码方式，Vim 保存文件时也会将文件保存为这种字符编码方式 (不管是否新文件都如此)。 </li>
+<li>fileencodings: Vim自动探测fileencoding的顺序列表， 启动时会按照它所列出的字符编码方式逐一探测即将打开的文件的字符编码方式，并且将 fileencoding 设置为最终探测到的字符编码方式。因此最好将Unicode 编码方式放到这个列表的最前面，将拉丁语系编码方式 latin1 放到最后面。 </li>
+<li>termencoding: Vim 所工作的终端 (或者 Windows 的 Console 窗口) 的字符编码方式。如果vim所在的term与vim编码相同，则无需设置。如其不然，你可以用vim的termencoding选项将自动转换成term的编码.这个选项在 Windows 下对我们常用的 GUI 模式的 gVim 无效，而对 Console 模式的Vim 而言就是 Windows 控制台的代码页，并且通常我们不需要改变它。 </li>
+</ul>
+<p>最主要的就是关注一下<code>encoding</code>和<code>fileencoding</code>，总结就是前者是vim内部处理字符的用的。vim中可能会处理不一样的编码的字符，然后都化为统一的格式进行处理是最明智的。后者是文件的编码格式。</p>
+<p>上面也说的很清楚了，文件读入时，若是<code>fileencoding</code>和<code>encoding</code>不一致，会先转化成<code>encoding</code>，统一处理，最后保存的时候再转化回<code>fileencoding</code>。转化的过程就是通过<code>unicode</code>这个第二层过渡。看<a href="http://www.mmmmmcclxxvii.cn/2016/10/04/encoding/">编码总结</a></p>
+<h1 id="vim的多字符编码方式支持工作流程"><a href="#vim的多字符编码方式支持工作流程" class="headerlink" title="vim的多字符编码方式支持工作流程"></a>vim的多字符编码方式支持工作流程</h1><ol>
+<li>Vim 启动，根据 <code>.vimrc</code> 中设置的<code>encoding</code> 的值来设置 buffer、菜单文本、消息文的字符编码方式。 </li>
+<li>读取需要编辑的文件，根据<code>fileencodings</code> 中列出的字符编码方式逐一探测该文件编码方式。并设置<code>fileencoding</code>为探测到的，看起来是正确的 字符编码方式。 </li>
+<li>对比<code>fileencoding</code>和<code>encoding</code>的值，若不同则调用<code>iconv</code>将文件内容转换为<code>encoding</code>所描述的字符编码方式，并且把转换后的内容放到为此文件开辟的<code>buffer</code>里，此时我们就可以开始编辑这个文件了。注意，完成这一步动作需要调用外部的<code>iconv.dll</code>，你需要保证这个文件存在于<code>$VIMRUNTIME</code>或者其他列在<code>PATH</code>环境变量中的目录里。 </li>
+<li>编辑完成后保存文件时，再次对比<code>fileencoding</code>和<code>encoding</code>的值。若不同，再次调用<code>iconv</code>将即将保存的 buffer 中的文本转换为<code>fileencoding</code>所描述的字符编码方式，并保存到指定的文件中。同样，这需要调用<code>iconv.dll</code>由于<code>Unicode</code>能够包含几乎所有的语言的字符，而且<code>Unicode</code>的<code>UTF-8</code>编码方式又是非常具有性价比的编码方式 (空间消耗比<code>UCS-2</code>小)，因此建议<code>encoding</code>的值设置为<code>utf-8</code>。这么做的另一个理由是<code>encoding</code>设置为<code>utf-8</code>时，Vim 自动探测文件的编码方式会更准确 (或许这个理由才是主要的 ;)。我们在中文 Windows 里编辑的文件，为了兼顾与其他软件的兼容性，文件编码还是设置为<code>GB2312/GBK</code> 比较合适，因此<code>fileencoding</code>建议设置为 chinese (chinese 是个别名，在 Unix 里表示 gb2312，在 Windows 里表示cp936，也就是 GBK 的代码页)。 </li>
+</ol>
+
+      
+    </div>
+
+	<div>
+		
+			<div>
+	
+		<div style="text-align:center;color: #ccc;font-size:14px;">------好了就这样了<i class="fa fa-heart"></i>欢迎指点------</div>
+	
+</div>
+
+		
+	</div>
+
+    <div>
+      
+        
+<div id="wechat_subscriber" style="display: block; padding: 10px 0; margin: 20px auto; width: 100%; text-align: center">
+    <img id="wechat_subscriber_qcode" src="/uploads/wechat.jpg" alt="Crayon Chaney wechat" style="width: 200px; max-width: 100%;"/>
+    <div>You can contact me via wechat as an alternative option of leaving a message below</div>
+</div>
+
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+  <ul class="post-copyright">
+    <li class="post-copyright-author">
+      <strong>Post author:</strong>
+      Crayon Chaney
+    </li>
+    <li class="post-copyright-link">
+      <strong>Post link:</strong>
+      <a href="http://www.mmmmmcclxxvii.cn/2017/04/10/vim-encoding/" title="vim的字符编码">http://www.mmmmmcclxxvii.cn/2017/04/10/vim-encoding/</a>
+    </li>
+    <li class="post-copyright-license">
+      <strong>Copyright Notice: </strong>
+      All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> unless stating additionally.
+    </li>
+  </ul>
+
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/encode/" rel="tag"><i class="fa fa-tag"></i> encode</a>
+          
+            <a href="/tags/utf-8/" rel="tag"><i class="fa fa-tag"></i> utf-8</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/04/07/r-lines/" rel="next" title="用R画出下面这样子的形式的图">
+                <i class="fa fa-chevron-left"></i> 用R画出下面这样子的形式的图
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+  <a class="jiathis_button_tsina"></a>
+  <a class="jiathis_button_tqq"></a>
+  <a class="jiathis_button_weixin"></a>
+  <a class="jiathis_button_cqq"></a>
+  <a class="jiathis_button_douban"></a>
+  <a class="jiathis_button_renren"></a>
+  <a class="jiathis_button_qzone"></a>
+  <a class="jiathis_button_kaixin001"></a>
+  <a class="jiathis_button_copy"></a>
+  <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank"></a>
+  <a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" >
+  var jiathis_config={
+    hideMore:false
+  }
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+
+      
+    </div>
   </div>
 
 
@@ -374,8 +626,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel sidebar-panel-active">
+      <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/uploads/myface.jpg"
@@ -662,6 +923,22 @@
       </section>
 
       
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#vim中的编码"><span class="nav-number">1.</span> <span class="nav-text">vim中的编码</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#vim的多字符编码方式支持工作流程"><span class="nav-number">2.</span> <span class="nav-text">vim的多字符编码方式支持工作流程</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
 
       
 
@@ -768,6 +1045,10 @@
   
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
 
   
 

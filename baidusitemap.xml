@@ -4,6 +4,28 @@
 
     
   <url>
+    <loc>http://www.mmmmmcclxxvii.cn/2017/04/10/vim-encoding/</loc>
+    <lastmod>2017-04-10T05:36:01.000Z</lastmod>
+    <data>
+        <display>
+        <title>vim的字符编码</title>
+        <pubTime>2017-04-10T04:43:00.000Z</pubTime>
+        
+        <tag>encode</tag>
+         
+        <tag>utf-8</tag>
+         
+         
+           
+             
+              <breadCrumb title="砍树人" url="http://www.mmmmmcclxxvii.cn/categories/%E7%A0%8D%E6%A0%91%E4%BA%BA/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://www.mmmmmcclxxvii.cn/2016/10/04/encoding/</loc>
     <lastmod>2017-04-10T04:25:35.000Z</lastmod>
     <data>
@@ -11,9 +33,9 @@
         <title>编码总结</title>
         <pubTime>2016-10-04T01:47:42.000Z</pubTime>
         
-        <tag>encode</tag>
-         
         <tag>python</tag>
+         
+        <tag>encode</tag>
          
         <tag>unicode</tag>
          
