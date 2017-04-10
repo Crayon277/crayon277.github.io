@@ -929,4 +929,311 @@
     
   </entry>
   
+  <entry>
+    <title>编码总结</title>
+    <link href="http://www.mmmmmcclxxvii.cn/2016/10/04/encoding/"/>
+    <id>http://www.mmmmmcclxxvii.cn/2016/10/04/encoding/</id>
+    <published>2016-10-04T01:47:42.000Z</published>
+    <updated>2017-04-10T04:25:35.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>这篇很长！！！先看一下目录。</p>
+<p>更新：</p>
+<ul>
+<li>python脚本文件的编码</li>
+<li>添加vim编码的链接</li>
+</ul>
+<a id="more"></a>
+<h1 id="问题的根源"><a href="#问题的根源" class="headerlink" title="问题的根源"></a>问题的根源</h1><p>因为计算机是二进制的，为了能在计算机上显示字符，又因为是电脑是美国人发明的，他们定义了字符表（ascii码表），也就是字符和数字的对应，比如在ascii码表中<code>65</code>表示<code>A</code>，这样就有一对一的映射关系，字符就能用数字表示了，那样计算机也就算懂得“文字”了。而ascii码表是用到了0~127这样一个范围，<code>0*** ****</code> 7位二进制，但是电脑普及之后，其他国家也想在电脑上显示自己的文字，因为一个字节是8位么，有些可以把8位中的最高位利用起来，定义一些其他字符，然后兼容ascii码，但是有些国家像中国，8位是远远不够的，所以就有了像gbk,gb2312这样的自己定义的一组字符编码表。后来国际上统一制定了一个叫unicode的字符编码表，能够包含<strong>所有</strong>国家的文字</p>
+<p>那unicode到底是什么？<br>这里其实有好几个不同的概念</p>
+<h1 id="不要混淆概念"><a href="#不要混淆概念" class="headerlink" title="不要混淆概念"></a>不要混淆概念</h1><ul>
+<li>字符集(Abstract character repertoire)</li>
+<li>编码字符集(Coded character set)</li>
+<li>字符编码方式 (Character encoding form)</li>
+<li>字符编码方案 (Character encoding scheme)</li>
+</ul>
+<h2 id="字符集"><a href="#字符集" class="headerlink" title="字符集"></a>字符集</h2><p>第一层，可以看作是抽象层，我就是我们人类的视角，看到的我们的语言的文字集合</p>
+<blockquote>
+<p>不同文字系统在记录信息上的能力是等价的。进一步讲，文字只是信息的载体，而非信息本身。不用文字，用其他的载体（数字）也可以存储同样意义的信息。<br>吴军《数学之美》</p>
+</blockquote>
+<h2 id="编码字符集"><a href="#编码字符集" class="headerlink" title="编码字符集"></a>编码字符集</h2><p>就是给抽象的字符编上数字，可以看作逻辑层。</p>
+<blockquote>
+<p>如gb2312中的定义的字符，每个字符都有个整数和它对应。一个整数只对应-着一个字符。反过来，则不一定是<br>这个说法有点模糊，反过来不一定是，是说在这个gb2312定义的字符中，一个字符能有多个整数对应，一个整数只对应一个字符的意思吗？一对多的关系？如果是这样，那没有意义啊，如果是因为在不同编码方式下，比如,这里只是假设打比方啊，在<code>a</code>编码表中，<code>&quot;中&quot;</code>对应<code>52</code>,在<code>b</code>编码中<code>&quot;中&quot;</code>对应<code>77</code>,这样说一个字符对应不同的整数还说的通，但是这样<code>77</code>在<code>a</code>中就能对应其他字符了，与一个整数只对应着一个字符在这个条件下也就矛盾了。所以我不知道这句话说的到底是什么意思</p>
+</blockquote>
+<p>但只需要知道这里所说的映射关系，<strong>是数学意义上的映射关系，编码字符集是与计算机无关的</strong>,<code>unicode</code>就在这一层</p>
+<h2 id="字符编码方式"><a href="#字符编码方式" class="headerlink" title="字符编码方式"></a>字符编码方式</h2><p>记得组原里面的逻辑结构和存储结构的概念，这里的字符编码方式就对应着存储结构的这个概念，它是与计算机有关的</p>
+<blockquote>
+<p>通俗的说，意思就是怎么样才能将字符所对应的整数的放进计算机内存，或文件、或网络中。于是，不同人有不同的实现方式，所谓的万码奔腾，就是指这个。gb2312，utf-8,utf-16,utf-32等都在这一层。</p>
+</blockquote>
+<p>这里就有问题了，既然像unicode已经定义了文字对数字的对应了，那直接就那样存就行了？<br>too young, too simple， 不是那么简单。要考虑到存储空间，提一下，因为会有很多零，考虑到这些，所以逻辑形式和存储形式会不一样。下面详解</p>
+<h2 id="字符编码方案"><a href="#字符编码方案" class="headerlink" title="字符编码方案"></a>字符编码方案</h2><blockquote>
+<p>这个更加与计算机密切相关。具体是与操作系统密切相关。主要是解决大小字节序的问题。对于UTF-16和UTF-32编码，Unicode都支持big-endian 和 little-endian两种编码方案。一般来说，我们所说的编码，都在第三层完成（字符编码方式）。具体到一个软件系统中，则很复杂。浏览器－apache－tomcat（包括tomcat内部的jsp编码、编译，文件读取）－数据库之间，只要存在数据交互，就有可能发生编码不一致，如果在读取数据时，没有正确的decode和encode，出现乱码就是家常便饭了。</p>
+</blockquote>
+<p>我理解就是这一层就是考虑大端还是小端存储，这是和<strong>不同计算机</strong>具体设计所不同的。</p>
+<h1 id="unicode"><a href="#unicode" class="headerlink" title="unicode"></a>unicode</h1><p>刚说了unicode是在第二层，只是理论上的，什么叫只是理论上的，它是理想的，他定义了字符与一个数字的关系，仅仅而此。他没有定义编码在电脑中的具体存储形式。<br>比如 <code>中</code> 对应是<code>4E2D 0100 1110 0010 1101</code>  它不就这样存着就好了么？ 不是这样的。<br>看<code>A</code> 是<code>41</code>,<code>0000 0000 0100 0001</code> 如果都按照这样直接存着，有一个问题就是太浪费资源了，8位还好，16位的话，有那么多个0，存储空间都浪费了，而且传输的时候也浪费不必要的带宽，所以这是理论上编码和具体实现的差别。在实际存储到计算机上要考虑其他因素，正是有这些因素，导致了<code>utf-8</code>，<code>utf-16</code>,<code>utf-32</code>等，基于<code>unicode</code>的编码方式。</p>
+<p><strong>但有些编码不只是定义了影射关系，除了有字符集同时也包含了字符编码的含义，<strong>也就是这样定义的也是这样存的</strong>。如ASCII,GBK,GB2312等</strong>， unicode 只是定义了编码。没有定义怎么具体实现。</p>
+<p>unicode 作为字符集(usc)是唯一的，编码方案(utf)才是有很多种。</p>
+<p>也就是怎么存储，比如<code>中</code>，用的最多的是utf-8</p>
+<h2 id="utf-8"><a href="#utf-8" class="headerlink" title="utf-8"></a>utf-8</h2><p><img src="http://onexs3cnv.bkt.clouddn.com/utf8.png" alt="utf-8"></p>
+<p>具体<code>utf-8</code>是怎么和<code>unicode</code>对应不是这里的讨论重点，终点是<code>unicode</code>和<code>utf-8</code>的关系，<code>unicode</code>是理想的，虚浮的，<code>utf-8</code>才是真实的显示的。<code>unicode</code>是一个<code>code point</code>，他还是需要被表示成一个一个binary,这就需要encode.</p>
+<blockquote>
+<p>In Unicode, a letter maps to something called a code point which is still just a theoretical concept. How that code point is represented in memory or on disk is a whole nuther story.</p>
+</blockquote>
+<h2 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h2><p><img src="http://onexs3cnv.bkt.clouddn.com/Screen%20Shot%202017-04-09%20at%209.46.29%20AM.png" alt="转化的例子"><br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">import</span> sys</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>sys.stdin.encoding</div><div class="line"><span class="string">'UTF-8'</span></div><div class="line"><span class="meta">&gt;&gt;&gt; </span>c = <span class="string">'中文'</span></div><div class="line"><span class="meta">&gt;&gt;&gt; </span>c</div><div class="line"><span class="string">'\xe4\xb8\xad\xe6\x96\x87'</span></div><div class="line"><span class="meta">&gt;&gt;&gt; </span>cu = c.decode(<span class="string">'utf-8'</span>)</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>cu</div><div class="line"><span class="string">u'\u4e2d\u6587'</span></div><div class="line"><span class="meta">&gt;&gt;&gt; </span>cu.encode(<span class="string">'gbk'</span>)</div><div class="line"><span class="string">'\xd6\xd0\xce\xc4'</span></div></pre></td></tr></table></figure></p>
+<blockquote>
+<p>It does not make sense to have a string without knowing what encoding it uses.</p>
+</blockquote>
+<p>这句话很重要。这里就先知道<code>c</code>这个字符串是由<code>utf-8</code>编码的。也就是计算机里面存的就是<code>\xe4\xb8\xad\xe6\x96\x87</code>对应的二进制。其实编码可以看作一个给<code>unicode</code>加密的过程,解码就是从字符串到<code>unicode</code>解密的过程。其实最终在计算机里只是一些<code>010101010</code>这样的数字，关键就是看你怎么看待它，怎么去翻译它的问题，翻译不正确就没有意义。</p>
+<p><code>c</code> 是由<code>utf-8</code>来编码的，解码之后<code>unicode</code> code point 是<code>4e2d 6587</code>, 代表<code>&#39;中文&#39;</code>，再对它进行<code>gbk</code>编码，它则变成了<code>&#39;\xd6\xd0\xce\xc4&#39;</code>, 所以字符集在不同编码方式下可能对应的实际存储形式是不一样的。 但反过来。给你一串这个数字 ， 不知道它的编码方式是毫无意义的。<br>因为unicode定义了这个地球所有的字符和数字的映射关系，看作是一个“上层建筑”，一个蓝图，各个编码就是具体的施工，因为地形的原因，气候关系，各个国家根据这个蓝图都会有有些变动（这个例子不够好）。</p>
+<p><strong>同一个<code>unicode</code>在不同编码下肯定是不一样的,但是不同的<code>unicode</code>在不同的编码下有可能是一样的</strong>。这个很容易验证，只要随便找个字符字节，<code>decode</code>一下，只要能<code>decode</code>出来，这个字节符合编码的格式，然后还原出来的<code>unicode</code>就是在那个编码下对应的<code>unicode</code>但是两者是相同的字节。下面有一个例子，看下面。<strong>所以，像<code>\xe9</code>这种给出不一定就是utf-8编码方式</strong>，有些只是刚好符合编码格式，但是不一定有意义。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&gt;&gt;&gt; </span>c.decode(<span class="string">'ascii'</span>)</div><div class="line">Traceback (most recent call last):</div><div class="line">  File <span class="string">"&lt;stdin&gt;"</span>, line <span class="number">1</span>, <span class="keyword">in</span> &lt;module&gt;</div><div class="line">  UnicodeDecodeError: <span class="string">'ascii'</span> codec can<span class="string">'t decode byte 0xe4 in position 0: ordinal not in range(128)</span></div></pre></td></tr></table></figure>
+<p>因为<code>c</code>不是<code>utf-8</code>来编码的所以用<code>ascii</code>来“解密”这个逆过程是行不通的<br>当得到了<code>unicode</code>又可以用不同的“加密方式”加密了。</p>
+<h1 id="python中的编码深入（python2）"><a href="#python中的编码深入（python2）" class="headerlink" title="python中的编码深入（python2）"></a>python中的编码深入（python2）</h1><p>首先明确<code>0x41</code>和<code>\x41</code>的区别<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&gt;&gt;&gt; </span><span class="number">0x41</span></div><div class="line"><span class="number">65</span></div><div class="line"><span class="meta">&gt;&gt;&gt; </span>\x41</div><div class="line">  File <span class="string">"&lt;stdin&gt;"</span>, line <span class="number">1</span></div><div class="line">	\x41</div><div class="line">	   ^</div><div class="line">SyntaxError: unexpected character after line continuation character</div><div class="line"><span class="meta">&gt;&gt;&gt; </span><span class="string">'\x41'</span></div><div class="line"><span class="string">'A'</span></div></pre></td></tr></table></figure></p>
+<p><strong><code>0x41</code>是<code>numeric</code> ，<code>\x41</code>是 <code>character</code>，它只有在字符串中才有意义。 两者虽然在电脑中都是存着<code>01000001</code>,但是看待它的角度不一样。 </strong></p>
+<h2 id="str类和unicode类"><a href="#str类和unicode类" class="headerlink" title="str类和unicode类"></a>str类和unicode类</h2><h2 id="str和unicode是两个不同的类"><a href="#str和unicode是两个不同的类" class="headerlink" title="str和unicode是两个不同的类"></a><strong><code>str</code>和<code>unicode</code>是两个不同的类</strong></h2><p>在python的REPL中，类似<code>w = &#39;{whatever}&#39;</code>，这样给出的，代表w是一个<code>str</code>，</p>
+<blockquote>
+<p><strong>str hold bytes ! str hold bytes ! str hold bytes !</strong><br><strong>str 存储的是已经编码后的字节序列，输出是看到每个字节用16进制表示，以<code>\x</code>开头，每个汉字会占用3个字节的长度。</strong></p>
+<p>str is string of bytes<br>unicode is string of unicode character</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&gt;&gt;&gt; </span>c=<span class="string">'中文'</span></div><div class="line"><span class="meta">&gt;&gt;&gt; </span>c</div><div class="line"><span class="string">'\xe4\xb8\xad\xe6\x96\x87'</span></div><div class="line"><span class="meta">&gt;&gt;&gt; </span>cu=<span class="string">u'中文'</span></div><div class="line"><span class="meta">&gt;&gt;&gt; </span>cu</div><div class="line"><span class="string">u'\u4e2d\u6587'</span></div><div class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">print</span> c</div><div class="line">中文</div><div class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">print</span> cu</div><div class="line">中文</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>len(c)</div><div class="line"><span class="number">6</span></div><div class="line"><span class="meta">&gt;&gt;&gt; </span>len(cu)</div><div class="line"><span class="number">2</span></div></pre></td></tr></table></figure>
+<p><code>cu=u&#39;中文&#39;</code>表示<code>cu</code>的编码指定为<code>unicode</code>了。这个是python的内部编码。<br><strong>我现在有一个疑问，那这个<code>cu</code>在内存中保存的是什么样的？？？</strong> [Todo]</p>
+<p><strong>一个以bytes 为单位，一个以unicode character 为单位</strong></p>
+<blockquote>
+<p>Unicode started out using 16-bit characters instead of 8-bit characters.!!!</p>
+</blockquote>
+<p>我的理解是<br><code>len(cu) == 2</code> 表示<code>cu</code>里面有2个code point<br><code>len（c) == 6</code> 表示<code>c</code>有6个bytes</p>
+<h2 id="那这里就有两个问题了"><a href="#那这里就有两个问题了" class="headerlink" title="那这里就有两个问题了"></a>那这里就有两个问题了</h2><h3 id="x-str存储已经编码后的字节序列，是用什么编码？？"><a href="#x-str存储已经编码后的字节序列，是用什么编码？？" class="headerlink" title="-[x] str存储已经编码后的字节序列，是用什么编码？？"></a>-[x] str存储已经编码后的字节序列，是用什么编码？？</h3><p>从键盘上按下到屏幕上显示的这一步我们先不管，我猜想是涉及到键盘的工作原理<strong><a href="http://hsmaterial.moe.edu.tw/file/computer/7I44/class800/7I44/final/7i44_2_4/7i44_2_4.htm" target="_blank" rel="external">Todo</a></strong>和输入法的原理<strong>[Todo]</strong>,改天再把这一块补上，现在先就关注再python内部的编码。<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> sys</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>sys.stdin.encoding</div><div class="line"><span class="string">'UTF-8'</span></div></pre></td></tr></table></figure></p>
+<p>是默认用<code>sys.stdin.encoding</code>来编码输入的字符。</p>
+<p>说到这里，python中有好几个有关编码的函数或值</p>
+<ul>
+<li>sys.stdin.encoding</li>
+<li>sys.stdout.encoding</li>
+<li>sys.getdefaultencoding()</li>
+<li>sys.getfilesystemencoding()</li>
+</ul>
+<p>各自的用处都不一样<br><img src="http://onexs3cnv.bkt.clouddn.com/python%E7%BC%96%E7%A0%81.png" alt="encoding in python"></p>
+<h3 id="w＝-39-中文-39-是需要编码一下的-用utf-8那这样-w-39-xe9-39-也要先utf-8编码？"><a href="#w＝-39-中文-39-是需要编码一下的-用utf-8那这样-w-39-xe9-39-也要先utf-8编码？" class="headerlink" title="-[] w＝&#39;中文&#39; 是需要编码一下的 用utf-8那这样 w = &#39;\xe9&#39;也要先utf-8编码？"></a>-[] <code>w＝&#39;中文&#39;</code> 是需要编码一下的 用<code>utf-8</code>那这样 <code>w = &#39;\xe9&#39;</code>也要先<code>utf-8</code>编码？</h3><p>这个我还不清楚，因为不可能一个不编码，一个编码，应该是统一的形式，但是对<code>\xe9</code>进行<code>utf-8</code>的编码是不行的因为对于但字节的，<code>utf-8</code>是高位是<code>0</code>开头的，所以这个不可能用<code>utf-8</code>编码成功，所以我猜测是因为<code>\x</code>,有这个，直接以字节码的形式传入进来了不用编码了。</p>
+<h2 id="print"><a href="#print" class="headerlink" title="print"></a>print</h2><p>当做<code>print c</code>的时候，会把<code>c</code>的byte string， 也就是字节流传到终端，终端接受到这一组字节流要用终端的编码来解码这个字节流（毕竟不是字符集，传送过来的只是编码方式，所以找字符对应关系还得还原），这样就又回到了<code>unicode</code>的形式，然后接下来就是<a href="Todo">字符怎么显示到计算机屏幕上的问题了</a></p>
+<h3 id="实验"><a href="#实验" class="headerlink" title="实验"></a>实验</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&gt;&gt;&gt; </span>c = <span class="string">'中文'</span></div><div class="line"><span class="meta">&gt;&gt;&gt; </span>c.decode(<span class="string">'utf-8'</span>)</div><div class="line"><span class="string">u'\u4e2d\u6587'</span></div><div class="line"><span class="meta">&gt;&gt;&gt; </span>c.decode(<span class="string">'utf-8'</span>).encode(<span class="string">'gb2312'</span>)</div><div class="line"><span class="string">'\xd6\xd0\xce\xc4'</span></div></pre></td></tr></table></figure>
+<p>我在iTerm下先把Terminal的Character Encoding改为<code>GB 2312</code><br><img src="http://onexs3cnv.bkt.clouddn.com/Screen%20Shot%202017-04-10%20at%208.03.38%20AM.png" alt="change terminal encoding"><br>可以看到结果是被正确打印出来<br><img src="http://onexs3cnv.bkt.clouddn.com/Screen%20Shot%202017-04-10%20at%208.05.13%20AM.png" alt="correct result"><br>但当我把编码随便改成另外国家的<br><img src="http://onexs3cnv.bkt.clouddn.com/Screen%20Shot%202017-04-10%20at%208.08.30%20AM.png" alt="other encoding"><br>然后再打印的时候就不对了<br><img src="http://onexs3cnv.bkt.clouddn.com/Screen%20Shot%202017-04-10%20at%208.09.04%20AM.png" alt="wrong result"><br>但是！ <code>cg</code>里面保存是一样的</p>
+<h2 id=""><a href="#" class="headerlink" title=""></a><img src="http://onexs3cnv.bkt.clouddn.com/Screen%20Shot%202017-04-10%20at%208.10.14%20AM.png" alt="cg"></h2><p>这也就是说当你终端的编码和在python中处理字符的编码不一致的时候，打印结果可能出现问题。之所以是可能，因为如果都是英文的话，因为都兼容ascii码,所以会打印出你想要看到的样子。</p>
+<hr>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&gt;&gt;&gt; </span>cg = <span class="string">'\xd6\xd0\xce\xc4'</span></div><div class="line"><span class="meta">&gt;&gt;&gt; </span>cg.decode(<span class="string">'iso 8859-11'</span>)</div><div class="line"><span class="string">u'\u0e36\u0e30\u0e2e\u0e24'</span></div><div class="line"><span class="meta">&gt;&gt;&gt; </span>cg.decode(<span class="string">'gb2312'</span>)</div><div class="line"><span class="string">u'\u4e2d\u6587'</span></div></pre></td></tr></table></figure>
+<p>这里就是不同<code>unicode</code>在不同的编码下有着相同的字节的例子<br>然后<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&gt;&gt;&gt; </span>cg.decode(<span class="string">'iso 2022-jp'</span>)</div><div class="line">Traceback (most recent call last):</div><div class="line">  File <span class="string">"&lt;stdin&gt;"</span>, line <span class="number">1</span>, <span class="keyword">in</span> &lt;module&gt;</div><div class="line">  UnicodeDecodeError: <span class="string">'iso2022_jp'</span> codec can<span class="string">'t decode byte 0xd6 in position 0: illegal multibyte sequence</span></div></pre></td></tr></table></figure></p>
+<p>上面那个能对<code>iso 8859-11</code>解码也只是凑巧，这个对<code>iso 2022-jp</code>就不行。</p>
+<h3 id="实验2"><a href="#实验2" class="headerlink" title="实验2"></a>实验2</h3><p>如果是<code>print</code>一个unicode对象的话<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&gt;&gt;&gt; </span>cgt = cg.decode(<span class="string">'iso 8859-11'</span>)</div><div class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">print</span> cgt</div><div class="line">Traceback (most recent call last):</div><div class="line">  File <span class="string">"&lt;stdin&gt;"</span>, line <span class="number">1</span>, <span class="keyword">in</span> &lt;module&gt;</div><div class="line">  UnicodeEncodeError: <span class="string">'ascii'</span> codec can<span class="string">'t encode characters in position 0-3: ordinal not in range(128)</span></div></pre></td></tr></table></figure></p>
+<p>看着样子好像是要转化成字节流传送到终端再解码。那这样不会出现什么问题么？<br>因为<code>unicode</code>的code point和字符之间是一一对应的，我编码成<code>utf-8</code>也好，<code>gbk</code>也好，其他什么的也好，只要能编成，我只是用它做个过度，我只需确保解码的时候用的是一致的编码的就行了，现在这里的问题就是<code>ascii</code>码不能编成，因为格式不支持。这个<code>ascii</code>应该是<code>sys.getdefaultencoding()</code>的。<br>以下终端编码是<code>utf-8</code><br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&gt;&gt;&gt; </span>cgt = cg.decode(<span class="string">'iso 8859-11'</span>)</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>cgt.encode(<span class="string">'utf-8'</span>)</div><div class="line"><span class="string">'\xe0\xb8\xb6\xe0\xb8\xb0\xe0\xb8\xae\xe0\xb8\xa4'</span></div><div class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">print</span> <span class="string">'\xe0\xb8\xb6\xe0\xb8\xb0\xe0\xb8\xae\xe0\xb8\xa4'</span></div><div class="line">ะฮฤ</div></pre></td></tr></table></figure></p>
+<p>这个显示的不知道是不是一致的，看着又像又不像，少了一个点貌似，到底对不对？？</p>
+<h2 id="读取文件"><a href="#读取文件" class="headerlink" title="读取文件"></a>读取文件</h2><h3 id="读文件，文件的编码"><a href="#读文件，文件的编码" class="headerlink" title="读文件，文件的编码"></a>读文件，文件的编码</h3><p>现在我先建立一个<code>gbk.txt</code>的文件，在vim中<code>:set fileencoding=gbk</code>,有关vim中的编码<a href="Todo">看这里</a><br>输入内容<code>我叫陈烨</code>保存。<br>先看一下<code>utf-8</code>的编码长什么样，<code>gbk</code>编码长什么样<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&gt;&gt;&gt; </span>c = <span class="string">'我叫陈烨'</span></div><div class="line"><span class="meta">&gt;&gt;&gt; </span>c</div><div class="line"><span class="string">'\xe6\x88\x91\xe5\x8f\xab\xe9\x99\x88\xe7\x83\xa8'</span></div><div class="line"><span class="meta">&gt;&gt;&gt; </span>c.decode(<span class="string">'utf-8'</span>).encode(<span class="string">'gbk'</span>)</div><div class="line"><span class="string">'\xce\xd2\xbd\xd0\xb3\xc2\xec\xc7'</span></div></pre></td></tr></table></figure></p>
+<p>然后读取文件<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&gt;&gt;&gt; </span>f = open(<span class="string">'gbk.txt'</span>)</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>fr = f.read()</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>fr</div><div class="line"><span class="string">'\xce\xd2\xbd\xd0\xb3\xc2\xec\xc7\n'</span></div></pre></td></tr></table></figure></p>
+<p>可以看出，我保存的是<code>gbk</code>编码格式，现在读入的也是<code>gbk</code>编码的格式，因为计算机他操作的就在“第三层”（这里先忽略第四层）所以，<strong>如果我不知道原来文件的编码是什么，直接操作文件内容也是没有意义的</strong>，只是现在大部分都是<code>utf-8</code>，一切都恰好行的通，等出现乱码的时候就应该知道是编码出现问题了。</p>
+<h3 id="读文件，文件内容的操作"><a href="#读文件，文件内容的操作" class="headerlink" title="读文件，文件内容的操作"></a>读文件，文件内容的操作</h3><p>现在我建立一个文件叫做wr.TARIN  , 这是里面的内容是<br><code>你好 中国 Hello China 1 2 3</code><br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">import</span> sys</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>sys.getfilesystemencoding()</div><div class="line"><span class="string">'utf-8'</span></div><div class="line"><span class="meta">&gt;&gt;&gt; </span>f = open(<span class="string">'wr.TRAIN'</span>)</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>content=f.readline()</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>content</div><div class="line"><span class="string">'\xe4\xbd\xa0\xe5\xa5\xbd \xe4\xb8\xad\xe5\x9b\xbd Hello China 1 2 3\n'</span></div></pre></td></tr></table></figure></p>
+<p>这个<code>sys.getfilesystemencoding()</code>是不是用来文件解码的还不清楚！！！【Todo】<br>文件都是以字节流的方式读进来的？  但不管怎么样，读进来的是一段字符串，重点是你怎么看，都是这样的01010的数字，关键在于怎么翻译，所以要知道它文件原来的编码方式。<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&gt;&gt;&gt; </span>content_list = content.split()</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>content_list</div><div class="line">[<span class="string">'\xe4\xbd\xa0\xe5\xa5\xbd'</span>, <span class="string">'\xe4\xb8\xad\xe5\x9b\xbd'</span>, <span class="string">'Hello'</span>, <span class="string">'China'</span>, <span class="string">'1'</span>, <span class="string">'2'</span>, <span class="string">'3'</span>]</div><div class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">print</span> content</div><div class="line">你好 中国 Hello China <span class="number">1</span> <span class="number">2</span> <span class="number">3</span></div><div class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">print</span> content_list</div><div class="line">[<span class="string">'\xe4\xbd\xa0\xe5\xa5\xbd'</span>, <span class="string">'\xe4\xb8\xad\xe5\x9b\xbd'</span>, <span class="string">'Hello'</span>, <span class="string">'China'</span>, <span class="string">'1'</span>, <span class="string">'2'</span>, <span class="string">'3'</span>]</div><div class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">print</span> content_list[<span class="number">0</span>]</div><div class="line">你好</div></pre></td></tr></table></figure></p>
+<p>那这里就有一个问题，为什么<code>print content_list</code>显示的是以这样的形式，而不是<br><code>[&#39;你好&#39;,&#39;中国&#39;,&#39;Hello&#39;,&#39;China&#39;,&#39;1&#39;,&#39;2&#39;,&#39;3&#39;]</code><br>这样子？<br>这其实是两个问题。<code>content_list</code>是<code>list</code>类型，它不是一个<code>str</code>！！！<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&gt;&gt;&gt; </span>l = [<span class="string">'中文'</span>,<span class="string">'你好'</span>]</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>l</div><div class="line">[<span class="string">'\xe4\xb8\xad\xe6\x96\x87'</span>, <span class="string">'\xe4\xbd\xa0\xe5\xa5\xbd'</span>]</div><div class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">print</span> l</div><div class="line">[<span class="string">'\xe4\xb8\xad\xe6\x96\x87'</span>, <span class="string">'\xe4\xbd\xa0\xe5\xa5\xbd'</span>]</div><div class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">print</span> str(l)</div><div class="line">[<span class="string">'\xe4\xb8\xad\xe6\x96\x87'</span>, <span class="string">'\xe4\xbd\xa0\xe5\xa5\xbd'</span>]</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>str(l)</div><div class="line"><span class="string">"['\\xe4\\xb8\\xad\\xe6\\x96\\x87', '\\xe4\\xbd\\xa0\\xe5\\xa5\\xbd']"</span></div></pre></td></tr></table></figure></p>
+<p>在打印<code>list</code>类型的时候，会先把<code>list</code>转为<code>str</code>，这样就发现<code>\x</code>编程了<code>\\x</code>，相当于<code>\xe4</code>原本表示编码的，被当成字符串处理了，说了一切看你怎么看的问题。<br>但其实本来是<code>list</code>转为字符串格式的话，会调用<code>repr</code>来转化，但是效果是和<code>str</code>是一样的。<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&gt;&gt;&gt; </span>repr(l)</div><div class="line"><span class="string">"['\\xe4\\xb8\\xad\\xe6\\x96\\x87', '\\xe4\\xbd\\xa0\\xe5\\xa5\\xbd']"</span></div></pre></td></tr></table></figure></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&gt;&gt;&gt; </span>lc = <span class="string">','</span>.join(l)</div><div class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">print</span> lc</div><div class="line">中文,你好</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>lc</div><div class="line"><span class="string">'\xe4\xb8\xad\xe6\x96\x87,\xe4\xbd\xa0\xe5\xa5\xbd'</span></div></pre></td></tr></table></figure>
+<p>但是如果想要有<code>[...]</code>的效果怎么办<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">print</span> str(l).decode(<span class="string">'string_escape'</span>)</div><div class="line">[<span class="string">'中文'</span>, <span class="string">'世界'</span>]</div></pre></td></tr></table></figure></p>
+<p><code>string_escape</code>是转义字符<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&gt;&gt;&gt; </span>repr(l)</div><div class="line"><span class="string">"['\\xe4\\xb8\\xad\\xe6\\x96\\x87', '\\xe4\\xbd\\xa0\\xe5\\xa5\\xbd']"</span></div><div class="line"><span class="meta">&gt;&gt;&gt; </span>repr(l).decode(<span class="string">'string_escape'</span>)</div><div class="line"><span class="string">"['\xe4\xb8\xad\xe6\x96\x87', '\xe4\xbd\xa0\xe5\xa5\xbd']"</span></div><div class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">print</span> <span class="string">"['\xe4\xb8\xad\xe6\x96\x87', '\xe4\xbd\xa0\xe5\xa5\xbd']"</span></div><div class="line">[<span class="string">'中文'</span>, <span class="string">'你好'</span>]</div></pre></td></tr></table></figure></p>
+<p>也就是相当于把<code>\\x</code>还原回<code>\x</code>了的一步操作。如果已经是<code>\x</code>再这样弄，没什么效果。</p>
+<h3 id="写入文件"><a href="#写入文件" class="headerlink" title="写入文件"></a>写入文件</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&gt;&gt;&gt; </span><span class="string">','</span>.join(content_list)</div><div class="line"><span class="string">'\xe4\xbd\xa0\xe5\xa5\xbd,\xe4\xb8\xad\xe5\x9b\xbd,Hello,China,1,2,3'</span></div><div class="line"><span class="meta">&gt;&gt;&gt; </span>fw = open(<span class="string">'out.TEST'</span>,<span class="string">'w'</span>)</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>fw.write(<span class="string">','</span>.join(content_list))</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>fw.close()</div></pre></td></tr></table></figure>
+<p><img src="http://onexs3cnv.bkt.clouddn.com/Screen%20Shot%202016-10-04%20at%209.11.11%20PM.png" alt="file_out"></p>
+<p>还可以用<code>unicode</code>统一来处理文本，不过在写入文件时，还是要转换为“第三层”的格式，毕竟<code>unicode</code>是虚浮的！！！<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&gt;&gt;&gt; </span>fw=open(<span class="string">'out.TEST'</span>,<span class="string">'w'</span>)</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>content_u_list_conjunction = <span class="string">','</span>.join(content_u_list)</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>content_u_list_conjunction</div><div class="line"><span class="string">u'\u4f60\u597d,\u4e2d\u56fd,Hello,China,1,2,3'</span></div><div class="line"><span class="meta">&gt;&gt;&gt; </span>fw.write(content_u_list_conjunction)</div><div class="line">Traceback (most recent call last):</div><div class="line">  File <span class="string">"&lt;stdin&gt;"</span>, line <span class="number">1</span>, <span class="keyword">in</span> &lt;module&gt;</div><div class="line">UnicodeEncodeError: <span class="string">'ascii'</span> codec cant encode characters <span class="keyword">in</span> position <span class="number">0</span><span class="number">-1</span>: ordinal <span class="keyword">not</span> <span class="keyword">in</span> range(<span class="number">128</span>)</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>fw.write(content_u_list_conjunction.encode(<span class="string">'utf-8'</span>)) <span class="comment">#要指定encode编码，不然用默认的</span></div><div class="line"><span class="meta">&gt;&gt;&gt; </span>fw.close()</div></pre></td></tr></table></figure></p>
+<p>这个默认的应该就是<code>sys.getdefaultencoding()</code>指定的吧。</p>
+<h2 id="python-脚本文件的编码"><a href="#python-脚本文件的编码" class="headerlink" title="python 脚本文件的编码"></a>python 脚本文件的编码</h2><p>经常可以看到一些<code>.py</code>文件的头两行是怎么写的<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#!/usr/bin/env/python</span></div><div class="line"><span class="comment"># coding=utf-8</span></div><div class="line"><span class="comment"># 或</span></div><div class="line"><span class="comment"># -*- coding: utf-8 -*-</span></div></pre></td></tr></table></figure></p>
+<blockquote>
+<p>If a comment in the first or second line of the Python script matches the regular expression coding[=:]\s*([-\w.]+), this comment is processed as an encoding declaration; the first group of this expression names the encoding of the source code file. The encoding declaration must appear on a line of its own. If it is the second line, the first line must also be a comment-only line. The recommended forms of an encoding expression are</p>
+<p><code># -*- coding: &lt;encoding-name&gt; -*-</code><br>from <a href="https://docs.python.org/2.7/reference/lexical_analysis.html#encoding-declarations" target="_blank" rel="external">Encoding declarations</a></p>
+<p>Python will default to ASCII as standard encoding if no other encoding hints are given.<br>from <a href="https://www.python.org/dev/peps/pep-0263/" target="_blank" rel="external">PEP 263 – Defining Python Source Code Encodings</a></p>
+</blockquote>
+<p>如果没有指定，脚本默认会用ascii码来解析文件内容，这时如果遇到有中文的，那就会报错<br><img src="http://onexs3cnv.bkt.clouddn.com/Screen%20Shot%202017-04-10%20at%2011.30.09%20AM.png" alt="without specific encoding"></p>
+<p>还有一些<a href="https://www.python.org/dev/peps/pep-0263/#id9" target="_blank" rel="external">example</a></p>
+<h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1><ol>
+<li><a href="http://www.joelonsoftware.com/articles/Unicode.html" target="_blank" rel="external">The Absolute Minimum Every Software Developer Absolutely, Positively Must Know About Unicode and Character Sets (No Excuses!)</a></li>
+<li><a href="http://www.51testing.com/html/63/524463-817888.html" target="_blank" rel="external">python新手必碰到的问题—encode与decode，中文乱码</a></li>
+<li><a href="http://noalgo.info/571.html" target="_blank" rel="external">字符编码详解</a></li>
+<li><a href="https://docs.python.org/2/howto/unicode.html" target="_blank" rel="external">Unicode HOWTO</a></li>
+<li><a href="http://stackoverflow.com/questions/16903192/meaning-of-0x-and-x-in-python-hex-strings" target="_blank" rel="external">Meaning of 0x and \x in python hex strings?</a></li>
+<li><a href="http://unicode-table.com/en/#00E9" target="_blank" rel="external">unicode-table</a></li>
+<li><a href="http://stackoverflow.com/questions/2596714/why-does-python-print-unicode-characters-when-the-default-encoding-is-ascii/21968640#21968640" target="_blank" rel="external">Why does Python print unicode characters when the default encoding is ASCII?</a></li>
+<li><a href="http://stackoverflow.com/questions/24832335/len-with-unicode-strings" target="_blank" rel="external">len() with unicode strings</a></li>
+<li><a href="http://stackoverflow.com/questions/5695714/python-len-and-slices-on-unicode-strings" target="_blank" rel="external">Python, len and slices on unicode strings</a></li>
+<li><a href="http://stackoverflow.com/questions/39835779/lenunicode-string#39835844" target="_blank" rel="external">len(unicode string)</a></li>
+<li><a href="http://blog.csdn.net/huxian370/article/details/51145926" target="_blank" rel="external">Python 2.7 解决写入文件的中文乱码问题</a></li>
+<li><a href="http://stackoverflow.com/questions/39807985/python-write-file-dealing-with-encode" target="_blank" rel="external">python write file dealing with encode</a></li>
+<li><a href="http://nedbatchelder.com/text/unipain.html" target="_blank" rel="external">Pragmatic Unicode</a></li>
+<li><a href="http://noalgo.info/578.html" target="_blank" rel="external">Python编程的中文问题</a></li>
+</ol>
+<hr>
+<p>1,2,4,7,13,14 推荐要看一下</p>
+<hr>
+<h2 id="一些重要的摘出来"><a href="#一些重要的摘出来" class="headerlink" title="一些重要的摘出来"></a>一些重要的摘出来</h2><h3 id="4"><a href="#4" class="headerlink" title="4"></a>4</h3><blockquote>
+<p>The Unicode standard describes how characters are represented by code points. A code point is an integer value, usually denoted in base 16. In the standard, a code point is written using the notation <code>U+12ca</code> to mean the character with value <code>0x12ca</code> (4810 decimal). The Unicode standard contains a lot of tables listing characters and their corresponding code points:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">&gt; 0061    &apos;a&apos;; LATIN SMALL LETTER A</div><div class="line">&gt; 0062    &apos;b&apos;; LATIN SMALL LETTER B</div><div class="line">&gt; 0063    &apos;c&apos;; LATIN SMALL LETTER C</div><div class="line">&gt; ...</div><div class="line">&gt; 007B    &apos;&#123;&apos;; LEFT CURLY BRACKET</div><div class="line">&gt;</div></pre></td></tr></table></figure></p>
+<p><strong>Strictly, these definitions imply that it’s meaningless to say ‘this is character U+12ca’. U+12ca is a code point, which represents some particular character; in this case, it represents the character ‘ETHIOPIC SYLLABLE WI’. In informal contexts, this distinction between code points and characters will sometimes be forgotten.</strong></p>
+<p><strong>A character is represented on a screen or on paper by a set of graphical elements that’s called a glyph. The glyph for an uppercase A, for example, is two diagonal strokes and a horizontal stroke, though the exact details will depend on the font being used. Most Python code doesn’t need to worry about glyphs; figuring out the correct glyph to display is generally the job of a GUI toolkit or a terminal’s font renderer.</strong></p>
+<p>a Unicode string is a sequence of code points, which are numbers from 0 to 0x10ffff. This sequence needs to be represented as a set of bytes (meaning, values from 0-255) in memory. The rules for translating a Unicode string into a sequence of bytes are called an encoding.</p>
+</blockquote>
+<h3 id="12"><a href="#12" class="headerlink" title="12"></a>12</h3><p>There are many encodings and they define 128-255 differently.</p>
+<blockquote>
+<p>For example, character 185 (0xB9) is ą in windows-1250 encoding, but it is š in iso-8859-2 encoding.<br>So, what happens if you print \xb9? It depends on the encoding used in the console. In my case (my console uses cp852 encoding) it is:<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&gt; &gt;&gt;&gt; <span class="keyword">print</span> <span class="string">'\xb9'</span></div><div class="line">&gt; ╣</div><div class="line">&gt;</div></pre></td></tr></table></figure></p>
+<p><strong>Because of that ambiguity, string ‘\xb9’ will never be represented as ‘╣’ (nor ‘ą’…). That would hide the true value. </strong> (这里解释了为什么用<code>\xb9</code>这样字节来保存，而不打印出来实际的字符)It will be represented as the numeric value:<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">&gt; &gt;&gt;&gt; <span class="string">'\xb9'</span></div><div class="line">&gt; <span class="string">'\xb9'</span></div><div class="line">&gt; <span class="comment">#Also:</span></div><div class="line">&gt; &gt;&gt;&gt; <span class="string">'╣'</span></div><div class="line">&gt; <span class="string">'\xb9'</span></div><div class="line">&gt;</div></pre></td></tr></table></figure></p>
+<p><strong>But what happens if variable is just entered in the console?When a variable is enteren in cosole without print, its representation is printed.</strong> It is the same as the following:<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&gt; &gt;&gt;&gt; <span class="keyword">print</span> repr(content)</div><div class="line">&gt; <span class="string">'\xe4\xbd\xa0\xe5\xa5\xbd \xe4\xb8\xad\xe5\x9b\xbd Hello China 1 2 3\n'</span></div><div class="line">&gt;</div></pre></td></tr></table></figure></p>
+<p>Unlike str objects, which are strings of bytes, unicode objects are strings of unicode characters<br>characters != bytes. a utf16 character is 2 bytes, but only one character</p>
+</blockquote>
+<h3 id="14"><a href="#14" class="headerlink" title="14"></a>14</h3><blockquote>
+<p>内置的open()方法打开文件时，read()读取的是str，读取后需要使用正确的编码格式进行decode()。write()写入时，如果参数是unicode，则需要使用你希望写入的编码进行encode()，如果是其他编码格式的str，则需要先用该str的编码进行decode()，转成unicode后再使用写入的编码进行encode()。如果直接将unicode作为参数传入write()方法，Python将先使用源代码文件声明的字符编码进行编码然后写入。</p>
+</blockquote>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;这篇很长！！！先看一下目录。&lt;/p&gt;
+&lt;p&gt;更新：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;python脚本文件的编码&lt;/li&gt;
+&lt;li&gt;添加vim编码的链接&lt;/li&gt;
+&lt;/ul&gt;
+    
+    </summary>
+    
+      <category term="砍树人" scheme="http://www.mmmmmcclxxvii.cn/categories/%E7%A0%8D%E6%A0%91%E4%BA%BA/"/>
+    
+    
+      <category term="encode" scheme="http://www.mmmmmcclxxvii.cn/tags/encode/"/>
+    
+      <category term="python" scheme="http://www.mmmmmcclxxvii.cn/tags/python/"/>
+    
+      <category term="unicode" scheme="http://www.mmmmmcclxxvii.cn/tags/unicode/"/>
+    
+      <category term="utf-8" scheme="http://www.mmmmmcclxxvii.cn/tags/utf-8/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>【转】如何从菜鸟程序员成长为高手</title>
+    <link href="http://www.mmmmmcclxxvii.cn/2015/04/07/rookie-to-master/"/>
+    <id>http://www.mmmmmcclxxvii.cn/2015/04/07/rookie-to-master/</id>
+    <published>2015-04-07T08:00:02.000Z</published>
+    <updated>2015-04-07T08:00:02.000Z</updated>
+    
+    <content type="html"><![CDATA[<p><a href="http://codecloud.net/4128.html" target="_blank" rel="external">原文链接</a></p>
+<p>下面这篇优秀的文章来自Axb的自我修养，写得很直白、很真实，很有营养，分享在这里与君共勉！<br>口头禅</p>
+<blockquote>
+<p>这其实是两个问题 （不要混淆概念）<br>还有没有更好的方案 （不要思维局限）<br>能不能举个例子 （理论实际相结合）<br>能不能给个一句话总结 （说明自己掌握了重点）</p>
+</blockquote>
+<a id="more"></a>
+<h1 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h1><p>最近有一些毕业不久的同事问我：“你工作的时候有没有什么窍门？怎么才能快速成为高手？”</p>
+<p>想起当初刚入职，新人培训的时候，也跟其他同事讨论过这个问题：如何才能成为业界大牛？当时自己只是觉得兴趣是最好的老师，思路方法什么的没有多想。</p>
+<p>加入微博平台架构部的时间也不短了，趁着快过春节总结了一下自己入职微博以来的工作情况，从互联网开发的半个门外汉，到如今能设计一些架构、排查一些问题、分享一些经验，收获颇多，感想颇多,也逐渐意识到思路和方法的重要性，在此跟大家分享一下。主要分为学、做、想三方面。</p>
+<h1 id="学会学习"><a href="#学会学习" class="headerlink" title="学会学习"></a>学会学习</h1><p>学习无疑是程序员最为重要的素质之一，尤其是互联网这种日新月异的行业，把学习当做工作的一大半也不为过。</p>
+<h2 id="自主学习"><a href="#自主学习" class="headerlink" title="自主学习"></a>自主学习</h2><p>最近发现身边的人并不是不想学习，只是每天都在纠结自己到底学什么好：简单的没挑战，复杂的看不懂；旧技术怕过时，新技术没方向……</p>
+<p>讲讲自己毕业后的经历，毕业之后去了个不大不小的公司，工作主要是做一些XX管理系统之类的东西，没什么挑战，也用不上什么技术，基本上前端用个extjs后面套个sql server就解决了。工作稳定了几年，业余时间除了wow没别的事情做，觉得这么闲下去不是办法，于是之后一年的时间里，用上班摸鱼和下班休息的时间学了这些东西：</p>
+<ul>
+<li>闲着无聊想做个小游戏，发现游戏相关的书大多是英文的，看不懂，一咬牙翻译了《Real-time rending 3rd》的前几章，刚开始前言都看不懂，只能一个词一个词的翻字典，一句话要琢磨几个钟头到底作者说的到底是什么意思。翻译了几百页英文书之后，发现自己看英文书没什么障碍了，于是开始每天用休息和摸鱼的时间看书。</li>
+<li>看完游戏引擎的书之后，把irrlicht引擎的代码看了一遍，然后自己山寨了一个3d渲染的场景管理器，还有个朴素的渲染引擎。</li>
+<li>给自己的游戏引擎写了个基于脚本语言的解释器，为此看了不少编译原理和虚拟机的书，了解了程序究竟是什么东西，这是我觉得收益很大的一件事情。</li>
+<li>看编译原理的书的时候发现操作系统的知识有些欠缺，又去看了<a href="http://codecloud.net/?s=linux" target="_blank" rel="external">linux内核</a>相关的书。之后买了个开发板天天修改内核玩，毕业以后又一次了解了内核的cpu调度、内存管理和文件系统，了解了应用是怎么跑在操作系统上，操作系统又是怎么运行在硬件上的，这也是收益很大的一件事情。</li>
+<li>看完操作系统又顺着看网络相关的书，之后把lighthttpd的代码看了一遍，用c写了个<a href="http://codecloud.net/?s=linux" target="_blank" rel="external">linux</a>下的http服务器，把几种网络编程模型挨个实现了一遍。</li>
+<li>实现<a href="http://codecloud.net/?s=http" target="_blank" rel="external">http</a>服务器的过程中觉得自己编码能力还是有欠缺，把代码大全翻了一遍，顺着又去看了设计模式的书，并且用自己的理解把每个模式用文字重新描述了一遍。</li>
+<li>中间还看了很多语言和框架相关的书，就不一一列举了。</li>
+</ul>
+<p>我把学习的方向分为三类：</p>
+<ol>
+<li>为了工作，满足当前工作所必备的知识</li>
+<li>为了提升，与当前工作相关的知识（深度）</li>
+<li>拓展视野，与当前工作无关的知识（广度）</li>
+</ol>
+<p>学习（1）之后只是个熟练工，2和3才是提升自己的途径，伴随着知识储备的提升，接触新事物时更容易找到相似的知识加以类比，加快理解，也更容易掌握本质。如果每天都在纠结“到底学什么”，那么只能说明还是学的太少了。（真正没什么可学的大牛们应该不会读到这里吧……）</p>
+<p>所以，如果觉着没什么东西可以学的时候，那么可以考虑一下学一下更有深度的知识（比如虚拟机或编译器），或者完全不同的知识（新的语言或当前比较火的方向），甚至完全不相干的知识（单纯练习英文阅读，学习ppt排版之类）吧。随着知识储备增加，自己的不足和未来的学习的方向也会更加明确起来。</p>
+<h2 id="向历史学习"><a href="#向历史学习" class="headerlink" title="向历史学习"></a>向历史学习</h2><p>以微博为例，在微博发展的过程中经历了不少波折，并逐渐衍生出了目前的系统架构。很多新人最喜欢问的问题便是“现在线上是怎么做的？”</p>
+<p>这个问题不错，但是还不够好。在程序员的世界里罕有能解决所有问题的“银弹”，当前的做法用不了多久也会被替换掉，如果想了解一件事情，那么就多关注一下“它是怎么变成今天这样的”吧。学会用发展的眼光看问题，了解一些经历过的经验教训，收获会比单纯学会一件什么事情多的多。</p>
+<p>那么，如何向历史学习？</p>
+<ul>
+<li>公司内部的资料库、wiki等大都会有旧时的资料，刚入职时大多不会太忙，这些资料库简直是挖不完的宝藏</li>
+<li>部门内部分享，比如我当初入职时经常去听“微博XXXX架构演化历程”之类的内部分享</li>
+<li>多问一下自己”它为什么不那么设计</li>
+<li>老员工忆苦思甜吹牛逼的时候多奉承几句</li>
+</ul>
+<h2 id="向他人学习"><a href="#向他人学习" class="headerlink" title="向他人学习"></a>向他人学习</h2><p>这里有两个极端，</p>
+<ul>
+<li>有的人喜欢自己闷头捣鼓，什么也不问，这必然是不利于自己提高的；</li>
+<li>也有人碰到问题就问，这也有问题，浪费他人时间不说，更关键的是说明这人向他人学习的思路错了，要学习他人的并不是具体某个知识（要学知识看书就能解决了），而是学习别人的思维方式。</li>
+</ul>
+<p>但是思维方式这种东西很难通过交流的方式学到，后来我发现有个很简单的学习方式：口头禅。举几个例子，大家体会一下：</p>
+<ul>
+<li>“这个其实是两个问题”</li>
+<li>“有没有更好的方案”</li>
+<li>“能不能举个例子”</li>
+<li>“能不能给个一句话总结”<br>除了口头禅，很多牛人都会有非常鲜明的思维方式和处事原则，如果有幸与业界的大牛共事，那么恭喜你，只要多交流、多观察、多思考，那么提升速度会提升好几个数量级。</li>
+</ul>
+<h1 id="多做有意义的事情"><a href="#多做有意义的事情" class="headerlink" title="多做有意义的事情"></a>多做有意义的事情</h1><p>有的人每天时间浪费在跟问题本身无关的事情上，比如我要设计架构的时候还要考虑架构图怎么画，写完代码还要反复部署测试好几轮才pass，查bug的时候把时间浪费在扫日志上。人的精力总是有限的，把时间浪费在这些事情上面，让自己提高的时间就变得少了。</p>
+<h2 id="练习，更多的练习"><a href="#练习，更多的练习" class="headerlink" title="练习，更多的练习"></a>练习，更多的练习</h2><p>这里有个误区：“做有意义的事情”不等于“只做自己没做过的事情”。</p>
+<p>对于程序员来说，写代码是基本功中的基本功，编码的规范、设计的权衡、甚至顺手的IDE快捷键都要靠平日的试错和积累，很难通过几本书或者几天培训领悟到。</p>
+<p>曾经目睹一些人写代码一年之后开始做一些小项目的设计，然后就迫不及待的把重心全都转移到设计甚至架构上，这种没有基础能力支撑做出的设计和架构最多只能算是高级意淫，大多没等落地就荒废了，意义不大。究其原因，大多是设计出来的东西“不好做”或者“不好用”，就像是只看过一遍课本就去参加高数考试，现实吗？（学霸们我错了……）</p>
+<p>举个例子，几年前在看设计模式的过程中，用qt做了个看漫画的应用，把能用的模式都试了一遍，当然有很多用的不合适的地方，正是这些不合适的地方让我对面向对象编程和设计模式的思考深入了很多，如何权衡灵活性和复杂性也有了新的认识。之后在设计很多系统的时候少走了很多弯路，既保证了时间点又保证了质量。如果当时指望着“用的时候再说”，大概已经被项目坑的不能自理了。</p>
+<h2 id="善用工具"><a href="#善用工具" class="headerlink" title="善用工具"></a>善用工具</h2><p>工具能解决的事情就用工具去解决，好的工具能节约大把的时间用在更有意义的事情上。</p>
+<p>工具的范畴很广，比如linux的各种命令、比如团队内部的各种系统、比如顺手的应用、甚至包括上下班骑的自行车。只要能节约时间、提高效率，那就值得一试。</p>
+<p>在这里我列举几个大幅度提升了我的效率的东西：</p>
+<ul>
+<li>双屏显示器</li>
+<li>顺手的键盘</li>
+<li>google（不是baidu！不是bing！）</li>
+<li>mac</li>
+<li>mac上的应用：idea、alfread、omnifocus、甚至synergy和istats menus之类跟开发本身关系不大的应用。</li>
+</ul>
+<p>我更倾向于把“使用工具”作为一种生活态度：是否希望让自己的生活专注于有意义的事情。如果你认同这个观点，那么想一想投入和回报比例，还是很可观的。</p>
+<p>（当然，为了不花钱而自己破解应用的大神也是极叼的……）</p>
+<h2 id="提高时间的利用率"><a href="#提高时间的利用率" class="headerlink" title="提高时间的利用率"></a>提高时间的利用率</h2><p>时间是所有期待提升自己的人最宝贵的资源，效率再高，没时间做也没意义。</p>
+<p>网上有个流传挺广的图：打扰程序员的成本。事实上我每天的工作时间非常碎片化，来到公司之后可能不断的接电话、被问问题、被拉去开会、回复邮件等等；也经常会有时间不够用或者没事做的困惑，这里分享一下心得：</p>
+<ul>
+<li>GTD可以整合很多碎片时间。除了把事做完之外，把上下文相关的事情集中在一起完成也很有帮助。比如把几件想去其他办公室做的事情整合成一趟完成。</li>
+<li>减少无意义的时间浪费，比如家住在公司边上可以每天节省几个小时的时间用来学习或者做别的事情。（但如果节省下来的时间用来刷微博，那就没有必要了。）</li>
+<li><ul>
+<li>另外一个很有趣的现象：一个软件的注册费就10几刀，贵些的几百刀，把日常用到的所有工具的费用全加起来都顶不上一个肾6贵，但是很多人还是坚持着没有破解不用的观念，为了几百块钱浪费了大把时间。</li>
+</ul>
+</li>
+<li>加班可以创造很多时间，并且能有效减少被打扰的几率，但是也会给身体和精神带来很大负担。因此加班做的事情必须能对个人进步产生足够多的收益。如果加班只是用来处理无意义的工作的话，那应该是日常工作出了什么问题。</li>
+<li>事情可以分成紧急重要、紧急不重要、重要不紧急、不重要不紧急四类，在todo列表里随时要有重要不紧急的事情。</li>
+</ul>
+<h1 id="学会思考"><a href="#学会思考" class="headerlink" title="学会思考"></a>学会思考</h1><h2 id="深究"><a href="#深究" class="headerlink" title="深究"></a>深究</h2><p>当有什么问题解决不了的时候，很多人会有畏难或者拖延的情绪，典型口头禅就是“就这么凑合着用吧”或者“先这样吧，以后有时间再研究”，说这些话的人大多并不是真的那么忙，甚至有人一边刷着微博一边跟我说没时间研究……(你tm在逗我？)</p>
+<p>要克服畏难情绪其实很简单，找一个具体的似懂非懂的问题，想尽办法把问题研究清楚，体会几次解决问题时的愉悦感，建立自信。</p>
+<p>大部分问题其实没有什么高深的科学原理，甚至只要翻几页书就解决了，但是遇到问题不深究，久而久之会形成自我暗示：这些问题是我懂的，那些是我不懂的，自己反而把自己进步的路给堵上了。</p>
+<p>说到如何深究，也有几条心得：</p>
+<ul>
+<li>遇事多想为什么，并且要反复问为什么。很多貌似理解了的问题过一阵再重新想想，往往会发现之前还有没考虑到的地方</li>
+<li>问题要有明确答案，哲学之类的就别纠结了</li>
+<li>查找资料时选权威的书籍或者网站，避免被误导</li>
+<li>找人讨论，或者直接拉小伙伴入伙，既可以互相交流，又可以互相监督</li>
+<li>分享你的成果</li>
+<li>不要所有事情全都深究，会给自己太多压力</li>
+</ul>
+<h2 id="多说，多写，多交流"><a href="#多说，多写，多交流" class="headerlink" title="多说，多写，多交流"></a>多说，多写，多交流</h2><p>平常工作中有一个感受，有交流和写作习惯的人思路会更清晰一些，能接触到的观点也会多一些。这方面其实属于我的弱项，大概总结几个观点。</p>
+<ul>
+<li>隔一段时间最好能书面形式总结一下最近的工作，比如说写个心得感悟，或者持续更新自己的简历</li>
+<li>写作的时候有两个难点：对要说明的事情做总结和抽象，形成观点统一、调理清晰的主线；从对方的视角考虑，把事情说明白，避免自言自语。</li>
+<li>找人讨论之前自己先要有个基本完整的思路，否则大部分的时间都要耗在解释原理之类的上网查反而更快的事情上。</li>
+<li>讨论之后要有一句话就能说明白的结论和描述清晰的时间点。</li>
+<li>有些人喜欢纠结于“这个不是我的问题，为什么要我处理”之类的事情。在我看来这是很好的机会。既能增长见识，又能展示水平，还能留个认真负责的好名声，何乐而不为呢。</li>
+</ul>
+<h1 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h1><p>最后分享一下关于我理解的程序员的自我修养，在我看来，可以总结为：负责任，重名声。</p>
+<p>负责任，说的更具体些：写的代码自己有没有测过、做的框架自己有没有用过、设计的架构自己有没有认真权衡过。</p>
+<p>重名声，说的直接些：没有测过的代码、没有用过的框架、没有权衡过的方案有没有脸交付给别人。</p>
+<p>与各位共勉。</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;&lt;a href=&quot;http://codecloud.net/4128.html&quot;&gt;原文链接&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;下面这篇优秀的文章来自Axb的自我修养，写得很直白、很真实，很有营养，分享在这里与君共勉！&lt;br&gt;口头禅&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;这其实是两个问题 （不要混淆概念）&lt;br&gt;还有没有更好的方案 （不要思维局限）&lt;br&gt;能不能举个例子 （理论实际相结合）&lt;br&gt;能不能给个一句话总结 （说明自己掌握了重点）&lt;/p&gt;
+&lt;/blockquote&gt;
+    
+    </summary>
+    
+      <category term="life" scheme="http://www.mmmmmcclxxvii.cn/categories/life/"/>
+    
+    
+      <category term="namaste" scheme="http://www.mmmmmcclxxvii.cn/tags/namaste/"/>
+    
+  </entry>
+  
 </feed>
