@@ -973,7 +973,7 @@
     <link href="http://www.mmmmmcclxxvii.cn/2016/10/04/encoding/"/>
     <id>http://www.mmmmmcclxxvii.cn/2016/10/04/encoding/</id>
     <published>2016-10-04T01:47:42.000Z</published>
-    <updated>2017-04-10T04:25:35.000Z</updated>
+    <updated>2017-04-10T05:39:30.000Z</updated>
     
     <content type="html"><![CDATA[<p>这篇很长！！！先看一下目录。</p>
 <p>更新：</p>
@@ -1062,7 +1062,7 @@
 <h3 id="实验2"><a href="#实验2" class="headerlink" title="实验2"></a>实验2</h3><p>如果是<code>print</code>一个unicode对象的话<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&gt;&gt;&gt; </span>cgt = cg.decode(<span class="string">'iso 8859-11'</span>)</div><div class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">print</span> cgt</div><div class="line">Traceback (most recent call last):</div><div class="line">  File <span class="string">"&lt;stdin&gt;"</span>, line <span class="number">1</span>, <span class="keyword">in</span> &lt;module&gt;</div><div class="line">  UnicodeEncodeError: <span class="string">'ascii'</span> codec can<span class="string">'t encode characters in position 0-3: ordinal not in range(128)</span></div></pre></td></tr></table></figure></p>
 <p>看着样子好像是要转化成字节流传送到终端再解码。那这样不会出现什么问题么？<br>因为<code>unicode</code>的code point和字符之间是一一对应的，我编码成<code>utf-8</code>也好，<code>gbk</code>也好，其他什么的也好，只要能编成，我只是用它做个过度，我只需确保解码的时候用的是一致的编码的就行了，现在这里的问题就是<code>ascii</code>码不能编成，因为格式不支持。这个<code>ascii</code>应该是<code>sys.getdefaultencoding()</code>的。<br>以下终端编码是<code>utf-8</code><br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&gt;&gt;&gt; </span>cgt = cg.decode(<span class="string">'iso 8859-11'</span>)</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>cgt.encode(<span class="string">'utf-8'</span>)</div><div class="line"><span class="string">'\xe0\xb8\xb6\xe0\xb8\xb0\xe0\xb8\xae\xe0\xb8\xa4'</span></div><div class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">print</span> <span class="string">'\xe0\xb8\xb6\xe0\xb8\xb0\xe0\xb8\xae\xe0\xb8\xa4'</span></div><div class="line">ะฮฤ</div></pre></td></tr></table></figure></p>
 <p>这个显示的不知道是不是一致的，看着又像又不像，少了一个点貌似，到底对不对？？</p>
-<h2 id="读取文件"><a href="#读取文件" class="headerlink" title="读取文件"></a>读取文件</h2><h3 id="读文件，文件的编码"><a href="#读文件，文件的编码" class="headerlink" title="读文件，文件的编码"></a>读文件，文件的编码</h3><p>现在我先建立一个<code>gbk.txt</code>的文件，在vim中<code>:set fileencoding=gbk</code>,有关vim中的编码<a href="Todo">看这里</a><br>输入内容<code>我叫陈烨</code>保存。<br>先看一下<code>utf-8</code>的编码长什么样，<code>gbk</code>编码长什么样<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&gt;&gt;&gt; </span>c = <span class="string">'我叫陈烨'</span></div><div class="line"><span class="meta">&gt;&gt;&gt; </span>c</div><div class="line"><span class="string">'\xe6\x88\x91\xe5\x8f\xab\xe9\x99\x88\xe7\x83\xa8'</span></div><div class="line"><span class="meta">&gt;&gt;&gt; </span>c.decode(<span class="string">'utf-8'</span>).encode(<span class="string">'gbk'</span>)</div><div class="line"><span class="string">'\xce\xd2\xbd\xd0\xb3\xc2\xec\xc7'</span></div></pre></td></tr></table></figure></p>
+<h2 id="读取文件"><a href="#读取文件" class="headerlink" title="读取文件"></a>读取文件</h2><h3 id="读文件，文件的编码"><a href="#读文件，文件的编码" class="headerlink" title="读文件，文件的编码"></a>读文件，文件的编码</h3><p>现在我先建立一个<code>gbk.txt</code>的文件，在vim中<code>:set fileencoding=gbk</code>,有关vim中的编码<a href="http://www.mmmmmcclxxvii.cn/2017/04/10/vim-encoding/">看这里</a><br>输入内容<code>我叫陈烨</code>保存。<br>先看一下<code>utf-8</code>的编码长什么样，<code>gbk</code>编码长什么样<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&gt;&gt;&gt; </span>c = <span class="string">'我叫陈烨'</span></div><div class="line"><span class="meta">&gt;&gt;&gt; </span>c</div><div class="line"><span class="string">'\xe6\x88\x91\xe5\x8f\xab\xe9\x99\x88\xe7\x83\xa8'</span></div><div class="line"><span class="meta">&gt;&gt;&gt; </span>c.decode(<span class="string">'utf-8'</span>).encode(<span class="string">'gbk'</span>)</div><div class="line"><span class="string">'\xce\xd2\xbd\xd0\xb3\xc2\xec\xc7'</span></div></pre></td></tr></table></figure></p>
 <p>然后读取文件<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&gt;&gt;&gt; </span>f = open(<span class="string">'gbk.txt'</span>)</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>fr = f.read()</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>fr</div><div class="line"><span class="string">'\xce\xd2\xbd\xd0\xb3\xc2\xec\xc7\n'</span></div></pre></td></tr></table></figure></p>
 <p>可以看出，我保存的是<code>gbk</code>编码格式，现在读入的也是<code>gbk</code>编码的格式，因为计算机他操作的就在“第三层”（这里先忽略第四层）所以，<strong>如果我不知道原来文件的编码是什么，直接操作文件内容也是没有意义的</strong>，只是现在大部分都是<code>utf-8</code>，一切都恰好行的通，等出现乱码的时候就应该知道是编码出现问题了。</p>
 <h3 id="读文件，文件内容的操作"><a href="#读文件，文件内容的操作" class="headerlink" title="读文件，文件内容的操作"></a>读文件，文件内容的操作</h3><p>现在我建立一个文件叫做wr.TARIN  , 这是里面的内容是<br><code>你好 中国 Hello China 1 2 3</code><br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">import</span> sys</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>sys.getfilesystemencoding()</div><div class="line"><span class="string">'utf-8'</span></div><div class="line"><span class="meta">&gt;&gt;&gt; </span>f = open(<span class="string">'wr.TRAIN'</span>)</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>content=f.readline()</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>content</div><div class="line"><span class="string">'\xe4\xbd\xa0\xe5\xa5\xbd \xe4\xb8\xad\xe5\x9b\xbd Hello China 1 2 3\n'</span></div></pre></td></tr></table></figure></p>
@@ -1136,13 +1136,50 @@
       <category term="砍树人" scheme="http://www.mmmmmcclxxvii.cn/categories/%E7%A0%8D%E6%A0%91%E4%BA%BA/"/>
     
     
+      <category term="unicode" scheme="http://www.mmmmmcclxxvii.cn/tags/unicode/"/>
+    
       <category term="python" scheme="http://www.mmmmmcclxxvii.cn/tags/python/"/>
     
       <category term="encode" scheme="http://www.mmmmmcclxxvii.cn/tags/encode/"/>
     
+      <category term="utf-8" scheme="http://www.mmmmmcclxxvii.cn/tags/utf-8/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>how character display on screen</title>
+    <link href="http://www.mmmmmcclxxvii.cn/2015/11/12/how-character-display-on-screen/"/>
+    <id>http://www.mmmmmcclxxvii.cn/2015/11/12/how-character-display-on-screen/</id>
+    <published>2015-11-12T05:40:00.000Z</published>
+    <updated>2017-04-10T05:53:13.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>我知道ascii码2c 是“，”逗号，但是计算机是怎么知道它是“逗号”的？<br><a id="more"></a></p>
+<p><strong>简答：有时候不是会安装字体font么，里面就有对应的字型。要显卡渲染形成的。</strong><br>大体过程是：字符编码（Unicode）→字体的形索引（Glyph ID）→字形轮廓→点阵图字形</p>
+<h1 id="计算机是如何显示文字的呢？"><a href="#计算机是如何显示文字的呢？" class="headerlink" title="计算机是如何显示文字的呢？"></a>计算机是如何显示文字的呢？</h1><p>计算机要对文字进行存储后就需要显示出来，而我们的液晶屏都是一个个的像素点组成的，这就必须要对文字进行渲染绘制，发送到显卡中进行栅格化和显示等操作。<br>Dos下最简单，利用主板BIOS就能对ascii码进行点阵化输出。</p>
+<p>字符显示器，显示字符的方法以点阵为基础，点阵是指由m*n个点组成的阵列，点阵的多少取决于显示字符的质量和字符窗口的大小。 字符窗口是指每个字符在屏幕是那个所占的点数。它包括字符显示点阵和字符间隔。</p>
+<p>将点阵存入由rom构成的字符发生其中，在CRT进行光栅扫描的过程中，从字符发生器中一次读出某个字符的点阵，按照点阵中0和1的代码不同控制电子束的开或关，从而在屏幕上显示出字符，对应每个字符窗口，所需显示字符的ACSII代码被存放在视频存储器VRAM中，以备刷新</p>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><blockquote>
+<p>假如说这个程序是 xterm ，它会通过 X core font API ，将这个字符直接送给 Xorg ，由 Xorg 来完成字体渲染（当然现在 xterm 也支持 libXft 了，不过先不管这个）。Xorg 拿到应用程序送来的请求之后，会在字体中检索每个字对应的字形，然后渲染出来。这个检索过程中用到的索引，就是我们之前给字符编上的号。如果要指定字体，需要向Xorg提供一个长得像这样：“-adobe-times-medium-r-normal–12-120-75-75-p-64-iso8859-1” 的字符串来指定字体。</p>
+<p>作者：乌鸦<br>链接：<a href="https://www.zhihu.com/question/24340504/answer/28902204" target="_blank" rel="external">https://www.zhihu.com/question/24340504/answer/28902204</a><br>来源：知乎<br>著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。</p>
+<p>在UNIX终端上和DOS里 ， 字符是终端或显卡（使用内置字库）绘制的，不但跟unicode和freetype什么的没有任何关系，而且跟操作系统都没有关系。<br>打印机也是如此：当你把一个文本文件直接发送给打印机，打印机使用内置的字库绘制每个文字和符号<br>著作权归作者所有。<br>商业转载请联系作者获得授权，非商业转载请注明出处。<br>作者：姜维<br>链接：<a href="http://www.zhihu.com/question/24340504/answer/27969692" target="_blank" rel="external">http://www.zhihu.com/question/24340504/answer/27969692</a><br>来源：知乎</p>
+<p>介绍到这里，大家应该对整个字体的绘制过程有个整体的认识了，首先是经过字符编解码，将硬盘中存储的有对应编码的文本文件进行加载，例如Java的文件IO，变成内存中的字符串对象，也就是符合本语言字符串存储特性的数据，（当然如果你愿意，也可以当做二进制读入，然后再手段转换编码，也是可以的），绘制时则首先调用对应的CodePage进行编码的索引查找，找到对应的字体字形索引，然后根据字形索引获取到字库中的数据，根据系统提供的绘制曲线绘制样条线的方法进行图形渲染，这样就能得到显示器上的图像了。而更高级的就是对字体进行反走样，锐化，等更为细节的操作了。<br>著作权归作者所有。<br>商业转载请联系作者获得授权，非商业转载请注明出处。<br>作者：孙笑凡<br>链接：<a href="http://www.zhihu.com/question/24340504/answer/29927340" target="_blank" rel="external">http://www.zhihu.com/question/24340504/answer/29927340</a><br>来源：知乎</p>
+</blockquote>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;我知道ascii码2c 是“，”逗号，但是计算机是怎么知道它是“逗号”的？&lt;br&gt;
+    
+    </summary>
+    
+      <category term="砍树人" scheme="http://www.mmmmmcclxxvii.cn/categories/%E7%A0%8D%E6%A0%91%E4%BA%BA/"/>
+    
+    
       <category term="unicode" scheme="http://www.mmmmmcclxxvii.cn/tags/unicode/"/>
     
-      <category term="utf-8" scheme="http://www.mmmmmcclxxvii.cn/tags/utf-8/"/>
+      <category term="glyph" scheme="http://www.mmmmmcclxxvii.cn/tags/glyph/"/>
+    
+      <category term="computer" scheme="http://www.mmmmmcclxxvii.cn/tags/computer/"/>
     
   </entry>
   

@@ -82,7 +82,7 @@
 <link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="python,encode,unicode,utf-8," />
+  <meta name="keywords" content="unicode,python,encode,utf-8," />
 
 
 
@@ -115,7 +115,7 @@ python脚本文件的编码
 python脚本文件的编码
 添加vim编码的链接">
 <meta property="og:image" content="http://onexs3cnv.bkt.clouddn.com/Screen%20Shot%202017-04-09%20at%209.46.29%20AM.png">
-<meta property="og:updated_time" content="2017-04-10T04:25:35.000Z">
+<meta property="og:updated_time" content="2017-04-10T05:39:30.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="编码总结">
 <meta name="twitter:description" content="这篇很长！！！先看一下目录。
@@ -391,7 +391,7 @@ python脚本文件的编码
               
                 <span class="post-meta-item-text">Post modified</span>
               
-              <time title="Post modified" itemprop="dateModified" datetime="2017-04-10T12:25:35+08:00">
+              <time title="Post modified" itemprop="dateModified" datetime="2017-04-10T13:39:30+08:00">
                 2017-04-10
               </time>
             
@@ -469,7 +469,7 @@ python脚本文件的编码
           
             <div class="post-gallery-row">
               <a class="post-gallery-img fancybox"
-                 href="http://onexs3cnv.bkt.clouddn.com/Screen%20Shot%202017-04-09%20at%209.46.29%20AM.png" rel="gallery_cj1boscb400094r76bof9f8w3"
+                 href="http://onexs3cnv.bkt.clouddn.com/Screen%20Shot%202017-04-09%20at%209.46.29%20AM.png" rel="gallery_cj1bpckr3000cd5765hit5v9w"
                  itemscope itemtype="http://schema.org/ImageObject" itemprop="url">
                 <img src="http://onexs3cnv.bkt.clouddn.com/Screen%20Shot%202017-04-09%20at%209.46.29%20AM.png" itemprop="contentUrl"/>
               </a>
@@ -569,7 +569,7 @@ python脚本文件的编码
 <h3 id="实验2"><a href="#实验2" class="headerlink" title="实验2"></a>实验2</h3><p>如果是<code>print</code>一个unicode对象的话<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&gt;&gt;&gt; </span>cgt = cg.decode(<span class="string">'iso 8859-11'</span>)</div><div class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">print</span> cgt</div><div class="line">Traceback (most recent call last):</div><div class="line">  File <span class="string">"&lt;stdin&gt;"</span>, line <span class="number">1</span>, <span class="keyword">in</span> &lt;module&gt;</div><div class="line">  UnicodeEncodeError: <span class="string">'ascii'</span> codec can<span class="string">'t encode characters in position 0-3: ordinal not in range(128)</span></div></pre></td></tr></table></figure></p>
 <p>看着样子好像是要转化成字节流传送到终端再解码。那这样不会出现什么问题么？<br>因为<code>unicode</code>的code point和字符之间是一一对应的，我编码成<code>utf-8</code>也好，<code>gbk</code>也好，其他什么的也好，只要能编成，我只是用它做个过度，我只需确保解码的时候用的是一致的编码的就行了，现在这里的问题就是<code>ascii</code>码不能编成，因为格式不支持。这个<code>ascii</code>应该是<code>sys.getdefaultencoding()</code>的。<br>以下终端编码是<code>utf-8</code><br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&gt;&gt;&gt; </span>cgt = cg.decode(<span class="string">'iso 8859-11'</span>)</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>cgt.encode(<span class="string">'utf-8'</span>)</div><div class="line"><span class="string">'\xe0\xb8\xb6\xe0\xb8\xb0\xe0\xb8\xae\xe0\xb8\xa4'</span></div><div class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">print</span> <span class="string">'\xe0\xb8\xb6\xe0\xb8\xb0\xe0\xb8\xae\xe0\xb8\xa4'</span></div><div class="line">ะฮฤ</div></pre></td></tr></table></figure></p>
 <p>这个显示的不知道是不是一致的，看着又像又不像，少了一个点貌似，到底对不对？？</p>
-<h2 id="读取文件"><a href="#读取文件" class="headerlink" title="读取文件"></a>读取文件</h2><h3 id="读文件，文件的编码"><a href="#读文件，文件的编码" class="headerlink" title="读文件，文件的编码"></a>读文件，文件的编码</h3><p>现在我先建立一个<code>gbk.txt</code>的文件，在vim中<code>:set fileencoding=gbk</code>,有关vim中的编码<a href="Todo">看这里</a><br>输入内容<code>我叫陈烨</code>保存。<br>先看一下<code>utf-8</code>的编码长什么样，<code>gbk</code>编码长什么样<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&gt;&gt;&gt; </span>c = <span class="string">'我叫陈烨'</span></div><div class="line"><span class="meta">&gt;&gt;&gt; </span>c</div><div class="line"><span class="string">'\xe6\x88\x91\xe5\x8f\xab\xe9\x99\x88\xe7\x83\xa8'</span></div><div class="line"><span class="meta">&gt;&gt;&gt; </span>c.decode(<span class="string">'utf-8'</span>).encode(<span class="string">'gbk'</span>)</div><div class="line"><span class="string">'\xce\xd2\xbd\xd0\xb3\xc2\xec\xc7'</span></div></pre></td></tr></table></figure></p>
+<h2 id="读取文件"><a href="#读取文件" class="headerlink" title="读取文件"></a>读取文件</h2><h3 id="读文件，文件的编码"><a href="#读文件，文件的编码" class="headerlink" title="读文件，文件的编码"></a>读文件，文件的编码</h3><p>现在我先建立一个<code>gbk.txt</code>的文件，在vim中<code>:set fileencoding=gbk</code>,有关vim中的编码<a href="http://www.mmmmmcclxxvii.cn/2017/04/10/vim-encoding/">看这里</a><br>输入内容<code>我叫陈烨</code>保存。<br>先看一下<code>utf-8</code>的编码长什么样，<code>gbk</code>编码长什么样<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&gt;&gt;&gt; </span>c = <span class="string">'我叫陈烨'</span></div><div class="line"><span class="meta">&gt;&gt;&gt; </span>c</div><div class="line"><span class="string">'\xe6\x88\x91\xe5\x8f\xab\xe9\x99\x88\xe7\x83\xa8'</span></div><div class="line"><span class="meta">&gt;&gt;&gt; </span>c.decode(<span class="string">'utf-8'</span>).encode(<span class="string">'gbk'</span>)</div><div class="line"><span class="string">'\xce\xd2\xbd\xd0\xb3\xc2\xec\xc7'</span></div></pre></td></tr></table></figure></p>
 <p>然后读取文件<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&gt;&gt;&gt; </span>f = open(<span class="string">'gbk.txt'</span>)</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>fr = f.read()</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>fr</div><div class="line"><span class="string">'\xce\xd2\xbd\xd0\xb3\xc2\xec\xc7\n'</span></div></pre></td></tr></table></figure></p>
 <p>可以看出，我保存的是<code>gbk</code>编码格式，现在读入的也是<code>gbk</code>编码的格式，因为计算机他操作的就在“第三层”（这里先忽略第四层）所以，<strong>如果我不知道原来文件的编码是什么，直接操作文件内容也是没有意义的</strong>，只是现在大部分都是<code>utf-8</code>，一切都恰好行的通，等出现乱码的时候就应该知道是编码出现问题了。</p>
 <h3 id="读文件，文件内容的操作"><a href="#读文件，文件内容的操作" class="headerlink" title="读文件，文件内容的操作"></a>读文件，文件内容的操作</h3><p>现在我建立一个文件叫做wr.TARIN  , 这是里面的内容是<br><code>你好 中国 Hello China 1 2 3</code><br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">import</span> sys</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>sys.getfilesystemencoding()</div><div class="line"><span class="string">'utf-8'</span></div><div class="line"><span class="meta">&gt;&gt;&gt; </span>f = open(<span class="string">'wr.TRAIN'</span>)</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>content=f.readline()</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>content</div><div class="line"><span class="string">'\xe4\xbd\xa0\xe5\xa5\xbd \xe4\xb8\xad\xe5\x9b\xbd Hello China 1 2 3\n'</span></div></pre></td></tr></table></figure></p>
@@ -687,11 +687,11 @@ python脚本文件的编码
       
         <div class="post-tags">
           
+            <a href="/tags/unicode/" rel="tag"><i class="fa fa-tag"></i> unicode</a>
+          
             <a href="/tags/python/" rel="tag"><i class="fa fa-tag"></i> python</a>
           
             <a href="/tags/encode/" rel="tag"><i class="fa fa-tag"></i> encode</a>
-          
-            <a href="/tags/unicode/" rel="tag"><i class="fa fa-tag"></i> unicode</a>
           
             <a href="/tags/utf-8/" rel="tag"><i class="fa fa-tag"></i> utf-8</a>
           
@@ -706,8 +706,8 @@ python脚本文件的编码
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2015/04/07/rookie-to-master/" rel="next" title="【转】如何从菜鸟程序员成长为高手">
-                <i class="fa fa-chevron-left"></i> 【转】如何从菜鸟程序员成长为高手
+              <a href="/2015/11/12/how-character-display-on-screen/" rel="next" title="how character display on screen">
+                <i class="fa fa-chevron-left"></i> how character display on screen
               </a>
             
           </div>
@@ -815,7 +815,7 @@ python脚本文件的编码
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">18</span>
+                <span class="site-state-item-count">19</span>
                 <span class="site-state-item-name">posts</span>
               </a>
             </div>
@@ -837,7 +837,7 @@ python脚本文件的编码
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">22</span>
+                <span class="site-state-item-count">24</span>
                 <span class="site-state-item-name">tags</span>
               </a>
             </div>
