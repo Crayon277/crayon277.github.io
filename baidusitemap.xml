@@ -4,42 +4,18 @@
 
     
   <url>
-    <loc>http://www.mmmmmcclxxvii.cn/2015/11/12/how-character-display-on-screen/</loc>
-    <lastmod>2017-04-10T05:53:13.000Z</lastmod>
-    <data>
-        <display>
-        <title>how character display on screen</title>
-        <pubTime>2015-11-12T05:40:00.000Z</pubTime>
-        
-        <tag>unicode</tag>
-         
-        <tag>glyph</tag>
-         
-        <tag>computer</tag>
-         
-         
-           
-             
-              <breadCrumb title="砍树人" url="http://www.mmmmmcclxxvii.cn/categories/%E7%A0%8D%E6%A0%91%E4%BA%BA/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
     <loc>http://www.mmmmmcclxxvii.cn/2016/10/04/encoding/</loc>
-    <lastmod>2017-04-10T05:39:30.000Z</lastmod>
+    <lastmod>2017-04-10T05:54:39.000Z</lastmod>
     <data>
         <display>
         <title>编码总结</title>
         <pubTime>2016-10-04T01:47:42.000Z</pubTime>
         
-        <tag>unicode</tag>
+        <tag>encode</tag>
          
         <tag>python</tag>
          
-        <tag>encode</tag>
+        <tag>unicode</tag>
          
         <tag>utf-8</tag>
          
@@ -415,6 +391,30 @@
            
              
               <breadCrumb title="life" url="http://www.mmmmmcclxxvii.cn/categories/life/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.mmmmmcclxxvii.cn/2015/11/12/how-character-display-on-screen/</loc>
+    <lastmod>2015-11-12T05:40:00.000Z</lastmod>
+    <data>
+        <display>
+        <title>how character display on screen</title>
+        <pubTime>2015-11-12T05:40:00.000Z</pubTime>
+        
+        <tag>unicode</tag>
+         
+        <tag>glyph</tag>
+         
+        <tag>computer</tag>
+         
+         
+           
+             
+              <breadCrumb title="砍树人" url="http://www.mmmmmcclxxvii.cn/categories/%E7%A0%8D%E6%A0%91%E4%BA%BA/"/>
           
         </display>
     </data>

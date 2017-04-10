@@ -973,7 +973,7 @@
     <link href="http://www.mmmmmcclxxvii.cn/2016/10/04/encoding/"/>
     <id>http://www.mmmmmcclxxvii.cn/2016/10/04/encoding/</id>
     <published>2016-10-04T01:47:42.000Z</published>
-    <updated>2017-04-10T05:39:30.000Z</updated>
+    <updated>2017-04-10T05:54:39.000Z</updated>
     
     <content type="html"><![CDATA[<p>这篇很长！！！先看一下目录。</p>
 <p>更新：</p>
@@ -1051,7 +1051,7 @@
 </ul>
 <p>各自的用处都不一样<br><img src="http://onexs3cnv.bkt.clouddn.com/python%E7%BC%96%E7%A0%81.png" alt="encoding in python"></p>
 <h3 id="w＝-39-中文-39-是需要编码一下的-用utf-8那这样-w-39-xe9-39-也要先utf-8编码？"><a href="#w＝-39-中文-39-是需要编码一下的-用utf-8那这样-w-39-xe9-39-也要先utf-8编码？" class="headerlink" title="-[] w＝&#39;中文&#39; 是需要编码一下的 用utf-8那这样 w = &#39;\xe9&#39;也要先utf-8编码？"></a>-[] <code>w＝&#39;中文&#39;</code> 是需要编码一下的 用<code>utf-8</code>那这样 <code>w = &#39;\xe9&#39;</code>也要先<code>utf-8</code>编码？</h3><p>这个我还不清楚，因为不可能一个不编码，一个编码，应该是统一的形式，但是对<code>\xe9</code>进行<code>utf-8</code>的编码是不行的因为对于但字节的，<code>utf-8</code>是高位是<code>0</code>开头的，所以这个不可能用<code>utf-8</code>编码成功，所以我猜测是因为<code>\x</code>,有这个，直接以字节码的形式传入进来了不用编码了。</p>
-<h2 id="print"><a href="#print" class="headerlink" title="print"></a>print</h2><p>当做<code>print c</code>的时候，会把<code>c</code>的byte string， 也就是字节流传到终端，终端接受到这一组字节流要用终端的编码来解码这个字节流（毕竟不是字符集，传送过来的只是编码方式，所以找字符对应关系还得还原），这样就又回到了<code>unicode</code>的形式，然后接下来就是<a href="Todo">字符怎么显示到计算机屏幕上的问题了</a></p>
+<h2 id="print"><a href="#print" class="headerlink" title="print"></a>print</h2><p>当做<code>print c</code>的时候，会把<code>c</code>的byte string， 也就是字节流传到终端，终端接受到这一组字节流要用终端的编码来解码这个字节流（毕竟不是字符集，传送过来的只是编码方式，所以找字符对应关系还得还原），这样就又回到了<code>unicode</code>的形式，然后接下来就是<a href="http://www.mmmmmcclxxvii.cn/2015/11/12/how-character-display-on-screen/">字符怎么显示到计算机屏幕上的问题了</a></p>
 <h3 id="实验"><a href="#实验" class="headerlink" title="实验"></a>实验</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&gt;&gt;&gt; </span>c = <span class="string">'中文'</span></div><div class="line"><span class="meta">&gt;&gt;&gt; </span>c.decode(<span class="string">'utf-8'</span>)</div><div class="line"><span class="string">u'\u4e2d\u6587'</span></div><div class="line"><span class="meta">&gt;&gt;&gt; </span>c.decode(<span class="string">'utf-8'</span>).encode(<span class="string">'gb2312'</span>)</div><div class="line"><span class="string">'\xd6\xd0\xce\xc4'</span></div></pre></td></tr></table></figure>
 <p>我在iTerm下先把Terminal的Character Encoding改为<code>GB 2312</code><br><img src="http://onexs3cnv.bkt.clouddn.com/Screen%20Shot%202017-04-10%20at%208.03.38%20AM.png" alt="change terminal encoding"><br>可以看到结果是被正确打印出来<br><img src="http://onexs3cnv.bkt.clouddn.com/Screen%20Shot%202017-04-10%20at%208.05.13%20AM.png" alt="correct result"><br>但当我把编码随便改成另外国家的<br><img src="http://onexs3cnv.bkt.clouddn.com/Screen%20Shot%202017-04-10%20at%208.08.30%20AM.png" alt="other encoding"><br>然后再打印的时候就不对了<br><img src="http://onexs3cnv.bkt.clouddn.com/Screen%20Shot%202017-04-10%20at%208.09.04%20AM.png" alt="wrong result"><br>但是！ <code>cg</code>里面保存是一样的</p>
 <h2 id=""><a href="#" class="headerlink" title=""></a><img src="http://onexs3cnv.bkt.clouddn.com/Screen%20Shot%202017-04-10%20at%208.10.14%20AM.png" alt="cg"></h2><p>这也就是说当你终端的编码和在python中处理字符的编码不一致的时候，打印结果可能出现问题。之所以是可能，因为如果都是英文的话，因为都兼容ascii码,所以会打印出你想要看到的样子。</p>
@@ -1136,11 +1136,11 @@
       <category term="砍树人" scheme="http://www.mmmmmcclxxvii.cn/categories/%E7%A0%8D%E6%A0%91%E4%BA%BA/"/>
     
     
-      <category term="unicode" scheme="http://www.mmmmmcclxxvii.cn/tags/unicode/"/>
+      <category term="encode" scheme="http://www.mmmmmcclxxvii.cn/tags/encode/"/>
     
       <category term="python" scheme="http://www.mmmmmcclxxvii.cn/tags/python/"/>
     
-      <category term="encode" scheme="http://www.mmmmmcclxxvii.cn/tags/encode/"/>
+      <category term="unicode" scheme="http://www.mmmmmcclxxvii.cn/tags/unicode/"/>
     
       <category term="utf-8" scheme="http://www.mmmmmcclxxvii.cn/tags/utf-8/"/>
     
@@ -1151,7 +1151,7 @@
     <link href="http://www.mmmmmcclxxvii.cn/2015/11/12/how-character-display-on-screen/"/>
     <id>http://www.mmmmmcclxxvii.cn/2015/11/12/how-character-display-on-screen/</id>
     <published>2015-11-12T05:40:00.000Z</published>
-    <updated>2017-04-10T05:53:13.000Z</updated>
+    <updated>2015-11-12T05:40:00.000Z</updated>
     
     <content type="html"><![CDATA[<p>我知道ascii码2c 是“，”逗号，但是计算机是怎么知道它是“逗号”的？<br><a id="more"></a></p>
 <p><strong>简答：有时候不是会安装字体font么，里面就有对应的字型。要显卡渲染形成的。</strong><br>大体过程是：字符编码（Unicode）→字体的形索引（Glyph ID）→字形轮廓→点阵图字形</p>
