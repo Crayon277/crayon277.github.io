@@ -82,7 +82,7 @@
 <link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="python," />
+  <meta name="keywords" content="R,R-piece,BFS,DFS,algorithm," />
 
 
 
@@ -100,22 +100,21 @@
 
 
 
-<meta name="description" content="阅读 Facts and myths about Python names and values 做的摘记内容不是很深，只是这里面提到了一些需要注意的点。最主要还是name和value的区别">
+<meta name="description" content="求上图的最大连通子图，其实就是图的遍历，图的遍历有深度优先和广度优先图有很多种对应的存储结构，在R里面最简单的就是邻接矩阵了。
+-update-用深度优先搜索做">
 <meta property="og:type" content="article">
-<meta property="og:title" content="python name and values">
-<meta property="og:url" content="http://www.mmmmmcclxxvii.cn/2017/03/29/python-name-and-values/index.html">
+<meta property="og:title" content="用R来找最大连通子图">
+<meta property="og:url" content="http://www.mmmmmcclxxvii.cn/2017/03/25/r-bfs/index.html">
 <meta property="og:site_name" content="MMMMMCCLXXVII">
-<meta property="og:description" content="阅读 Facts and myths about Python names and values 做的摘记内容不是很深，只是这里面提到了一些需要注意的点。最主要还是name和value的区别">
-<meta property="og:image" content="http://onexs3cnv.bkt.clouddn.com/list_mutate_value.png">
-<meta property="og:image" content="http://onexs3cnv.bkt.clouddn.com/Screen%20Shot%202017-03-29%20at%2010.23.49%20PM.png">
-<meta property="og:image" content="http://onexs3cnv.bkt.clouddn.com/Screen%20Shot%202017-03-29%20at%2010.23.55%20PM.png">
-<meta property="og:image" content="http://onexs3cnv.bkt.clouddn.com/Screen%20Shot%202017-03-29%20at%2010.35.39%20PM.png">
-<meta property="og:image" content="http://onexs3cnv.bkt.clouddn.com/Screen%20Shot%202017-03-29%20at%2010.35.45%20PM.png">
-<meta property="og:updated_time" content="2017-03-29T14:50:38.000Z">
+<meta property="og:description" content="求上图的最大连通子图，其实就是图的遍历，图的遍历有深度优先和广度优先图有很多种对应的存储结构，在R里面最简单的就是邻接矩阵了。
+-update-用深度优先搜索做">
+<meta property="og:image" content="http://onexs3cnv.bkt.clouddn.com/Screen%20Shot%202017-04-11%20at%208.41.36%20AM.png">
+<meta property="og:updated_time" content="2017-04-11T10:01:09.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="python name and values">
-<meta name="twitter:description" content="阅读 Facts and myths about Python names and values 做的摘记内容不是很深，只是这里面提到了一些需要注意的点。最主要还是name和value的区别">
-<meta name="twitter:image" content="http://onexs3cnv.bkt.clouddn.com/list_mutate_value.png">
+<meta name="twitter:title" content="用R来找最大连通子图">
+<meta name="twitter:description" content="求上图的最大连通子图，其实就是图的遍历，图的遍历有深度优先和广度优先图有很多种对应的存储结构，在R里面最简单的就是邻接矩阵了。
+-update-用深度优先搜索做">
+<meta name="twitter:image" content="http://onexs3cnv.bkt.clouddn.com/Screen%20Shot%202017-04-11%20at%208.41.36%20AM.png">
 
 
 
@@ -143,13 +142,13 @@
 
 
 
-  <link rel="canonical" href="http://www.mmmmmcclxxvii.cn/2017/03/29/python-name-and-values/"/>
+  <link rel="canonical" href="http://www.mmmmmcclxxvii.cn/2017/03/25/r-bfs/"/>
 
 
 
 
 
-  <title> python name and values | MMMMMCCLXXVII </title>
+  <title> 用R来找最大连通子图 | MMMMMCCLXXVII </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="en">
@@ -331,7 +330,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://www.mmmmmcclxxvii.cn/2017/03/29/python-name-and-values/">
+    <link itemprop="mainEntityOfPage" href="http://www.mmmmmcclxxvii.cn/2017/03/25/r-bfs/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Crayon Chaney">
@@ -352,7 +351,7 @@
             
             
               
-                python name and values
+                用R来找最大连通子图
               
             
           </h1>
@@ -367,8 +366,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-03-29T21:54:00+08:00">
-                2017-03-29
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-03-25T08:35:37+08:00">
+                2017-03-25
               </time>
             
 
@@ -383,8 +382,8 @@
               
                 <span class="post-meta-item-text">Post modified</span>
               
-              <time title="Post modified" itemprop="dateModified" datetime="2017-03-29T22:50:38+08:00">
-                2017-03-29
+              <time title="Post modified" itemprop="dateModified" datetime="2017-04-11T18:01:09+08:00">
+                2017-04-11
               </time>
             
           </span>
@@ -402,8 +401,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/python/" itemprop="url" rel="index">
-                    <span itemprop="name">python</span>
+                  <a href="/categories/R/" itemprop="url" rel="index">
+                    <span itemprop="name">R</span>
                   </a>
                 </span>
 
@@ -420,7 +419,7 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a class="cloud-tie-join-count" href="/2017/03/29/python-name-and-values/#comments" itemprop="discussionUrl">
+                <a class="cloud-tie-join-count" href="/2017/03/25/r-bfs/#comments" itemprop="discussionUrl">
                   <span class="post-comments-count join-count" itemprop="commentCount"></span>
                 </a>
               </span>
@@ -429,7 +428,7 @@
 
           
           
-             <span id="/2017/03/29/python-name-and-values/" class="leancloud_visitors" data-flag-title="python name and values">
+             <span id="/2017/03/25/r-bfs/" class="leancloud_visitors" data-flag-title="用R来找最大连通子图">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -456,57 +455,72 @@
 
       
       
+        <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
+          
+          
+            <div class="post-gallery-row">
+              <a class="post-gallery-img fancybox"
+                 href="http://onexs3cnv.bkt.clouddn.com/Screen%20Shot%202017-04-11%20at%208.41.36%20AM.png" rel="gallery_cj1ddn9kv000lln76du0wi6e8"
+                 itemscope itemtype="http://schema.org/ImageObject" itemprop="url">
+                <img src="http://onexs3cnv.bkt.clouddn.com/Screen%20Shot%202017-04-11%20at%208.41.36%20AM.png" itemprop="contentUrl"/>
+              </a>
+            
+          
+
+          
+          </div>
+        </div>
+      
 
       
-        <p>阅读 <a href="https://nedbatchelder.com/text/names.html" target="_blank" rel="external">Facts and myths about Python names and values</a> 做的摘记<br>内容不是很深，只是这里面提到了一些需要注意的点。最主要还是<code>name</code>和<code>value</code>的区别<br><a id="more"></a></p>
-<h1 id="Fact-Names-have-no-type-values-have-no-scope"><a href="#Fact-Names-have-no-type-values-have-no-scope" class="headerlink" title="Fact: Names have no type, values have no scope."></a>Fact: Names have no type, values have no scope.</h1><blockquote>
-<p>Just as names have no type, values have no scope. When we say that a function has a local variable, we mean that the name is scoped to the function: you can’t use the name outside the function, and when the function returns, the name is destroyed. But as we’ve seen, if the name’s value has other references, it will live on beyond the function call. It is a local name, not a local value.</p>
-</blockquote>
-<p>翻译：</p>
-<p>就跟名字没有类型一样，数值是没有作用范围的。当我们说一个函数有局部变量的时候，我们只是说的是名字只在函数作用域中起作用而已，你不能在函数外使用这个名字，当函数返回的时候，这个名字也就摧毁了。但是，如果这个名字指向的数值还有其他引用，它就会继续生存下去，不管这个函数了。局部变量，而不是局部数值。</p>
-<h1 id="Fact-Values-can’t-be-deleted-only-names-can"><a href="#Fact-Values-can’t-be-deleted-only-names-can" class="headerlink" title="Fact: Values can’t be deleted, only names can."></a>Fact: Values can’t be deleted, only names can.</h1><blockquote>
-<p>Python’s memory management is so central to its behavior, not only do you not have to delete values, but there is no way to delete values. You may have seen the del statement:</p>
-</blockquote>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">nums = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]</div><div class="line"><span class="keyword">del</span> nums</div></pre></td></tr></table></figure>
+        <p>求上图的最大连通子图，其实就是图的遍历，图的遍历有深度优先和广度优先<br>图有很多种对应的存储结构，在R里面最简单的就是邻接矩阵了。</p>
+<p>-update-<br>用深度优先搜索做<br><a id="more"></a></p>
+<h1 id="构造邻接矩阵"><a href="#构造邻接矩阵" class="headerlink" title="构造邻接矩阵"></a>构造邻接矩阵</h1><figure class="highlight r"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">m &lt;- matrix(<span class="number">0</span>,<span class="number">5</span>,<span class="number">5</span>)</div><div class="line">m[<span class="number">1</span>,<span class="number">2</span>] &lt;- <span class="number">1</span></div><div class="line">m[<span class="number">1</span>,<span class="number">3</span>] &lt;- <span class="number">1</span></div><div class="line">m[<span class="number">2</span>,<span class="number">3</span>] &lt;- <span class="number">1</span></div><div class="line">m[<span class="number">4</span>,<span class="number">5</span>] &lt;- <span class="number">1</span></div><div class="line"></div><div class="line">m &lt;- m + t(m)</div></pre></td></tr></table></figure>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">&gt; m</div><div class="line">     [,<span class="number">1</span>] [,<span class="number">2</span>] [,<span class="number">3</span>] [,<span class="number">4</span>] [,<span class="number">5</span>]</div><div class="line">[<span class="number">1</span>,]    <span class="number">0</span>    <span class="number">1</span>    <span class="number">1</span>    <span class="number">0</span>    <span class="number">0</span></div><div class="line">[<span class="number">2</span>,]    <span class="number">1</span>    <span class="number">0</span>    <span class="number">1</span>    <span class="number">0</span>    <span class="number">0</span></div><div class="line">[<span class="number">3</span>,]    <span class="number">1</span>    <span class="number">1</span>    <span class="number">0</span>    <span class="number">0</span>    <span class="number">0</span></div><div class="line">[<span class="number">4</span>,]    <span class="number">0</span>    <span class="number">0</span>    <span class="number">0</span>    <span class="number">0</span>    <span class="number">1</span></div><div class="line">[<span class="number">5</span>,]    <span class="number">0</span>    <span class="number">0</span>    <span class="number">0</span>    <span class="number">1</span>    <span class="number">0</span></div></pre></td></tr></table></figure>
+<p>主要也就是<code>m&lt;-m+t(m)</code>这一步，因为是无向图，是对称矩阵，可以先构造一半然后与转置相加。<strong>这是对称矩阵的性质的应用！！</strong></p>
 <blockquote>
-<p>This does not delete the value nums, it deletes the name nums. The name is removed from its scope, and then the usual reference counting kicks in: if nums’ value had only that one reference, then the value will be reclaimed. But if it had other references, then it will not.</p>
+<p>在线性代数中，实对称矩阵是一个方形矩阵，其元素都为实数，且转置矩阵和自身相等<br><a href="https://zh.wikipedia.org/wiki/%E5%AE%9E%E5%AF%B9%E7%A7%B0%E7%9F%A9%E9%98%B5" target="_blank" rel="external">实对称矩阵</a></p>
 </blockquote>
-<h1 id="Fact-Assignment-never-copies-data"><a href="#Fact-Assignment-never-copies-data" class="headerlink" title="Fact: Assignment never copies data."></a>Fact: Assignment never copies data.</h1><blockquote>
-<p>Mutable means that the value has methods that can change the value in-place. Immutable means that the value can never change, instead when you think you are changing the value, you are really making new values from old ones.</p>
-</blockquote>
-<p>比如：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">x = <span class="number">3</span></div><div class="line">y = x</div></pre></td></tr></table></figure></p>
-<p><code>x</code>和<code>y</code>只是一起指向了<code>3</code>而已，并没有给<code>y</code>再来一个<code>3</code>。这里<code>x</code>,<code>y</code>是<code>name</code>，<code>3</code>是<code>value</code><br>上面说到的<code>Mutable</code>是什么意思，也就是因为这个赋值不拷贝数据的特性，当<code>y</code>变了的时候，比如<code>y+=1</code>，那<code>x</code>还变不变？这里就要考虑到可变类型和不可变类型了</p>
-<p>Immutable values:</p>
+<h1 id="广度优先遍历"><a href="#广度优先遍历" class="headerlink" title="广度优先遍历"></a>广度优先遍历</h1><p>主要思想就是它分两个部分，一个部分保存已经访问过的，一个部分是未访问的，未访问部分是用一个队列来存储，每次从队头出一个元素i，然后将这个元素的能够够到的节点依次加到队尾去。这一步其实就是邻接表中的第i行中为1的元素加进来</p>
+<p>先考虑简单的情况，从第1个节点出发，寻找包含1的最大联通子图，其实就是1能够直接或间接够到的所有节点，在图中我们可以直观的看到是1，2，3，三个节点。</p>
+<h2 id="错误的代码"><a href="#错误的代码" class="headerlink" title="错误的代码"></a>错误的代码</h2><figure class="highlight r"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">visited &lt;- c(<span class="number">1</span>)</div><div class="line">unvisited &lt;- m[<span class="number">1</span>,]</div><div class="line"></div><div class="line"><span class="keyword">while</span>(length(unvisited)&gt;<span class="number">0</span>)&#123;</div><div class="line">	now &lt;- unvisited[<span class="number">1</span>]</div><div class="line">	unvisited &lt;- unvisited[-<span class="number">1</span>]</div><div class="line">	candidate &lt;- m[now,]</div><div class="line">	candidate &lt;- setdiff(candidate,visited)</div><div class="line">	unvisited &lt;- union(candidate,unvisited)</div><div class="line">	visited &lt;- c(visited,now)</div><div class="line">&#125;</div><div class="line"></div><div class="line">print(visited)</div></pre></td></tr></table></figure>
+<p>这里我犯了一个错误，<code>unvisited &lt;- m[1,]</code>,这是<code>unvisited</code>里面保存的是什么？？<br><figure class="highlight r"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">&gt; unvisited</div><div class="line">[<span class="number">1</span>] <span class="number">0</span> <span class="number">1</span> <span class="number">1</span> <span class="number">0</span> <span class="number">0</span></div></pre></td></tr></table></figure></p>
+<p>那我想要的是什么？应该是<code>visisted</code>中一开始是<code>1</code>,<code>unvisisted</code>中将<code>1</code>的邻接节点加进来是<code>2,3</code>,然后后面每次循环体内做的是队头元素出队列。但是加进来的元素应该是代表这个节点的符号,反应在矩阵中的应该是下标。矩阵里面存的其实是边信息，<code>1</code>代表有边,<code>0</code>代表无边，<strong>其实要的是<code>0 1 1 0 0</code>对应的下标！！！需要的是节点信息</strong>，这其实是两个概念</p>
+<h2 id="初始化"><a href="#初始化" class="headerlink" title="初始化"></a>初始化</h2><p>我欠缺的也就是我知道我想要的是什么，但是不熟悉R语法，或者说不知道怎么用R语言来实现，虽然我熟悉python语法，但我也不能保证我能写出很优雅的代码，因为跟别人差就差在，他们不仅精通语法，还知道他们的性能，能有很多组合。</p>
+<p>这里我需要的是读进来第1行矩阵元素有<code>1</code>的下标，取下标怎么取</p>
+<p>有关下标的函数,目前只注意到下面的三个</p>
+<ul>
+<li><code>which</code>:Give the TRUE indices of a logical object, allowing for array indices.</li>
+<li><code>which.min</code>:最小值的下标</li>
+<li><code>which.max</code>:最大值的下标</li>
+</ul>
+<p>按照条条大路通罗马的理论，只要这个函数跟目标有点沾边的肯定能实现，只是看你的想象力，是否能突破天际<br>因为<code>which</code>是需要一组逻辑向量，在R中逻辑值只有<code>TRUE</code>和<code>FALSE</code>,然后它会返回<code>TRUE</code>的下标<br>只要把<code>0 1 1 0 0</code>转换为逻辑值就行了。查了一下<br><figure class="highlight r"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">&gt; as.logical(c(-<span class="number">1</span>,<span class="number">0</span>,<span class="number">1</span>,<span class="number">2</span>))</div><div class="line">[<span class="number">1</span>]  <span class="literal">TRUE</span> <span class="literal">FALSE</span>  <span class="literal">TRUE</span>  <span class="literal">TRUE</span></div></pre></td></tr></table></figure></p>
+<p>可以看到<code>as.logical</code>认为只有<code>0</code>是<code>FALSE</code>，其它为<code>TRUE</code>,这样路就通了<br><figure class="highlight r"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">visited &lt;- c(<span class="number">1</span>)</div><div class="line">unvisited &lt;- which(as.logical(m[<span class="number">1</span>,]))</div></pre></td></tr></table></figure></p>
+<p>因为只要得到逻辑向量就可以了，那逻辑操作还可以用<code>m[1,] == 1</code>来得到逻辑向量值。这也可以<br>还有没有其他方案？</p>
+<p>因为我注意到这里要么是<code>0</code>,要么是<code>1</code>,可以用向量<code>1 2 3 4 5</code>去乘，就得到了<code>0 2 3 0 0</code>,然后只要大于0的就行了<br><figure class="highlight r"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">index &lt;- c(<span class="number">1</span>:<span class="number">5</span>)</div><div class="line">edge2node &lt;- index*m[<span class="number">1</span>,]</div><div class="line">unvisited &lt;- edge2node[edge2node &gt; <span class="number">0</span>]</div></pre></td></tr></table></figure></p>
+<p><code>edge2node[edge2node &gt; 0]</code> 中的<code>edge2node&gt;0</code>计算完之后是逻辑值，然后用<code>[]</code>下标操作取逻辑值只为<code>TRUE</code>的元素</p>
+<p>上面两种得到的<br><figure class="highlight r"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">&gt; unvisited</div><div class="line">[<span class="number">1</span>] <span class="number">2</span> <span class="number">3</span></div></pre></td></tr></table></figure></p>
+<p>就是我想要的</p>
+<h2 id="遍历"><a href="#遍历" class="headerlink" title="遍历"></a>遍历</h2><p>上面一开始写的错误的代码中也就是和上面一样的问题。只要改了这一部分就行了。<br><figure class="highlight r"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">while</span>(length(unvisited)&gt;<span class="number">0</span>)&#123;</div><div class="line">	now &lt;- unvisited[<span class="number">1</span>]</div><div class="line">	unvisited &lt;- unvisited[-<span class="number">1</span>] <span class="comment"># 队头元素出队列</span></div><div class="line">	<span class="comment">#candidate &lt;- m[now,]</span></div><div class="line">	candidate &lt;- which(as.logical(m[now,]))</div><div class="line">	candidate &lt;- setdiff(candidate,visited)</div><div class="line">	unvisited &lt;- union(candidate,unvisited) <span class="comment"># 将队头元素的邻接节点加入队列</span></div><div class="line">	visited &lt;- c(visited,now)  <span class="comment"># 将队头元素加入已访问的</span></div><div class="line">&#125;</div><div class="line">print(visited)</div></pre></td></tr></table></figure></p>
+<p>这里<code>setdiff</code>和<code>union</code>是集合运算，因为可以在图上直观的看到，<code>1</code>这个节点可以找到<code>2</code>,<code>3</code>。到<code>2</code>这个节点，可以找到<code>1</code>,<code>3</code>,但此时，<code>1</code>这个节点是已经访问了的，如果不处理，还是加进队列里面的话，那就不断在循环了！！！</p>
+<p><code>setdiff</code>是取差值，注意参数的位置，<strong>是将<code>visited</code>里面有的元素从<code>candidate</code>中消掉</strong><br><code>union</code>是取并集，没什么好说的了<br>还有一个<code>intersect(x, y)</code>就是取交集</p>
+<p>最后的结果<br><figure class="highlight r"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">&gt; print(visited)</div><div class="line">[<span class="number">1</span>] <span class="number">1</span> <span class="number">2</span> <span class="number">3</span></div></pre></td></tr></table></figure></p>
+<h2 id="全图对每个节点进行同样的操作"><a href="#全图对每个节点进行同样的操作" class="headerlink" title="全图对每个节点进行同样的操作"></a>全图对每个节点进行同样的操作</h2><p>图的最大连通子图，那就对每个节点都进行上面的操作，然后图包含节点最多的就是这个图的最大联通子图了</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line">max_node_num &lt;- <span class="number">0</span></div><div class="line">maximal_connected_subgraph &lt;- <span class="literal">NULL</span></div><div class="line"><span class="keyword">for</span>(i <span class="keyword">in</span> <span class="number">1</span>:<span class="number">5</span>)&#123;</div><div class="line">  visited &lt;- c(i)</div><div class="line">  unvisited &lt;- which(as.logical(m[i,]))</div><div class="line">  <span class="keyword">while</span>(length(unvisited)&gt;<span class="number">0</span>)&#123;</div><div class="line">    now &lt;- unvisited[<span class="number">1</span>]</div><div class="line">    unvisited &lt;- unvisited[-<span class="number">1</span>]</div><div class="line">    candidate &lt;- which(as.logical(m[now,]))</div><div class="line">    candidate &lt;- setdiff(candidate,visited)</div><div class="line">    unvisited &lt;- union(candidate,unvisited)</div><div class="line">    visited &lt;- c(visited,now)</div><div class="line">  &#125;</div><div class="line">  current_node_num &lt;- length(visited)</div><div class="line">  <span class="keyword">if</span>(current_node_num &gt; max_node_num)&#123;</div><div class="line">    max_node_num &lt;- current_node_num</div><div class="line">    maximal_connected_subgraph &lt;- visited</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">sort(maximal_connected_subgraph)</div><div class="line">print(m[maximal_connected_subgraph,maximal_connected_subgraph])</div></pre></td></tr></table></figure>
+<p>result:<br><figure class="highlight r"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">&gt; print(m[maximal_connected_subgraph,maximal_connected_subgraph])</div><div class="line">     [,<span class="number">1</span>] [,<span class="number">2</span>] [,<span class="number">3</span>]</div><div class="line">[<span class="number">1</span>,]    <span class="number">0</span>    <span class="number">1</span>    <span class="number">1</span></div><div class="line">[<span class="number">2</span>,]    <span class="number">1</span>    <span class="number">0</span>    <span class="number">1</span></div><div class="line">[<span class="number">3</span>,]    <span class="number">1</span>    <span class="number">1</span>    <span class="number">0</span></div></pre></td></tr></table></figure></p>
+<h1 id="深度优先遍历"><a href="#深度优先遍历" class="headerlink" title="深度优先遍历"></a>深度优先遍历</h1><p>深度优先就是一条道走到底，无路可走的时候，及时浪子回头，然后又不听教诲又去浪到底，直到玩累了，回家的过程。</p>
+<p>涉及到一个回朔。这样就需要一个<code>parent_node</code>来保存父节点的信息。这里我想到，是不是要回去的时候要重新计算父节点的邻接节点，因为这样才能知道其他节点啊。</p>
+<p>同样还需要一个<code>visited</code>来保存已经访问过的节点。然后在访问完一个节点，要将这个节点加入<code>visited</code>中，在要遍历下一个节点的时候，需要取一个节点。那这个时候需要看这个节点是不是已经访问了。<br>这里我想到了两个方案：</p>
 <ol>
-<li>numbers</li>
-<li>strings</li>
-<li>tuples </li>
+<li>一个一个取。意思是下标操作，取一个对比一下是不是在<code>visited</code>中，可以用<code>any(visited == current_node)</code>如果是<code>FALSE</code>就是还未访问过。<code>visisted == current_node</code>返回的是一个逻辑向量，然后用<code>any</code>函数如果有一个是<code>TRUE</code>那返回值是<code>TRUE</code>，返回<code>FALSE</code>说明没有一个是相等的。</li>
+<li>一下子全取出来。然后用集合运算，做差，然后再取出一个。</li>
 </ol>
-<p>Mutable values:</p>
-<ol>
-<li>lists</li>
-<li>dicts</li>
-<li>user-defined objects</li>
-</ol>
-<p>那在上面<code>y+=1</code>之后，其实是给<code>y</code>重新<code>reference</code>到了4</p>
-<p>关于mutable的直接截图：</p>
-<p><img src="http://onexs3cnv.bkt.clouddn.com/list_mutate_value.png" alt="list_mutate"></p>
-<hr>
-<h1 id="Fact-Python-passes-function-arguments-by-assigning-to-them"><a href="#Fact-Python-passes-function-arguments-by-assigning-to-them" class="headerlink" title="Fact: Python passes function arguments by assigning to them."></a>Fact: Python passes function arguments by assigning to them.</h1><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">def my_func(x,y)</div><div class="line">	return x+y</div><div class="line">print(my_func(8,9))</div></pre></td></tr></table></figure>
-<blockquote>
-<p>The names x and y are local to the function, so when the function returns, those names go away. But if the values they refer to are still referenced by other names, the values live on.</p>
-</blockquote>
-<p><strong>注意</strong>，这里就出现<code>name</code>和<code>value</code>的区别了，可以这样理解，<code>value</code>就是一个实物，<code>name</code>只是这个实物的标签，我可以贴很多标签，而看到这个标签，我就联想到这个实物，实物可以有多个标签，一个标签只能对应一个实物。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">augment_twice</span><span class="params">(a_list,val)</span>:</span></div><div class="line">	a_list.append(val)</div><div class="line">	a_list.append(val)</div><div class="line"></div><div class="line">nums = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>]</div><div class="line">augment_twice(nums, <span class="number">4</span>)</div><div class="line">print(nums) <span class="comment">#[1,2,3,4,4]</span></div></pre></td></tr></table></figure>
-<h2 id=""><a href="#" class="headerlink" title=""></a><img src="http://onexs3cnv.bkt.clouddn.com/Screen%20Shot%202017-03-29%20at%2010.23.49%20PM.png" alt="before"></h2><h2 id="-1"><a href="#-1" class="headerlink" title=""></a><img src="http://onexs3cnv.bkt.clouddn.com/Screen%20Shot%202017-03-29%20at%2010.23.55%20PM.png" alt="after"></h2><p>虚线框表示本地<code>name</code>在一个新的<code>frame</code>里面，而参数传递只是一种赋值操作，<code>a_list</code> “指向” <code>nums</code>指向的<code>value</code>,而<code>list</code>类型是可变数据类型，所以任何<code>name</code>对它的改变都是就地的，可以通过<code>id()</code>操作来查看是否改变了地址</p>
-<p>另外一个程序</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">augment_twice_bad</span><span class="params">(a_list,val)</span>:</span></div><div class="line">	a_list = a_list + [val,val]</div><div class="line">nums = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>]</div><div class="line">augment_twice_bad(nums,<span class="number">4</span>)</div><div class="line">print(nums) <span class="comment">#[1,2,3]</span></div></pre></td></tr></table></figure>
-<p>这个跟上面的程序就不同在函数里面一个是用<code>.append()</code>来增加元素，一个则用加法然后赋值，赋值，赋值，重要的事情说三遍，这是个赋值操作，一旦出现赋值，就相当于等式左边的<code>name</code><strong>rebind</strong>出现在等式右边的<code>value</code></p>
-<h2 id="-2"><a href="#-2" class="headerlink" title=""></a><img src="http://onexs3cnv.bkt.clouddn.com/Screen%20Shot%202017-03-29%20at%2010.35.39%20PM.png" alt="bad_before"></h2><p><img src="http://onexs3cnv.bkt.clouddn.com/Screen%20Shot%202017-03-29%20at%2010.35.45%20PM.png" alt="bad_after"></p>
-<blockquote>
-<p>It’s really important to keep in mind the difference between mutating a value in place, and rebinding a name. augment_twice worked because it mutated the value passed in, so that mutation was available after the function returned. augment_twice_bad used an assignment to rebind a local name, so the changes weren’t visible outside the function.</p>
-</blockquote>
-<h1 id="其他的-facts-myths都知道了，上面的需要注意一下就可以了。过"><a href="#其他的-facts-myths都知道了，上面的需要注意一下就可以了。过" class="headerlink" title="其他的 facts, myths都知道了，上面的需要注意一下就可以了。过"></a>其他的 facts, myths都知道了，上面的需要注意一下就可以了。过</h1>
+<p>然后我用笔在纸上模拟的时候，发现这应该是个递归的过程。那<code>visisted</code>需要全局来维护，那这样函数体内就用循环可以了，遍历一个节点的所有邻接节点，然后对每一个节点再进入这个函数。这样就不需要<code>parent_node</code>来维护了，但是需要一个边界条件来终止递归。那就是一个节点的所有邻接节点都被访问过了。</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line">m &lt;- matrix(<span class="number">0</span>,<span class="number">5</span>,<span class="number">5</span>)</div><div class="line">m[<span class="number">1</span>,<span class="number">2</span>] &lt;- <span class="number">1</span></div><div class="line">m[<span class="number">1</span>,<span class="number">3</span>] &lt;- <span class="number">1</span></div><div class="line">m[<span class="number">2</span>,<span class="number">3</span>] &lt;- <span class="number">1</span></div><div class="line">m[<span class="number">4</span>,<span class="number">5</span>] &lt;- <span class="number">1</span></div><div class="line"></div><div class="line">m &lt;- m + t(m)</div><div class="line"></div><div class="line">visited &lt;- c(<span class="number">1</span>)</div><div class="line"></div><div class="line">dfs &lt;- <span class="keyword">function</span>(current_node)&#123;</div><div class="line">  <span class="comment">#browser()  # 调试用的</span></div><div class="line">  </div><div class="line">  candidate_node &lt;- which(as.logical(m[current_node,]))</div><div class="line">  candidate_node &lt;- setdiff(candidate_node,visited)</div><div class="line">  <span class="comment">#print(candidate_node)</span></div><div class="line">  <span class="keyword">if</span>(length(candidate_node) == <span class="number">0</span>)&#123;</div><div class="line">    <span class="keyword">return</span>(<span class="number">0</span>) <span class="comment">#这个0返回的没有意义的，随便都可以，只是单纯的结束</span></div><div class="line">  &#125;</div><div class="line">  <span class="keyword">for</span>(i <span class="keyword">in</span> candidate_node)&#123;</div><div class="line">    visited &lt;- c(visited,i) <span class="comment">#访问i节点</span></div><div class="line">    dfs(i) <span class="comment">#递归</span></div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line">dfs(<span class="number">1</span>)</div><div class="line">print(visited)</div></pre></td></tr></table></figure>
+<p>上面的结果出错了<br><figure class="highlight r"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">Error: evaluation nested too deeply: infinite recursion / options(expressions=)?</div><div class="line">Error during wrapup: evaluation nested too deeply: infinite recursion / options(expressions=)?</div></pre></td></tr></table></figure></p>
+<p>那就是递归没返回<br>调试了一下，发现问题出现在<code>visited</code>上，<code>dfs(i)</code>进去的时候，理想中<code>visited</code>应该是全局变量，在循环中我将<code>i</code>节点加入已访问的节点中，但是发现递归进去的时候，<code>candidate_node &lt;- setdiff(candidate_node,visited)</code>这时候的<code>visited</code>值是<code>1</code>,就是初始值。可是为什么呢？？？<br>那就将这个<code>visited</code>当作一个参数传递就行了</p>
+<p>但是发现，这个只是值传递参数，不是引用传递，也就是参数变了，最后<code>visited</code>自己没有改变没有用啊，<code>print(visited)</code>就没用，最后结果就只是<code>1</code></p>
+
       
     </div>
 
@@ -550,7 +564,7 @@
     </li>
     <li class="post-copyright-link">
       <strong>Post link:</strong>
-      <a href="http://www.mmmmmcclxxvii.cn/2017/03/29/python-name-and-values/" title="python name and values">http://www.mmmmmcclxxvii.cn/2017/03/29/python-name-and-values/</a>
+      <a href="http://www.mmmmmcclxxvii.cn/2017/03/25/r-bfs/" title="用R来找最大连通子图">http://www.mmmmmcclxxvii.cn/2017/03/25/r-bfs/</a>
     </li>
     <li class="post-copyright-license">
       <strong>Copyright Notice: </strong>
@@ -566,7 +580,15 @@
       
         <div class="post-tags">
           
-            <a href="/tags/python/" rel="tag"><i class="fa fa-tag"></i> python</a>
+            <a href="/tags/R/" rel="tag"><i class="fa fa-tag"></i> R</a>
+          
+            <a href="/tags/R-piece/" rel="tag"><i class="fa fa-tag"></i> R-piece</a>
+          
+            <a href="/tags/BFS/" rel="tag"><i class="fa fa-tag"></i> BFS</a>
+          
+            <a href="/tags/DFS/" rel="tag"><i class="fa fa-tag"></i> DFS</a>
+          
+            <a href="/tags/algorithm/" rel="tag"><i class="fa fa-tag"></i> algorithm</a>
           
         </div>
       
@@ -579,8 +601,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/03/25/r-bfs/" rel="next" title="用R来找最大连通子图">
-                <i class="fa fa-chevron-left"></i> 用R来找最大连通子图
+              <a href="/2017/03/20/naruto/" rel="next" title="naruto">
+                <i class="fa fa-chevron-left"></i> naruto
               </a>
             
           </div>
@@ -589,8 +611,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/03/30/self-discipline/" rel="prev" title="自我约束-你好">
-                自我约束-你好 <i class="fa fa-chevron-right"></i>
+              <a href="/2017/03/29/python-name-and-values/" rel="prev" title="python name and values">
+                python name and values <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -969,7 +991,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Fact-Names-have-no-type-values-have-no-scope"><span class="nav-number">1.</span> <span class="nav-text">Fact: Names have no type, values have no scope.</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Fact-Values-can’t-be-deleted-only-names-can"><span class="nav-number">2.</span> <span class="nav-text">Fact: Values can’t be deleted, only names can.</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Fact-Assignment-never-copies-data"><span class="nav-number">3.</span> <span class="nav-text">Fact: Assignment never copies data.</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Fact-Python-passes-function-arguments-by-assigning-to-them"><span class="nav-number">4.</span> <span class="nav-text">Fact: Python passes function arguments by assigning to them.</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#"><span class="nav-number">4.1.</span> <span class="nav-text"></span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#-1"><span class="nav-number">4.2.</span> <span class="nav-text"></span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#-2"><span class="nav-number">4.3.</span> <span class="nav-text"></span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#其他的-facts-myths都知道了，上面的需要注意一下就可以了。过"><span class="nav-number">5.</span> <span class="nav-text">其他的 facts, myths都知道了，上面的需要注意一下就可以了。过</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#构造邻接矩阵"><span class="nav-number">1.</span> <span class="nav-text">构造邻接矩阵</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#广度优先遍历"><span class="nav-number">2.</span> <span class="nav-text">广度优先遍历</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#错误的代码"><span class="nav-number">2.1.</span> <span class="nav-text">错误的代码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#初始化"><span class="nav-number">2.2.</span> <span class="nav-text">初始化</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#遍历"><span class="nav-number">2.3.</span> <span class="nav-text">遍历</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#全图对每个节点进行同样的操作"><span class="nav-number">2.4.</span> <span class="nav-text">全图对每个节点进行同样的操作</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#深度优先遍历"><span class="nav-number">3.</span> <span class="nav-text">深度优先遍历</span></a></li></ol></div>
             
 
           </div>
