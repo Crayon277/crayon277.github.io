@@ -5,7 +5,7 @@
     
   <url>
     <loc>http://www.mmmmmcclxxvii.cn/2017/03/25/r-bfs/</loc>
-    <lastmod>2017-04-11T10:01:09.000Z</lastmod>
+    <lastmod>2017-04-11T12:12:34.000Z</lastmod>
     <data>
         <display>
         <title>用R来找最大连通子图</title>
@@ -63,11 +63,11 @@
         <title>编码总结</title>
         <pubTime>2016-10-04T01:47:42.000Z</pubTime>
         
-        <tag>unicode</tag>
+        <tag>encode</tag>
          
         <tag>python</tag>
          
-        <tag>encode</tag>
+        <tag>unicode</tag>
          
         <tag>utf-8</tag>
          
