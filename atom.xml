@@ -175,9 +175,9 @@
       <category term="R" scheme="http://www.mmmmmcclxxvii.cn/categories/R/"/>
     
     
-      <category term="R" scheme="http://www.mmmmmcclxxvii.cn/tags/R/"/>
-    
       <category term="R-piece" scheme="http://www.mmmmmcclxxvii.cn/tags/R-piece/"/>
+    
+      <category term="R" scheme="http://www.mmmmmcclxxvii.cn/tags/R/"/>
     
       <category term="text-mining" scheme="http://www.mmmmmcclxxvii.cn/tags/text-mining/"/>
     
@@ -263,9 +263,9 @@
       <category term="R" scheme="http://www.mmmmmcclxxvii.cn/categories/R/"/>
     
     
-      <category term="R" scheme="http://www.mmmmmcclxxvii.cn/tags/R/"/>
-    
       <category term="R-piece" scheme="http://www.mmmmmcclxxvii.cn/tags/R-piece/"/>
+    
+      <category term="R" scheme="http://www.mmmmmcclxxvii.cn/tags/R/"/>
     
       <category term="plot" scheme="http://www.mmmmmcclxxvii.cn/tags/plot/"/>
     
@@ -546,13 +546,18 @@
   
   <entry>
     <title>用R来找最大连通子图</title>
-    <link href="http://www.mmmmmcclxxvii.cn/2017/03/25/r-bfs/"/>
-    <id>http://www.mmmmmcclxxvii.cn/2017/03/25/r-bfs/</id>
+    <link href="http://www.mmmmmcclxxvii.cn/2017/03/25/r-maximal-connected-subgraph/"/>
+    <id>http://www.mmmmmcclxxvii.cn/2017/03/25/r-maximal-connected-subgraph/</id>
     <published>2017-03-25T00:35:37.000Z</published>
-    <updated>2017-04-11T12:12:34.000Z</updated>
+    <updated>2017-04-12T12:45:59.000Z</updated>
     
     <content type="html"><![CDATA[<p>求上图的最大连通子图，其实就是图的遍历，图的遍历有深度优先和广度优先<br>图有很多种对应的存储结构，在R里面最简单的就是邻接矩阵了。</p>
-<p>-update-<br>用深度优先搜索做<br><a id="more"></a></p>
+<p>-update-</p>
+<ul>
+<li>用深度优先搜索做</li>
+<li>在深度优先里面涉及到的R中的全局，局部变量<a id="more"></a>
+</li>
+</ul>
 <h1 id="构造邻接矩阵"><a href="#构造邻接矩阵" class="headerlink" title="构造邻接矩阵"></a>构造邻接矩阵</h1><figure class="highlight r"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">m &lt;- matrix(<span class="number">0</span>,<span class="number">5</span>,<span class="number">5</span>)</div><div class="line">m[<span class="number">1</span>,<span class="number">2</span>] &lt;- <span class="number">1</span></div><div class="line">m[<span class="number">1</span>,<span class="number">3</span>] &lt;- <span class="number">1</span></div><div class="line">m[<span class="number">2</span>,<span class="number">3</span>] &lt;- <span class="number">1</span></div><div class="line">m[<span class="number">4</span>,<span class="number">5</span>] &lt;- <span class="number">1</span></div><div class="line"></div><div class="line">m &lt;- m + t(m)</div></pre></td></tr></table></figure>
 <figure class="highlight r"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">&gt; m</div><div class="line">     [,<span class="number">1</span>] [,<span class="number">2</span>] [,<span class="number">3</span>] [,<span class="number">4</span>] [,<span class="number">5</span>]</div><div class="line">[<span class="number">1</span>,]    <span class="number">0</span>    <span class="number">1</span>    <span class="number">1</span>    <span class="number">0</span>    <span class="number">0</span></div><div class="line">[<span class="number">2</span>,]    <span class="number">1</span>    <span class="number">0</span>    <span class="number">1</span>    <span class="number">0</span>    <span class="number">0</span></div><div class="line">[<span class="number">3</span>,]    <span class="number">1</span>    <span class="number">1</span>    <span class="number">0</span>    <span class="number">0</span>    <span class="number">0</span></div><div class="line">[<span class="number">4</span>,]    <span class="number">0</span>    <span class="number">0</span>    <span class="number">0</span>    <span class="number">0</span>    <span class="number">1</span></div><div class="line">[<span class="number">5</span>,]    <span class="number">0</span>    <span class="number">0</span>    <span class="number">0</span>    <span class="number">1</span>    <span class="number">0</span></div></pre></td></tr></table></figure>
 <p>主要也就是<code>m&lt;-m+t(m)</code>这一步，因为是无向图，是对称矩阵，可以先构造一半然后与转置相加。<strong>这是对称矩阵的性质的应用！！</strong></p>
@@ -596,8 +601,18 @@
 <p>然后我用笔在纸上模拟的时候，发现这应该是个递归的过程。那<code>visisted</code>需要全局来维护，那这样函数体内就用循环可以了，遍历一个节点的所有邻接节点，然后对每一个节点再进入这个函数。这样就不需要<code>parent_node</code>来维护了，但是需要一个边界条件来终止递归。那就是一个节点的所有邻接节点都被访问过了。</p>
 <h2 id="发现的问题，visited全局变量"><a href="#发现的问题，visited全局变量" class="headerlink" title="发现的问题，visited全局变量"></a>发现的问题，<code>visited</code>全局变量</h2><figure class="highlight r"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line">m &lt;- matrix(<span class="number">0</span>,<span class="number">5</span>,<span class="number">5</span>)</div><div class="line">m[<span class="number">1</span>,<span class="number">2</span>] &lt;- <span class="number">1</span></div><div class="line">m[<span class="number">1</span>,<span class="number">3</span>] &lt;- <span class="number">1</span></div><div class="line">m[<span class="number">2</span>,<span class="number">3</span>] &lt;- <span class="number">1</span></div><div class="line">m[<span class="number">4</span>,<span class="number">5</span>] &lt;- <span class="number">1</span></div><div class="line"></div><div class="line">m &lt;- m + t(m)</div><div class="line"></div><div class="line">visited &lt;- c(<span class="number">1</span>)</div><div class="line"></div><div class="line">dfs &lt;- <span class="keyword">function</span>(current_node)&#123;</div><div class="line">  <span class="comment">#browser()  # 调试用的</span></div><div class="line">  </div><div class="line">  candidate_node &lt;- which(as.logical(m[current_node,]))</div><div class="line">  candidate_node &lt;- setdiff(candidate_node,visited)</div><div class="line">  <span class="comment">#print(candidate_node)</span></div><div class="line">  <span class="keyword">if</span>(length(candidate_node) == <span class="number">0</span>)&#123;</div><div class="line">    <span class="keyword">return</span>(<span class="number">0</span>) <span class="comment">#这个0返回的没有意义的，随便都可以，只是单纯的结束</span></div><div class="line">  &#125;</div><div class="line">  <span class="keyword">for</span>(i <span class="keyword">in</span> candidate_node)&#123;</div><div class="line">    visited &lt;- c(visited,i) <span class="comment">#访问i节点</span></div><div class="line">    dfs(i) <span class="comment">#递归</span></div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line">dfs(<span class="number">1</span>)</div><div class="line">print(visited)</div></pre></td></tr></table></figure>
 <p>上面的结果出错了<br><figure class="highlight r"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">Error: evaluation nested too deeply: infinite recursion / options(expressions=)?</div><div class="line">Error during wrapup: evaluation nested too deeply: infinite recursion / options(expressions=)?</div></pre></td></tr></table></figure></p>
-<p>那就是递归没返回<br>调试了一下，发现问题出现在<code>visited</code>上，<code>dfs(i)</code>进去的时候，理想中<code>visited</code>应该是全局变量，在循环中我将<code>i</code>节点加入已访问的节点中，但是发现递归进去的时候，<code>candidate_node &lt;- setdiff(candidate_node,visited)</code>这时候的<code>visited</code>值是<code>1</code>,就是初始值。可是为什么呢？？？<br>那就将这个<code>visited</code>当作一个参数传递就行了</p>
-<p>但是发现，这个只是值传递参数，不是引用传递，也就是参数变了，最后<code>visited</code>自己没有改变没有用啊，<code>print(visited)</code>就没用，最后结果就只是<code>1</code></p>
+<p>那就是递归没返回<br>调试了一下，发现问题出现在<code>visited</code>上，<code>dfs(i)</code>进去的时候，理想中<code>visited</code>应该是全局变量，在循环中我将<code>i</code>节点加入已访问的节点中，但是发现递归进去的时候，<code>candidate_node &lt;- setdiff(candidate_node,visited)</code>这时候的<code>visited</code>值是<code>1</code>,就是初始值。可是为什么呢？？？</p>
+<blockquote>
+<p>内部函数在它的环境中查找visited的值（查找的顺序为：首先函数体的局部变量，参数；然后是外部函数中的局域变量，参数；最后是全局变量） </p>
+</blockquote>
+<p>所以当在函数内做赋值的时候，相当于就建立了一个局部变量，那在第一层的时候<code>visited &lt;- c(visited,i)</code>这个语句还没执行到的时候，此时的<code>visited</code>在函数体内还没有定义！那找到的就是外部的变量，所以调试的时候看到的是<code>1</code>，那其实相当于因为在递归的时候可以看作都是进入自己的函数，所以每一层的<code>visited</code>都是独立的。</p>
+<h2 id="方案-1-return-visited"><a href="#方案-1-return-visited" class="headerlink" title="方案 1 : return(visited)"></a>方案 1 : return(visited)</h2><figure class="highlight r"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">dfs2 &lt;- <span class="keyword">function</span>(current_node,vis=<span class="literal">NULL</span>)&#123;</div><div class="line">	candidate_node &lt;- which(as.logical(m[current_node,]))</div><div class="line">	candidate_node &lt;- setdiff(candidate_node,visited)</div><div class="line">	    </div><div class="line">	<span class="keyword">if</span>(length(candidate_node) == <span class="number">0</span>)&#123;</div><div class="line">		<span class="keyword">return</span>(<span class="literal">NULL</span>) </div><div class="line">	&#125;</div><div class="line">	<span class="keyword">for</span>(i <span class="keyword">in</span> candidate_node)&#123;</div><div class="line">		<span class="keyword">if</span>(!any(visited == i))&#123;</div><div class="line">			visited &lt;- c(visited,dfs2(i))</div><div class="line">		&#125;</div><div class="line">		<span class="keyword">return</span>(visited)</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>这么写有两个问题！！！<br>第一个是有闭环的时候，因为我在前面的代码计算<code>candidate_node</code>的时候是依赖<code>visited</code>的，在每一层的函数进去后，因为前面说了，每一层的<code>visited</code>是独立的，所以在没有赋值之前，也就是没有在下一层<code>return</code>之前，用的都是外部的<code>visited &lt;- c(1)</code>这个值，所以这时候计算的<code>candidate_node</code>肯定是不正确的，不是我们想要的，因为不能正确判断是否邻接节点已经访问过。这是根源，所以导致了在下面<code>for</code>循环的时候，在闭环的情况下，因为没有正确的将已经访问的排除掉，而无限的递归。</p>
+<p>第二个是分叉，就最简单的情况，<code>1</code>连接<code>2</code>,<code>3</code>,但后两个不连接，因为到<code>2</code>中，<code>visited</code>是外部的<code>1</code>，所以这里是恰好，凑巧，刚刚好<code>candidate_node</code>计算为空，返回，但是！！！返回的是空！这样<code>visited &lt;- c(visited,dfs2(i))</code>这个语句就没有起作用，追其根源那就是<code>return</code>写的不正确。一方面是这里连<code>return(visited)</code>都没执行到，相当于在<code>2</code>层这里直接返回<code>NULL</code>，但是并没有把<code>2</code>这个节点加入<code>visited</code>中。<br>而且，即使不管上面的情况，在<code>2</code>饭后会，后面直接<code>return(visited)</code>了，函数直接退出了。<code>3</code>根本就没做。</p>
+<p>试错：<br><figure class="highlight r"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">m &lt;- matrix(<span class="number">0</span>,<span class="number">3</span>,<span class="number">3</span>)</div><div class="line">m[<span class="number">1</span>,<span class="number">2</span>] &lt;- <span class="number">1</span></div><div class="line">m[<span class="number">1</span>,<span class="number">3</span>] &lt;- <span class="number">1</span></div><div class="line">m + t(m) -&gt; m</div><div class="line"></div><div class="line">visited &lt;- c(<span class="number">1</span>)</div><div class="line"></div><div class="line">print(dfs2(<span class="number">1</span>))</div></pre></td></tr></table></figure></p>
+<p>结果<br><figure class="highlight r"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">&gt; print(dfs2(<span class="number">1</span>))</div><div class="line">[<span class="number">1</span>] <span class="number">1</span></div></pre></td></tr></table></figure></p>
+<p>[todo] 使用return 写递归应该是可以的，那就是我整体的递归应该不是按照原来的思路了。但目前还没有想到怎么写</p>
+<h2 id="方案-2-这个visited当作一个参数传递就行了"><a href="#方案-2-这个visited当作一个参数传递就行了" class="headerlink" title="方案 2 : 这个visited当作一个参数传递就行了"></a>方案 2 : 这个<code>visited</code>当作一个参数传递就行了</h2><p>但是发现，这个只是值传递参数，不是引用传递，也就是参数变了，最后<code>visited</code>自己没有改变没有用啊，<code>print(visited)</code>就没用，最后结果就只是<code>1</code></p>
 <h2 id="lt-lt-解决"><a href="#lt-lt-解决" class="headerlink" title="&lt;&lt;-解决"></a><code>&lt;&lt;-</code>解决</h2><p>然后我<a href="https://zhangjg.github.io/blog/2015/12/25/The-Closure-in-R.html" target="_blank" rel="external">查到</a>里面提到了<code>&lt;&lt;-</code>，可能这个操作符才是将变量复制到全局变量中去，不然<code>&lt;-</code>就在函数体内生成了一个同名的局部变量<br>然后我就将上面的<code>visited &lt;- c(visited,i)</code>改为<code>visited &lt;&lt;- c(visited,i)</code><br>得到的结果是<br><figure class="highlight r"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">&gt; print(visited)</div><div class="line">[<span class="number">1</span>] <span class="number">1</span> <span class="number">2</span> <span class="number">3</span> <span class="number">3</span></div></pre></td></tr></table></figure></p>
 <p>多了一个<code>3</code>，这个是因为在第一层的时候也就是<code>current_node</code>为<code>1</code>的时候，邻接节点是<code>2</code>,<code>3</code>,在<code>for</code>循环中，先进入<code>2</code>节点，此时可以遍历的只有<code>3</code>,然后进入<code>3</code>,访问完，回朔，此时应该是在这个图下<code>1</code>,<code>2</code>,<code>3</code>都是遍历完了的，但是回朔到<code>1</code>节点的时候，<code>for</code>循环还有一个<code>3</code>没执行，所以在<code>for</code>循环里面还要再加一个条件，看是否已经遍历过。<br><figure class="highlight r"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">for</span>(i <span class="keyword">in</span> candidate_node)&#123;</div><div class="line">	<span class="keyword">if</span>(!any(visited == i))&#123;</div><div class="line">		visited &lt;&lt;- c(visited,i) <span class="comment">#访问i节点</span></div><div class="line">	&#125;</div><div class="line">	dfs(i) <span class="comment">#递归</span></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
 <p>结果：<br><figure class="highlight r"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">&gt; print(visited)</div><div class="line">[<span class="number">1</span>] <span class="number">1</span> <span class="number">2</span> <span class="number">3</span></div></pre></td></tr></table></figure></p>
@@ -611,16 +626,19 @@
     <summary type="html">
     
       &lt;p&gt;求上图的最大连通子图，其实就是图的遍历，图的遍历有深度优先和广度优先&lt;br&gt;图有很多种对应的存储结构，在R里面最简单的就是邻接矩阵了。&lt;/p&gt;
-&lt;p&gt;-update-&lt;br&gt;用深度优先搜索做&lt;br&gt;
+&lt;p&gt;-update-&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;用深度优先搜索做&lt;/li&gt;
+&lt;li&gt;在深度优先里面涉及到的R中的全局，局部变量
     
     </summary>
     
       <category term="R" scheme="http://www.mmmmmcclxxvii.cn/categories/R/"/>
     
     
-      <category term="R" scheme="http://www.mmmmmcclxxvii.cn/tags/R/"/>
-    
       <category term="R-piece" scheme="http://www.mmmmmcclxxvii.cn/tags/R-piece/"/>
+    
+      <category term="R" scheme="http://www.mmmmmcclxxvii.cn/tags/R/"/>
     
       <category term="BFS" scheme="http://www.mmmmmcclxxvii.cn/tags/BFS/"/>
     
@@ -682,8 +700,8 @@
   
   <entry>
     <title>project of stackoverflow - python object(一)</title>
-    <link href="http://www.mmmmmcclxxvii.cn/2017/03/14/object/"/>
-    <id>http://www.mmmmmcclxxvii.cn/2017/03/14/object/</id>
+    <link href="http://www.mmmmmcclxxvii.cn/2017/03/14/stackoverflow_object_1/"/>
+    <id>http://www.mmmmmcclxxvii.cn/2017/03/14/stackoverflow_object_1/</id>
     <published>2017-03-14T14:27:10.000Z</published>
     <updated>2017-03-27T15:00:07.000Z</updated>
     
@@ -1352,50 +1370,62 @@
       <category term="砍树人" scheme="http://www.mmmmmcclxxvii.cn/categories/%E7%A0%8D%E6%A0%91%E4%BA%BA/"/>
     
     
-      <category term="encode" scheme="http://www.mmmmmcclxxvii.cn/tags/encode/"/>
-    
       <category term="python" scheme="http://www.mmmmmcclxxvii.cn/tags/python/"/>
     
       <category term="unicode" scheme="http://www.mmmmmcclxxvii.cn/tags/unicode/"/>
+    
+      <category term="encode" scheme="http://www.mmmmmcclxxvii.cn/tags/encode/"/>
     
       <category term="utf-8" scheme="http://www.mmmmmcclxxvii.cn/tags/utf-8/"/>
     
   </entry>
   
   <entry>
-    <title>how character display on screen</title>
-    <link href="http://www.mmmmmcclxxvii.cn/2015/11/12/how-character-display-on-screen/"/>
-    <id>http://www.mmmmmcclxxvii.cn/2015/11/12/how-character-display-on-screen/</id>
-    <published>2015-11-12T05:40:00.000Z</published>
-    <updated>2015-11-12T05:40:00.000Z</updated>
+    <title>project of stackoverflow - python piece (一)</title>
+    <link href="http://www.mmmmmcclxxvii.cn/2016/02/12/stackoverflow-python-piece-1/"/>
+    <id>http://www.mmmmmcclxxvii.cn/2016/02/12/stackoverflow-python-piece-1/</id>
+    <published>2016-02-12T00:11:45.000Z</published>
+    <updated>2016-02-12T00:11:45.000Z</updated>
     
-    <content type="html"><![CDATA[<p>我知道ascii码2c 是“，”逗号，但是计算机是怎么知道它是“逗号”的？<br><a id="more"></a></p>
-<p><strong>简答：有时候不是会安装字体font么，里面就有对应的字型。要显卡渲染形成的。</strong><br>大体过程是：字符编码（Unicode）→字体的形索引（Glyph ID）→字形轮廓→点阵图字形</p>
-<h1 id="计算机是如何显示文字的呢？"><a href="#计算机是如何显示文字的呢？" class="headerlink" title="计算机是如何显示文字的呢？"></a>计算机是如何显示文字的呢？</h1><p>计算机要对文字进行存储后就需要显示出来，而我们的液晶屏都是一个个的像素点组成的，这就必须要对文字进行渲染绘制，发送到显卡中进行栅格化和显示等操作。<br>Dos下最简单，利用主板BIOS就能对ascii码进行点阵化输出。</p>
-<p>字符显示器，显示字符的方法以点阵为基础，点阵是指由m*n个点组成的阵列，点阵的多少取决于显示字符的质量和字符窗口的大小。 字符窗口是指每个字符在屏幕是那个所占的点数。它包括字符显示点阵和字符间隔。</p>
-<p>将点阵存入由rom构成的字符发生其中，在CRT进行光栅扫描的过程中，从字符发生器中一次读出某个字符的点阵，按照点阵中0和1的代码不同控制电子束的开或关，从而在屏幕上显示出字符，对应每个字符窗口，所需显示字符的ACSII代码被存放在视频存储器VRAM中，以备刷新</p>
-<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><blockquote>
-<p>假如说这个程序是 xterm ，它会通过 X core font API ，将这个字符直接送给 Xorg ，由 Xorg 来完成字体渲染（当然现在 xterm 也支持 libXft 了，不过先不管这个）。Xorg 拿到应用程序送来的请求之后，会在字体中检索每个字对应的字形，然后渲染出来。这个检索过程中用到的索引，就是我们之前给字符编上的号。如果要指定字体，需要向Xorg提供一个长得像这样：“-adobe-times-medium-r-normal–12-120-75-75-p-64-iso8859-1” 的字符串来指定字体。</p>
-<p>作者：乌鸦<br>链接：<a href="https://www.zhihu.com/question/24340504/answer/28902204" target="_blank" rel="external">https://www.zhihu.com/question/24340504/answer/28902204</a><br>来源：知乎<br>著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。</p>
-<p>在UNIX终端上和DOS里 ， 字符是终端或显卡（使用内置字库）绘制的，不但跟unicode和freetype什么的没有任何关系，而且跟操作系统都没有关系。<br>打印机也是如此：当你把一个文本文件直接发送给打印机，打印机使用内置的字库绘制每个文字和符号<br>著作权归作者所有。<br>商业转载请联系作者获得授权，非商业转载请注明出处。<br>作者：姜维<br>链接：<a href="http://www.zhihu.com/question/24340504/answer/27969692" target="_blank" rel="external">http://www.zhihu.com/question/24340504/answer/27969692</a><br>来源：知乎</p>
-<p>介绍到这里，大家应该对整个字体的绘制过程有个整体的认识了，首先是经过字符编解码，将硬盘中存储的有对应编码的文本文件进行加载，例如Java的文件IO，变成内存中的字符串对象，也就是符合本语言字符串存储特性的数据，（当然如果你愿意，也可以当做二进制读入，然后再手段转换编码，也是可以的），绘制时则首先调用对应的CodePage进行编码的索引查找，找到对应的字体字形索引，然后根据字形索引获取到字库中的数据，根据系统提供的绘制曲线绘制样条线的方法进行图形渲染，这样就能得到显示器上的图像了。而更高级的就是对字体进行反走样，锐化，等更为细节的操作了。<br>著作权归作者所有。<br>商业转载请联系作者获得授权，非商业转载请注明出处。<br>作者：孙笑凡<br>链接：<a href="http://www.zhihu.com/question/24340504/answer/29927340" target="_blank" rel="external">http://www.zhihu.com/question/24340504/answer/29927340</a><br>来源：知乎</p>
+    <content type="html"><![CDATA[<p><a href="http://stackoverflow.com/questions/2596714/why-does-python-print-unicode-characters-when-the-default-encoding-is-ascii/21968640#21968640" target="_blank" rel="external">Why does Python print unicode characters when the default encoding is ASCII?</a></p>
+<p>在python 2.6的交互式界面中：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">import</span> sys</div><div class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">print</span> sys.getdefaultencoding()</div><div class="line">ascii</div><div class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">print</span> <span class="string">u'\xe9'</span></div><div class="line">é</div><div class="line">&gt;&gt;&gt;</div></pre></td></tr></table></figure></p>
+<p>我原本预想打印出来的结果是乱码或者直接报错，因为字符 “é” 并不是<code>ASCII</code>码所定义的范围，而且我没有指定编码。我想我是不是没有懂这个<code>ASCII</code>码作为默认编码的真正意思。</p>
+<hr>
+<p>73票的回答：</p>
+<p>谢谢不同回复的各方面的回答，我觉得我们可以连起来成一个解释<br>当尝试着去打印unicode字符串的时候，<code>u&#39;\xe9&#39;</code>，Python会隐式的先尝试去对这个字符串用<code>sys.stdout.encoding</code>返回的编码方案编码。实际上，python在一开始初始化的时候就记录了这个设置。如果不能在环境中找到合适的编码，才会使用默认的<code>ASCII</code>码编码。</p>
+<p>比如，我使用一个默认编码是<code>UTF-8</code>的bash shell。当我在它上启动python，它会使用这个设置：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">$ python</div><div class="line"></div><div class="line">&gt;&gt;&gt; import sys</div><div class="line">&gt;&gt;&gt; <span class="built_in">print</span> sys.stdout.encoding</div><div class="line">UTF-8</div></pre></td></tr></table></figure></p>
+<p>让我们先暂时退出python shell然后重新用一些伪造的编码设置bash的环境<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ <span class="built_in">export</span> LC_CTYPE=klingon</div><div class="line"><span class="comment"># we should get some error message here, just ignore it.</span></div></pre></td></tr></table></figure></p>
+<p>然后重新启动python shell，证实一下他确实恢复到它默认的acsii编码<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">$ python</div><div class="line"></div><div class="line">&gt;&gt;&gt; import sys</div><div class="line">&gt;&gt;&gt; <span class="built_in">print</span> sys.stdout.encoding</div><div class="line">ANSI_X3.4-1968</div></pre></td></tr></table></figure></p>
+<p>那就对了！</p>
+<p>如果现在你要打印一些在ascii码定义之外的unicode字符，你就会得到漂亮的错误提示<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&gt;&gt;&gt; <span class="built_in">print</span> u<span class="string">'\xe9'</span></div><div class="line">UnicodeEncodeError: <span class="string">'ascii'</span> codec can<span class="string">'t encode character u'</span>\xe9<span class="string">' </span></div><div class="line">in position 0: ordinal not in range(128)</div></pre></td></tr></table></figure></p>
+<hr>
+<p>让我们退出python，不要管bash shell</p>
+<p>我们现在在python输出字符后观察会发生什么。为了能够观察，我们需要在图形界面的终端启动bash shell(我使用的是Gnome Terminal)然后我们设置终端的输出编码为<code>ISO-8859-1 aka latin-1</code>(图形界面的终端通常在下拉菜单里面都有可以设置字符编码的选项)注意，<strong>这个不会改变shell 真正的环境编码。他只改变终端自己对于给出输出的解码方式，有点像浏览器的行为</strong>。因此你可以改变终端的编码，那是和shell环境的编码是相互独立的。然后启动从shell中启动python，核实一下<code>sys.stdout.encodin</code>是被设置成shell的环境编码(我的是UTF-8)：</p>
+<blockquote>
+<p>(我：插一句，bash shell的环境编码是由LC_CTYPE决定的。然后终端改为latin-1的编码，应该先在编码正常utf-8的时候先启动，然后再改编码，否则，至少我尝试下来如果一开始用latin-1编码启动终端，注意是启动终端，sys.stdou.encoding是ascii)<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">$ python</div><div class="line"></div><div class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">import</span> sys</div><div class="line"></div><div class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">print</span> sys.stdout.encoding</div><div class="line">UTF<span class="number">-8</span></div><div class="line"></div><div class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">print</span> <span class="string">'\xe9'</span> <span class="comment"># (1)</span></div><div class="line">é</div><div class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">print</span> <span class="string">u'\xe9'</span> <span class="comment"># (2)</span></div><div class="line">Ã©</div><div class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">print</span> <span class="string">u'\xe9'</span>.encode(<span class="string">'latin-1'</span>) <span class="comment"># (3)</span></div><div class="line">é</div><div class="line">&gt;&gt;&gt;</div></pre></td></tr></table></figure></p>
+</blockquote>
+<p>(1) python 如实的输出二进制字节字符串，然后终端接受到这个，然后尝试着去用<code>latin-1</code>的字符映射来匹配它的值。在<code>latin-1</code>，<code>0xe9</code>或者<code>233</code>对应字符<code>&quot;é&quot;</code>,这也是终端的显示</p>
+<p>(2) 不管当前设置在<code>sys.stdou.encoding</code>的编码方案是什么，python先<strong>隐式</strong>的用这个来编码unicode，在这个例子中是<code>UTF-8</code>。在<code>UTF-8</code>编码完了后,编成了一串二进制字符串<code>\xc3\xa9</code>（后面会解释）。终端接受到这个字节流后然后尝试着去用<code>latin-1</code>去解码<code>0xc3a9</code>，但是<code>latin-1</code>的范围是<code>0</code>到<code>255</code>，所以会一个字节一个字节的解码，<code>0xc3a9</code>是2个字节长，因此<code>latin-1</code>的解码器会解释成<code>0xc3(195)</code>和<code>0xa9(169)</code>,这两个对应的字符分别是Ã和©.</p>
+<p>(3) python 会用<code>latin-1</code>的编码方案来编码unicode的code point <code>u&#39;\x9&#39;(233)</code>。事实是<code>latin-1</code>的code point的范围是0-255,然后刚好好unicode字符指向在那个范围内（Turns out latin-1 code points range is 0-255 and points to the exact same character as Unicode within that range. ）。因此，在那个范围内的unicode code point 用latin-1编码会产生相同的值。所以<code>u&#39;\xe9&#39;(233)</code>在用latin-1编码后，会产生二进制字符串<code>\xe9</code>。终端接受这个值后，尝试这种latin-1的字符映射来匹配这个值，就像第（1）中情况一样，它对应<code>&quot;é&quot;</code>，在屏幕上也是这么显示的。</p>
+<blockquote>
+<p>(我：在二进制的时候，是直接去找对应关系，不用用这个编码去解码到unicode再去找对应，我理解错了)</p>
 </blockquote>
 ]]></content>
     
     <summary type="html">
     
-      &lt;p&gt;我知道ascii码2c 是“，”逗号，但是计算机是怎么知道它是“逗号”的？&lt;br&gt;
+      搬运stackoverflow有关python的问题 之 小知识点 (一)、
     
     </summary>
     
-      <category term="砍树人" scheme="http://www.mmmmmcclxxvii.cn/categories/%E7%A0%8D%E6%A0%91%E4%BA%BA/"/>
+      <category term="stackoverflow" scheme="http://www.mmmmmcclxxvii.cn/categories/stackoverflow/"/>
     
     
-      <category term="unicode" scheme="http://www.mmmmmcclxxvii.cn/tags/unicode/"/>
+      <category term="python" scheme="http://www.mmmmmcclxxvii.cn/tags/python/"/>
     
-      <category term="glyph" scheme="http://www.mmmmmcclxxvii.cn/tags/glyph/"/>
+      <category term="stackoverflow" scheme="http://www.mmmmmcclxxvii.cn/tags/stackoverflow/"/>
     
-      <category term="computer" scheme="http://www.mmmmmcclxxvii.cn/tags/computer/"/>
+      <category term="python-piece" scheme="http://www.mmmmmcclxxvii.cn/tags/python-piece/"/>
     
   </entry>
   

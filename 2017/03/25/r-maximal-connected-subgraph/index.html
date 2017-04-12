@@ -82,7 +82,7 @@
 <link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="R,R-piece,BFS,DFS,algorithm," />
+  <meta name="keywords" content="R-piece,R,BFS,DFS,algorithm," />
 
 
 
@@ -101,19 +101,28 @@
 
 
 <meta name="description" content="求上图的最大连通子图，其实就是图的遍历，图的遍历有深度优先和广度优先图有很多种对应的存储结构，在R里面最简单的就是邻接矩阵了。
--update-用深度优先搜索做">
+-update-
+
+用深度优先搜索做
+在深度优先里面涉及到的R中的全局，局部变量">
 <meta property="og:type" content="article">
 <meta property="og:title" content="用R来找最大连通子图">
-<meta property="og:url" content="http://www.mmmmmcclxxvii.cn/2017/03/25/r-bfs/index.html">
+<meta property="og:url" content="http://www.mmmmmcclxxvii.cn/2017/03/25/r-maximal-connected-subgraph/index.html">
 <meta property="og:site_name" content="MMMMMCCLXXVII">
 <meta property="og:description" content="求上图的最大连通子图，其实就是图的遍历，图的遍历有深度优先和广度优先图有很多种对应的存储结构，在R里面最简单的就是邻接矩阵了。
--update-用深度优先搜索做">
+-update-
+
+用深度优先搜索做
+在深度优先里面涉及到的R中的全局，局部变量">
 <meta property="og:image" content="http://onexs3cnv.bkt.clouddn.com/Screen%20Shot%202017-04-11%20at%208.41.36%20AM.png">
-<meta property="og:updated_time" content="2017-04-11T12:12:34.000Z">
+<meta property="og:updated_time" content="2017-04-12T12:45:59.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="用R来找最大连通子图">
 <meta name="twitter:description" content="求上图的最大连通子图，其实就是图的遍历，图的遍历有深度优先和广度优先图有很多种对应的存储结构，在R里面最简单的就是邻接矩阵了。
--update-用深度优先搜索做">
+-update-
+
+用深度优先搜索做
+在深度优先里面涉及到的R中的全局，局部变量">
 <meta name="twitter:image" content="http://onexs3cnv.bkt.clouddn.com/Screen%20Shot%202017-04-11%20at%208.41.36%20AM.png">
 
 
@@ -142,7 +151,7 @@
 
 
 
-  <link rel="canonical" href="http://www.mmmmmcclxxvii.cn/2017/03/25/r-bfs/"/>
+  <link rel="canonical" href="http://www.mmmmmcclxxvii.cn/2017/03/25/r-maximal-connected-subgraph/"/>
 
 
 
@@ -330,7 +339,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://www.mmmmmcclxxvii.cn/2017/03/25/r-bfs/">
+    <link itemprop="mainEntityOfPage" href="http://www.mmmmmcclxxvii.cn/2017/03/25/r-maximal-connected-subgraph/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Crayon Chaney">
@@ -382,8 +391,8 @@
               
                 <span class="post-meta-item-text">Post modified</span>
               
-              <time title="Post modified" itemprop="dateModified" datetime="2017-04-11T20:12:34+08:00">
-                2017-04-11
+              <time title="Post modified" itemprop="dateModified" datetime="2017-04-12T20:45:59+08:00">
+                2017-04-12
               </time>
             
           </span>
@@ -419,7 +428,7 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a class="cloud-tie-join-count" href="/2017/03/25/r-bfs/#comments" itemprop="discussionUrl">
+                <a class="cloud-tie-join-count" href="/2017/03/25/r-maximal-connected-subgraph/#comments" itemprop="discussionUrl">
                   <span class="post-comments-count join-count" itemprop="commentCount"></span>
                 </a>
               </span>
@@ -428,7 +437,7 @@
 
           
           
-             <span id="/2017/03/25/r-bfs/" class="leancloud_visitors" data-flag-title="用R来找最大连通子图">
+             <span id="/2017/03/25/r-maximal-connected-subgraph/" class="leancloud_visitors" data-flag-title="用R来找最大连通子图">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -460,7 +469,7 @@
           
             <div class="post-gallery-row">
               <a class="post-gallery-img fancybox"
-                 href="http://onexs3cnv.bkt.clouddn.com/Screen%20Shot%202017-04-11%20at%208.41.36%20AM.png" rel="gallery_cj1dicax2000in776ngoszuas"
+                 href="http://onexs3cnv.bkt.clouddn.com/Screen%20Shot%202017-04-11%20at%208.41.36%20AM.png" rel="gallery_cj1f36340000ysu76txrog4yu"
                  itemscope itemtype="http://schema.org/ImageObject" itemprop="url">
                 <img src="http://onexs3cnv.bkt.clouddn.com/Screen%20Shot%202017-04-11%20at%208.41.36%20AM.png" itemprop="contentUrl"/>
               </a>
@@ -474,7 +483,12 @@
 
       
         <p>求上图的最大连通子图，其实就是图的遍历，图的遍历有深度优先和广度优先<br>图有很多种对应的存储结构，在R里面最简单的就是邻接矩阵了。</p>
-<p>-update-<br>用深度优先搜索做<br><a id="more"></a></p>
+<p>-update-</p>
+<ul>
+<li>用深度优先搜索做</li>
+<li>在深度优先里面涉及到的R中的全局，局部变量<a id="more"></a>
+</li>
+</ul>
 <h1 id="构造邻接矩阵"><a href="#构造邻接矩阵" class="headerlink" title="构造邻接矩阵"></a>构造邻接矩阵</h1><figure class="highlight r"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">m &lt;- matrix(<span class="number">0</span>,<span class="number">5</span>,<span class="number">5</span>)</div><div class="line">m[<span class="number">1</span>,<span class="number">2</span>] &lt;- <span class="number">1</span></div><div class="line">m[<span class="number">1</span>,<span class="number">3</span>] &lt;- <span class="number">1</span></div><div class="line">m[<span class="number">2</span>,<span class="number">3</span>] &lt;- <span class="number">1</span></div><div class="line">m[<span class="number">4</span>,<span class="number">5</span>] &lt;- <span class="number">1</span></div><div class="line"></div><div class="line">m &lt;- m + t(m)</div></pre></td></tr></table></figure>
 <figure class="highlight r"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">&gt; m</div><div class="line">     [,<span class="number">1</span>] [,<span class="number">2</span>] [,<span class="number">3</span>] [,<span class="number">4</span>] [,<span class="number">5</span>]</div><div class="line">[<span class="number">1</span>,]    <span class="number">0</span>    <span class="number">1</span>    <span class="number">1</span>    <span class="number">0</span>    <span class="number">0</span></div><div class="line">[<span class="number">2</span>,]    <span class="number">1</span>    <span class="number">0</span>    <span class="number">1</span>    <span class="number">0</span>    <span class="number">0</span></div><div class="line">[<span class="number">3</span>,]    <span class="number">1</span>    <span class="number">1</span>    <span class="number">0</span>    <span class="number">0</span>    <span class="number">0</span></div><div class="line">[<span class="number">4</span>,]    <span class="number">0</span>    <span class="number">0</span>    <span class="number">0</span>    <span class="number">0</span>    <span class="number">1</span></div><div class="line">[<span class="number">5</span>,]    <span class="number">0</span>    <span class="number">0</span>    <span class="number">0</span>    <span class="number">1</span>    <span class="number">0</span></div></pre></td></tr></table></figure>
 <p>主要也就是<code>m&lt;-m+t(m)</code>这一步，因为是无向图，是对称矩阵，可以先构造一半然后与转置相加。<strong>这是对称矩阵的性质的应用！！</strong></p>
@@ -518,8 +532,18 @@
 <p>然后我用笔在纸上模拟的时候，发现这应该是个递归的过程。那<code>visisted</code>需要全局来维护，那这样函数体内就用循环可以了，遍历一个节点的所有邻接节点，然后对每一个节点再进入这个函数。这样就不需要<code>parent_node</code>来维护了，但是需要一个边界条件来终止递归。那就是一个节点的所有邻接节点都被访问过了。</p>
 <h2 id="发现的问题，visited全局变量"><a href="#发现的问题，visited全局变量" class="headerlink" title="发现的问题，visited全局变量"></a>发现的问题，<code>visited</code>全局变量</h2><figure class="highlight r"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line">m &lt;- matrix(<span class="number">0</span>,<span class="number">5</span>,<span class="number">5</span>)</div><div class="line">m[<span class="number">1</span>,<span class="number">2</span>] &lt;- <span class="number">1</span></div><div class="line">m[<span class="number">1</span>,<span class="number">3</span>] &lt;- <span class="number">1</span></div><div class="line">m[<span class="number">2</span>,<span class="number">3</span>] &lt;- <span class="number">1</span></div><div class="line">m[<span class="number">4</span>,<span class="number">5</span>] &lt;- <span class="number">1</span></div><div class="line"></div><div class="line">m &lt;- m + t(m)</div><div class="line"></div><div class="line">visited &lt;- c(<span class="number">1</span>)</div><div class="line"></div><div class="line">dfs &lt;- <span class="keyword">function</span>(current_node)&#123;</div><div class="line">  <span class="comment">#browser()  # 调试用的</span></div><div class="line">  </div><div class="line">  candidate_node &lt;- which(as.logical(m[current_node,]))</div><div class="line">  candidate_node &lt;- setdiff(candidate_node,visited)</div><div class="line">  <span class="comment">#print(candidate_node)</span></div><div class="line">  <span class="keyword">if</span>(length(candidate_node) == <span class="number">0</span>)&#123;</div><div class="line">    <span class="keyword">return</span>(<span class="number">0</span>) <span class="comment">#这个0返回的没有意义的，随便都可以，只是单纯的结束</span></div><div class="line">  &#125;</div><div class="line">  <span class="keyword">for</span>(i <span class="keyword">in</span> candidate_node)&#123;</div><div class="line">    visited &lt;- c(visited,i) <span class="comment">#访问i节点</span></div><div class="line">    dfs(i) <span class="comment">#递归</span></div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line">dfs(<span class="number">1</span>)</div><div class="line">print(visited)</div></pre></td></tr></table></figure>
 <p>上面的结果出错了<br><figure class="highlight r"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">Error: evaluation nested too deeply: infinite recursion / options(expressions=)?</div><div class="line">Error during wrapup: evaluation nested too deeply: infinite recursion / options(expressions=)?</div></pre></td></tr></table></figure></p>
-<p>那就是递归没返回<br>调试了一下，发现问题出现在<code>visited</code>上，<code>dfs(i)</code>进去的时候，理想中<code>visited</code>应该是全局变量，在循环中我将<code>i</code>节点加入已访问的节点中，但是发现递归进去的时候，<code>candidate_node &lt;- setdiff(candidate_node,visited)</code>这时候的<code>visited</code>值是<code>1</code>,就是初始值。可是为什么呢？？？<br>那就将这个<code>visited</code>当作一个参数传递就行了</p>
-<p>但是发现，这个只是值传递参数，不是引用传递，也就是参数变了，最后<code>visited</code>自己没有改变没有用啊，<code>print(visited)</code>就没用，最后结果就只是<code>1</code></p>
+<p>那就是递归没返回<br>调试了一下，发现问题出现在<code>visited</code>上，<code>dfs(i)</code>进去的时候，理想中<code>visited</code>应该是全局变量，在循环中我将<code>i</code>节点加入已访问的节点中，但是发现递归进去的时候，<code>candidate_node &lt;- setdiff(candidate_node,visited)</code>这时候的<code>visited</code>值是<code>1</code>,就是初始值。可是为什么呢？？？</p>
+<blockquote>
+<p>内部函数在它的环境中查找visited的值（查找的顺序为：首先函数体的局部变量，参数；然后是外部函数中的局域变量，参数；最后是全局变量） </p>
+</blockquote>
+<p>所以当在函数内做赋值的时候，相当于就建立了一个局部变量，那在第一层的时候<code>visited &lt;- c(visited,i)</code>这个语句还没执行到的时候，此时的<code>visited</code>在函数体内还没有定义！那找到的就是外部的变量，所以调试的时候看到的是<code>1</code>，那其实相当于因为在递归的时候可以看作都是进入自己的函数，所以每一层的<code>visited</code>都是独立的。</p>
+<h2 id="方案-1-return-visited"><a href="#方案-1-return-visited" class="headerlink" title="方案 1 : return(visited)"></a>方案 1 : return(visited)</h2><figure class="highlight r"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">dfs2 &lt;- <span class="keyword">function</span>(current_node,vis=<span class="literal">NULL</span>)&#123;</div><div class="line">	candidate_node &lt;- which(as.logical(m[current_node,]))</div><div class="line">	candidate_node &lt;- setdiff(candidate_node,visited)</div><div class="line">	    </div><div class="line">	<span class="keyword">if</span>(length(candidate_node) == <span class="number">0</span>)&#123;</div><div class="line">		<span class="keyword">return</span>(<span class="literal">NULL</span>) </div><div class="line">	&#125;</div><div class="line">	<span class="keyword">for</span>(i <span class="keyword">in</span> candidate_node)&#123;</div><div class="line">		<span class="keyword">if</span>(!any(visited == i))&#123;</div><div class="line">			visited &lt;- c(visited,dfs2(i))</div><div class="line">		&#125;</div><div class="line">		<span class="keyword">return</span>(visited)</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>这么写有两个问题！！！<br>第一个是有闭环的时候，因为我在前面的代码计算<code>candidate_node</code>的时候是依赖<code>visited</code>的，在每一层的函数进去后，因为前面说了，每一层的<code>visited</code>是独立的，所以在没有赋值之前，也就是没有在下一层<code>return</code>之前，用的都是外部的<code>visited &lt;- c(1)</code>这个值，所以这时候计算的<code>candidate_node</code>肯定是不正确的，不是我们想要的，因为不能正确判断是否邻接节点已经访问过。这是根源，所以导致了在下面<code>for</code>循环的时候，在闭环的情况下，因为没有正确的将已经访问的排除掉，而无限的递归。</p>
+<p>第二个是分叉，就最简单的情况，<code>1</code>连接<code>2</code>,<code>3</code>,但后两个不连接，因为到<code>2</code>中，<code>visited</code>是外部的<code>1</code>，所以这里是恰好，凑巧，刚刚好<code>candidate_node</code>计算为空，返回，但是！！！返回的是空！这样<code>visited &lt;- c(visited,dfs2(i))</code>这个语句就没有起作用，追其根源那就是<code>return</code>写的不正确。一方面是这里连<code>return(visited)</code>都没执行到，相当于在<code>2</code>层这里直接返回<code>NULL</code>，但是并没有把<code>2</code>这个节点加入<code>visited</code>中。<br>而且，即使不管上面的情况，在<code>2</code>饭后会，后面直接<code>return(visited)</code>了，函数直接退出了。<code>3</code>根本就没做。</p>
+<p>试错：<br><figure class="highlight r"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">m &lt;- matrix(<span class="number">0</span>,<span class="number">3</span>,<span class="number">3</span>)</div><div class="line">m[<span class="number">1</span>,<span class="number">2</span>] &lt;- <span class="number">1</span></div><div class="line">m[<span class="number">1</span>,<span class="number">3</span>] &lt;- <span class="number">1</span></div><div class="line">m + t(m) -&gt; m</div><div class="line"></div><div class="line">visited &lt;- c(<span class="number">1</span>)</div><div class="line"></div><div class="line">print(dfs2(<span class="number">1</span>))</div></pre></td></tr></table></figure></p>
+<p>结果<br><figure class="highlight r"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">&gt; print(dfs2(<span class="number">1</span>))</div><div class="line">[<span class="number">1</span>] <span class="number">1</span></div></pre></td></tr></table></figure></p>
+<p>[todo] 使用return 写递归应该是可以的，那就是我整体的递归应该不是按照原来的思路了。但目前还没有想到怎么写</p>
+<h2 id="方案-2-这个visited当作一个参数传递就行了"><a href="#方案-2-这个visited当作一个参数传递就行了" class="headerlink" title="方案 2 : 这个visited当作一个参数传递就行了"></a>方案 2 : 这个<code>visited</code>当作一个参数传递就行了</h2><p>但是发现，这个只是值传递参数，不是引用传递，也就是参数变了，最后<code>visited</code>自己没有改变没有用啊，<code>print(visited)</code>就没用，最后结果就只是<code>1</code></p>
 <h2 id="lt-lt-解决"><a href="#lt-lt-解决" class="headerlink" title="&lt;&lt;-解决"></a><code>&lt;&lt;-</code>解决</h2><p>然后我<a href="https://zhangjg.github.io/blog/2015/12/25/The-Closure-in-R.html" target="_blank" rel="external">查到</a>里面提到了<code>&lt;&lt;-</code>，可能这个操作符才是将变量复制到全局变量中去，不然<code>&lt;-</code>就在函数体内生成了一个同名的局部变量<br>然后我就将上面的<code>visited &lt;- c(visited,i)</code>改为<code>visited &lt;&lt;- c(visited,i)</code><br>得到的结果是<br><figure class="highlight r"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">&gt; print(visited)</div><div class="line">[<span class="number">1</span>] <span class="number">1</span> <span class="number">2</span> <span class="number">3</span> <span class="number">3</span></div></pre></td></tr></table></figure></p>
 <p>多了一个<code>3</code>，这个是因为在第一层的时候也就是<code>current_node</code>为<code>1</code>的时候，邻接节点是<code>2</code>,<code>3</code>,在<code>for</code>循环中，先进入<code>2</code>节点，此时可以遍历的只有<code>3</code>,然后进入<code>3</code>,访问完，回朔，此时应该是在这个图下<code>1</code>,<code>2</code>,<code>3</code>都是遍历完了的，但是回朔到<code>1</code>节点的时候，<code>for</code>循环还有一个<code>3</code>没执行，所以在<code>for</code>循环里面还要再加一个条件，看是否已经遍历过。<br><figure class="highlight r"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">for</span>(i <span class="keyword">in</span> candidate_node)&#123;</div><div class="line">	<span class="keyword">if</span>(!any(visited == i))&#123;</div><div class="line">		visited &lt;&lt;- c(visited,i) <span class="comment">#访问i节点</span></div><div class="line">	&#125;</div><div class="line">	dfs(i) <span class="comment">#递归</span></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
 <p>结果：<br><figure class="highlight r"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">&gt; print(visited)</div><div class="line">[<span class="number">1</span>] <span class="number">1</span> <span class="number">2</span> <span class="number">3</span></div></pre></td></tr></table></figure></p>
@@ -572,7 +596,7 @@
     </li>
     <li class="post-copyright-link">
       <strong>Post link:</strong>
-      <a href="http://www.mmmmmcclxxvii.cn/2017/03/25/r-bfs/" title="用R来找最大连通子图">http://www.mmmmmcclxxvii.cn/2017/03/25/r-bfs/</a>
+      <a href="http://www.mmmmmcclxxvii.cn/2017/03/25/r-maximal-connected-subgraph/" title="用R来找最大连通子图">http://www.mmmmmcclxxvii.cn/2017/03/25/r-maximal-connected-subgraph/</a>
     </li>
     <li class="post-copyright-license">
       <strong>Copyright Notice: </strong>
@@ -588,9 +612,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/R/" rel="tag"><i class="fa fa-tag"></i> R</a>
-          
             <a href="/tags/R-piece/" rel="tag"><i class="fa fa-tag"></i> R-piece</a>
+          
+            <a href="/tags/R/" rel="tag"><i class="fa fa-tag"></i> R</a>
           
             <a href="/tags/BFS/" rel="tag"><i class="fa fa-tag"></i> BFS</a>
           
@@ -718,7 +742,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">21</span>
+                <span class="site-state-item-count">22</span>
                 <span class="site-state-item-name">posts</span>
               </a>
             </div>
@@ -740,7 +764,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">28</span>
+                <span class="site-state-item-count">29</span>
                 <span class="site-state-item-name">tags</span>
               </a>
             </div>
@@ -999,7 +1023,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#构造邻接矩阵"><span class="nav-number">1.</span> <span class="nav-text">构造邻接矩阵</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#广度优先遍历"><span class="nav-number">2.</span> <span class="nav-text">广度优先遍历</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#错误的代码"><span class="nav-number">2.1.</span> <span class="nav-text">错误的代码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#初始化"><span class="nav-number">2.2.</span> <span class="nav-text">初始化</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#遍历"><span class="nav-number">2.3.</span> <span class="nav-text">遍历</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#全图对每个节点进行同样的操作"><span class="nav-number">2.4.</span> <span class="nav-text">全图对每个节点进行同样的操作</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#深度优先遍历"><span class="nav-number">3.</span> <span class="nav-text">深度优先遍历</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#思路"><span class="nav-number">3.1.</span> <span class="nav-text">思路</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#发现的问题，visited全局变量"><span class="nav-number">3.2.</span> <span class="nav-text">发现的问题，visited全局变量</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#lt-lt-解决"><span class="nav-number">3.3.</span> <span class="nav-text"><<-解决</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#寻找最大连通子图"><span class="nav-number">3.4.</span> <span class="nav-text">寻找最大连通子图</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#测试复杂的用例"><span class="nav-number">3.5.</span> <span class="nav-text">测试复杂的用例</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#构造邻接矩阵"><span class="nav-number">1.</span> <span class="nav-text">构造邻接矩阵</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#广度优先遍历"><span class="nav-number">2.</span> <span class="nav-text">广度优先遍历</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#错误的代码"><span class="nav-number">2.1.</span> <span class="nav-text">错误的代码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#初始化"><span class="nav-number">2.2.</span> <span class="nav-text">初始化</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#遍历"><span class="nav-number">2.3.</span> <span class="nav-text">遍历</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#全图对每个节点进行同样的操作"><span class="nav-number">2.4.</span> <span class="nav-text">全图对每个节点进行同样的操作</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#深度优先遍历"><span class="nav-number">3.</span> <span class="nav-text">深度优先遍历</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#思路"><span class="nav-number">3.1.</span> <span class="nav-text">思路</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#发现的问题，visited全局变量"><span class="nav-number">3.2.</span> <span class="nav-text">发现的问题，visited全局变量</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#方案-1-return-visited"><span class="nav-number">3.3.</span> <span class="nav-text">方案 1 : return(visited)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#方案-2-这个visited当作一个参数传递就行了"><span class="nav-number">3.4.</span> <span class="nav-text">方案 2 : 这个visited当作一个参数传递就行了</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#lt-lt-解决"><span class="nav-number">3.5.</span> <span class="nav-text"><<-解决</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#寻找最大连通子图"><span class="nav-number">3.6.</span> <span class="nav-text">寻找最大连通子图</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#测试复杂的用例"><span class="nav-number">3.7.</span> <span class="nav-text">测试复杂的用例</span></a></li></ol></li></ol></div>
             
 
           </div>

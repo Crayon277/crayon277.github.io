@@ -4,16 +4,16 @@
 
     
   <url>
-    <loc>http://www.mmmmmcclxxvii.cn/2017/03/25/r-bfs/</loc>
-    <lastmod>2017-04-11T12:12:34.000Z</lastmod>
+    <loc>http://www.mmmmmcclxxvii.cn/2017/03/25/r-maximal-connected-subgraph/</loc>
+    <lastmod>2017-04-12T12:45:59.000Z</lastmod>
     <data>
         <display>
         <title>用R来找最大连通子图</title>
         <pubTime>2017-03-25T00:35:37.000Z</pubTime>
         
-        <tag>R</tag>
-         
         <tag>R-piece</tag>
+         
+        <tag>R</tag>
          
         <tag>BFS</tag>
          
@@ -39,9 +39,9 @@
         <title>用r做一个简单的统计词频的程序</title>
         <pubTime>2017-04-08T06:31:23.000Z</pubTime>
         
-        <tag>R</tag>
-         
         <tag>R-piece</tag>
+         
+        <tag>R</tag>
          
         <tag>text-mining</tag>
          
@@ -63,11 +63,11 @@
         <title>编码总结</title>
         <pubTime>2016-10-04T01:47:42.000Z</pubTime>
         
-        <tag>encode</tag>
-         
         <tag>python</tag>
          
         <tag>unicode</tag>
+         
+        <tag>encode</tag>
          
         <tag>utf-8</tag>
          
@@ -111,9 +111,9 @@
         <title>用R画出下面这样子的形式的图</title>
         <pubTime>2017-04-07T05:35:06.000Z</pubTime>
         
-        <tag>R</tag>
-         
         <tag>R-piece</tag>
+         
+        <tag>R</tag>
          
         <tag>plot</tag>
          
@@ -400,7 +400,7 @@
 
     
   <url>
-    <loc>http://www.mmmmmcclxxvii.cn/2017/03/14/object/</loc>
+    <loc>http://www.mmmmmcclxxvii.cn/2017/03/14/stackoverflow_object_1/</loc>
     <lastmod>2017-03-27T15:00:07.000Z</lastmod>
     <data>
         <display>
@@ -443,6 +443,30 @@
            
              
               <breadCrumb title="life" url="http://www.mmmmmcclxxvii.cn/categories/life/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.mmmmmcclxxvii.cn/2016/02/12/stackoverflow-python-piece-1/</loc>
+    <lastmod>2016-02-12T00:11:45.000Z</lastmod>
+    <data>
+        <display>
+        <title>project of stackoverflow - python piece (一)</title>
+        <pubTime>2016-02-12T00:11:45.000Z</pubTime>
+        
+        <tag>python</tag>
+         
+        <tag>stackoverflow</tag>
+         
+        <tag>python-piece</tag>
+         
+         
+           
+             
+              <breadCrumb title="stackoverflow" url="http://www.mmmmmcclxxvii.cn/categories/stackoverflow/"/>
           
         </display>
     </data>
