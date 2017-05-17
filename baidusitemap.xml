@@ -4,8 +4,52 @@
 
     
   <url>
+    <loc>http://www.mmmmmcclxxvii.cn/2017/05/17/calm-down/</loc>
+    <lastmod>2017-05-17T15:55:55.000Z</lastmod>
+    <data>
+        <display>
+        <title>平静和沉淀</title>
+        <pubTime>2017-05-17T15:44:57.000Z</pubTime>
+        
+        <tag>life</tag>
+         
+         
+           
+             
+              <breadCrumb title="life" url="http://www.mmmmmcclxxvii.cn/categories/life/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.mmmmmcclxxvii.cn/2017/03/14/stackoverflow_object_1/</loc>
+    <lastmod>2017-05-15T10:55:32.000Z</lastmod>
+    <data>
+        <display>
+        <title>project of stackoverflow - python object(一)</title>
+        <pubTime>2017-03-14T14:27:10.000Z</pubTime>
+        
+        <tag>python</tag>
+         
+        <tag>object</tag>
+         
+        <tag>stackoverflow</tag>
+         
+         
+           
+             
+              <breadCrumb title="stackoverflow" url="http://www.mmmmmcclxxvii.cn/categories/stackoverflow/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://www.mmmmmcclxxvii.cn/2017/03/25/r-maximal-connected-subgraph/</loc>
-    <lastmod>2017-04-12T12:45:59.000Z</lastmod>
+    <lastmod>2017-05-15T10:54:56.000Z</lastmod>
     <data>
         <display>
         <title>用R来找最大连通子图</title>
@@ -25,6 +69,26 @@
            
              
               <breadCrumb title="R" url="http://www.mmmmmcclxxvii.cn/categories/R/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.mmmmmcclxxvii.cn/2017/04/14/install-hadoop/</loc>
+    <lastmod>2017-05-15T10:54:31.000Z</lastmod>
+    <data>
+        <display>
+        <title>install hadoop</title>
+        <pubTime>2017-04-14T06:47:18.000Z</pubTime>
+        
+        <tag>hadoop</tag>
+         
+         
+           
+             
+              <breadCrumb title="bigdata" url="http://www.mmmmmcclxxvii.cn/categories/bigdata/"/>
           
         </display>
     </data>
@@ -65,9 +129,9 @@
         
         <tag>python</tag>
          
-        <tag>unicode</tag>
-         
         <tag>encode</tag>
+         
+        <tag>unicode</tag>
          
         <tag>utf-8</tag>
          
@@ -393,30 +457,6 @@
            
              
               <breadCrumb title="python" url="http://www.mmmmmcclxxvii.cn/categories/python/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://www.mmmmmcclxxvii.cn/2017/03/14/stackoverflow_object_1/</loc>
-    <lastmod>2017-03-27T15:00:07.000Z</lastmod>
-    <data>
-        <display>
-        <title>project of stackoverflow - python object(一)</title>
-        <pubTime>2017-03-14T14:27:10.000Z</pubTime>
-        
-        <tag>python</tag>
-         
-        <tag>object</tag>
-         
-        <tag>stackoverflow</tag>
-         
-         
-           
-             
-              <breadCrumb title="stackoverflow" url="http://www.mmmmmcclxxvii.cn/categories/stackoverflow/"/>
           
         </display>
     </data>

@@ -479,6 +479,7 @@
 <blockquote>
 <p>(我：在二进制的时候，是直接去找对应关系，不用用这个编码去解码到unicode再去找对应，我理解错了)</p>
 </blockquote>
+<p>现在我们在下拉菜单下面将终端的编码设置为UTF-8（就像你改变浏览器编码一样）。不需要中断python或重启shell。现在终端的编码和python的一致了，我们来重新尝试打印：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">print</span> <span class="string">'\xe9'</span> <span class="comment"># (4)</span></div><div class="line"></div><div class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">print</span> <span class="string">u'\xe9'</span> <span class="comment"># (5)</span></div><div class="line">é</div><div class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">print</span> <span class="string">u'\xe9'</span>.encode(<span class="string">'latin-1'</span>) <span class="comment"># (6)</span></div><div class="line"></div><div class="line">&gt;&gt;&gt;</div></pre></td></tr></table></figure></p>
 
       
     </div>
@@ -656,7 +657,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">22</span>
+                <span class="site-state-item-count">24</span>
                 <span class="site-state-item-name">posts</span>
               </a>
             </div>
