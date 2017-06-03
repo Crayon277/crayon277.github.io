@@ -4,6 +4,138 @@
 
     
   <url>
+    <loc>http://www.mmmmmcclxxvii.cn/2017/05/27/stackoverflow-c-piece-1/</loc>
+    <lastmod>2017-06-03T09:13:13.000Z</lastmod>
+    <data>
+        <display>
+        <title>project of stackoverflow - C Piece (一)</title>
+        <pubTime>2017-05-27T10:55:09.000Z</pubTime>
+        
+        <tag>stackoverflow</tag>
+         
+        <tag>c</tag>
+         
+        <tag>c-piece</tag>
+         
+         
+           
+             
+              <breadCrumb title="stackoverflow" url="http://www.mmmmmcclxxvii.cn/categories/stackoverflow/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.mmmmmcclxxvii.cn/2017/06/02/recompile-hadoop/</loc>
+    <lastmod>2017-06-03T08:10:06.000Z</lastmod>
+    <data>
+        <display>
+        <title>重新编译hadoop过程终于到的问题</title>
+        <pubTime>2017-06-02T09:03:42.000Z</pubTime>
+        
+        <tag>hadoop</tag>
+         
+         
+           
+             
+              <breadCrumb title="bigdata" url="http://www.mmmmmcclxxvii.cn/categories/bigdata/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.mmmmmcclxxvii.cn/2017/04/14/install-hadoop/</loc>
+    <lastmod>2017-06-02T21:37:48.000Z</lastmod>
+    <data>
+        <display>
+        <title>install hadoop</title>
+        <pubTime>2017-04-14T06:47:18.000Z</pubTime>
+        
+        <tag>hadoop</tag>
+         
+         
+           
+             
+              <breadCrumb title="bigdata" url="http://www.mmmmmcclxxvii.cn/categories/bigdata/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.mmmmmcclxxvii.cn/2015/06/02/c-draw-cos/</loc>
+    <lastmod>2017-06-02T03:52:07.000Z</lastmod>
+    <data>
+        <display>
+        <title>c_draw_cos</title>
+        <pubTime>2015-06-02T00:33:38.000Z</pubTime>
+        
+        <tag>C-practice</tag>
+         
+         
+           
+             
+              <breadCrumb title="C" url="http://www.mmmmmcclxxvii.cn/categories/C/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.mmmmmcclxxvii.cn/2017/05/29/stackoverflow-bitcoin-1/</loc>
+    <lastmod>2017-05-29T12:35:10.000Z</lastmod>
+    <data>
+        <display>
+        <title>stackoverflow-bitcoin-1</title>
+        <pubTime>2017-05-29T10:31:21.000Z</pubTime>
+        
+        <tag>bitcoin</tag>
+         
+        <tag>stackoverflow</tag>
+         
+        <tag>blockchain</tag>
+         
+         
+           
+             
+              <breadCrumb title="stackoverflow" url="http://www.mmmmmcclxxvii.cn/categories/stackoverflow/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.mmmmmcclxxvii.cn/2017/03/14/stackoverflow_object_1/</loc>
+    <lastmod>2017-05-27T14:52:14.000Z</lastmod>
+    <data>
+        <display>
+        <title>project of stackoverflow - python object(一)</title>
+        <pubTime>2017-03-14T14:27:10.000Z</pubTime>
+        
+        <tag>python</tag>
+         
+        <tag>object</tag>
+         
+        <tag>stackoverflow</tag>
+         
+         
+           
+             
+              <breadCrumb title="stackoverflow" url="http://www.mmmmmcclxxvii.cn/categories/stackoverflow/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://www.mmmmmcclxxvii.cn/2017/05/18/inside-money/</loc>
     <lastmod>2017-05-23T09:41:36.000Z</lastmod>
     <data>
@@ -48,30 +180,6 @@
 
     
   <url>
-    <loc>http://www.mmmmmcclxxvii.cn/2017/03/14/stackoverflow_object_1/</loc>
-    <lastmod>2017-05-15T10:55:32.000Z</lastmod>
-    <data>
-        <display>
-        <title>project of stackoverflow - python object(一)</title>
-        <pubTime>2017-03-14T14:27:10.000Z</pubTime>
-        
-        <tag>python</tag>
-         
-        <tag>object</tag>
-         
-        <tag>stackoverflow</tag>
-         
-         
-           
-             
-              <breadCrumb title="stackoverflow" url="http://www.mmmmmcclxxvii.cn/categories/stackoverflow/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
     <loc>http://www.mmmmmcclxxvii.cn/2017/03/25/r-maximal-connected-subgraph/</loc>
     <lastmod>2017-05-15T10:54:56.000Z</lastmod>
     <data>
@@ -93,26 +201,6 @@
            
              
               <breadCrumb title="R" url="http://www.mmmmmcclxxvii.cn/categories/R/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://www.mmmmmcclxxvii.cn/2017/04/14/install-hadoop/</loc>
-    <lastmod>2017-05-15T10:54:31.000Z</lastmod>
-    <data>
-        <display>
-        <title>install hadoop</title>
-        <pubTime>2017-04-14T06:47:18.000Z</pubTime>
-        
-        <tag>hadoop</tag>
-         
-         
-           
-             
-              <breadCrumb title="bigdata" url="http://www.mmmmmcclxxvii.cn/categories/bigdata/"/>
           
         </display>
     </data>

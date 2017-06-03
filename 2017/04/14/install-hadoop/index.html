@@ -100,16 +100,20 @@
 
 
 
-<meta name="description" content="记录安装hadoop">
+<meta name="description" content="记录安装hadoop 2.8.0">
 <meta property="og:type" content="article">
 <meta property="og:title" content="install hadoop">
 <meta property="og:url" content="http://www.mmmmmcclxxvii.cn/2017/04/14/install-hadoop/index.html">
 <meta property="og:site_name" content="MMMMMCCLXXVII">
-<meta property="og:description" content="记录安装hadoop">
-<meta property="og:updated_time" content="2017-05-15T10:54:31.000Z">
+<meta property="og:description" content="记录安装hadoop 2.8.0">
+<meta property="og:image" content="http://onexs3cnv.bkt.clouddn.com/Screen%20Shot%202017-06-03%20at%2012.29.03%20AM.png">
+<meta property="og:image" content="http://onexs3cnv.bkt.clouddn.com/Screen%20Shot%202017-06-03%20at%2012.54.22%20AM.png">
+<meta property="og:image" content="http://onexs3cnv.bkt.clouddn.com/Screen%20Shot%202017-06-03%20at%205.17.35%20AM.png">
+<meta property="og:updated_time" content="2017-06-02T21:37:48.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="install hadoop">
-<meta name="twitter:description" content="记录安装hadoop">
+<meta name="twitter:description" content="记录安装hadoop 2.8.0">
+<meta name="twitter:image" content="http://onexs3cnv.bkt.clouddn.com/Screen%20Shot%202017-06-03%20at%2012.29.03%20AM.png">
 
 
 
@@ -377,8 +381,8 @@
               
                 <span class="post-meta-item-text">Post modified</span>
               
-              <time title="Post modified" itemprop="dateModified" datetime="2017-05-15T18:54:31+08:00">
-                2017-05-15
+              <time title="Post modified" itemprop="dateModified" datetime="2017-06-03T05:37:48+08:00">
+                2017-06-03
               </time>
             
           </span>
@@ -441,7 +445,7 @@
 
           
               <div class="post-description">
-                  记录安装hadoop
+                  记录安装hadoop 2.8.0
               </div>
           
 
@@ -456,7 +460,39 @@
       
 
       
-        <p>借鉴的文档：</p>
+        <p>因为hadoop版本的问题，有些命令可能不一样。网上搜到的一些资料都会过时或与我现在安装的版本不兼容。<br>所以直接看<a href="http://hadoop.apache.org/docs/" target="_blank" rel="external">官方文档</a></p>
+<p>那安装其实涉及的就是单机和集群。特地在知乎上逛了一圈，得到的答案是，看目的吧，如果主要想学习mapreduce编程的，不要搭集群，不要搭集群，不要搭集群！！！因为目的是修炼内功，就没必要磨练工具了吧。但至少我觉得安装个工具如果都搞不定的话，那就不用混了。还是把重心放在mapreduce编程上吧</p>
+<p>这里记录一个安装<code>single-node</code> hadoop的历程。</p>
+<p>我mac上用的是<code>homebrew</code>包管理工具，所以我就直接<code>brew install hadoop</code>。好了，安装完成。</p>
+<p>接下来的<a href="http://hadoop.apache.org/docs/r2.8.0/hadoop-project-dist/hadoop-common/SingleCluster.html" target="_blank" rel="external">文档</a>里面都有。</p>
+<p>主要记录一下几个点：</p>
+<ol>
+<li>java的路径</li>
+</ol>
+<p>因为是从官网下载的dmg直接安装的。java home的路径是<code>/Library/Java/JavaVirtualMachines/jdk1.8.0_60.jdk/Contents/Home</code><br>如果是其他途径，比如<code>brew cask install java</code>的话，那应该会在<code>/usr/local/Cellar/java</code>中吧（我猜的），还有其他的肯定会有提示的。</p>
+<ol>
+<li>官网文档中的etc/hadoop？？在哪？</li>
+</ol>
+<p>因为是通过<code>brew</code>安装的<code>hadoop</code>，所以<code>hadoop</code>都在<code>/usr/local/Cellar/hadoop</code>里面。文档直接说是<code>etc/hadop</code>，对应我机子上完整的路径是<code>/usr/local/Cellar/hadoop/2.8.0/libexec/etc</code></p>
+<p>同理<code>bin/hadoop</code></p>
+<p>中间什么配置<code>core-site.xml</code>等文件看文档就好了。</p>
+<p><img src="http://onexs3cnv.bkt.clouddn.com/Screen%20Shot%202017-06-03%20at%2012.29.03%20AM.png" alt="hadoop-localhost"></p>
+<p>出来这个页面就可以了</p>
+<ol>
+<li>hadoop fs -ls</li>
+</ol>
+<p>在官网文档里面的命令是<code>hdfs dfs</code>，但其实是一样的<br><img src="http://onexs3cnv.bkt.clouddn.com/Screen%20Shot%202017-06-03%20at%2012.54.22%20AM.png" alt="hadoop"></p>
+<p>但执行结果：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">WARN util.NativeCodeLoader: Unable to load native-hadoop library <span class="keyword">for</span> your platform... using <span class="built_in">builtin</span>-java classes <span class="built_in">where</span> applicable</div><div class="line">ls: `.<span class="string">': No such file or directory</span></div></pre></td></tr></table></figure></p>
+<p>上面那个是因为编译的问题。hadoop官方是32位编译的好像。然后我机子是64位的。这个暂时不管。<br>下面这个报错其实是正常的。</p>
+<p><code>hadoop fs -ls</code>命令的语法完整其实是<code>hadoop fs -ls [path]</code><br>而默认情况下，不用详细指定<code>[path]</code>,hadoop会认为是在hdfs中的<code>/home/[username]</code>，这个<code>[username]</code>就是用bash shell当前的用户替换。</p>
+<p><img src="http://onexs3cnv.bkt.clouddn.com/Screen%20Shot%202017-06-03%20at%205.17.35%20AM.png" alt="shell"></p>
+<p>比如在我机子上，hadoop回去找<code>/home/MMMMMCCLXXVII</code>，但这个路径不存在hdfs中。那这样，其实就是指定一个路径就可以了。</p>
+<p><code>hadoop fs -ls /</code> 它会自动获取计算出hdfs的根目录，然后显示</p>
+<p>其实根据<code>core-site.xml</code>的配置</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">&lt;configuration&gt;</div><div class="line">    &lt;property&gt;</div><div class="line">	    &lt;name&gt;fs.defaultFS&lt;/name&gt;</div><div class="line">		&lt;value&gt;hdfs://localhost:9000&lt;/value&gt;</div><div class="line">	&lt;/property&gt;</div><div class="line">&lt;/configuration&gt;</div></pre></td></tr></table></figure>
+<p>预想<code>hadoop fs -ls hdfs://localhost:9000/</code> 应该可以的。但是好像有问题。[TOdo]</p>
+<p>然后用hadoop命令显示本地的文件。<code>hadoop fs -ls file:///</code></p>
+<p>借鉴的文档：</p>
 <hr>
 <p><a href="http://blog.csdn.net/joe_007/article/details/8298814" target="_blank" rel="external">【hadoop】ssh localhost 免密码登陆（图解）</a><br>主要就是先要有sudo权限，如果没有用root账户的时候。<br><a href="https://www.digitalocean.com/community/tutorials/how-to-create-a-sudo-user-on-centos-quickstart" target="_blank" rel="external">How To Create a Sudo User on CentOS </a><br>这个<code>usermod</code>命令后，要重启终端。</p>
 <blockquote>
@@ -639,7 +675,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">25</span>
+                <span class="site-state-item-count">29</span>
                 <span class="site-state-item-name">posts</span>
               </a>
             </div>
@@ -650,7 +686,7 @@
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
-                <span class="site-state-item-count">7</span>
+                <span class="site-state-item-count">8</span>
                 <span class="site-state-item-name">categories</span>
               </a>
             </div>
@@ -661,7 +697,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">32</span>
+                <span class="site-state-item-count">36</span>
                 <span class="site-state-item-name">tags</span>
               </a>
             </div>
