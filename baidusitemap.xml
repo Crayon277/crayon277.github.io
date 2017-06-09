@@ -4,6 +4,118 @@
 
     
   <url>
+    <loc>http://www.mmmmmcclxxvii.cn/2017/06/09/mtjoin/</loc>
+    <lastmod>2017-06-09T06:02:37.000Z</lastmod>
+    <data>
+        <display>
+        <title>hadoop 相关数据的规约mapreduce程序 in python</title>
+        <pubTime>2017-06-09T05:07:57.000Z</pubTime>
+        
+        <tag>hadoop</tag>
+         
+        <tag>mapreduce</tag>
+         
+         
+           
+             
+              <breadCrumb title="bigdata" url="http://www.mmmmmcclxxvii.cn/categories/bigdata/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.mmmmmcclxxvii.cn/2017/06/09/dedup/</loc>
+    <lastmod>2017-06-09T05:07:11.000Z</lastmod>
+    <data>
+        <display>
+        <title>hadoop mapreduce -- 数据去重(python)</title>
+        <pubTime>2017-06-09T00:05:32.000Z</pubTime>
+        
+        <tag>hadoop</tag>
+         
+        <tag>mapreduce</tag>
+         
+         
+           
+             
+              <breadCrumb title="bigdata" url="http://www.mmmmmcclxxvii.cn/categories/bigdata/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.mmmmmcclxxvii.cn/2017/06/08/wordcount/</loc>
+    <lastmod>2017-06-08T22:59:06.000Z</lastmod>
+    <data>
+        <display>
+        <title>hadoop wordcount in python</title>
+        <pubTime>2017-06-08T14:28:34.000Z</pubTime>
+        
+        <tag>hadoop</tag>
+         
+        <tag>mapreduce</tag>
+         
+        <tag>python</tag>
+         
+         
+           
+             
+              <breadCrumb title="bigdata" url="http://www.mmmmmcclxxvii.cn/categories/bigdata/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.mmmmmcclxxvii.cn/2017/04/14/install-hadoop/</loc>
+    <lastmod>2017-06-06T02:02:51.000Z</lastmod>
+    <data>
+        <display>
+        <title>install hadoop</title>
+        <pubTime>2017-04-14T06:47:18.000Z</pubTime>
+        
+        <tag>hadoop</tag>
+         
+         
+           
+             
+              <breadCrumb title="bigdata" url="http://www.mmmmmcclxxvii.cn/categories/bigdata/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.mmmmmcclxxvii.cn/2017/06/05/shell/</loc>
+    <lastmod>2017-06-05T07:53:29.000Z</lastmod>
+    <data>
+        <display>
+        <title>shell （一）</title>
+        <pubTime>2017-06-05T07:00:53.000Z</pubTime>
+        
+        <tag>linux</tag>
+         
+        <tag>shell</tag>
+         
+        <tag>bash</tag>
+         
+         
+           
+             
+              <breadCrumb title="linux" url="http://www.mmmmmcclxxvii.cn/categories/linux/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://www.mmmmmcclxxvii.cn/2017/05/27/stackoverflow-c-piece-1/</loc>
     <lastmod>2017-06-03T09:13:13.000Z</lastmod>
     <data>
@@ -34,26 +146,6 @@
         <display>
         <title>重新编译hadoop过程终于到的问题</title>
         <pubTime>2017-06-02T09:03:42.000Z</pubTime>
-        
-        <tag>hadoop</tag>
-         
-         
-           
-             
-              <breadCrumb title="bigdata" url="http://www.mmmmmcclxxvii.cn/categories/bigdata/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://www.mmmmmcclxxvii.cn/2017/04/14/install-hadoop/</loc>
-    <lastmod>2017-06-02T21:37:48.000Z</lastmod>
-    <data>
-        <display>
-        <title>install hadoop</title>
-        <pubTime>2017-04-14T06:47:18.000Z</pubTime>
         
         <tag>hadoop</tag>
          

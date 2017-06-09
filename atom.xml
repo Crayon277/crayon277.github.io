@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://www.mmmmmcclxxvii.cn/"/>
-  <updated>2017-06-03T08:10:06.000Z</updated>
+  <updated>2017-06-09T06:02:37.000Z</updated>
   <id>http://www.mmmmmcclxxvii.cn/</id>
   
   <author>
@@ -14,6 +14,228 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>hadoop 相关数据的规约mapreduce程序 in python</title>
+    <link href="http://www.mmmmmcclxxvii.cn/2017/06/09/mtjoin/"/>
+    <id>http://www.mmmmmcclxxvii.cn/2017/06/09/mtjoin/</id>
+    <published>2017-06-09T05:07:57.000Z</published>
+    <updated>2017-06-09T06:02:37.000Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="生成数据"><a href="#生成数据" class="headerlink" title="生成数据"></a>生成数据</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> sys</div><div class="line"></div><div class="line">chans   = [<span class="string">'ABC'</span>,<span class="string">'DEF'</span>,<span class="string">'CNO'</span>,<span class="string">'NOX'</span>,<span class="string">'YES'</span>,<span class="string">'CAB'</span>,<span class="string">'BAT'</span>,<span class="string">'MAN'</span>,<span class="string">'ZOO'</span>,<span class="string">'XYZ'</span>,<span class="string">'BOB'</span>]</div><div class="line">sh1 =[<span class="string">'Hot'</span>,<span class="string">'Almost'</span>,<span class="string">'Hourly'</span>,<span class="string">'PostModern'</span>,<span class="string">'Baked'</span>,<span class="string">'Dumb'</span>,<span class="string">'Cold'</span>,<span class="string">'Surreal'</span>,<span class="string">'Loud'</span>]</div><div class="line">sh2 =[<span class="string">'News'</span>,<span class="string">'Show'</span>,<span class="string">'Cooking'</span>,<span class="string">'Sports'</span>,<span class="string">'Games'</span>,<span class="string">'Talking'</span>,<span class="string">'Talking'</span>]</div><div class="line">vwr =range(<span class="number">17</span>,<span class="number">1053</span>)</div><div class="line"></div><div class="line">chvnm=sys.argv[<span class="number">1</span>]  <span class="comment">#get number argument, if its n, do numbers not channels,</span></div><div class="line"></div><div class="line">lch=len(chans)</div><div class="line">lsh1=len(sh1)</div><div class="line">lsh2=len(sh2)</div><div class="line">lvwr=len(vwr)</div><div class="line">ci=<span class="number">1</span></div><div class="line">s1=<span class="number">2</span></div><div class="line">s2=<span class="number">3</span></div><div class="line">vwi=<span class="number">4</span></div><div class="line">ri=int(sys.argv[<span class="number">3</span>])</div><div class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">0</span>,int(sys.argv[<span class="number">2</span>])):  <span class="comment">#arg 2 is the number of lines to output</span></div><div class="line"></div><div class="line">    <span class="keyword">if</span> chvnm==<span class="string">'n'</span>:  <span class="comment">#no numuber</span></div><div class="line">        print(<span class="string">'&#123;0&#125;_&#123;1&#125;,&#123;2&#125;'</span>.format(sh1[s1],sh2[s2],chans[ci]))</div><div class="line">    <span class="keyword">else</span>:</div><div class="line">        print(<span class="string">'&#123;0&#125;_&#123;1&#125;,&#123;2&#125;'</span>.format(sh1[s1],sh2[s2],vwr[vwi]))</div><div class="line">    ci=(<span class="number">5</span>*ci+ri) % lch</div><div class="line">    s1=(<span class="number">4</span>*s1+ri) % lsh1</div><div class="line">    s2=(<span class="number">3</span>*s1+ri+i) % lsh2</div><div class="line">    vwi=(<span class="number">2</span>*vwi+ri+i) % lvwr</div><div class="line"></div><div class="line">    <span class="keyword">if</span> (vwi==<span class="number">4</span>): vwi=<span class="number">5</span></div></pre></td></tr></table></figure>
+<p>然后执行：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">python make_join2data.py y 1000 13 &gt; num1.txt</div><div class="line">python make_join2data.py y 2000 17 &gt; num2.txt</div><div class="line">python make_join2data.py y 3000 19 &gt; num3.txt</div><div class="line">python make_join2data.py n 100  23 &gt; chan1.txt</div><div class="line">python make_join2data.py n 200  19 &gt; chan2.txt</div><div class="line">python make_join2data.py n 300  37 &gt; chan3.txt</div></pre></td></tr></table></figure></p>
+<p>可以查看数据：<br><img src="http://onexs3cnv.bkt.clouddn.com/Screen%20Shot%202017-06-09%20at%201.14.03%20PM.png" alt="dat"></p>
+<h1 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h1><p>然后在上面比如<code>Hourly_Talking,922</code>这些表明是有922个观众在观看<code>Hourly_Takling</code>这个节目。<code>Almost_Show,ABC</code>表明是<code>ABC</code>电视台下有<code>Almost_Show</code>这个节目，然后现在要计算<code>ABC</code>电视台的收视情况</p>
+<h1 id="map"><a href="#map" class="headerlink" title="map"></a>map</h1><p>这里主要就是要筛选出<code>ABC</code>电视台</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> sys</div><div class="line"><span class="keyword">import</span> re</div><div class="line"></div><div class="line">pat = re.compile(<span class="string">r'\d+'</span>)</div><div class="line"></div><div class="line"><span class="keyword">for</span> line <span class="keyword">in</span> sys.stdin:</div><div class="line">    <span class="keyword">if</span> <span class="string">'ABC'</span> <span class="keyword">in</span> line <span class="keyword">or</span> len(pat.findall(line)):</div><div class="line">        <span class="keyword">print</span> <span class="string">'&#123;&#125;\t&#123;&#125;'</span>.format(*(line.strip().split(<span class="string">','</span>)))</div></pre></td></tr></table></figure>
+<p><img src="http://onexs3cnv.bkt.clouddn.com/Screen%20Shot%202017-06-09%20at%201.35.54%20PM.png" alt="resu"></p>
+<p>因为观众数的那些还不知道和那些电视台相关，所以这些数据要保留</p>
+<h1 id="reduce"><a href="#reduce" class="headerlink" title="reduce"></a>reduce</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> sys</div><div class="line"></div><div class="line">line_count     = <span class="number">0</span>      </div><div class="line">old_key        = <span class="keyword">None</span> </div><div class="line">viewer_count   = <span class="number">0</span>       </div><div class="line">abc_found      = <span class="keyword">False</span>   </div><div class="line"></div><div class="line"><span class="keyword">for</span> line <span class="keyword">in</span> sys.stdin:</div><div class="line">    line       = line.strip()       </div><div class="line">    key_value  = line.split(<span class="string">'\t'</span>)   </div><div class="line">    key        = key_value[<span class="number">0</span>]       </div><div class="line">    value      = key_value[<span class="number">1</span>]       </div><div class="line"></div><div class="line">    line_count = line_count + <span class="number">1</span></div><div class="line"></div><div class="line">    <span class="keyword">if</span> key == old_key <span class="keyword">or</span> line_count == <span class="number">1</span>:</div><div class="line">        <span class="keyword">if</span> value == <span class="string">"ABC"</span>:</div><div class="line">            abc_found = <span class="keyword">True</span></div><div class="line">        <span class="keyword">else</span>:</div><div class="line">            viewer_count = viewer_count + int(value)</div><div class="line"></div><div class="line">    <span class="keyword">if</span> key != old_key <span class="keyword">and</span> line_count: <span class="comment">#这是进入下一组了</span></div><div class="line">        <span class="keyword">if</span> abc_found == <span class="keyword">True</span>: <span class="comment">#只有在是ABC的才打印出来</span></div><div class="line">            print( <span class="string">'%s %s'</span> % (old_key, viewer_count) )</div><div class="line">        old_key      = key  <span class="comment">#下一个</span></div><div class="line">        <span class="keyword">if</span> value.isdigit():</div><div class="line">            viewer_count = int(value)</div><div class="line">        abc_found    = <span class="keyword">False</span></div><div class="line"></div><div class="line"><span class="keyword">print</span> <span class="string">'%s %s'</span> % (key, viewer_count)</div></pre></td></tr></table></figure>
+<p>在reduce阶段的时候，shuffle已sort了，<code>&lt;key,value&gt;</code>的value要么是’ABC’，要么是数字，如果是数字的话累加，而且，因为是sort过的，然后一定是这样的形式：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">d,12</div><div class="line">d,23</div><div class="line">d,abc</div></pre></td></tr></table></figure></p>
+<p><strong>所以相关的点就在<code>key</code>都是<code>d</code>的value累加完后，势必会读到<code>d</code>的value是哪个电视台的，如果是’ABC’的话，就可以输出了。</strong></p>
+<h1 id="本地测试"><a href="#本地测试" class="headerlink" title="本地测试"></a>本地测试</h1><p><img src="http://onexs3cnv.bkt.clouddn.com/Screen%20Shot%202017-06-09%20at%201.54.54%20PM.png" alt="local test"></p>
+<h1 id="hadoop-集群测试"><a href="#hadoop-集群测试" class="headerlink" title="hadoop 集群测试"></a>hadoop 集群测试</h1><p><img src="http://onexs3cnv.bkt.clouddn.com/Screen%20Shot%202017-06-09%20at%202.00.15%20PM.png" alt="1"><br><img src="http://onexs3cnv.bkt.clouddn.com/Screen%20Shot%202017-06-09%20at%202.00.30%20PM.png" alt="2"><br><img src="http://onexs3cnv.bkt.clouddn.com/Screen%20Shot%202017-06-09%20at%202.01.47%20PM.png" alt="3"></p>
+<p>与本地测试的结果一样</p>
+]]></content>
+    
+    <summary type="html">
+    
+      一个电视台有多个节目，一个节目有收看的观众，那电视台的有多少观众？
+    
+    </summary>
+    
+      <category term="bigdata" scheme="http://www.mmmmmcclxxvii.cn/categories/bigdata/"/>
+    
+    
+      <category term="hadoop" scheme="http://www.mmmmmcclxxvii.cn/tags/hadoop/"/>
+    
+      <category term="mapreduce" scheme="http://www.mmmmmcclxxvii.cn/tags/mapreduce/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>hadoop mapreduce -- 数据去重(python)</title>
+    <link href="http://www.mmmmmcclxxvii.cn/2017/06/09/dedup/"/>
+    <id>http://www.mmmmmcclxxvii.cn/2017/06/09/dedup/</id>
+    <published>2017-06-09T00:05:32.000Z</published>
+    <updated>2017-06-09T05:07:11.000Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h1><p>就用mapreduce的思想来将重复的数据剔除</p>
+<h1 id="测试数据"><a href="#测试数据" class="headerlink" title="测试数据"></a>测试数据</h1><p>自己随便弄<br><img src="http://onexs3cnv.bkt.clouddn.com/Screen%20Shot%202017-06-09%20at%208.18.29%20AM.png" alt="testfile1"><br><img src="http://onexs3cnv.bkt.clouddn.com/Screen%20Shot%202017-06-09%20at%208.18.37%20AM.png" alt="testfile2"></p>
+<h1 id="map"><a href="#map" class="headerlink" title="map"></a>map</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> sys</div><div class="line"></div><div class="line"><span class="keyword">for</span> line <span class="keyword">in</span> sys.stdin:</div><div class="line">    line = line.strip()</div><div class="line"></div><div class="line">    <span class="keyword">print</span> <span class="string">"&#123;0&#125;\t&#123;1&#125;"</span>.format(line,<span class="number">1</span>)</div></pre></td></tr></table></figure>
+<p>这个比wordcount程序简单多了。其实在这个例子中，<code>&lt;key,value&gt;</code>的value没有什么用，最后不用输出。</p>
+<h1 id="reduce"><a href="#reduce" class="headerlink" title="reduce"></a>reduce</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> sys</div><div class="line"></div><div class="line">last_key = <span class="keyword">None</span></div><div class="line"></div><div class="line"><span class="keyword">for</span> line <span class="keyword">in</span> sys.stdin:</div><div class="line">    this_key = line.split(<span class="string">'\t'</span>)[<span class="number">0</span>].strip()</div><div class="line">    <span class="keyword">if</span> this_key == last_key:</div><div class="line">        <span class="keyword">pass</span></div><div class="line">    <span class="keyword">else</span>:</div><div class="line">        <span class="keyword">if</span> last_key:</div><div class="line">            <span class="comment">#print this_key #错误！！！</span></div><div class="line">            <span class="keyword">print</span> last_key <span class="comment">#this_key每一轮都更新，当不一样了的时候，要将上一轮的key输出</span></div><div class="line">        last_key = this_key</div><div class="line"><span class="keyword">print</span> this_key</div></pre></td></tr></table></figure>
+<p>在<code>this_key == last_key</code>条件满足的时候，跟wordcount不一样的是，这里什么都不用做，比较wordcount程序这里是要累加的。但其实reduce这一步只要将相同的输出一个就行了。</p>
+<h1 id="本地测试"><a href="#本地测试" class="headerlink" title="本地测试"></a>本地测试</h1><p>命令: <code>python mapper.py &lt; testfile* | sort | python reducer.py</code><br><img src="http://onexs3cnv.bkt.clouddn.com/Screen%20Shot%202017-06-09%20at%208.51.38%20AM.png" alt="localtest"></p>
+<h1 id="hadoop测试"><a href="#hadoop测试" class="headerlink" title="hadoop测试"></a>hadoop测试</h1><p><img src="http://onexs3cnv.bkt.clouddn.com/Screen%20Shot%202017-06-09%20at%208.58.26%20AM.png" alt="ha"><br><img src="http://onexs3cnv.bkt.clouddn.com/Screen%20Shot%202017-06-09%20at%208.58.40%20AM.png" alt="doop"><br><img src="http://onexs3cnv.bkt.clouddn.com/Screen%20Shot%202017-06-09%20at%208.58.17%20AM.png" alt="result"></p>
+<p>看到结果也是一样的。</p>
+<h1 id="combine"><a href="#combine" class="headerlink" title="combine"></a>combine</h1><p>上面结果中<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">Combine input records=0</div><div class="line">Combine output records=0</div></pre></td></tr></table></figure></p>
+<p>了解了一下combine的过程，我一开始疑惑combine到底在哪个阶段，他的输入是什么（输入的是sort前还是sort后），是在哪个节点运行的。</p>
+<p>参考：</p>
+<ul>
+<li><a href="https://stackoverflow.com/questions/35195101/which-runs-first-combiner-or-partitioner-in-a-mapreduce-job" target="_blank" rel="external">Which runs first, Combiner or Partitioner in a MapReduce Job</a></li>
+</ul>
+<p>-[] combine阶段在shuffle阶段之前，因为shuffle阶段做的是copy和sort，那么表示的就是combine阶段的时候是没有sort过的数据输入。这很重要。如果是sort过的话的，那么combine的程序就跟reducer的程序一样。只是在单个节点上，可以看作预处理的reduce。那在旧的mapreduce架构shuflle在jobtracker上运行，combine在tasktracker上执行。那在YARN架构下，combine应该在nodemanager，shuffle在resourcemanager。[Todo] 不确定</p>
+<p><img src="http://onexs3cnv.bkt.clouddn.com/Screen%20Shot%202017-06-09%20at%209.29.39%20AM.png" alt="combine"></p>
+<p><strong>combine只是处理一个节点中的输出，而不能享受像reduce一样的输入（经过了shuffle阶段的数据）,这个非常关键</strong></p>
+<h2 id="实验combine带来的优化能力"><a href="#实验combine带来的优化能力" class="headerlink" title="实验combine带来的优化能力"></a>实验combine带来的优化能力</h2><p>先用wordcount测试，词频统计是一个可以展示combine用处的例子。词频统计程序为每一个它看到的词生成了一个（word，1）键值对。所以如果在同一个文档内“cat”出现了3次，（”cat”，1）键值对会被生成3次，这些键值对会被送到Reducer那里。通过使用Combiner，这些键值对可以被压缩为一个送往Reducer的键值对（”cat”，3）。现在每一个节点针对每一个词只会发送一个值到reducer，大大减少了shuffle过程所需要的带宽并加速了作业的执行。</p>
+<h3 id="测试数据-1"><a href="#测试数据-1" class="headerlink" title="测试数据"></a>测试数据</h3><p>网上下载了两个英文小说<br><img src="http://onexs3cnv.bkt.clouddn.com/Screen%20Shot%202017-06-09%20at%209.54.51%20AM.png" alt="entxt"></p>
+<p>一个是165k，另一个是446k</p>
+<hr>
+<p><strong>不使用 combine ：</strong></p>
+<p>命令: <code>hadoop jar ../../hadoop-2.8.0/share/hadoop/tools/lib/hadoop-streaming-2.8.0.jar -input file:///Users/Crayon_277/Develop/Project/hadoop/mapreduce-program/wordcount/f*.txt -output file:///Users/Crayon_277/Develop/Project/hadoop/mapreduce-program/wordcount/output -mapper mapper.py -reducer reducer.py</code></p>
+<p>结果：<br><img src="http://onexs3cnv.bkt.clouddn.com/Screen%20Shot%202017-06-09%20at%209.54.20%20AM.png" alt="result"></p>
+<p>可以看到<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">GC time elapsed (ms)=4</div><div class="line">Total committed heap usage (bytes)=1160773632</div></pre></td></tr></table></figure></p>
+<hr>
+<p><strong>使用了combine: </strong></p>
+<p>命令：<code>hadoop jar ../../hadoop-2.8.0/share/hadoop/tools/lib/hadoop-streaming-2.8.0.jar -input file:///Users/Crayon_277/Develop/Project/hadoop/mapreduce-program/wordcount/f*.txt -output file:///Users/Crayon_277/Develop/Project/hadoop/mapreduce-program/wordcount/output -mapper mapper.py -reducer reducer.py -combiner reducer.py</code></p>
+<p>combine的程序用回reducer.py的程序</p>
+<p><img src="http://onexs3cnv.bkt.clouddn.com/Screen%20Shot%202017-06-09%20at%2010.06.01%20AM.png" alt="usecombine"></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">GC time elapsed (ms)=3</div><div class="line">Total committed heap usage (bytes)=1159200768</div></pre></td></tr></table></figure>
+<hr>
+<p>可以对比出<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">GC time elapsed (ms)=4</div><div class="line">Total committed heap usage (bytes)=1160773632</div><div class="line">	</div><div class="line">GC time elapsed (ms)=3</div><div class="line">Total committed heap usage (bytes)=1159200768</div></pre></td></tr></table></figure></p>
+<p>是有优化的。时间上效率也有提升。</p>
+<h2 id="combine不是所有的情景都适合"><a href="#combine不是所有的情景都适合" class="headerlink" title="combine不是所有的情景都适合"></a>combine不是所有的情景都适合</h2><p>combiner操作是有风险的，使用它的原则是combiner的输入不会影响到reduce计算的最终输入，例如：如果计算只是求总数，最大值，最小值可以使用combiner，但是做平均值计算使用combiner的话，最终的reduce计算结果就会出错。</p>
+<h1 id="数据去重的例子中使用combine"><a href="#数据去重的例子中使用combine" class="headerlink" title="数据去重的例子中使用combine"></a>数据去重的例子中使用combine</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> sys</div><div class="line"></div><div class="line">s = set() <span class="comment">#集合</span></div><div class="line"></div><div class="line"><span class="keyword">for</span> line <span class="keyword">in</span> sys.stdin:</div><div class="line">    s.add(line.strip().split(<span class="string">'\t'</span>)[<span class="number">0</span>]) <span class="comment">#取&lt;key,value&gt;中的value</span></div><div class="line"></div><div class="line"><span class="keyword">for</span> item <span class="keyword">in</span> s:</div><div class="line">    <span class="keyword">print</span> <span class="string">"&#123;0&#125;\t&#123;1&#125;"</span>.format(item,<span class="number">0</span>) <span class="comment"># 0其实没有什么意义</span></div></pre></td></tr></table></figure>
+<p>我预想的是这个在每个节点上将map输出的东西，先筛选一遍，就是用集合的方法，然后再输出，但是！！</p>
+<p><img src="http://onexs3cnv.bkt.clouddn.com/Screen%20Shot%202017-06-09%20at%2010.55.19%20AM.png" alt="wrong"></p>
+<p>结果有点问题，用的时间也多了</p>
+<p>[Todo]不知道为啥？combine的输出格式也和map阶段的一样，但错误。</p>
+<p>从结果上看，还有重复的数据，反推，说明有数据没有被sort到一起，因为从打印结果看到，相同的中间隔着一些，但是在reduce的程序，可以看出，如果是收集在一起的数据是只会打印一个的，说明shuffle没有起作用？？</p>
+]]></content>
+    
+    <summary type="html">
+    
+      打个比方，桌上有10个苹果，之前的编程思想是从上往下看，mapreduce的编程思想是贴着桌面，平行透视的看。combiner阶段也是可以用于这个场景的。而且combiner是在每个运行map任务的节点上运行。是一个迷你的reduce过程
+    
+    </summary>
+    
+      <category term="bigdata" scheme="http://www.mmmmmcclxxvii.cn/categories/bigdata/"/>
+    
+    
+      <category term="hadoop" scheme="http://www.mmmmmcclxxvii.cn/tags/hadoop/"/>
+    
+      <category term="mapreduce" scheme="http://www.mmmmmcclxxvii.cn/tags/mapreduce/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>hadoop wordcount in python</title>
+    <link href="http://www.mmmmmcclxxvii.cn/2017/06/08/wordcount/"/>
+    <id>http://www.mmmmmcclxxvii.cn/2017/06/08/wordcount/</id>
+    <published>2017-06-08T14:28:34.000Z</published>
+    <updated>2017-06-08T22:59:06.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>因为不会java，暂时用自己熟悉的python来写mapreduce程序放在hadoop上跑。mapreduce只是一个编程思想，不局限于语言。</p>
+<hr>
+<h1 id="hadoop-streaming"><a href="#hadoop-streaming" class="headerlink" title="hadoop streaming"></a>hadoop streaming</h1><blockquote>
+<p>both the mapper and the reducer are executables that read the input from stdin (line by line) and emit the output to stdout. The utility will create a Map/Reduce job, submit the job to an appropriate cluster, and monitor the progress of the job until it completes.</p>
+</blockquote>
+<p>官网的解释，也就是说，这个可执行文件或脚本里面，只要从stdin标准输入读入数据，然后进行内部的分词处理，输出到stdout，就行了，streaming会创建mapreduce的作业，发送给各个tasktracker，同时监控整个作业的执行过程。</p>
+<h2 id="用法"><a href="#用法" class="headerlink" title="用法"></a>用法</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">hadoop jar hadoop-streaming-2.8.0.jar \</div><div class="line">  -input myInputDirs \</div><div class="line">  -output myOutputDir \</div><div class="line">  -mapper /bin/cat \</div><div class="line">  -reducer /usr/bin/wc</div></pre></td></tr></table></figure>
+<p>官网给出的，但在机子上首先需要找到hadoop-streaming的jar文件，路径跟官网的不一样。</p>
+<p><img src="http://onexs3cnv.bkt.clouddn.com/Screen%20Shot%202017-06-08%20at%2011.09.41%20PM.png" alt="streaming"><br>我的路径是：<code>./share/hadoop/tools/lib/hadoop-streaming-2.8.0.jar</code></p>
+<h1 id="测试数据"><a href="#测试数据" class="headerlink" title="测试数据"></a>测试数据</h1><p><img src="http://onexs3cnv.bkt.clouddn.com/Screen%20Shot%202017-06-08%20at%2010.47.18%20PM.png" alt="data"></p>
+<h1 id="map阶段："><a href="#map阶段：" class="headerlink" title="map阶段："></a>map阶段：</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> sys</div><div class="line"></div><div class="line"><span class="keyword">for</span> line <span class="keyword">in</span> sys.stdin:</div><div class="line">    line = line.strip()</div><div class="line">    keys = line.split()</div><div class="line">    <span class="keyword">for</span> key <span class="keyword">in</span> keys:</div><div class="line">        value = <span class="number">1</span></div><div class="line">        print(<span class="string">'&#123;0&#125;\t&#123;1&#125;'</span>.format(key,value))</div></pre></td></tr></table></figure>
+<p>python从stdin标准输入中读取每行数据, 然后将词切分，然后输入格式为<code>&lt;key,value&gt;</code>的形式，因为在map阶段，value都是1</p>
+<p>本地测试结果：</p>
+<p><img src="http://onexs3cnv.bkt.clouddn.com/Screen%20Shot%202017-06-08%20at%2010.52.19%20PM.png" alt="test-map"></p>
+<h1 id="reduce阶段："><a href="#reduce阶段：" class="headerlink" title="reduce阶段："></a>reduce阶段：</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> sys</div><div class="line"></div><div class="line">last_key = <span class="keyword">None</span></div><div class="line">running_total = <span class="number">0</span></div><div class="line"></div><div class="line"><span class="keyword">for</span> input_line <span class="keyword">in</span> sys.stdin:</div><div class="line">    input_line = input_line.strip()</div><div class="line"></div><div class="line">    this_key, value = input_line.split(<span class="string">"\t"</span>,<span class="number">1</span>)</div><div class="line">    value = int(value)</div><div class="line"></div><div class="line">    <span class="keyword">if</span> last_key == this_key:</div><div class="line">        running_total += value</div><div class="line">    <span class="keyword">else</span>:</div><div class="line">        <span class="keyword">if</span> last_key: <span class="comment">#进入新的一组会进入这条语句，last_key初始是None，一开始不会打印</span></div><div class="line">            print(<span class="string">"&#123;0&#125;\t&#123;1&#125;"</span>.format(last_key,running_total))</div><div class="line"></div><div class="line">        running_total = value</div><div class="line">        last_key = this_key</div><div class="line"></div><div class="line"><span class="keyword">if</span> last_key == this_key: <span class="comment">#最后一组输出</span></div><div class="line">    print(<span class="string">"&#123;0&#125;\t&#123;1&#125;"</span>.format(last_key,running_total))</div></pre></td></tr></table></figure>
+<p>本地测试：<br><img src="http://onexs3cnv.bkt.clouddn.com/Screen%20Shot%202017-06-08%20at%2010.56.42%20PM.png" alt="test-reduce"></p>
+<p>有问题！怎么没有把相同的归在一起，其实这个程序如果按照map的输出当作输入执行结果就是这样的。因为<code>last_key</code>和<code>this_key</code>不停在变，因为map的输出哪怕没有两行是相同的key。那其实这里就涉及mapreduce的机制了，map阶段完成由输入数据到单词切分的工作，还有<strong><code>shuffle</code></strong>阶段，这个阶段完成相同的单词的聚集和分发工作，<strong>这个过程是mapreduce的默认过程，不用具体配置</strong>,也就是map和reduce的中间环节会把相同的给收集起来再进行reduce，如果在本地测试应该是这样的：</p>
+<p><img src="http://onexs3cnv.bkt.clouddn.com/Screen%20Shot%202017-06-08%20at%2011.03.25%20PM.png" alt="test_reduce2"></p>
+<p>用<code>sort</code>命令将相同的放在了一起，就模拟了把相同单词的聚集工作。</p>
+<ul>
+<li>[] ？有个疑问就是：相同的单词聚集在一起是分发给一个节点么，也就是不同节点计算着不同的单词，可能有节点计算好几个不同的单词，但问题是，是不是一个相同的所有单词都是在一个节点上reduce，如果不是，因为相同的单词被分了几份reduce了，那岂不是还要再reduce，总归要合并的，那这步在哪个节点上，由谁控制？</li>
+</ul>
+<h1 id="hadoop-上测试"><a href="#hadoop-上测试" class="headerlink" title="hadoop 上测试"></a>hadoop 上测试</h1><p>用<code>file:///</code>放在本地看</p>
+<p><code>hadoop jar ../hadoop-2.8.0/share/hadoop/tools/lib/hadoop-streaming-2.8.0.jar -input file:///Users/Crayon_277/Develop/Project/hadoop/wordcount/testfile* -output file:///Users/Crayon_277/Develop/Project/hadoop/wordcount/output2 -mapper mapper.py -reducer reducer.py</code></p>
+<p><img src="http://onexs3cnv.bkt.clouddn.com/Screen%20Shot%202017-06-08%20at%2011.19.07%20PM.png" alt="1"><br><img src="http://onexs3cnv.bkt.clouddn.com/Screen%20Shot%202017-06-08%20at%2011.21.23%20PM.png" alt="2"><br><img src="http://onexs3cnv.bkt.clouddn.com/Screen%20Shot%202017-06-08%20at%2011.21.37%20PM.png" alt="3"></p>
+<p>注：以上在伪分布集群下测试的。</p>
+<h2 id="mapreduce-framework"><a href="#mapreduce-framework" class="headerlink" title="mapreduce framework"></a>mapreduce framework</h2><p>运行hadoop程序给出的INFO，可以看到<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">Map-Reduce Framework</div><div class="line">	Map input records=2</div><div class="line">	Map output records=16</div><div class="line">	Map output bytes=109</div><div class="line">	Map output materialized bytes=153</div><div class="line">	Input split bytes=234</div><div class="line">	Combine input records=0</div><div class="line">	Combine output records=0</div><div class="line">	Reduce input groups=12</div><div class="line">	Reduce shuffle bytes=153</div><div class="line">	Reduce input records=16</div><div class="line">	Reduce output records=12</div><div class="line">	Spilled Records=32</div><div class="line">	Shuffled Maps =2</div><div class="line">	Failed Shuffles=0</div><div class="line">	Merged Map outputs=2</div><div class="line">	GC time elapsed (ms)=0</div><div class="line">	Total committed heap usage (bytes)=1160773632</div></pre></td></tr></table></figure></p>
+<p><code>Map input records=2</code> 这是说明有两个文件输入<br><code>Map output records=16</code>数了一下<code>mapper.py</code>程序的输出，就是16个<br>然后可以看到<code>Reduce input groups=12</code>应该就是说明了<code>shuffle</code>的工作收集相同的单词，但<code>Reduce input records=16</code>这个16应该指的的总的还是16个，不是按<strong>单词组</strong>来看。<br><code>Shuffled Maps=2</code> 我本来觉得是代表了有2种单词是有相同的，收集在一起了。但不是，因为其实在这个案例上是有4种是单词是有重复的。[Todo]</p>
+<p>贴个流程图：</p>
+<p><img src="https://i.stack.imgur.com/ToZS9.png" alt="mapreduceprogram"></p>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>其实应该有5个阶段：</p>
+<ul>
+<li><p>map phase</p>
+<blockquote>
+<p>The map phase is done by mappers. Mappers run on unsorted input key/values pairs. Each mapper emits zero, one, or multiple output key/value pairs for each input key/value pairs.</p>
+</blockquote>
+</li>
+<li><p>combine phase</p>
+<blockquote>
+<p>The combine phase is done by combiners. The combiner should combine key/value pairs with the same key. Each combiner may run zero, once, or multiple times.</p>
+</blockquote>
+</li>
+<li><p>shuffle and sort phase</p>
+<blockquote>
+<p>The shuffle and sort phase is done by the framework. Data from all mappers are grouped by the key, split among reducers and sorted by the key. Each reducer obtains all values associated with the same key. The programmer may supply custom compare functions for sorting and a partitioner for data split.</p>
+</blockquote>
+</li>
+<li><p>partitioner</p>
+<blockquote>
+<p>The partitioner decides which reducer will get a particular key value pair.</p>
+</blockquote>
+</li>
+<li><p>reducer</p>
+<blockquote>
+<p>The reducer obtains sorted key/[values list] pairs, sorted by the key. The value list contains all values with the same key produced by mappers. Each reducer emits zero, one or multiple output key/value pairs for each input key/value pair.<br>参考：<br><a href="https://stackoverflow.com/questions/22141631/what-is-the-purpose-of-shuffling-and-sorting-phase-in-the-reducer-in-map-reduce" target="_blank" rel="external">What is the purpose of shuffling and sorting phase in the reducer in Map Reduce Programming?</a></p>
+</blockquote>
+</li>
+</ul>
+<p>因为combiner操作是有风险的，使用它的原则是combiner的输入不会影响到reduce计算的最终输入，例如：如果计算只是求总数，最大值，最小值可以使用combiner，但是做平均值计算使用combiner的话，最终的reduce计算结果就会出错。这个例子统计词频，同样也不能combine，因为会遗失数据了。</p>
+]]></content>
+    
+    <summary type="html">
+    
+      Hadoop Streaming是Hadoop提供的一个编程工具，它允许用户使用任何可执行文件或者脚本文件作为Mapper和Reducer
+    
+    </summary>
+    
+      <category term="bigdata" scheme="http://www.mmmmmcclxxvii.cn/categories/bigdata/"/>
+    
+    
+      <category term="hadoop" scheme="http://www.mmmmmcclxxvii.cn/tags/hadoop/"/>
+    
+      <category term="mapreduce" scheme="http://www.mmmmmcclxxvii.cn/tags/mapreduce/"/>
+    
+      <category term="python" scheme="http://www.mmmmmcclxxvii.cn/tags/python/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>shell （一）</title>
+    <link href="http://www.mmmmmcclxxvii.cn/2017/06/05/shell/"/>
+    <id>http://www.mmmmmcclxxvii.cn/2017/06/05/shell/</id>
+    <published>2017-06-05T07:00:53.000Z</published>
+    <updated>2017-06-05T07:53:29.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>参考：</p>
+<ul>
+<li><p><a href="http://blog.csdn.net/solomon1558/article/details/51763751" target="_blank" rel="external">Linux的环境变量.bash_profile .bashrc profile文件</a></p>
+</li>
+<li><p><a href="https://stackoverflow.com/questions/415403/whats-the-difference-between-bashrc-bash-profile-and-environment" target="_blank" rel="external">What’s the difference between .bashrc, .bash_profile, and .environment?’</a></p>
+</li>
+</ul>
+]]></content>
+    
+    <summary type="html">
+    
+      /etc/profile, ~/.bash_profile, ~/.bashrc, ~/.profile 都是什么,区别是什么
+    
+    </summary>
+    
+      <category term="linux" scheme="http://www.mmmmmcclxxvii.cn/categories/linux/"/>
+    
+    
+      <category term="linux" scheme="http://www.mmmmmcclxxvii.cn/tags/linux/"/>
+    
+      <category term="shell" scheme="http://www.mmmmmcclxxvii.cn/tags/shell/"/>
+    
+      <category term="bash" scheme="http://www.mmmmmcclxxvii.cn/tags/bash/"/>
+    
+  </entry>
   
   <entry>
     <title>重新编译hadoop过程终于到的问题</title>
@@ -260,7 +482,7 @@
     <link href="http://www.mmmmmcclxxvii.cn/2017/04/14/install-hadoop/"/>
     <id>http://www.mmmmmcclxxvii.cn/2017/04/14/install-hadoop/</id>
     <published>2017-04-14T06:47:18.000Z</published>
-    <updated>2017-06-02T21:37:48.000Z</updated>
+    <updated>2017-06-06T02:02:51.000Z</updated>
     
     <content type="html"><![CDATA[<p>因为hadoop版本的问题，有些命令可能不一样。网上搜到的一些资料都会过时或与我现在安装的版本不兼容。<br>所以直接看<a href="http://hadoop.apache.org/docs/" target="_blank" rel="external">官方文档</a></p>
 <p>那安装其实涉及的就是单机和集群。特地在知乎上逛了一圈，得到的答案是，看目的吧，如果主要想学习mapreduce编程的，不要搭集群，不要搭集群，不要搭集群！！！因为目的是修炼内功，就没必要磨练工具了吧。但至少我觉得安装个工具如果都搞不定的话，那就不用混了。还是把重心放在mapreduce编程上吧</p>
@@ -277,8 +499,9 @@
 </ol>
 <p>因为是通过<code>brew</code>安装的<code>hadoop</code>，所以<code>hadoop</code>都在<code>/usr/local/Cellar/hadoop</code>里面。文档直接说是<code>etc/hadop</code>，对应我机子上完整的路径是<code>/usr/local/Cellar/hadoop/2.8.0/libexec/etc</code></p>
 <p>同理<code>bin/hadoop</code></p>
-<p>中间什么配置<code>core-site.xml</code>等文件看文档就好了。</p>
+<p>中间什么配置<code>core-site.xml</code>等文件看文档就好了。<strong>因为不同版本可能配置会不一样！！！所以还是看官方文档</strong></p>
 <p><img src="http://onexs3cnv.bkt.clouddn.com/Screen%20Shot%202017-06-03%20at%2012.29.03%20AM.png" alt="hadoop-localhost"></p>
+<p><img src="http://onexs3cnv.bkt.clouddn.com/Screen%20Shot%202017-06-05%20at%207.22.24%20PM.png" alt="yarn"></p>
 <p>出来这个页面就可以了</p>
 <ol>
 <li>hadoop fs -ls</li>
@@ -949,257 +1172,6 @@
       <category term="DFS" scheme="http://www.mmmmmcclxxvii.cn/tags/DFS/"/>
     
       <category term="algorithm" scheme="http://www.mmmmmcclxxvii.cn/tags/algorithm/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>naruto</title>
-    <link href="http://www.mmmmmcclxxvii.cn/2017/03/20/naruto/"/>
-    <id>http://www.mmmmmcclxxvii.cn/2017/03/20/naruto/</id>
-    <published>2017-03-20T07:44:12.000Z</published>
-    <updated>2017-04-06T14:16:14.000Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="迈特凯语录"><a href="#迈特凯语录" class="headerlink" title="迈特凯语录"></a>迈特凯语录</h1><blockquote>
-<p>唯有努力，我不想输给他</p>
-<p>真正的胜利，不是击败强者，而是保护对你而言最重要的东西。</p>
-<p>不相信自己的人，连努力的价值都没有。</p>
-<p>真正重要的东西，不管痛苦也好、悲伤也好…都要努力到底，就算失去生命也要用双手来保护到底!如此一来，就算死掉的话，也会永远留下男子汉活过的证据…</p>
-<p>努力是绝不会背叛人的</p>
-<p>你只要相信自己所走的路，大步向前走就好，然后就那样成为一个能让别人带着笑容守望着的人吧。</p>
-<p>天资聪颖的人并非幸福，能够为自己所信任之人去努力拼搏的人才是幸福的！</p>
-<p>当新叶萌发，新春到来之时，才是青春的最高潮燃烧得最火热的时刻！</p>
-<p>既然我已经摆出帅哥的姿势来耍帅了,就必须要彻底地遵守约定! </p>
-<p>小李,你要休息了吗? </p>
-<p>青春的勋章离不开『热血』</p>
-<p>我相信木叶的莲花一定会再次定放!!</p>
-<p>青春的操场500圈!!</p>
-<p>这就是青春!!!</p>
-<p>李洛克：在一个有觉悟的男人面前，任何哀愁和悲伤都是对他的侮辱</p>
-</blockquote>
-<p>在凯开八门遁甲，这个差点一脚踢出大结局的男人，令卡卡西尊敬不已，我反复看了好几遍。<br>凯这个集逗逼与热血气质于一身的男人。</p>
-<h1 id="迈特凯父亲，迈特戴的语录"><a href="#迈特凯父亲，迈特戴的语录" class="headerlink" title="迈特凯父亲，迈特戴的语录"></a>迈特凯父亲，迈特戴的语录</h1><blockquote>
-<p>不要和你的努力说对不起，那样会多对不起你的努力啊！</p>
-<p>祝贺你从忍者 学校毕业，但青春可不能就此毕业啊。搜索<br>青春什么时候结束？<br>青春不会退缩，所以永远不会结束。那爸爸死的时候也不结束吗？<br>那才是青春的最高潮！</p>
-<p> 迈特戴：不过你的努力也不算错，就算只跑完一半，你也确实努力了。<br> 迈特戴：你的忍术和体术不行，这才叫爸爸高兴，知道自己的短处，才能让长处发光，<br> 迈特戴：爸爸很高兴，能让儿子在这么小的时候就发现长处，<br> 迈特凯：爸爸，其实你在逞强吧，<br> 迈特戴：短处也能变成长处，唠叨代表周到，啰嗦说明热门，顽固意味着专注，</p>
-<p>迈特戴：所谓自我约束是指在向某些困难发起挑战时，故意给自己戴上一个枷锁，把自己逼到穷途末路， 制定只属于自己的规矩，正因为有了那个枷锁，你才会认真面对挑战，而一旦失败，你就能通过实践那个规矩，让自己得到严格的锻炼，使得自己不断进步，这才叫自我约束。</p>
-</blockquote>
-<p>迈特戴为迈特凯的父亲，他影响了迈特凯的一生，而迈特凯也将这种影响传给了自己的徒弟李洛克</p>
-<p>青春，热血！！！</p>
-<p>迈特戴经常在别人嘲笑他的时候，对别人说，谢谢支持。</p>
-<p><img src="http://onexs3cnv.bkt.clouddn.com/self1.jpg" alt="self1"><br><img src="http://onexs3cnv.bkt.clouddn.com/self2.jpg" alt="self2"></p>
-]]></content>
-    
-    <summary type="html">
-    
-      想成为像鸣人那样能感染身边人的人；迈特凯和李的青春！！！
-    
-    </summary>
-    
-      <category term="life" scheme="http://www.mmmmmcclxxvii.cn/categories/life/"/>
-    
-    
-      <category term="life" scheme="http://www.mmmmmcclxxvii.cn/tags/life/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>project of stackoverflow - python object(一)</title>
-    <link href="http://www.mmmmmcclxxvii.cn/2017/03/14/stackoverflow_object_1/"/>
-    <id>http://www.mmmmmcclxxvii.cn/2017/03/14/stackoverflow_object_1/</id>
-    <published>2017-03-14T14:27:10.000Z</published>
-    <updated>2017-05-27T14:52:14.000Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="what-does-‘super’-do-in-python"><a href="#what-does-‘super’-do-in-python" class="headerlink" title="what does ‘super’ do in python"></a><a href="http://stackoverflow.com/questions/222877/what-does-super-do-in-python" target="_blank" rel="external">what does ‘super’ do in python</a></h1><p>下面两个的区别是？</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Child</span><span class="params">(SomeBaseClass)</span>:</span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self)</span>:</span></div><div class="line">		super(Child, self).__init__()</div></pre></td></tr></table></figure>
-<p>和<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Child</span><span class="params">(SomeBaseClass)</span>:</span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self)</span>:</span></div><div class="line">		SomeBaseClass.__init__(self)</div></pre></td></tr></table></figure></p>
-<a id="more"></a>
-<p>我在单个继承中已经看到<code>super</code> 被用的很多了。我能知道为什么要在多重继承的时候用它，但是还是不清楚在这种情况用它的好处。</p>
-<hr>
-<p>180票的回答：（John Millikin)</p>
-<p>在单一继承用<code>super</code>的好处很小–只是你不再需要硬编码基类名字到方法里面去了</p>
-<p>然后，在多重继承里，不用<code>super()</code>几乎是不可能的。这包括常见的习语，像是mixins，interface,abstract classes等，<br>这能让你的代码在之后延伸。如果以后有人想写一个拓展<code>Child</code> 和 mixin的类，他们的代码不会很好的工作。</p>
-<hr>
-<p>75票的回答：</p>
-<p><strong>区别是什么？</strong></p>
-<p><code>SomeBaseClass.__init__(self)</code>意思是调用<code>SomeBaseClass</code>的<code>__init__</code>方法<br>然后，<code>super(Child,self).__init__()</code>意思是从<code>Child</code>类的MRO的父类中调用一个绑定方法<code>__init__</code><br>如果实例是Child的子类，有可能在方法解释顺序中的下一个父类是不一样的？？？</p>
-<p><strong>向前兼容间接 ？？ （Indirection with Forward Compatibility) </strong></p>
-<p>这能给你什么？对于单重继承，问题中给出的例子几乎等同于静态分析。然而使用<code>super</code> 提供了具有向前兼容性的间接层<br>向前兼容对于经验丰富的开发者来说是很重要的。你希望你的代码在做出一些细微的改动之后还能工作。当您查看修订历史记录时，您希望准确地查看何时更改了哪些内容。</p>
-<p>你可能先从单重继承开始，但是当你增加另外的基类，你只需要改变基类的顺序（change the line with the bases）<br>（if the bases change in a class you inherit from）如果类继承关系变了（比如增加了一个mixin)，其实你就没做什么改变。<br>尤其在python2中，要想给super正确的方法参数是很难的。如果你知道你在单重继承下正确的使用<code>super</code>，这样是的调试就容易一点了</p>
-<p><strong>依赖注入 Dependency Injection </strong></p>
-<p>其他人可以使用你的代码然后插入一些父类到方法解释中(method resolution):</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">SomeBaseClass</span><span class="params">(object)</span>:</span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self)</span>:</span></div><div class="line">		print(<span class="string">'SomeBaseClass.__init__(self) called'</span>)</div><div class="line">			</div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">UnsuperChild</span><span class="params">(SomeBaseClass)</span>:</span></div><div class="line">	<span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self)</span>:</span></div><div class="line">		print(<span class="string">'UnsuperChild.__init__(self) called'</span>)</div><div class="line">		SomeBaseClass.__init__(self)</div><div class="line">							</div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">SuperChild</span><span class="params">(SomeBaseClass)</span>:</span></div><div class="line">	<span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self)</span>:</span></div><div class="line">		print(<span class="string">'SuperChild.__init__(self) called'</span>)</div><div class="line">		super(SuperChild, self).__init__()</div></pre></td></tr></table></figure>
-<p>现在你增加其他类，然后在Foo和Bar之间插入一个类</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">InjectMe</span><span class="params">(SomeBaseClass)</span>:</span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self)</span>:</span></div><div class="line">		print(<span class="string">'InjectMe.__init__(self) called'</span>)</div><div class="line">		super(InjectMe, self).__init__()</div><div class="line">				</div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">UnsuperInjector</span><span class="params">(UnsuperChild, InjectMe)</span>:</span> <span class="keyword">pass</span></div><div class="line">					</div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">SuperInjector</span><span class="params">(SuperChild, InjectMe)</span>:</span> <span class="keyword">pass</span></div></pre></td></tr></table></figure>
-<p>使用un-super子类未能注入依赖，因为你是用的子类在自己执行打印后调用的是硬编码方法</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&gt;&gt;&gt; </span>o = UnsuperInjector()</div><div class="line">UnsuperChild.__init__(self) called</div><div class="line">SomeBaseClass.__init__(self) called</div></pre></td></tr></table></figure>
-<p>然而使用<code>super</code>的子类能正确的依赖注入</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&gt;&gt;&gt; </span>o2 = SuperInjector()</div><div class="line">SuperChild.__init__(self) called</div><div class="line">InjectMe.__init__(self) called</div><div class="line">SomeBaseClass.__init__(self) called</div></pre></td></tr></table></figure>
-<p>(我：因为super按照MRO来寻找next类的，不是就是去找父类SomeBaseClass,<br>因为SuperInjector的MRO是自身&gt; UnsuperChild &gt; InjectMe &gt; SomeBaseClass &gt; object</p>
-<p>还有就是 super 不是在SuperChild内么，为什么要按SuperInjector的MRO来？？<br>这里应该是因为SuperInjector的init没有定义，然后是用的supserchild的，但是还是按照自身的MRO来。<br>怎么做实验</p>
-<p>)</p>
-<p><strong>结论</strong><br>一直使用<code>super</code>来引用父类就好了</p>
-<p>你想要引用的父类是MRO下一个类，而不是你看到的继承的关系</p>
-<p>不使用<code>super</code> 回让你代码的使用者多了很多不必要的限制</p>
-<hr>
-<h1 id="我的："><a href="#我的：" class="headerlink" title="我的："></a>我的：</h1><p>一个例子就是<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">from</span> collections imoprt Counter, OrderedDict</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">OrderedCounter</span><span class="params">(Counter, OrderedDict)</span>:</span></div><div class="line">	<span class="keyword">pass</span></div><div class="line"></div><div class="line">oc = OrderedCounter(<span class="string">"abracadabra"</span>)</div></pre></td></tr></table></figure></p>
-<p>之前还一直奇怪这个为什么类里面pass，什么都不用写就能结合，现在知道是因为有super<br>相当于我先把参数传递到Counter初始化，然后因为有super找到的是下一个MRO，然后到OrderedDict初始化<br>相当于两个工序，先count再order。</p>
-<hr>
-<h1 id="How-does-Python’s-super-actually-work-in-the-general-case"><a href="#How-does-Python’s-super-actually-work-in-the-general-case" class="headerlink" title="How does Python’s super() actually work, in the general case?"></a><a href="http://stackoverflow.com/questions/33290894/how-does-pythons-super-actually-work-in-the-general-case/33291315?noredirect=1#comment72867412_33291315" target="_blank" rel="external">How does Python’s super() actually work, in the general case?</a></h1><p>现在有很多有关<code>super()</code>的资源，包括<a href="https://rhettinger.wordpress.com/2011/05/26/super-considered-super/" target="_blank" rel="external">这个</a>博客写的，还有很多stackoverflow上的问题。但是我感觉它们都没有解释它在普遍情况下是怎么工作的，也就是底层的实现。</p>
-<p>考虑下面的这个继承层次：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">A</span><span class="params">(object)</span>:</span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">foo</span><span class="params">(self)</span>:</span></div><div class="line">		<span class="keyword">print</span> <span class="string">'A foo'</span></div><div class="line">			</div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">B</span><span class="params">(A)</span>:</span></div><div class="line">	<span class="function"><span class="keyword">def</span> <span class="title">foo</span><span class="params">(self)</span>:</span></div><div class="line">		<span class="keyword">print</span> <span class="string">'B foo before'</span></div><div class="line">		super(B, self).foo()</div><div class="line">		<span class="keyword">print</span> <span class="string">'B foo after'</span></div><div class="line">										</div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">C</span><span class="params">(A)</span>:</span></div><div class="line">	<span class="function"><span class="keyword">def</span> <span class="title">foo</span><span class="params">(self)</span>:</span></div><div class="line">		<span class="keyword">print</span> <span class="string">'C foo before'</span></div><div class="line">		super(C, self).foo()</div><div class="line">		<span class="keyword">print</span> <span class="string">'C foo after'</span></div><div class="line">																	</div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">D</span><span class="params">(B, C)</span>:</span></div><div class="line">	<span class="function"><span class="keyword">def</span> <span class="title">foo</span><span class="params">(self)</span>:</span></div><div class="line">		<span class="keyword">print</span> <span class="string">'D foo before'</span></div><div class="line">		super(D, self).foo()</div><div class="line">		<span class="keyword">print</span> <span class="string">'D foo after'</span></div></pre></td></tr></table></figure>
-<p>如果你读过python的方法解释顺序的规则，你就知道上面的MRO是（D,B,C,A,object)。 这是被D.<strong>mro</strong>决定的<br><code>(&lt;class &#39;__main__.D&#39;&gt;, &lt;class &#39;__main__.B&#39;&gt;, &lt;class &#39;__main__.C&#39;&gt;, &lt;class &#39;__main__.A&#39;&gt;, &lt;type &#39;object&#39;&gt;))</code></p>
-<p>和<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">d = D()</div><div class="line">d.foo()</div></pre></td></tr></table></figure></p>
-<p>打印出的：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">D foo before</div><div class="line">B foo before</div><div class="line">C foo before</div><div class="line">A foo</div><div class="line">C foo after</div><div class="line">B foo after</div><div class="line">D foo after</div></pre></td></tr></table></figure>
-<p>结果符合MRO。 但是，考虑上面的B中的<code>super(B,self).foo()</code> 实际调用的是<code>C.foo</code>，这个是在<code>b=B()</code>中；<code>b.foo()</code> 会直接到<code>A.foo</code> 很显然使用<code>super(B,self).foo()</code>不是<code>A.foo(self)</code>的快捷键，虽然有时是</p>
-<p>很显然<code>super()</code>是有意识的在意之前的调用，然后尝试着去跟随总的MRO链。我觉得有两个方法能完成这个。<br>第一个是做了一些类似在链中将<code>super</code>对象传递给下一个方法的<code>self</code>参数,像原来<code>self</code>对象那样，但是包含了这个信息，但是这样似乎会破坏很多东西(<code>super(D,d) is d</code>是False)，然后做了一些实验，我觉得这个方法不可行。</p>
-<p>另外一个方法是类似全局变量来保存MRO和现在的链上的位置。我想象中的<code>super</code>算法是这样的：</p>
-<ol>
-<li>我们当前有工作的环境吗？如果没有，创建一个队列，获取MRO，将除了第一个之外的所有元素入队列</li>
-<li>将当前上下文的MRO队列中pop一个元素，在构建<code>super</code>实例的时候将它作为当前的class</li>
-<li>当访问<code>super</code>实例的一个方法的时候，在当前class上寻找，然后调用它</li>
-</ol>
-<p>但是，这样却没有解释类似使用不一样的基类当作第一个参数来调用<code>super</code>，或者调用不同方法。（这段好别扭）<br>我想知道这个的更普遍的算法。而且，如果这样的context存在的话，我能看吗？我能破坏他么？这当然是一个糟糕的想法，但是python希望你成为一个成熟的人尽管你不是。</p>
-<p>这同样也引入了好多设计的考量。如果我写的B只考虑了它和A的联系，然后又有其他人写了C，还有其他人写了D，我的<code>B.foo()</code>方法必须找到一个能兼容<code>C.foo()</code>的方法来调用<code>super</code>，尽管我在写它的时候C不存在。如果我想要我的类能很简单的扩展，那我必须要考虑这些。但是我不清楚这是不是比简单的将所有的<code>foo</code>的特征设置成一样来的更复杂。还有一个问题就是什么时候将代码放在<code>super</code>之前，什么时候之后，即使在仅考虑B的基类的时候它没有什么区别</p>
-<hr>
-<p>7票的回答：</p>
-<blockquote>
-<p>super() is then obviously aware of the previous calls before it</p>
-</blockquote>
-<p>它不是。当你做<code>super(B,self).foo</code>,<code>super</code>知道你的MRO因为它会从<code>type(self).__mro__</code>中得到。然后它知道应该在MRO的B后面那里开始寻找<code>foo</code>，一个粗略的纯 python写的应该是这样的:<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">super</span><span class="params">(object)</span>:</span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, klass, obj)</span>:</span></div><div class="line">		self.klass = klass</div><div class="line">		self.obj = obj</div><div class="line">	<span class="function"><span class="keyword">def</span> <span class="title">__getattr__</span><span class="params">(self, attrname)</span>:</span></div><div class="line">		classes = iter(type(self.obj).__mro__)</div><div class="line"></div><div class="line">		<span class="comment"># search the MRO to find self.klass</span></div><div class="line">		<span class="keyword">for</span> klass <span class="keyword">in</span> classes:</div><div class="line">			<span class="keyword">if</span> klass <span class="keyword">is</span> self.klass:</div><div class="line">				<span class="keyword">break</span></div><div class="line"></div><div class="line">		<span class="comment"># start searching for attrname at the next class after self.klass</span></div><div class="line">		<span class="keyword">for</span> klass <span class="keyword">in</span> classes:</div><div class="line">			<span class="keyword">if</span> attrname <span class="keyword">in</span> klass.__dict__:</div><div class="line">				attr = klass.__dict__[attrname]</div><div class="line">				<span class="keyword">break</span></div><div class="line">		<span class="keyword">else</span>:</div><div class="line">			<span class="keyword">raise</span> AttributeError</div><div class="line"></div><div class="line">		<span class="comment"># handle methods and other descriptors</span></div><div class="line">		<span class="keyword">try</span>:</div><div class="line">			<span class="keyword">return</span> attr.__get__(self.obj, type(self.obj))</div><div class="line">		<span class="keyword">except</span> AttributeError:</div><div class="line">			<span class="keyword">return</span> attr</div></pre></td></tr></table></figure></p>
-<blockquote>
-<p>If I wrote B thinking only of its relation to A, then later someone else writes C and a third person writes D, my B.foo() method has to call super in a way that is compatible with C.foo() even though it didn’t exist at the time I wrote it!</p>
-</blockquote>
-<p>并不要求你要从随机的类中多种继承。除非<code>foo</code>是被特意设计成在多重继承的时候将兄弟类的重写。D不应该存在。</p>
-]]></content>
-    
-    <summary type="html">
-    
-      搬运stackoverflow有关python的问题 之 object部分 （一）
-    
-    </summary>
-    
-      <category term="stackoverflow" scheme="http://www.mmmmmcclxxvii.cn/categories/stackoverflow/"/>
-    
-    
-      <category term="python" scheme="http://www.mmmmmcclxxvii.cn/tags/python/"/>
-    
-      <category term="object" scheme="http://www.mmmmmcclxxvii.cn/tags/object/"/>
-    
-      <category term="stackoverflow" scheme="http://www.mmmmmcclxxvii.cn/tags/stackoverflow/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>understanding MRO</title>
-    <link href="http://www.mmmmmcclxxvii.cn/2017/03/13/mro/"/>
-    <id>http://www.mmmmmcclxxvii.cn/2017/03/13/mro/</id>
-    <published>2017-03-13T09:28:31.000Z</published>
-    <updated>2017-03-30T13:05:36.000Z</updated>
-    
-    <content type="html"><![CDATA[<p>其实我一直觉得遇到什么障碍再去学什么是效率比较高的，这时候是带着问题去解决问题，比起干看，没有与实际相结合，要有用多了。所以等你真正遇到这个问题了，再来看看。<strong> 这个<code>MRO</code>是理解<code>super</code>方法的前序 </strong>,以下考虑的都是多重继承，单重继承讨论这个就没什么价值了。</p>
-<h1 id="Method-Resolution-Order"><a href="#Method-Resolution-Order" class="headerlink" title="Method Resolution Order"></a>Method Resolution Order</h1><blockquote>
-<p>In computing, the C3 superclass linearization is an algorithm used primarily to obtain the order in which methods should be inherited (the “linearization”) in the presence of multiple inheritance, and is often termed Method Resolution Order (MRO)<br>from wikipedia – <a href="https://en.wikipedia.org/wiki/C3_linearization" target="_blank" rel="external">C3 linearization</a></p>
-</blockquote>
-<p>这里引进这个概念。因为在继承中，会有子类继承父类当中的一些元素或方法，但是在多重继承中，到底是哪一个呢？这里就涉及到了<code>MRO</code>，方法解释顺序。可以想像一个列表，里面是继承关系的顺序，当调用子类的方法，或访问子类的元素的时候，就按照这个顺序依次的查找。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">A</span><span class="params">(object)</span>:</span></div><div class="line">	<span class="keyword">pass</span></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">B</span><span class="params">(object)</span>:</span></div><div class="line">	<span class="keyword">pass</span></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">C</span><span class="params">(B)</span>:</span></div><div class="line">	<span class="keyword">pass</span></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">D</span><span class="params">(A,B,C)</span>:</span></div><div class="line">	<span class="keyword">pass</span></div></pre></td></tr></table></figure>
-<p>你可以试一下，这个<code>D</code>类是定义不了的，会报错<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">Traceback (most recent call last):</div><div class="line">  File <span class="string">"&lt;stdin&gt;"</span>, line <span class="number">1</span>, <span class="keyword">in</span> &lt;module&gt;</div><div class="line">TypeError: Error when calling the metaclass bases</div><div class="line">  Cannot create a consistent method resolution</div><div class="line">order (MRO) <span class="keyword">for</span> bases object, B, C</div></pre></td></tr></table></figure></p>
-<p>这里是因为破坏了<code>MRO</code>的一个(<code>monotomic</code>)单调性规定：</p>
-<blockquote>
-<p>if C1 precedes C2 in the linearization of C, then C1 precedes C2 in the linearization of any subclass of C.</p>
-</blockquote>
-<p>通过C3算法得出的<code>MRO</code>就可以满足上面的这个要求</p>
-<h1 id="C3-linearization"><a href="#C3-linearization" class="headerlink" title="C3 linearization"></a>C3 linearization</h1><p>先定义几个符号表示：<br><code>C1C2....CN</code> 表示一个[C1,C2,C3….CN]的解决顺序列表，在这样的一个列表中，<code>head</code>是<code>C1</code>，<strong>其余的</strong>都叫做<code>tail</code>。<br>注意：是从C2到最后都算tail.<br><code>C+(C1C2...CN) = CC1C2...CN</code> 表示<code>[C] + [C1,C2...CN]</code><br><code>L[C]</code>表示<code>linearization of class C</code>，规定<code>L[O] = O</code>,<code>O</code>表示<code>object</code></p>
-<p>算法可以描述为一个递归的过程：</p>
-<blockquote>
-<p>the linearization of C is the Sum of C plus the merge of the linearizations of the parents and the list of the parents.<br><code>L[C(B1B2...BN)] = C + merge(L[B1],...L[BN],B1...BN)</code><br>顺序很重要，一一对应的。</p>
-</blockquote>
-<p>merge 算法描述为(原文)：</p>
-<blockquote>
-<p>take the head of the first list, i.e L[B1][0]; if this head is not in the tail of any of the other lists, then add it to the linearization of C and remove it from the lists in the merge, otherwise look at the head of the next list and take it. if it is a good head, then report the operation until all the class are removed or it is impossible to find good heads. If fail, python will refuse to create the class C and will raise an exception.</p>
-</blockquote>
-<h2 id="没看懂直接看例子。"><a href="#没看懂直接看例子。" class="headerlink" title="没看懂直接看例子。"></a>没看懂直接看例子。</h2><p><img src="http://onexs3cnv.bkt.clouddn.com/Screen%20Shot%202017-03-30%20at%207.18.59%20PM.png" alt="example-class-inherit"></p>
-<p>写出各个的<code>linearization</code>（这个翻译成啥我也不知道）<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">L[O] = O</div><div class="line">L[E] = EO</div><div class="line">L[D] = DO</div><div class="line">L[F] = FO</div><div class="line">L[B] = B + merge(L[D],L[E],DE)</div><div class="line">     = B + merge(DO,EO,DE)</div></pre></td></tr></table></figure></p>
-<p>这里是要<code>merge</code>3个<code>list</code>，<code>DO</code>,<code>EO</code>,<code>DE</code>，从第一个<code>DO</code>开始，它的<code>head</code>是<code>D</code>，然后看<code>D</code>是否出现在其他<code>list</code>的<code>tail</code>中中，注意<code>tail</code>是指除了<code>head</code>其余的所有。比如有一个<code>list</code>是<code>ADCBEF</code>,那<code>D</code>出现在第2个位置也算是在<code>tail</code>中，而不是在最后一个位置才算是<code>tail</code>。也就是说只有<code>D</code>出现在其他<code>list</code>首位置的时候，或者就根本没有<code>D</code>，这个<code>D</code>算是一个<code>good head</code>，然后将<code>D</code>加入<code>B</code>的linearization中，如果<code>D</code>不满足上面的条件，那么顺推到下一个<code>list</code> <code>EO</code>中的<code>E</code>，如果再不满足，继续顺推，都不满足的话就<code>raise an exception</code>。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">L[B] = B + merge(L[D],L[E],DE)</div><div class="line">     = B + merge(DO,EO,DE)</div><div class="line">	 = B + D + merge(O,EO,E) <span class="comment">#再从第一个list O 开始去第一个元素O，但O不满足，出现在了第二个EO的tail中，顺延</span></div><div class="line">	 = B + D + E + merge(O,O)</div><div class="line">	 = B + D + E + O</div><div class="line">	 = BDEO</div></pre></td></tr></table></figure>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">L[C] = C + merge(DO,FO,DF)</div><div class="line">	 = C + D + merge(O,FO,F)</div><div class="line">	 = C + D + F + merge(O,O)</div><div class="line">	 = CDFO</div></pre></td></tr></table></figure>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">L[A] = A + merge(L[B],L[C],BC)</div><div class="line">	 = A + merge(BDEO,CDFO,BC)</div><div class="line">	 = A + B + merge(DEO,CDFO,C)</div><div class="line">	 = A + B + C + merge(DEO,DFO)</div><div class="line">	 = A + B + C + D + merge(EO,FO)</div><div class="line">	 = A + B + C + D + E + merge(O,FO)</div><div class="line">	 = A + B + C + D + E + F + merge(O,O)</div><div class="line">	 = A + B + C + D + E + F + O</div><div class="line">	 = ABCDEFO</div></pre></td></tr></table></figure>
-<hr>
-<h2 id="另一个例子–-不能生成mro"><a href="#另一个例子–-不能生成mro" class="headerlink" title="另一个例子– 不能生成mro"></a>另一个例子– 不能生成mro</h2><p><img src="http://onexs3cnv.bkt.clouddn.com/Screen%20Shot%202017-03-30%20at%207.39.09%20PM.png" alt="bad-example"></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">L[O] = O</div><div class="line">L[X] = XO</div><div class="line">L[Y] = YO</div><div class="line">L[A] = AXYO </div><div class="line">L[B] = BYXO <span class="comment">#这两个其实也应该通过上面那个merge算法算出来的，只不过这里一眼就能看出来</span></div></pre></td></tr></table></figure>
-<p>关键看类C<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">L[C] = C + merge(AXYO,BYXO,AB)</div><div class="line">	 = C + A + merge(XYO,BYXO,B)</div><div class="line">	 = C + A + B + merge(XYO,YXO)</div></pre></td></tr></table></figure></p>
-<p>到了这里就做不下去了，这里<code>XYO</code>,<code>YXO</code>，不管第一个<code>X</code>还是第二个的<code>Y</code>，都不行！！</p>
-<blockquote>
-<p>X is in the tail of YXO whereas Y is in the tail of XYO<br>因此算法结束.<code>raise an error refuese to create class C</code></p>
-</blockquote>
-<h1 id="快速判别能否生成MRO的方法"><a href="#快速判别能否生成MRO的方法" class="headerlink" title="快速判别能否生成MRO的方法"></a>快速判别能否生成MRO的方法</h1><p>以下来自 <a href="http://www.cafepy.com/article/python_attributes_and_methods/python_attributes_and_methods.html" target="_blank" rel="external">python Attributes and Methods</a><br><img src="http://www.cafepy.com/article/python_attributes_and_methods/images/simple_hierarchy.png" alt="simple hierarchy"><br>现在要定义一个新的类<code>class N(A,B,C)</code><br><img src="http://www.cafepy.com/article/python_attributes_and_methods/images/beads_on_strings.png" alt="game abacus style beads"><br>画的稍微歪了，第一排全是<code>O</code>，那ok，<code>result</code>中也生成<code>O</code>放在顶部，第二排，<code>BBC</code>，不一样，要全部一样才能放在最后的<code>result</code>中，所以这个是失败的。</p>
-<p>如果将类<code>N</code>的定义改为<code>class N(A,C,B)</code><br><img src="http://www.cafepy.com/article/python_attributes_and_methods/images/beads_on_strings_solved.png" alt="solved-beads on strings"></p>
-<hr>
-<p>以上深入了解以下这个机制就可以，在编程的时候可以调用<code>__mro__</code>属性来查看一个类的<code>mro</code>，了解这个更有助于你理解你写的程序，比如<code>super</code>，比如描述符当中也会用到这个概念</p>
-<hr>
-<p>出处：</p>
-<ol>
-<li><a href="https://www.python.org/download/releases/2.3/mro/" target="_blank" rel="external">The Python 2.3 Method Resolution Order</a></li>
-<li><a href="http://www.cafepy.com/article/python_attributes_and_methods/python_attributes_and_methods.html" target="_blank" rel="external">python Attributes and Methods</a></li>
-</ol>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;其实我一直觉得遇到什么障碍再去学什么是效率比较高的，这时候是带着问题去解决问题，比起干看，没有与实际相结合，要有用多了。所以等你真正遇到这个问题了，再来看看。&lt;strong&gt; 这个&lt;code&gt;MRO&lt;/code&gt;是理解&lt;code&gt;super&lt;/code&gt;方法的前序 &lt;/st
-    
-    </summary>
-    
-      <category term="python" scheme="http://www.mmmmmcclxxvii.cn/categories/python/"/>
-    
-    
-      <category term="python" scheme="http://www.mmmmmcclxxvii.cn/tags/python/"/>
-    
-      <category term="mro" scheme="http://www.mmmmmcclxxvii.cn/tags/mro/"/>
-    
-      <category term="python-object" scheme="http://www.mmmmmcclxxvii.cn/tags/python-object/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>python中的对象属性查找</title>
-    <link href="http://www.mmmmmcclxxvii.cn/2017/03/08/object-attribute-look-up/"/>
-    <id>http://www.mmmmmcclxxvii.cn/2017/03/08/object-attribute-look-up/</id>
-    <published>2017-03-08T14:06:02.000Z</published>
-    <updated>2017-04-02T02:03:08.000Z</updated>
-    
-    <content type="html"><![CDATA[<p><a href="http://www.betterprogramming.com/object-attribute-lookup-in-python.html" target="_blank" rel="external">原文链接</a></p>
-<p>这里面已经讲的很详细了。暂时还没有自己的深刻的思考和理解，就先搬运过来。</p>
-<h1 id="Instance-attribute-look-up-实例属性查找"><a href="#Instance-attribute-look-up-实例属性查找" class="headerlink" title="Instance attribute look up 实例属性查找"></a>Instance attribute look up 实例属性查找</h1><blockquote>
-<p>The implementation works through a precedence chain that gives data descriptors priority over instance variables, instance variables priority over non-data descriptors, and assigns lowest priority to getattr() if provided.</p>
-</blockquote>
-<p>现在有一个类<code>C</code>和一个实例<code>c = C()</code>，现在调用<code>c.name</code>，相当于在实例<code>c</code>中查找<code>name</code>属性，流程如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line">Get the Class from Instance</div><div class="line">Call the Class&apos;s special method __getattribute__.All objects have a default __getattribute__</div><div class="line">	Get the Class&apos;s __mro__ as ClassParents</div><div class="line">	For each ClassParent in ClassParents</div><div class="line">		if the Attribute is in the ClassParent&apos;s __dict__</div><div class="line">			if this attribute is data descriptor</div><div class="line">				return the result from calling the data descriptor&apos;s special method __get__()</div><div class="line">				Breaking the for each(do not continue searching the same Attribute any further)</div><div class="line">	</div><div class="line">	If the Attribute is in Instance&apos;s __dict__</div><div class="line">		return the value as it is(even if the value is a data descriptor)</div><div class="line">		#这个意思是即使是描述符也直接返回这个对象，不会去调用__get__(),返回值类似&lt;__main__ descriptor object at Ox..&gt;</div><div class="line">	For each ClassParent in ClassParents</div><div class="line">		if the Attribute is in the ClassParent&apos;s __dict__</div><div class="line">			if is a non-data descriptor</div><div class="line">				return the result from calling the non-data descriptor&apos;s special method __get__()</div><div class="line">			if it is Not a descriptor</div><div class="line">				return the value</div><div class="line">	</div><div class="line">	If Class has the special method __getattr__</div><div class="line">		return the result from calling the Class&apos;s special method __getattr__</div><div class="line">	</div><div class="line">	Raise an AttributeError</div></pre></td></tr></table></figure></p>
-<p>有几个点要记住！</p>
-<ol>
-<li>descriptors are invoked by the <code>getattribute()</code> method</li>
-<li>overriding <code>getattribute()</code> prevents automatic descriptor calls</li>
-<li><code>getattribute()</code> is only available with new style classes and objects</li>
-<li><code>object.getattribute()</code> and <code>type.getattribute()</code> make different calls to <code>get()</code></li>
-<li>data descriptors always override instance dictionaries.</li>
-<li>non-data descriptors may be overridden by instance dictionaries.</li>
-</ol>
-<h1 id="Class-attribute-look-up-类属性的查找"><a href="#Class-attribute-look-up-类属性的查找" class="headerlink" title="Class attribute look up 类属性的查找"></a>Class attribute look up 类属性的查找</h1><p>一个<code>metaclass</code> <code>M</code>，和一个<code>M</code>的实例，类<code>C</code>，这时候调用<code>C.name</code>的流程：<br>其实和实例访问一一对应，就是各自都升了一个level<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line">Get the MetaClass from Class</div><div class="line">Call the Metaclass&apos;s special method __getattribute__</div><div class="line">	Get the Metaclass&apos;s __mro__ as MetaParents</div><div class="line">	For each MetaParent in MetaParents</div><div class="line">		if the Attribute is in the MetaParent&apos;s __dict__</div><div class="line">			if is a data descriptor</div><div class="line">				return the result from calling the data descriptor&apos;s special method __get__()</div><div class="line">	</div><div class="line">	Get the Class&apos;s __mro__ as ClassParents</div><div class="line">	For each ClassParent in ClassParents</div><div class="line">		if the Attribute is in the ClassParents&apos;s __dict__</div><div class="line">			if is a(data or non-data) descriptor</div><div class="line">				return the result from calling the descriptor&apos;s special method __get__()</div><div class="line">				# 实例在这层上不会调用__get__()</div><div class="line">			else</div><div class="line">				return the value</div><div class="line">	</div><div class="line">	For each MetaParent in MetaParents</div><div class="line">		if the Attribute is in the MetaParents&apos;s __dict__</div><div class="line">			if is a non-data descriptor</div><div class="line">				return the result from calling the non-data descriptor&apos;s special method __get__()</div><div class="line">			if it is NOT a descriptor</div><div class="line">				return the value</div><div class="line">	</div><div class="line">	If MetaClass has the special method __getattr__</div><div class="line">		return the result from calling the MetaClass&apos;s special method __getattr__</div><div class="line">	</div><div class="line">	Raises an AttributeError</div></pre></td></tr></table></figure></p>
-<h1 id="例子"><a href="#例子" class="headerlink" title="例子"></a><a href="https://gist.github.com/Crayon277/cd05d4c058a5e11c7bd202aa44fff876" target="_blank" rel="external">例子</a></h1><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div><div class="line">121</div><div class="line">122</div><div class="line">123</div><div class="line">124</div><div class="line">125</div><div class="line">126</div><div class="line">127</div><div class="line">128</div><div class="line">129</div><div class="line">130</div><div class="line">131</div><div class="line">132</div><div class="line">133</div><div class="line">134</div><div class="line">135</div><div class="line">136</div><div class="line">137</div><div class="line">138</div><div class="line">139</div><div class="line">140</div><div class="line">141</div><div class="line">142</div><div class="line">143</div><div class="line">144</div><div class="line">145</div><div class="line">146</div><div class="line">147</div><div class="line">148</div><div class="line">149</div><div class="line">150</div><div class="line">151</div><div class="line">152</div><div class="line">153</div><div class="line">154</div><div class="line">155</div><div class="line">156</div><div class="line">157</div><div class="line">158</div><div class="line">159</div><div class="line">160</div><div class="line">161</div><div class="line">162</div><div class="line">163</div><div class="line">164</div><div class="line">165</div><div class="line">166</div><div class="line">167</div><div class="line">168</div><div class="line">169</div><div class="line">170</div><div class="line">171</div><div class="line">172</div><div class="line">173</div><div class="line">174</div><div class="line">175</div><div class="line">176</div><div class="line">177</div><div class="line">178</div><div class="line">179</div><div class="line">180</div><div class="line">181</div><div class="line">182</div><div class="line">183</div><div class="line">184</div><div class="line">185</div><div class="line">186</div><div class="line">187</div><div class="line">188</div><div class="line">189</div><div class="line">190</div><div class="line">191</div><div class="line">192</div><div class="line">193</div><div class="line">194</div><div class="line">195</div><div class="line">196</div><div class="line">197</div><div class="line">198</div><div class="line">199</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#!/usr/bin/env python</span></div><div class="line"><span class="comment"># coding=utf-8</span></div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Desc</span><span class="params">(object)</span>:</span> <span class="comment"># 定一个非数据描述符</span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, msg)</span>:</span></div><div class="line">        self.msg = msg</div><div class="line">    </div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__get__</span><span class="params">(self, instance, owner=None)</span>:</span></div><div class="line">        <span class="keyword">return</span> <span class="string">"&#123;0&#125;: &#123;1&#125;"</span>.format(self.typ, self.msg) <span class="comment"># self.typ是啥？？？？</span></div><div class="line"></div><div class="line">    </div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">NonDesc</span><span class="params">(Desc)</span>:</span></div><div class="line">    <span class="comment"># non-data descriptor </span></div><div class="line">    typ = <span class="string">'NonDesc'</span></div><div class="line"></div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">DataDesc</span><span class="params">(Desc)</span>:</span></div><div class="line">    <span class="comment"># data descriptor</span></div><div class="line">    typ = <span class="string">'DataDesc'</span></div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__set__</span><span class="params">(self, instance, value)</span>:</span></div><div class="line">        <span class="keyword">pass</span></div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__delete__</span><span class="params">(self, instance)</span>:</span></div><div class="line">        <span class="keyword">pass</span></div><div class="line"></div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">M</span><span class="params">(type)</span>:</span></div><div class="line">    x = <span class="string">'x from M'</span></div><div class="line">    y = NonDesc(<span class="string">'y from cls M'</span>)</div><div class="line">    z = DataDesc(<span class="string">'z from cls M'</span>)</div><div class="line">    </div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__getattr__</span><span class="params">(self, name)</span>:</span></div><div class="line">        <span class="keyword">return</span> <span class="string">"getattr M &#123;0&#125;"</span>.format(name)</div><div class="line"></div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">A</span><span class="params">(object)</span>:</span></div><div class="line">    <span class="comment">#t = 't from A'</span></div><div class="line">    <span class="comment">#u = NonDesc('u from cls A')</span></div><div class="line">    <span class="comment">#v = DataDesc('v from cls A')</span></div><div class="line">    x = <span class="string">'x from A'</span></div><div class="line">    y = NonDesc(<span class="string">'y from cls A'</span>)</div><div class="line">    z = DataDesc(<span class="string">'z from cls A'</span>)</div><div class="line"></div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">B</span><span class="params">(A)</span>:</span></div><div class="line">    <span class="string">"""</span></div><div class="line">    metaclass is M</div><div class="line">    """</div><div class="line">    __metaclass__ = M</div><div class="line">    <span class="string">"""</span></div><div class="line">    这个metaclass什么用？？？？</div><div class="line">    """</div><div class="line">    </div><div class="line">    </div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">C</span><span class="params">(B)</span>:</span></div><div class="line">    <span class="string">"""</span></div><div class="line">    metaclass is inherited from C</div><div class="line">    """</div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__getattr__</span><span class="params">(self, name)</span>:</span></div><div class="line">        <span class="keyword">return</span> <span class="string">"getattr C: &#123;0&#125;"</span>.format(name)</div><div class="line">    </div><div class="line"></div><div class="line">c = C()</div><div class="line"><span class="keyword">print</span> <span class="string">'******'</span></div><div class="line"><span class="keyword">print</span> <span class="string">'c.__class__'</span>, c.__class__  <span class="comment">#其实就是type(c), 还有注意c是新式类，格式应该是&lt;class '__main__.C'&gt;之类的</span></div><div class="line"><span class="keyword">print</span> <span class="string">'c.__class__.__getattribute__'</span>, c.__class__.__getattribute__ <span class="comment"># 因为c.__class__也是一个对象</span></div><div class="line"><span class="comment"># &lt;slot wrapper '__getattribute__' of 'object' objects&gt;</span></div><div class="line"><span class="keyword">print</span> <span class="string">'c.__class__.__mro__'</span>, c.__class__.__mro__ <span class="comment"># method resolution order C B A O</span></div><div class="line"></div><div class="line"><span class="keyword">print</span> <span class="string">'******'</span></div><div class="line"><span class="keyword">print</span> <span class="string">'c.x'</span>, c.x </div><div class="line"><span class="string">"""</span></div><div class="line">父类们寻找顺序是根据c.__class__.__mro__ 来的</div><div class="line">c先去寻找父类们中有没有x的描述符，没有，然后在自己的__dict__中找x，也咩有，然后再去父类们的__dict__中找</div><div class="line">有没有这个属性名的non-data 描述符，没有，不是描述符而是直接属性的呢？A中有，返回A中的x值</div><div class="line">"""</div><div class="line"><span class="keyword">print</span> <span class="string">'c.y'</span>, c.y</div><div class="line"><span class="string">"""</span></div><div class="line">同上，父类的顺序不废话了</div><div class="line">最终在第三阶段找到A中的y，它是一个non-data descriptor，NonDesc: y from cls A</div><div class="line">"""</div><div class="line"><span class="keyword">print</span> <span class="string">'c.z'</span>, c.z</div><div class="line"><span class="string">"""</span></div><div class="line">在第一个阶段中的A中找到z 是一个data descriptor，饭后 DataDesc: z from cls A</div><div class="line">"""</div><div class="line"><span class="keyword">print</span> <span class="string">'c.nope'</span>, c.nope</div><div class="line"><span class="string">"""</span></div><div class="line">当前三个阶段都找不到的时候，如果类中有定义__getattr__，就到这里去，没有报错</div><div class="line">这里所有三个阶段没有nope属性，然后到了__getattr__，返回 getattr C: nope</div><div class="line">"""</div><div class="line"></div><div class="line">c.t = <span class="string">'t from obj c'</span></div><div class="line">c.u = NonDesc(<span class="string">'u from obj c'</span>)</div><div class="line">c.v = DataDesc(<span class="string">'v from obj c'</span>)</div><div class="line">c.x = <span class="string">'x from obj c'</span></div><div class="line">c.y = NonDesc(<span class="string">'y from obj c'</span>)</div><div class="line">c.z = DataDesc(<span class="string">'z from obj c'</span>)</div><div class="line"></div><div class="line"><span class="keyword">print</span> <span class="string">'******'</span></div><div class="line"><span class="keyword">print</span> <span class="string">'c.t'</span>, c.t</div><div class="line"><span class="string">"""</span></div><div class="line">如上，在第二个阶段找到t, 返回 t from obj c</div><div class="line">"""</div><div class="line"><span class="keyword">print</span> <span class="string">'c.u'</span>, c.u</div><div class="line"><span class="string">"""</span></div><div class="line">在第二个阶段在c字典里面找到，不管是值还是descriptor ，这里会调用__get__()  NonDesc: u from obj c</div><div class="line">update:更正</div><div class="line">因为在</div><div class="line">"""</div><div class="line"><span class="keyword">print</span> <span class="string">'c.v'</span>, c.v</div><div class="line"><span class="string">"""</span></div><div class="line">在第二阶段c字典里找到, 调用__get__() ，返回 DataDesc: v from obj c</div><div class="line">"""</div><div class="line"><span class="keyword">print</span> <span class="string">'c.x'</span>, c.x</div><div class="line"><span class="string">"""</span></div><div class="line">因为在第一阶段是在类父类中找描述符，虽然A中有属性x但不是描述符，因此进入第二个阶段，在实例字典中找，不管是不是描述符</div><div class="line">只要名字对了就返回. 这里在这个阶段返回x from obj c</div><div class="line">"""</div><div class="line"><span class="keyword">print</span> <span class="string">'c.y'</span>, c.y</div><div class="line"><span class="string">"""</span></div><div class="line">同上，返回的是 NonDesc: y from obj c</div><div class="line">"""</div><div class="line"><span class="keyword">print</span> <span class="string">'c.z'</span>, c.z</div><div class="line"><span class="string">"""</span></div><div class="line">同上，返回的是 DataDesc: z from obj c</div><div class="line">"""</div><div class="line"></div><div class="line"><span class="keyword">print</span> <span class="string">'******'</span>  <span class="comment"># 这里是用到 class attribute look up 。 以上是对实例进行点运算</span></div><div class="line"><span class="keyword">print</span> <span class="string">"C.x"</span>, C.x</div><div class="line"><span class="string">"""</span></div><div class="line">因为B的metaclass是M了，C继承B，C现在的metaclass也是M</div><div class="line">现在要将上面的所有概念都升级，原来class变成metaclass，原来instance变成class</div><div class="line">先根据metaclass里的mro决定先后顺序metaparents</div><div class="line">因为这里是类属性访问，C类的metaclass是M，M.__mro__ 是 (&lt;class '__main__.M'&gt;, &lt;type 'type'&gt;, &lt;type 'object'&gt;)</div><div class="line">按顺序找x的描述符，但M中没有x的描述符，然后type，object都没有。</div><div class="line">进入第二个阶段，先计算C.__mro__,按照顺序依次访问类字典C,B,A,O ， </div><div class="line">如果有属性重名，先要描述符，不然只要是在__dict__中就返回</div><div class="line">c中没有x,然后去B，B里面也咩有x，到A中，有x但是不是描述符，没关系直接返回,因为也没有名字为x的描述符了。</div><div class="line">返回x from A</div><div class="line">"""</div><div class="line"><span class="keyword">print</span> <span class="string">"C.y"</span>, C.y</div><div class="line"><span class="string">"""</span></div><div class="line">同上，虽然在M中有y但是是非数据描述符，在第2阶段中的A类中找到y非数据描述符,返回 NonDesc: y from cls A</div><div class="line">"""</div><div class="line"><span class="keyword">print</span> <span class="string">"C.z"</span>, C.z</div><div class="line"><span class="string">"""</span></div><div class="line">这是在第一个阶段中的M里找到z数据描述符， 返回 DataDesc: z from cls M</div><div class="line">"""</div><div class="line"><span class="keyword">print</span> <span class="string">"C.nope"</span>, C.nope</div><div class="line"><span class="string">"""</span></div><div class="line">上面三个阶段都没有，进入第四个阶段，这个阶段不是去C中的__getattr__，因为上面说了都升了一级，现在是在</div><div class="line">M中的__getattr__，如果M里面没有__getattr__，那么就回报错，现在M有，返回 getattr M nope</div><div class="line">"""</div><div class="line"></div><div class="line">C.t = <span class="string">'t from obj C'</span></div><div class="line">C.u = NonDesc(<span class="string">'u from obj C'</span>)</div><div class="line">C.v = DataDesc(<span class="string">'v from obj C'</span>)</div><div class="line">C.x = <span class="string">'x from obj C'</span></div><div class="line">C.y = NonDesc(<span class="string">'y from obj C'</span>)</div><div class="line">C.z = DataDesc(<span class="string">'z from obj C'</span>)</div><div class="line"></div><div class="line"><span class="string">"""</span></div><div class="line">如果是类属性访问，好像没有A，B什么事 !!!!</div><div class="line">写在流程搞错之前，之前在第二阶段没有计算类的__mro__</div><div class="line">重新看一下流程</div><div class="line">"""</div><div class="line"><span class="keyword">print</span> <span class="string">'******'</span></div><div class="line"><span class="keyword">print</span> <span class="string">"C.t"</span>, C.t</div><div class="line"><span class="string">"""</span></div><div class="line">因为metaclass以及mro中都没有t，进入下一个阶段</div><div class="line">在第二阶段中现在C类中有t这个属性了，返回 t from obj C</div><div class="line">"""</div><div class="line"><span class="keyword">print</span> <span class="string">"C.u"</span>, C.u</div><div class="line"><span class="string">"""</span></div><div class="line">同上，在第二阶段中C类的__dict__中找到，返回 NonDesc: u from obj C</div><div class="line">"""</div><div class="line"><span class="keyword">print</span> <span class="string">"C.v"</span>, C.v</div><div class="line"><span class="string">"""</span></div><div class="line">同上，在第二阶段中返回 DataDesc: v from obj C</div><div class="line">"""</div><div class="line"><span class="keyword">print</span> <span class="string">"C.x"</span>, C.x</div><div class="line"><span class="string">"""</span></div><div class="line">和M中有重名，但是因为M中的不是数据描述符，这个的优先级高，在第二阶段返回 x from obj C</div><div class="line">虽然A中也有x，但是mro顺序C排在A前面</div><div class="line">"""</div><div class="line"><span class="keyword">print</span> <span class="string">"C.y"</span>, C.y</div><div class="line"><span class="string">"""</span></div><div class="line">同上，有重名，但是M中是非数据描述符，第一阶段过，到第二阶段，返回 NonDesc: y from obj C</div><div class="line">然后A中同理</div><div class="line">"""</div><div class="line"><span class="keyword">print</span> <span class="string">"C.z"</span>, C.z</div><div class="line"><span class="string">"""</span></div><div class="line">重名，但是z在M中是数据描述符，在第一阶段就返回 DataDesc: z from cls M</div><div class="line">"""</div><div class="line"><span class="keyword">print</span> <span class="string">"C.nope"</span>, C.nope</div><div class="line"><span class="string">"""</span></div><div class="line">这个没有变 getattr M nope</div><div class="line">"""</div></pre></td></tr></table></figure>
-<p>结果：<br><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line">******</div><div class="line">c.__class__ &lt;class '__main__.C'&gt;</div><div class="line">c.__class__.__getattribute__ &lt;slot wrapper '__getattribute__' of 'object' objects&gt;</div><div class="line">c.__class__.__mro__ (&lt;class '__main__.C'&gt;, &lt;class '__main__.B'&gt;, &lt;class '__main__.A'&gt;, &lt;type 'object'&gt;)</div><div class="line">******</div><div class="line">c.x x from A</div><div class="line">c.y NonDesc: y from cls A</div><div class="line">c.z DataDesc: z from cls A</div><div class="line">c.nope getattr C: nope</div><div class="line">******</div><div class="line">c.t t from obj c</div><div class="line">c.u &lt;__main__.NonDesc object at 0x1009b8f10&gt;</div><div class="line">c.v &lt;__main__.DataDesc object at 0x1009b8f50&gt;</div><div class="line">c.x x from obj c</div><div class="line">c.y &lt;__main__.NonDesc object at 0x1009b8f90&gt;</div><div class="line">c.z DataDesc: z from cls A</div><div class="line">******</div><div class="line">C.x x from A</div><div class="line">C.y NonDesc: y from cls A</div><div class="line">C.z DataDesc: z from cls M</div><div class="line">C.nope getattr M nope</div><div class="line">******</div><div class="line">C.t t from obj C</div><div class="line">C.u NonDesc: u from obj C</div><div class="line">C.v DataDesc: v from obj C</div><div class="line">C.x x from obj C</div><div class="line">C.y NonDesc: y from obj C</div><div class="line">C.z DataDesc: z from cls M</div><div class="line">C.nope getattr M nope</div></pre></td></tr></table></figure></p>
-]]></content>
-    
-    <summary type="html">
-    
-      分为实例调用和类调用，两者查找属性的流程是不一样的
-    
-    </summary>
-    
-      <category term="python" scheme="http://www.mmmmmcclxxvii.cn/categories/python/"/>
-    
-    
-      <category term="python" scheme="http://www.mmmmmcclxxvii.cn/tags/python/"/>
-    
-      <category term="object" scheme="http://www.mmmmmcclxxvii.cn/tags/object/"/>
     
   </entry>
   
