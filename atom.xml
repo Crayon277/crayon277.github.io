@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://www.mmmmmcclxxvii.cn/"/>
-  <updated>2017-06-09T06:02:37.000Z</updated>
+  <updated>2017-07-29T14:10:36.000Z</updated>
   <id>http://www.mmmmmcclxxvii.cn/</id>
   
   <author>
@@ -14,6 +14,279 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>微信小程序-snake案例解析</title>
+    <link href="http://www.mmmmmcclxxvii.cn/2017/07/12/miniprogram/"/>
+    <id>http://www.mmmmmcclxxvii.cn/2017/07/12/miniprogram/</id>
+    <published>2017-07-12T14:06:45.000Z</published>
+    <updated>2017-07-29T14:10:36.000Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="snake-wxml"><a href="#snake-wxml" class="headerlink" title="snake.wxml"></a>snake.wxml</h1><h2 id="wx-for"><a href="#wx-for" class="headerlink" title="wx:for"></a>wx:for</h2><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">view</span> <span class="attr">class</span>=<span class="string">"ground"</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">view</span> <span class="attr">wx:for</span>=<span class="string">"&#123;&#123;ground&#125;&#125;"</span>  <span class="attr">class</span>=<span class="string">"rows"</span> <span class="attr">wx:for-item</span>=<span class="string">"cols"</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">view</span> <span class="attr">wx:for</span>=<span class="string">"&#123;&#123;cols&#125;&#125;"</span> <span class="attr">class</span>=<span class="string">"block block_&#123;&#123;item&#125;&#125;"</span> &gt;</span></div><div class="line"></div><div class="line">        <span class="tag">&lt;/<span class="name">view</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">view</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">view</span>&gt;</span></div></pre></td></tr></table></figure>
+<p>最外层的<code>view</code>想成一个大容器，这个容器的大小是由相对应的<code>ground</code>的wxss规定的，然后内层第一个<code>view</code>是放在这个大容器的一个抽屉，然后最里层是放在这个抽屉里面的东西，</p>
+<p>想象建立一个操场，先是规划好操场的大小，划好地块，然后在每一排的植被土壤弄好，然后再一块一块的假草放上去。</p>
+<p>注意的就是，<strong>默认数组的当前项的下标变量名默认为<code>index</code>，数组当前项的变量名默认为<code>item</code></strong></p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">view</span> <span class="attr">wx:for</span>=<span class="string">"&#123;&#123;array&#125;&#125;"</span>&gt;</span></div><div class="line">  &#123;&#123;index&#125;&#125;: &#123;&#123;item&#125;&#125;</div><div class="line"><span class="tag">&lt;/<span class="name">view</span>&gt;</span></div></pre></td></tr></table></figure>
+<p>这个<code>index</code>就是下标索引，从零开始，而<code>item</code>是数组里面具体的东西<br>比如这个<code>array</code>在js里赋值<code>[&#39;a&#39;,&#39;b&#39;,&#39;c&#39;,&#39;d&#39;]</code><br>那么打印出来的是：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">0:&apos;a&apos;</div><div class="line">1:&apos;b&apos;</div><div class="line">3:&apos;c&apos;</div><div class="line">4:&apos;d&apos;</div></pre></td></tr></table></figure></p>
+<p>如果是<code>[[1,2],[2,3],[3,4]]</code><br>那么打印出来是：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">0:[1,2]</div><div class="line">1:[2,3]</div><div class="line">2:[3,4]</div></pre></td></tr></table></figure></p>
+<p>所以<code>item</code>表示的就是第<code>index</code>下标对应的值<br><code>wx:for-index=&quot;idx&quot;</code>,<code>wx:for-item=&quot;itm&quot;</code>只是名字不叫<code>item</code>,<code>index</code>而已，自己命名罢了。</p>
+<p>参考：</p>
+<ul>
+<li><a href="https://mp.weixin.qq.com/debug/wxadoc/dev/framework/view/wxml/list.html" target="_blank" rel="external">列表渲染</a></li>
+</ul>
+<h2 id="modal弹出框组件"><a href="#modal弹出框组件" class="headerlink" title="modal弹出框组件"></a>modal弹出框组件</h2><p>参考：</p>
+<ul>
+<li><a href="http://www.cnblogs.com/simba-lkj/p/6509927.html" target="_blank" rel="external">微信小程序之弹框modal</a></li>
+<li><a href="http://blog.csdn.net/u014360817/article/details/52671211" target="_blank" rel="external">微信小程序把玩（二十三）modal组件</a></li>
+</ul>
+<h1 id="snake-wxss-中"><a href="#snake-wxss-中" class="headerlink" title="snake.wxss 中"></a>snake.wxss 中</h1><h2 id="flex属性"><a href="#flex属性" class="headerlink" title="flex属性"></a>flex属性</h2><p>首先看标签结构<br><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">view</span> <span class="attr">class</span>=<span class="string">"score"</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">view</span> <span class="attr">class</span>=<span class="string">"title"</span>&gt;</span>snake<span class="tag">&lt;/<span class="name">view</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">view</span> <span class="attr">class</span>=<span class="string">"scoredetail"</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">view</span> <span class="attr">class</span>=<span class="string">"scoredesc"</span>&gt;</span>得分<span class="tag">&lt;/<span class="name">view</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">view</span> <span class="attr">class</span>=<span class="string">"scorenumber"</span>&gt;</span>&#123;&#123;score&#125;&#125;<span class="tag">&lt;/<span class="name">view</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">view</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">view</span> <span class="attr">class</span>=<span class="string">"scoredetail"</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">view</span> <span class="attr">class</span>=<span class="string">"scoredesc"</span>&gt;</span>历史最高<span class="tag">&lt;/<span class="name">view</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">view</span> <span class="attr">class</span>=<span class="string">"scorenumber"</span>&gt;</span>&#123;&#123;maxscore&#125;&#125;<span class="tag">&lt;/<span class="name">view</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">view</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">view</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<p>上面的布局用图示就是<br><img src="http://onexs3cnv.bkt.clouddn.com/Screen%20Shot%202017-07-12%20at%2010.17.00%20PM.png" alt="layout"></p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">.score &#123;</div><div class="line">    display:flex;</div><div class="line">&#125;</div><div class="line"></div><div class="line">.scoretitle&#123;</div><div class="line">    flex:1;</div><div class="line">	...</div><div class="line">&#125;</div><div class="line"></div><div class="line">.scoredetail&#123;</div><div class="line">    flex:1;</div><div class="line">	...</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>如果用了flex就是这样的展现形式<br><img src="http://onexs3cnv.bkt.clouddn.com/Screen%20Shot%202017-07-12%20at%2010.21.04%20PM.png" alt="flex"></p>
+<p>如果<code>.score</code>中设置的<code>display</code>设置为<code>block</code>,效果为<br><img src="http://onexs3cnv.bkt.clouddn.com/Screen%20Shot%202017-07-12%20at%2010.22.58%20PM.png" alt="block"><br>而且其他<code>inline</code>,<code>grid</code>等都是上面这个效果。</p>
+<p>其实<code>flex</code>还隐藏了一个设置，就是<code>flex-flow</code>应该默认是<code>row</code>，所以在一列上展开。flex是flexiable的缩写，注意在<code>scoretitle</code>和<code>scoredetail</code>中都有设置<code>flex</code>值，这个值表示的意义就是比重，我是这么理解的。比如，如果将<code>scoretitle</code>中的<code>flex</code>值改为<code>4</code></p>
+<p><img src="http://onexs3cnv.bkt.clouddn.com/Screen%20Shot%202017-07-12%20at%2010.28.25%20PM.png" alt="4flex"><br>可以看到<code>title</code>的视图占的地盘越来越大，而因为另外两个视图都是由同样的<code>scoredetail</code>控制，<code>flex</code>都为1，所以占比相同。</p>
+<p><strong>而且因为是<code>flex</code>，所以只要是关于距离的属性值，都会影响到它</strong>，比如<code>scoretitle</code>中的<code>margin</code>值的左侧改为<code>200rpx</code><br><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">.title&#123;</div><div class="line">	...</div><div class="line">    margin: 40rpx 20rpx 40rpx 200rpx;</div><div class="line">	...</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p><img src="http://onexs3cnv.bkt.clouddn.com/Screen%20Shot%202017-07-12%20at%2010.35.06%20PM.png" alt="margin200"></p>
+<p>可以看到因为title这个视图被要求离左侧200rpx，<strong>导致另外两个视图被等比例的压缩了。</strong></p>
+<p>参考:</p>
+<ul>
+<li><a href="http://onexs3cnv.bkt.clouddn.com/Screen%20Shot%202017-07-12%20at%2010.35.06%20PM.png" target="_blank" rel="external">display:flex多栏多列布局</a></li>
+</ul>
+<h2 id="操场宽度-rpx"><a href="#操场宽度-rpx" class="headerlink" title="操场宽度 rpx"></a>操场宽度 rpx</h2><p>参考：<br>-<a href="http://www.51xuediannao.com/javascript/xiaochengxu_rpx.html" target="_blank" rel="external">微信小程序尺寸单位rpx以及样式相关介绍</a></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">.ground&#123;</div><div class="line">    width: 660rpx;</div><div class="line">    height:840rpx;</div><div class="line">    margin-left: 40rpx;</div><div class="line">    background-color: #eee4da;</div><div class="line">&#125;</div><div class="line">.block&#123;</div><div class="line">    width:30rpx;</div><div class="line">    height:30rpx;</div><div class="line">    float: left;</div><div class="line">    background: #ccc;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<blockquote>
+<p>rpx单位是微信小程序中css的尺寸单位，rpx可以根据屏幕宽度进行自适应。规定屏幕宽为750rpx。如在 iPhone6 上，屏幕宽度为375px，共有750个物理像素，则750rpx = 375px = 750物理像素，1rpx = 0.5px = 1物理像素。</p>
+</blockquote>
+<p>因为一个块设定30rpx,然后每一行有22个（22列），所以操场宽度是22<em>30=660rpx, 有28行，高度就是28</em>30=840rpx。</p>
+<h1 id="snake-js"><a href="#snake-js" class="headerlink" title="snake.js"></a>snake.js</h1><p>逻辑层！！</p>
+<h2 id="setData"><a href="#setData" class="headerlink" title="setData"></a>setData</h2><p>参考：</p>
+<ul>
+<li><a href="https://segmentfault.com/q/1010000007078232/a-1020000007103717" target="_blank" rel="external">关于微信小程序里面this.setData到底怎样或运行的？</a></li>
+</ul>
+<blockquote>
+<p>setData 函数用于将数据从逻辑层发送到视图层，同时改变对应的 this.data 的值。<br>注意<br>1.直接修改 this.data 而不调用 this.setData 是无法改变页面的状态的，还会造成数据不一致<br>2.单次设置的数据不能超过1024kB，请尽量避免一次设置过多的数据。</p>
+<p>1.页面最终绑定的是data对象上的属性（键）<br>2.setData(obj)方法中要求对象作为参数，他做了两件事<br>   1)他会将obj参数上的属性浅拷贝到data对象上，该功能建议你参考Object.assign()方法的功效<br>   2)obj参数上的属性浅拷贝到data对象的同时，会对页面绑定该属性的地方重新渲染，起到了脏值检查的作用</p>
+</blockquote>
+<h3 id="为什么在initGround和initSnake方法中没有用this-setData，而是直接设置data中的值"><a href="#为什么在initGround和initSnake方法中没有用this-setData，而是直接设置data中的值" class="headerlink" title="为什么在initGround和initSnake方法中没有用this.setData，而是直接设置data中的值"></a>为什么在<code>initGround</code>和<code>initSnake</code>方法中没有用<code>this.setData</code>，而是直接设置<code>data</code>中的值</h3><p>先直接给结论，那是因为在<code>createFood</code>方法中<code>setData</code>了<code>ground</code>等值，不然在屏幕上显示不出操场。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">onLoad: <span class="function"><span class="keyword">function</span> (<span class="params">options</span>) </span>&#123;</div><div class="line">  <span class="keyword">var</span> maxscore = wx.getStorageSync(<span class="string">'maxscore'</span>);</div><div class="line">  <span class="keyword">if</span>(!maxscore) maxscore=<span class="number">0</span></div><div class="line">  <span class="keyword">this</span>.setData(&#123;</div><div class="line">    <span class="attr">maxscore</span>:maxscore</div><div class="line">  &#125;);</div><div class="line">  <span class="keyword">this</span>.initGround(<span class="keyword">this</span>.data.rows,<span class="keyword">this</span>.data.cols);</div><div class="line">  <span class="comment">//操场渲染</span></div><div class="line">  <span class="comment">//this.initSnake(3);</span></div><div class="line">  <span class="comment">//贪吃蛇渲染</span></div><div class="line">  <span class="keyword">this</span>.createFood();</div><div class="line">  <span class="comment">//this.move();</span></div><div class="line">&#125;,</div></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div></pre></td><td class="code"><pre><div class="line">initGround:<span class="function"><span class="keyword">function</span>(<span class="params">rows,cols</span>)</span>&#123;</div><div class="line">    <span class="comment">//初始化操场</span></div><div class="line">    <span class="comment">//console.log([rows,cols]);</span></div><div class="line"></div><div class="line">    <span class="keyword">for</span>(<span class="keyword">var</span> i=<span class="number">0</span>;i&lt;rows;i++)&#123;</div><div class="line">      <span class="keyword">var</span> arr = [];</div><div class="line">      <span class="keyword">this</span>.data.ground.push(arr);</div><div class="line">      <span class="keyword">for</span>(<span class="keyword">var</span> j=<span class="number">0</span>;j&lt;cols;j++)&#123;</div><div class="line">        <span class="keyword">this</span>.data.ground[i].push(<span class="number">0</span>);</div><div class="line">      &#125;</div><div class="line">    &#125;</div><div class="line">   <span class="comment">// console.log(this.data.ground);</span></div><div class="line">  &#125;,</div><div class="line"></div><div class="line">  <span class="attr">initSnake</span>:<span class="function"><span class="keyword">function</span>(<span class="params">len</span>)</span>&#123;</div><div class="line">    <span class="keyword">for</span>(<span class="keyword">var</span> i= <span class="number">0</span>;i&lt;len;i++)&#123;</div><div class="line">      <span class="keyword">this</span>.data.ground[<span class="number">0</span>][i] = <span class="number">1</span>;</div><div class="line">      <span class="keyword">this</span>.data.snake.push([<span class="number">0</span>,i]);</div><div class="line">      <span class="comment">//???Todo</span></div><div class="line">      <span class="comment">//这里没有用this.setData方法来设置snake可以吗？</span></div><div class="line">      <span class="comment">//还是用对象方法是可以的？</span></div><div class="line">    &#125;</div><div class="line">  &#125;,</div><div class="line"><span class="attr">createFood</span>:<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">    <span class="keyword">var</span> x=<span class="built_in">Math</span>.floor(<span class="built_in">Math</span>.random()*<span class="keyword">this</span>.data.rows);</div><div class="line">    <span class="keyword">var</span> y=<span class="built_in">Math</span>.floor(<span class="built_in">Math</span>.random()*<span class="keyword">this</span>.data.cols);</div><div class="line">    <span class="keyword">var</span> ground = <span class="keyword">this</span>.data.ground;</div><div class="line">    ground[x][y] = <span class="number">2</span>;</div><div class="line">    <span class="keyword">this</span>.setData(&#123;</div><div class="line">      <span class="attr">ground</span>:ground,</div><div class="line">      <span class="attr">food</span>:[x,y]</div><div class="line">    &#125;)</div><div class="line">  &#125;,</div></pre></td></tr></table></figure>
+<p><code>initGround</code>和<code>initSnake</code>里面是对<code>data</code>数据中的<code>ground</code>和<code>snake</code>进行改变，如果把<code>onLoad</code>中的<code>createFood</code>注释掉，可以看到渲染的效果是<br><img src="http://onexs3cnv.bkt.clouddn.com/Screen%20Shot%202017-07-15%20at%2010.53.43%20PM.png" alt="comment createFood"></p>
+<p><strong>注意</strong>这里的棕色底是<code>ground</code>的css属性，是容纳操场的“大抽屉”<br><figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="selector-class">.ground</span>&#123;</div><div class="line">    <span class="attribute">width</span>: <span class="number">660</span>rpx;</div><div class="line">    <span class="attribute">height</span>:<span class="number">840</span>rpx;</div><div class="line">    <span class="attribute">margin-left</span>: <span class="number">40</span>rpx;</div><div class="line">    <span class="attribute">background-color</span>: <span class="number">#eee4da</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>而贪吃蛇的活动场地是由<code>block</code>属性控制的，背景应该为灰色。可以在视图层打印出每个操场的数组值（操场由数组控制，值是0的为灰色，值是1的是蛇体部分，值是2的是食物）<br><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"> <span class="tag">&lt;<span class="name">view</span> <span class="attr">class</span>=<span class="string">"ground"</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">view</span> <span class="attr">wx:for</span>=<span class="string">"&#123;&#123;ground&#125;&#125;"</span> <span class="attr">class</span>=<span class="string">"rows"</span> <span class="attr">wx:for-item</span>=<span class="string">"cols"</span> &gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">view</span> <span class="attr">wx:for</span>=<span class="string">"&#123;&#123;cols&#125;&#125;"</span> <span class="attr">class</span>=<span class="string">"block block_&#123;&#123;item&#125;&#125;"</span>&gt;</span></div><div class="line">      &#123;&#123;cols&#125;&#125;</div><div class="line">      <span class="tag">&lt;/<span class="name">view</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">view</span>&gt;</span></div><div class="line">  <span class="tag">&lt;/<span class="name">view</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">view</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<p>因为有<code></code>理应在操场这个视图中打印出数字，但是没有，还是和上面一样。</p>
+<p><strong>然后再把<code>createFood</code>注释删掉</strong>，看到效果</p>
+<p><img src="http://onexs3cnv.bkt.clouddn.com/Screen%20Shot%202017-07-15%20at%2011.00.41%20PM.png" alt="uncomment createFood"></p>
+<p><strong>由此得知，并不是<code>initGround</code>和<code>initSnake</code>不用<code>this.setData</code>来设置<code>ground</code>值，而是统一在<code>createFood</code>中做了，并可以验证，<code>this.setData</code>是逻辑层和视图层的实时交互的途径，要想在视图层中显示由逻辑层控制的一些参数，必须通过<code>this.setData</code>，不然没有效果。因为蛇体其实就是<code>ground</code>的某几个值为1，而<code>snake</code>不是用来渲染视图层的，是用来后面的判断生死以及移动的，可以想成是后台的数据，所以可以不用<code>this.setData</code>来设置，而<code>ground</code>是要显示在前端的，所以必须用<code>this.setData</code>来设置</strong></p>
+<h3 id="触壁后蛇头位移？"><a href="#触壁后蛇头位移？" class="headerlink" title="触壁后蛇头位移？"></a>触壁后蛇头位移？</h3><p>详细见下面的debug部分。</p>
+<p>原因是因为在<code>checkGame</code>中的<code>this.setData</code>函数设置后，没有即使反应在视图层，<strong>我想的是，这个函数是及时生效</strong></p>
+<p>调用流程是：</p>
+<p><code>Move</code> –&gt; <code>changeDirection</code> –&gt; <code>changeRight</code> –&gt; <code>checkGame</code> </p>
+<p>在<code>checkGame</code>中<code>this.setData</code>做完后不是马上视图层生效，而是回到<code>changeRight</code>继续做剩下的，而剩下的因为没经过逻辑判断，这里可能会后bug，因为触壁后，已经到头了，理应弹出结束框，但是因为视图层没有马上生效，所以导致<code>changeRight</code>中在<code>checkGame</code>后的<code>ground[x][y]=1</code>继续执行，这个则是超出了边界。</p>
+<p>可以做一个实验</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">view</span>&gt;</span>&#123;&#123;newfield.text&#125;&#125;<span class="tag">&lt;/<span class="name">view</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">button</span> <span class="attr">bindtap</span>=<span class="string">"addnewfield"</span>&gt;</span> add new field<span class="tag">&lt;/<span class="name">button</span>&gt;</span></div></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">addnewfield:<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">    <span class="keyword">this</span>.outersetData();</div><div class="line">    <span class="keyword">this</span>.setData(&#123;</div><div class="line">      <span class="string">"newfield.text"</span>:<span class="string">"here is after outersetData"</span></div><div class="line">    &#125;);</div><div class="line">  &#125;,</div><div class="line">  <span class="attr">outersetData</span>:<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">    <span class="keyword">this</span>.setData(&#123;</div><div class="line">      <span class="string">"newfield.text"</span>:<span class="string">"can this message display???"</span></div><div class="line">    &#125;)</div><div class="line">  &#125;</div><div class="line">&#125;)</div></pre></td></tr></table></figure>
+<p>最后结果：<br><img src="http://onexs3cnv.bkt.clouddn.com/Screen%20Shot%202017-07-20%20at%209.17.42%20AM.png" alt="result"></p>
+<p><code>outersetData</code>中设置的，在单步调试中也没有显示过，<strong>说明，在函数调用过程中，应该是要所有调用结束后才会触发<code>setData</code>的作用，然后视图层重新渲染</strong></p>
+<h2 id="初始化操场"><a href="#初始化操场" class="headerlink" title="初始化操场"></a>初始化操场</h2><p>我写的是:<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">...</div><div class="line">initGround:<span class="function"><span class="keyword">function</span>(<span class="params">rows,cols</span>)</span>&#123;</div><div class="line">    <span class="comment">//console.log([rows,cols]);</span></div><div class="line">    <span class="keyword">var</span> arr=[];</div><div class="line">    <span class="keyword">for</span>(<span class="keyword">var</span> i=<span class="number">0</span>;i&lt;rows;i++)&#123;</div><div class="line">      <span class="keyword">this</span>.data.ground.push(arr);</div><div class="line">      <span class="keyword">for</span>(<span class="keyword">var</span> j=<span class="number">0</span>;j&lt;cols;j++)&#123;</div><div class="line">        <span class="keyword">this</span>.data.ground[i].push(<span class="number">0</span>);</div><div class="line">      &#125;</div><div class="line">    &#125;</div><div class="line">    <span class="built_in">console</span>.log(<span class="keyword">this</span>.data.ground);</div><div class="line">  &#125;,</div><div class="line">...</div></pre></td></tr></table></figure></p>
+<p>注意<code>var arr = []</code>写在<code>for</code>循环外面，然后在调试中看到<br><img src="http://onexs3cnv.bkt.clouddn.com/Screen%20Shot%202017-07-13%20at%2012.12.32%20AM.png" alt="initground"></p>
+<p>这是一个异常的情况，不可能有那么多数据。</p>
+<p>然后测试了一下<br><img src="http://onexs3cnv.bkt.clouddn.com/Screen%20Shot%202017-07-13%20at%2012.22.45%20AM.png" alt="test"><br>从上面的测试可以看出，虽然<code>g.push(arr)</code>是导入了4个<code>[]</code>，但当<code>g[0].push(1)</code>，做这个的时候，实际上，这4个<code>[]</code>都是引用同一个arr,也就是<code>arr</code>是“全局的”，它变，全都变。</p>
+<h2 id="事件"><a href="#事件" class="headerlink" title="事件"></a>事件</h2><p>参考：<br>-<a href="https://mp.weixin.qq.com/debug/wxadoc/dev/framework/view/wxml/event.html" target="_blank" rel="external">event</a></p>
+<p>视图层的代码<br><code>&lt;view class=&quot;control&quot; bindtouchstart=&quot;tapStart&quot; bindtouchmove=&quot;tapMove&quot; bindtouchend=&quot;tapEnd&quot;&gt;</code><br>当在这个视图里面发生触屏事件，这个视图的大小可能是<code>control</code>控制的，然后在里面的每一次点击滑动，都会触发相应的<code>tapStart</code>,<code>tapMove</code>,<code>tapEnd</code>函数。</p>
+<p>与视图层的逻辑层，以<code>tapStart</code>为例，<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">tapStart:<span class="function"><span class="keyword">function</span>(<span class="params">event</span>)</span>&#123;</div><div class="line">  <span class="keyword">this</span>.setData(&#123;</div><div class="line">    <span class="attr">startx</span>:event.touches[<span class="number">0</span>].pageX,</div><div class="line">    <span class="attr">starty</span>:event.touches[<span class="number">0</span>].pageY</div><div class="line">  &#125;)</div><div class="line">&#125;,</div></pre></td></tr></table></figure></p>
+<p>我一开始怀疑为什么要event,以为是关键字，看到文档中写</p>
+<blockquote>
+<p>在相应的Page定义中写上相应的事件处理函数，参数是event。</p>
+</blockquote>
+<p>它是参数，并不是关键字。然后试了一些，把上面的<code>event</code>改为其他的名字也可以，其实就是一个命名参数<code>function(event=**)</code>这种。<br>这个<code>event</code>是个对象。</p>
+<blockquote>
+<p>如无特殊说明，当组件触发事件时，逻辑层绑定该事件的处理函数会收到一个事件对象。</p>
+</blockquote>
+<p>然后是<code>event.touches[0]</code>，好奇[1]是什么，这个<code>touches</code>是什么东西。</p>
+<blockquote>
+<p>touches 是一个数组，每个元素为一个 Touch 对象（canvas 触摸事件中携带的 touches 是 CanvasTouch 数组）。 表示当前停留在屏幕上的触摸点。</p>
+</blockquote>
+<p>然后打印出来，<br><img src="http://onexs3cnv.bkt.clouddn.com/Screen%20Shot%202017-07-13%20at%202.35.49%20PM.png" alt="touches"><br><code>touches</code>数组就一个元素，长度就为1，没有<code>touches[1]</code>。</p>
+<h3 id="tapEnd"><a href="#tapEnd" class="headerlink" title="tapEnd"></a>tapEnd</h3><h2 id="that和this"><a href="#that和this" class="headerlink" title="that和this"></a>that和this</h2><p>参考：</p>
+<ul>
+<li><a href="http://blog.csdn.net/u010289760/article/details/49968387" target="_blank" rel="external"> js中this和that</a></li>
+<li><a href="http://94rn.com/hudong/201701/14123.html" target="_blank" rel="external">微信小程序开发日记：重要的var that=this</a></li>
+<li><a href="http://www.cnblogs.com/rainman/archive/2009/05/03/1448392.html" target="_blank" rel="external">深入理解JavaScript中的this关键字</a></li>
+</ul>
+<h2 id="onLoad"><a href="#onLoad" class="headerlink" title="onLoad"></a>onLoad</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"> changeLeft:<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">   ...</div><div class="line">      this.checkGame(snakeTAIL);</div><div class="line">...</div><div class="line">this.setData(&#123;</div><div class="line">              <span class="attr">ground</span>:ground,</div><div class="line">          <span class="attr">snake</span>:arr</div><div class="line">      &#125;);</div><div class="line">...</div><div class="line">  &#125;,</div></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line">checkGame:<span class="function"><span class="keyword">function</span>(<span class="params">snakeTAIL</span>)</span>&#123;</div><div class="line">    <span class="keyword">var</span> arr=<span class="keyword">this</span>.data.snake;</div><div class="line">    <span class="keyword">var</span> len=<span class="keyword">this</span>.data.snake.length;</div><div class="line">    <span class="keyword">var</span> snakeHEAD=arr[len<span class="number">-1</span>];</div><div class="line">    <span class="keyword">if</span>(snakeHEAD[<span class="number">0</span>]&lt;<span class="number">0</span>||snakeHEAD[<span class="number">0</span>]&gt;=<span class="keyword">this</span>.data.rows||snakeHEAD[<span class="number">1</span>]&gt;=<span class="keyword">this</span>.data.cols||snakeHEAD[<span class="number">1</span>]&lt;<span class="number">0</span>)&#123;</div><div class="line">            clearInterval(<span class="keyword">this</span>.data.timer);</div><div class="line">                <span class="keyword">this</span>.setData(&#123;</div><div class="line">                <span class="attr">modalHidden</span>: <span class="literal">false</span>,</div><div class="line">                    &#125;)  </div><div class="line">    &#125;</div><div class="line">    <span class="keyword">for</span>(<span class="keyword">var</span> i=<span class="number">0</span>;i&lt;len<span class="number">-1</span>;i++)&#123;</div><div class="line">        <span class="keyword">if</span>(arr[i][<span class="number">0</span>]==snakeHEAD[<span class="number">0</span>]&amp;&amp;arr[i][<span class="number">1</span>]==snakeHEAD[<span class="number">1</span>])&#123;</div><div class="line">            clearInterval(<span class="keyword">this</span>.data.timer);</div><div class="line">                <span class="keyword">this</span>.setData(&#123;</div><div class="line">                    <span class="attr">modalHidden</span>: <span class="literal">false</span>,</div><div class="line">                &#125;)</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">if</span>(snakeHEAD[<span class="number">0</span>]==<span class="keyword">this</span>.data.food[<span class="number">0</span>]&amp;&amp;snakeHEAD[<span class="number">1</span>]==<span class="keyword">this</span>.data.food[<span class="number">1</span>])&#123;</div><div class="line">        arr.unshift(snakeTAIL);</div><div class="line">        <span class="keyword">this</span>.setData(&#123;</div><div class="line">            <span class="attr">score</span>:<span class="keyword">this</span>.data.score+<span class="number">10</span></div><div class="line">        &#125;);</div><div class="line">        <span class="keyword">this</span>.storeScore();</div><div class="line">        <span class="keyword">this</span>.creatFood();</div><div class="line">    &#125;  </div><div class="line">&#125;,</div></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">modalChange:<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">    <span class="keyword">this</span>.setData(&#123;</div><div class="line">            <span class="attr">score</span>: <span class="number">0</span>,</div><div class="line">        <span class="attr">ground</span>:[],</div><div class="line">        <span class="attr">snake</span>:[],</div><div class="line">            <span class="attr">food</span>:[],</div><div class="line">            <span class="attr">modalHidden</span>: <span class="literal">true</span>,</div><div class="line">            <span class="attr">direction</span>:<span class="string">''</span></div><div class="line">    &#125;)</div><div class="line">    <span class="keyword">this</span>.onLoad();</div><div class="line">    &#125;,</div></pre></td></tr></table></figure>
+<p>我发现一个问题，就是在<code>changeLeft</code>中（或者其他change direction），会<code>checkGame</code>，如果贪吃蛇触壁或者碰到自己的身体，那就会设置<code>modalHidden</code>值为<code>false</code>然后，因为每个<code>this.setData</code>发送都会重新渲染视图层，然后将会触发弹出框，这个弹出框的确认也会触发一个事件，<code>modalchange</code>重置。这里就有一个问题了，这一些列都是从<code>changeleft</code>的<code>checkGame</code>步骤分叉出来的，那如果重置了之后，<code>changeleft</code>中的<code>this.setData</code>还执不执行了，因为重置这一步也会执行<code>this.setData</code>，那到底是设置了哪个数据？</p>
+<p>从结果来看，如果贪吃蛇死了，触发重置，那么<code>changeleft</code>里面的<code>this.setData</code>就不会执行了，不然，<code>ground</code>和<code>snake</code>就不是初始值了。</p>
+<p>然后我看到了<code>modalchange</code>中有<code>this.onLoad()</code>，猜测原因应该在这里，就是重新开始服务线程。这时候一切都被销毁，重新开始，自然<code>changeleft</code>中的<code>this.setData</code>也不会再执行了。</p>
+<h1 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h1><ol>
+<li>期间调试一个<code>changebottom</code>的bug，发现怎么也没有进去这个函数，结果发现在这个定义的下面还定义了同名的函数，那个里面什么还没写，估计是之前放在哪里搭的框架。<strong>结论：如果有同名函数，则默认是选择最新的那个，也就是最下面的那个</strong>。</li>
+</ol>
+<h1 id="debug"><a href="#debug" class="headerlink" title="debug"></a>debug</h1><p>##移动轨迹渲染</p>
+<ul>
+<li><code>changeleft</code>中<br>发现贪吃蛇在往左移动的时候，把移动轨迹都当作身体渲染出来了。</li>
+</ul>
+<p><img src="http://onexs3cnv.bkt.clouddn.com/Screen%20Shot%202017-07-16%20at%201.01.23%20AM.png" alt="errorbodymove"></p>
+<p>原因：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">for</span>(<span class="keyword">var</span> i=<span class="number">1</span>;i&lt;len<span class="number">-1</span>;i++)&#123;</div><div class="line">  arr[i] = arr[i+<span class="number">1</span>];</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><code>for</code>循环里面把<code>i</code>从1开始了，应该从0开始。从1开始导致arr[0]没有被覆盖</p>
+<h2 id="死了的时候，蛇头“位移”"><a href="#死了的时候，蛇头“位移”" class="headerlink" title="死了的时候，蛇头“位移”"></a>死了的时候，蛇头“位移”</h2><p><img src="http://onexs3cnv.bkt.clouddn.com/Screen%20Shot%202017-07-17%20at%201.16.27%20PM.png" alt="errorplace"></p>
+<p>可以看到背后蛇头触到最右边的时候应该死了，但是蛇头却在下一行的最左边显示了一块，然后第1列整体往下挪了。最后一行由独立的一块。</p>
+<p><a href="http://blog.csdn.net/bright789/article/details/54709594" target="_blank" rel="external">单步调试</a>后发现，在<code>changeleft</code>等这些函数中</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">...</div><div class="line"> var x = snakeHead[<span class="number">0</span>];</div><div class="line">    <span class="keyword">var</span> y = snakeHead[<span class="number">1</span>]+<span class="number">1</span>;</div><div class="line">    arr[len<span class="number">-1</span>] = [x,y];</div><div class="line">    <span class="comment">//var check = this.checkGame(arr);</span></div><div class="line">	<span class="keyword">this</span>.checkGame(arr);</div><div class="line">    <span class="comment">//if(check)&#123;</span></div><div class="line">    ground[x][y] = <span class="number">1</span>;</div><div class="line">    <span class="comment">//&#125;</span></div><div class="line">    <span class="keyword">this</span>.setData(&#123;</div><div class="line">      <span class="attr">snake</span>:arr,</div><div class="line">      <span class="attr">ground</span>:ground</div><div class="line">    &#125;)</div><div class="line">...</div></pre></td></tr></table></figure>
+<p>当<code>this.checkGame(arr)</code>做了之后，在<code>checkGame</code>函数中，当贪吃蛇死了之后，只是把<code>modalHidden</code>设为<code>false</code>了，但是这个<code>this.setData</code>没有让视图层重新渲染，不知道为什么？？？应该这里就弹出游戏结束的框了，但是没有，而是返回到<code>change*</code>函数内，继续做<code>ground[x][y]=1</code>，然后往下继续，因为已经触到最右边，此时<code>y=22</code>，是22，不是21，21是这一行的最后一块，还没出界，22出界。但是因为在<code>checkGame</code>中没有弹出结束框，所以<code>ground</code>中有第22列了，然后在<code>snake.wxml</code>中，是根据<code></code>，然后两个嵌套循环来打印出这个操场，然后这个操场的每一个块又是由<code>snake.wxss</code>来控制，因为规定了每行就是22个，这是因为660/30 = 22，决定的，也是cols=22，定义的，然后上面的<code>y=22</code>，其实是第23块，从0开始。那这时候,一行放不下，就放到下一行去了，那本来第二行还换不换行？</p>
+<p>做了一个实验，数据量小一点。</p>
+<p><img src="http://onexs3cnv.bkt.clouddn.com/Screen%20Shot%202017-07-17%20at%202.55.49%20PM.png" alt="test"></p>
+<p>可以看到没有换行</p>
+<h1 id="源代码："><a href="#源代码：" class="headerlink" title="源代码："></a>源代码：</h1>]]></content>
+    
+    <summary type="html">
+    
+      以微信贪吃蛇小程序为例，入门小程序
+    
+    </summary>
+    
+      <category term="wechat" scheme="http://www.mmmmmcclxxvii.cn/categories/wechat/"/>
+    
+    
+      <category term="javascript" scheme="http://www.mmmmmcclxxvii.cn/tags/javascript/"/>
+    
+      <category term="html" scheme="http://www.mmmmmcclxxvii.cn/tags/html/"/>
+    
+      <category term="css" scheme="http://www.mmmmmcclxxvii.cn/tags/css/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Javascript detail record</title>
+    <link href="http://www.mmmmmcclxxvii.cn/2017/07/09/js-piece/"/>
+    <id>http://www.mmmmmcclxxvii.cn/2017/07/09/js-piece/</id>
+    <published>2017-07-09T02:22:44.000Z</published>
+    <updated>2017-07-11T07:57:56.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>#Web的集成开发环境:</p>
+<ol>
+<li><a href="https://jsfiddle.net/" target="_blank" rel="external">jsfiddle</a></li>
+<li><a href="https://thimble.webmaker.org/" target="_blank" rel="external">Thimble</a></li>
+<li><a href="http://jsbin.com/" target="_blank" rel="external">jsbin</a></li>
+</ol>
+<hr>
+<h1 id="BugFix"><a href="#BugFix" class="headerlink" title="BugFix"></a>BugFix</h1><ol>
+<li><code>&lt;script&gt;</code>元素要放所有的标签的后面，也就是最后。<br>今天的一个bug问题就出现在这里<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">var myButton = document.querySelector(&apos;button&apos;);</div><div class="line">var myHeading = document.querySelector(&apos;h1&apos;);</div><div class="line"></div><div class="line">function setUserName() &#123;</div><div class="line">    var myName = prompt(&apos;Please enter your name.&apos;);</div><div class="line">    localStorage.setItem(&apos;name&apos;, myName);</div><div class="line">    myHeading.innerHTML = &apos;Mozilla is cool, &apos; + myName;</div><div class="line">&#125;</div><div class="line"></div><div class="line">if(!localStorage.getItem(&apos;name&apos;)) &#123;</div><div class="line">    setUserName();</div><div class="line">&#125; else &#123;</div><div class="line">    var storedName = localStorage.getItem(&apos;name&apos;);</div><div class="line">    myHeading.innerHTML = &apos;Mozilla is cool, &apos; + storedName;</div><div class="line">&#125;</div><div class="line"></div><div class="line">myButton.onclick = function() &#123;</div><div class="line">    setUserName();</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>html里面是<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">...</div><div class="line">   &lt;script src=&quot;scripts/main.js&quot;&gt;&lt;/script&gt;</div><div class="line">   &lt;button&gt;Change user&lt;/button&gt;</div><div class="line">...</div></pre></td></tr></table></figure></p>
+<p>在页面中点击change user的按钮一直没有反应，打开console看到报错原因是<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">Uncaught TypeError: Cannot set property &apos;onclick&apos; of null</div><div class="line">    at main.js:45</div></pre></td></tr></table></figure></p>
+<p><code>null</code>说明<code>myButton</code>是空的，没有读取到，然后在html中将<code>&lt;button&gt;``&lt;scirpt&gt;</code>标签调换一下就可以了。</p>
+<blockquote>
+<p><code>&lt;script&gt;</code>元素放在 HTML 文件底部的原因是，浏览器解析 HTML 似乎按照代码出现的顺序来的。如果 JavaScript被首先读取，它也应该影响下面的 HTML，但有时会出现问题，因为 JavaScript 会在 HTML 之前被加载，如果 JavaScript 代码出现问题则 HTML 不会被加载。所以将 JavaScript 代码放在底部是最好的选择。</p>
+</blockquote>
+]]></content>
+    
+    <summary type="html">
+    
+      记录javascript的注意点。
+    
+    </summary>
+    
+      <category term="javascript" scheme="http://www.mmmmmcclxxvii.cn/categories/javascript/"/>
+    
+    
+      <category term="javascript-piece，html" scheme="http://www.mmmmmcclxxvii.cn/tags/javascript-piece%EF%BC%8Chtml/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>比特币- 资料整理（2）</title>
+    <link href="http://www.mmmmmcclxxvii.cn/2017/06/21/inside-money-2/"/>
+    <id>http://www.mmmmmcclxxvii.cn/2017/06/21/inside-money-2/</id>
+    <published>2017-06-21T09:12:11.000Z</published>
+    <updated>2017-07-29T14:16:01.000Z</updated>
+    
+    <content type="html"><![CDATA[<ul>
+<li><a href="http://www.wanbizu.com/xinbi/201409012089.html" target="_blank" rel="external">BITUSD（BTU）是如何取代美元的？</a></li>
+</ul>
+<p>-[] 由于美元占据全球交易规模的一半以上，美元的弱势资本开始流向新兴市场导致了新兴市场经济的繁荣，新兴市场的繁荣意味着贸易顺差，贸易顺差意味着赚取更多美元。?</p>
+<blockquote>
+<p>贸易顺差是指在特定年度一国出口贸易总额大于进口贸易总额，又称“ 出超 ”。贸易顺差就是在一定的单位时间里(通常按年度计算)，贸易的双方互相买卖各种货物，互相进口与出口，甲方的出口金额大过乙方的出口金额，或甲方的进口金额少于乙方的进口金额，其中的差额，对甲方来说，就叫作贸易顺差，反之，对乙方来说，就叫作贸易逆差。贸易顺差越多并不一定好，过高的贸易顺差是一件危险的事情，意味着经济的增长对外依存度过高。</p>
+<p>经常项目贸易顺差主要源于净出口的增加，是中国对外贸易、特别是出口迅速增加的结果，净出口增加使得国内总需求扩张，国内总需求扩张促进了国民经济增长。</p>
+</blockquote>
+<p>-[] 从77年牙买加货币体系创立起，80年拉美金融危机，94年墨西哥金融危机，97亚洲金融危机，08年全球金融危机，都伴随着美元的升值。金融危机和美元的升值有什么关系</p>
+<p>什么是BTU呢，BTU是一个概念，其内涵是1美元等于多少BTS。</p>
+<p>　　BTS /USD BTU/ BTS</p>
+<p>　　10 0.1 (0.1BTS等于1美元)</p>
+<p>　　假如1BTS在市场上涨到10美元 ，这时候BTU的标价就是0.1BTS.有人也许会问如下这种情况</p>
+<p>　　BTS/USD BTU/BTS</p>
+<p>　　10 0.2</p>
+<p>　　当然在初期这种偏离是存在的，但随着市场深度的加深这种偏离就被纠正了。否则市场深度也不可能上升。假设BTS价格持续上涨到100美元，BTU的价格就跌到0.01BTS, 我作为多头在0.1买进，结果跌到了0.01，损失了99%这不是要跳楼吗?不用担心，0.01BTS 还是等于1美元啊，</p>
+<p>　　BTS /USD BTU/ BTS</p>
+<p>　　100 0.01 (0.01BTS还是等于1美元)</p>
+<p>　　作为多头的我放弃BTS的汇率变化而持有BTU, 不管BTU的价格如何变化，我如果把他当做美元来交换的话是没有变化的。</p>
+<p>　　损失了BTS的收益，获得了BTU的稳定性。从而开展正常的贸易。作为空头的小马虽然把BTS质押出去了，但随着BTS的飙升，BTU的暴跌，他可以换回更多的BTS, 因此小马可以看做一名投机客而非贸易商。这时候还会出现一种线下的交易BTU和美元之间的兑换业务。基于BITUSD模式我们还可以展开更多遐想，例如BITUSD彻底取代USD的可能性，莫非第三次货币体系变革就要开始了吗?</p>
+<ul>
+<li><a href="http://www.wanbizu.com/xinbi/201408312064.html" target="_blank" rel="external">浅显易懂看锚定的充要条件与承兑商风险</a><br>-</li>
+</ul>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;http://www.wanbizu.com/xinbi/201409012089.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;BITUSD（BTU）是如何取代美元的？&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;-[] 
+    
+    </summary>
+    
+      <category term="blockchain" scheme="http://www.mmmmmcclxxvii.cn/categories/blockchain/"/>
+    
+    
+      <category term="money" scheme="http://www.mmmmmcclxxvii.cn/tags/money/"/>
+    
+      <category term="bitcoin" scheme="http://www.mmmmmcclxxvii.cn/tags/bitcoin/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>PBFT算法理解</title>
+    <link href="http://www.mmmmmcclxxvii.cn/2017/06/18/pbft/"/>
+    <id>http://www.mmmmmcclxxvii.cn/2017/06/18/pbft/</id>
+    <published>2017-06-18T13:09:59.000Z</published>
+    <updated>2017-06-20T11:59:20.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>参考资料：</p>
+<ul>
+<li><a href="http://bitkan.com/news/topic/21120" target="_blank" rel="external">超级账本PBFT（拜占庭容错）算法详解</a></li>
+</ul>
+<p><img src="http://onexs3cnv.bkt.clouddn.com/Screen%20Shot%202017-06-18%20at%209.11.30%20PM.png" alt="rough workflow"></p>
+<p>Q: 为什么是f+1<br>A：一方面，一个极端，因为拜占庭错误节点最多f个，当我有f+1个一致的结果，这f+1个没有一个是错误的节点，那么不管总数多少，即使我还有f个错误的，因为最多f个，但我已经有f+1个一致的结果了，f+1&gt;f，所以作恶失败。另一个极端，f+1中有f个错误的节点。<strong>因为结果都一样！！</strong>，而最多是有f个replicas出现问题，所以至少有一个replicas是正确的，就是这个+1,而结果一致，说明这些结果都是正确的。f+1就是能保证了收到的结果是正确的。</p>
+<hr>
+<blockquote>
+<p>紧接着prepare阶段，当一个replica节点发现有一个quorum同意编号分配时，它就会广播一条COMMIT信息给其它所有节点告诉他们它有一个prepared certificate了。与此同时它也会陆续收到来自其它节点的COMMIT信息，如果它收到了2f+1条COMMIT（包括自身的一条，这些来自不同节点的COMMIT携带相同的编号n和view v）</p>
+</blockquote>
+<p>Q: 这里为什么是2f+1条commit<br>A: 最多容错n-1/3个(令等于f)，n=3f+1,然后减掉f个错误的，2f+1</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;参考资料：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;http://bitkan.com/news/topic/21120&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;超级账本PBFT（拜占庭容错）算法详解&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;img
+    
+    </summary>
+    
+      <category term="blockchain" scheme="http://www.mmmmmcclxxvii.cn/categories/blockchain/"/>
+    
+    
+      <category term="algorithm" scheme="http://www.mmmmmcclxxvii.cn/tags/algorithm/"/>
+    
+      <category term="blockchain" scheme="http://www.mmmmmcclxxvii.cn/tags/blockchain/"/>
+    
+      <category term="fabric" scheme="http://www.mmmmmcclxxvii.cn/tags/fabric/"/>
+    
+  </entry>
   
   <entry>
     <title>hadoop 相关数据的规约mapreduce程序 in python</title>
@@ -329,9 +602,9 @@
     
       <category term="bitcoin" scheme="http://www.mmmmmcclxxvii.cn/tags/bitcoin/"/>
     
-      <category term="stackoverflow" scheme="http://www.mmmmmcclxxvii.cn/tags/stackoverflow/"/>
-    
       <category term="blockchain" scheme="http://www.mmmmmcclxxvii.cn/tags/blockchain/"/>
+    
+      <category term="stackoverflow" scheme="http://www.mmmmmcclxxvii.cn/tags/stackoverflow/"/>
     
   </entry>
   
@@ -402,7 +675,7 @@
     <link href="http://www.mmmmmcclxxvii.cn/2017/05/18/inside-money/"/>
     <id>http://www.mmmmmcclxxvii.cn/2017/05/18/inside-money/</id>
     <published>2017-05-18T02:42:39.000Z</published>
-    <updated>2017-05-23T09:41:36.000Z</updated>
+    <updated>2017-06-21T09:14:00.000Z</updated>
     
     <content type="html"><![CDATA[<p>对货币的研究不是很深入，但毕竟是每天都用的东西，然后结合了一些看的资料，下面给出我的理解，不对的地方非常欢迎指点。</p>
 <hr>
@@ -437,7 +710,7 @@
     
     </summary>
     
-      <category term="interest" scheme="http://www.mmmmmcclxxvii.cn/categories/interest/"/>
+      <category term="blockchain" scheme="http://www.mmmmmcclxxvii.cn/categories/blockchain/"/>
     
     
       <category term="bitcoin" scheme="http://www.mmmmmcclxxvii.cn/tags/bitcoin/"/>
@@ -936,242 +1209,6 @@
       <category term="mapreduce" scheme="http://www.mmmmmcclxxvii.cn/tags/mapreduce/"/>
     
       <category term="udacity" scheme="http://www.mmmmmcclxxvii.cn/tags/udacity/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>seven-principle</title>
-    <link href="http://www.mmmmmcclxxvii.cn/2017/04/04/seven-principle/"/>
-    <id>http://www.mmmmmcclxxvii.cn/2017/04/04/seven-principle/</id>
-    <published>2017-04-04T05:58:52.000Z</published>
-    <updated>2017-04-06T07:41:12.000Z</updated>
-    
-    <content type="html"><![CDATA[<ol>
-<li><strong>自带鸡血</strong>，能源源不断地给自己充电，遇到打击能迅速恢复，哪怕这种打击沉重而有力，也就是，抗压能力强。<br><img src="http://onexs3cnv.bkt.clouddn.com/balalal" alt="balala"></li>
-<li><strong>不能给自己设限</strong>，既没有上限，也没有下限，凡事能想到的事，都敢做，给联合国秘书长写信也没啥不敢的</li>
-<li><strong>格局大，顺势而为</strong>.胸怀达到全宇宙，又能找到把猪吹上天的风口，从来站在更大的地位上思考问题，绝不想同事蹭吃了一盒酸奶之类的小时；</li>
-<li>对自己高标准，<strong>永不满足</strong>，一旦自己陷入舒适圈，马上调整自己，给自己提更高的要求，让自己不舒适，让自己不高心，让自己不痛快，给自己找别扭，上升到更高的level</li>
-<li><strong>做不可替代的角色</strong></li>
-<li><strong>极度自律，执行力超强（强调）</strong>。别跟我说自律，其实就是一个人呆着的时候，不放纵自己，做应当做的是，不玩游戏，不看电视剧，<strong>不在低附加值的事情上浪费时间</strong>。同时，你不能想着，我要有时间就好了，然后每天还能睡到中午12点，然后慵懒的发发朋友圈，谈谈诗和远方。</li>
-<li>具备<strong>逆向思维</strong>，善于创新，说白了，就不跟大家一样思考，常人怎么想，总是反着想，具备创新精神。剑走偏锋</li>
-</ol>
-]]></content>
-    
-    <summary type="html">
-    
-      七条
-    
-    </summary>
-    
-      <category term="life" scheme="http://www.mmmmmcclxxvii.cn/categories/life/"/>
-    
-    
-      <category term="life" scheme="http://www.mmmmmcclxxvii.cn/tags/life/"/>
-    
-      <category term="principle" scheme="http://www.mmmmmcclxxvii.cn/tags/principle/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>自我约束-你好</title>
-    <link href="http://www.mmmmmcclxxvii.cn/2017/03/30/self-discipline/"/>
-    <id>http://www.mmmmmcclxxvii.cn/2017/03/30/self-discipline/</id>
-    <published>2017-03-30T08:02:29.000Z</published>
-    <updated>2017-04-06T13:30:19.000Z</updated>
-    
-    <content type="html"><![CDATA[<p>坐公交好几次都碰见她，一位穿着比较啰哩啰嗦的，时尚的。我想认识她</p>
-<p>今天，我在看nba勇士队的比赛，她突然过来，没有一丝丝准备，都不知道我发型有没有乱的，问我能不能帮她刷下公交卡，她转支付宝给我，我下意识的说不用，现在老后悔了。</p>
-<p>不过，从我过往的经验看，大多是我自己自作多情，人家也只是想寻求帮助，不要想太多了，今天不是你也是其他人。</p>
-<p>但还是挺开心的，借此聊了一会，得知是大三外语系的。哈哈哈</p>
-<p>这次的自我约束：<br>如果你能静下心来，不要胡思乱想。进入自己的zone, 认认真真做自己的事情，专注！！<br>看缘分，如果能做到专注，那么下次遇见的时候就厚着脸皮要个联系方式吧，不然就永远当个路人</p>
-]]></content>
-    
-    <summary type="html">
-    
-      所谓自我约束是指在向某些困难发起挑战时，故意给自己戴上一个枷锁，把自己逼到穷途末路， 制定只属于自己的规矩，正因为有了那个枷锁，你才会认真面对挑战，而一旦失败，你就能通过实践那个规矩，让自己得到严格的锻炼，使得自己不断进步，这才叫自我约束。
-    
-    </summary>
-    
-      <category term="life" scheme="http://www.mmmmmcclxxvii.cn/categories/life/"/>
-    
-    
-      <category term="life" scheme="http://www.mmmmmcclxxvii.cn/tags/life/"/>
-    
-      <category term="namaste" scheme="http://www.mmmmmcclxxvii.cn/tags/namaste/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>python name and values</title>
-    <link href="http://www.mmmmmcclxxvii.cn/2017/03/29/python-name-and-values/"/>
-    <id>http://www.mmmmmcclxxvii.cn/2017/03/29/python-name-and-values/</id>
-    <published>2017-03-29T13:54:00.000Z</published>
-    <updated>2017-03-29T14:50:38.000Z</updated>
-    
-    <content type="html"><![CDATA[<p>阅读 <a href="https://nedbatchelder.com/text/names.html" target="_blank" rel="external">Facts and myths about Python names and values</a> 做的摘记<br>内容不是很深，只是这里面提到了一些需要注意的点。最主要还是<code>name</code>和<code>value</code>的区别<br><a id="more"></a></p>
-<h1 id="Fact-Names-have-no-type-values-have-no-scope"><a href="#Fact-Names-have-no-type-values-have-no-scope" class="headerlink" title="Fact: Names have no type, values have no scope."></a>Fact: Names have no type, values have no scope.</h1><blockquote>
-<p>Just as names have no type, values have no scope. When we say that a function has a local variable, we mean that the name is scoped to the function: you can’t use the name outside the function, and when the function returns, the name is destroyed. But as we’ve seen, if the name’s value has other references, it will live on beyond the function call. It is a local name, not a local value.</p>
-</blockquote>
-<p>翻译：</p>
-<p>就跟名字没有类型一样，数值是没有作用范围的。当我们说一个函数有局部变量的时候，我们只是说的是名字只在函数作用域中起作用而已，你不能在函数外使用这个名字，当函数返回的时候，这个名字也就摧毁了。但是，如果这个名字指向的数值还有其他引用，它就会继续生存下去，不管这个函数了。局部变量，而不是局部数值。</p>
-<h1 id="Fact-Values-can’t-be-deleted-only-names-can"><a href="#Fact-Values-can’t-be-deleted-only-names-can" class="headerlink" title="Fact: Values can’t be deleted, only names can."></a>Fact: Values can’t be deleted, only names can.</h1><blockquote>
-<p>Python’s memory management is so central to its behavior, not only do you not have to delete values, but there is no way to delete values. You may have seen the del statement:</p>
-</blockquote>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">nums = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]</div><div class="line"><span class="keyword">del</span> nums</div></pre></td></tr></table></figure>
-<blockquote>
-<p>This does not delete the value nums, it deletes the name nums. The name is removed from its scope, and then the usual reference counting kicks in: if nums’ value had only that one reference, then the value will be reclaimed. But if it had other references, then it will not.</p>
-</blockquote>
-<h1 id="Fact-Assignment-never-copies-data"><a href="#Fact-Assignment-never-copies-data" class="headerlink" title="Fact: Assignment never copies data."></a>Fact: Assignment never copies data.</h1><blockquote>
-<p>Mutable means that the value has methods that can change the value in-place. Immutable means that the value can never change, instead when you think you are changing the value, you are really making new values from old ones.</p>
-</blockquote>
-<p>比如：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">x = <span class="number">3</span></div><div class="line">y = x</div></pre></td></tr></table></figure></p>
-<p><code>x</code>和<code>y</code>只是一起指向了<code>3</code>而已，并没有给<code>y</code>再来一个<code>3</code>。这里<code>x</code>,<code>y</code>是<code>name</code>，<code>3</code>是<code>value</code><br>上面说到的<code>Mutable</code>是什么意思，也就是因为这个赋值不拷贝数据的特性，当<code>y</code>变了的时候，比如<code>y+=1</code>，那<code>x</code>还变不变？这里就要考虑到可变类型和不可变类型了</p>
-<p>Immutable values:</p>
-<ol>
-<li>numbers</li>
-<li>strings</li>
-<li>tuples </li>
-</ol>
-<p>Mutable values:</p>
-<ol>
-<li>lists</li>
-<li>dicts</li>
-<li>user-defined objects</li>
-</ol>
-<p>那在上面<code>y+=1</code>之后，其实是给<code>y</code>重新<code>reference</code>到了4</p>
-<p>关于mutable的直接截图：</p>
-<p><img src="http://onexs3cnv.bkt.clouddn.com/list_mutate_value.png" alt="list_mutate"></p>
-<hr>
-<h1 id="Fact-Python-passes-function-arguments-by-assigning-to-them"><a href="#Fact-Python-passes-function-arguments-by-assigning-to-them" class="headerlink" title="Fact: Python passes function arguments by assigning to them."></a>Fact: Python passes function arguments by assigning to them.</h1><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">def my_func(x,y)</div><div class="line">	return x+y</div><div class="line">print(my_func(8,9))</div></pre></td></tr></table></figure>
-<blockquote>
-<p>The names x and y are local to the function, so when the function returns, those names go away. But if the values they refer to are still referenced by other names, the values live on.</p>
-</blockquote>
-<p><strong>注意</strong>，这里就出现<code>name</code>和<code>value</code>的区别了，可以这样理解，<code>value</code>就是一个实物，<code>name</code>只是这个实物的标签，我可以贴很多标签，而看到这个标签，我就联想到这个实物，实物可以有多个标签，一个标签只能对应一个实物。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">augment_twice</span><span class="params">(a_list,val)</span>:</span></div><div class="line">	a_list.append(val)</div><div class="line">	a_list.append(val)</div><div class="line"></div><div class="line">nums = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>]</div><div class="line">augment_twice(nums, <span class="number">4</span>)</div><div class="line">print(nums) <span class="comment">#[1,2,3,4,4]</span></div></pre></td></tr></table></figure>
-<h2 id=""><a href="#" class="headerlink" title=""></a><img src="http://onexs3cnv.bkt.clouddn.com/Screen%20Shot%202017-03-29%20at%2010.23.49%20PM.png" alt="before"></h2><h2 id="-1"><a href="#-1" class="headerlink" title=""></a><img src="http://onexs3cnv.bkt.clouddn.com/Screen%20Shot%202017-03-29%20at%2010.23.55%20PM.png" alt="after"></h2><p>虚线框表示本地<code>name</code>在一个新的<code>frame</code>里面，而参数传递只是一种赋值操作，<code>a_list</code> “指向” <code>nums</code>指向的<code>value</code>,而<code>list</code>类型是可变数据类型，所以任何<code>name</code>对它的改变都是就地的，可以通过<code>id()</code>操作来查看是否改变了地址</p>
-<p>另外一个程序</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">augment_twice_bad</span><span class="params">(a_list,val)</span>:</span></div><div class="line">	a_list = a_list + [val,val]</div><div class="line">nums = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>]</div><div class="line">augment_twice_bad(nums,<span class="number">4</span>)</div><div class="line">print(nums) <span class="comment">#[1,2,3]</span></div></pre></td></tr></table></figure>
-<p>这个跟上面的程序就不同在函数里面一个是用<code>.append()</code>来增加元素，一个则用加法然后赋值，赋值，赋值，重要的事情说三遍，这是个赋值操作，一旦出现赋值，就相当于等式左边的<code>name</code><strong>rebind</strong>出现在等式右边的<code>value</code></p>
-<h2 id="-2"><a href="#-2" class="headerlink" title=""></a><img src="http://onexs3cnv.bkt.clouddn.com/Screen%20Shot%202017-03-29%20at%2010.35.39%20PM.png" alt="bad_before"></h2><p><img src="http://onexs3cnv.bkt.clouddn.com/Screen%20Shot%202017-03-29%20at%2010.35.45%20PM.png" alt="bad_after"></p>
-<blockquote>
-<p>It’s really important to keep in mind the difference between mutating a value in place, and rebinding a name. augment_twice worked because it mutated the value passed in, so that mutation was available after the function returned. augment_twice_bad used an assignment to rebind a local name, so the changes weren’t visible outside the function.</p>
-</blockquote>
-<h1 id="其他的-facts-myths都知道了，上面的需要注意一下就可以了。过"><a href="#其他的-facts-myths都知道了，上面的需要注意一下就可以了。过" class="headerlink" title="其他的 facts, myths都知道了，上面的需要注意一下就可以了。过"></a>其他的 facts, myths都知道了，上面的需要注意一下就可以了。过</h1>]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;阅读 &lt;a href=&quot;https://nedbatchelder.com/text/names.html&quot;&gt;Facts and myths about Python names and values&lt;/a&gt; 做的摘记&lt;br&gt;内容不是很深，只是这里面提到了一些需要注意的点。最主要还是&lt;code&gt;name&lt;/code&gt;和&lt;code&gt;value&lt;/code&gt;的区别&lt;br&gt;
-    
-    </summary>
-    
-      <category term="python" scheme="http://www.mmmmmcclxxvii.cn/categories/python/"/>
-    
-    
-      <category term="python" scheme="http://www.mmmmmcclxxvii.cn/tags/python/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>用R来找最大连通子图</title>
-    <link href="http://www.mmmmmcclxxvii.cn/2017/03/25/r-maximal-connected-subgraph/"/>
-    <id>http://www.mmmmmcclxxvii.cn/2017/03/25/r-maximal-connected-subgraph/</id>
-    <published>2017-03-25T00:35:37.000Z</published>
-    <updated>2017-05-15T10:54:56.000Z</updated>
-    
-    <content type="html"><![CDATA[<p>求上图的最大连通子图，其实就是图的遍历，图的遍历有深度优先和广度优先<br>图有很多种对应的存储结构，在R里面最简单的就是邻接矩阵了。</p>
-<p>-update-</p>
-<ul>
-<li>用深度优先搜索做</li>
-<li>在深度优先里面涉及到的R中的全局，局部变量<a id="more"></a>
-</li>
-</ul>
-<h1 id="构造邻接矩阵"><a href="#构造邻接矩阵" class="headerlink" title="构造邻接矩阵"></a>构造邻接矩阵</h1><figure class="highlight r"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">m &lt;- matrix(<span class="number">0</span>,<span class="number">5</span>,<span class="number">5</span>)</div><div class="line">m[<span class="number">1</span>,<span class="number">2</span>] &lt;- <span class="number">1</span></div><div class="line">m[<span class="number">1</span>,<span class="number">3</span>] &lt;- <span class="number">1</span></div><div class="line">m[<span class="number">2</span>,<span class="number">3</span>] &lt;- <span class="number">1</span></div><div class="line">m[<span class="number">4</span>,<span class="number">5</span>] &lt;- <span class="number">1</span></div><div class="line"></div><div class="line">m &lt;- m + t(m)</div></pre></td></tr></table></figure>
-<figure class="highlight r"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">&gt; m</div><div class="line">     [,<span class="number">1</span>] [,<span class="number">2</span>] [,<span class="number">3</span>] [,<span class="number">4</span>] [,<span class="number">5</span>]</div><div class="line">[<span class="number">1</span>,]    <span class="number">0</span>    <span class="number">1</span>    <span class="number">1</span>    <span class="number">0</span>    <span class="number">0</span></div><div class="line">[<span class="number">2</span>,]    <span class="number">1</span>    <span class="number">0</span>    <span class="number">1</span>    <span class="number">0</span>    <span class="number">0</span></div><div class="line">[<span class="number">3</span>,]    <span class="number">1</span>    <span class="number">1</span>    <span class="number">0</span>    <span class="number">0</span>    <span class="number">0</span></div><div class="line">[<span class="number">4</span>,]    <span class="number">0</span>    <span class="number">0</span>    <span class="number">0</span>    <span class="number">0</span>    <span class="number">1</span></div><div class="line">[<span class="number">5</span>,]    <span class="number">0</span>    <span class="number">0</span>    <span class="number">0</span>    <span class="number">1</span>    <span class="number">0</span></div></pre></td></tr></table></figure>
-<p>主要也就是<code>m&lt;-m+t(m)</code>这一步，因为是无向图，是对称矩阵，可以先构造一半然后与转置相加。<strong>这是对称矩阵的性质的应用！！</strong></p>
-<blockquote>
-<p>在线性代数中，实对称矩阵是一个方形矩阵，其元素都为实数，且转置矩阵和自身相等<br><a href="https://zh.wikipedia.org/wiki/%E5%AE%9E%E5%AF%B9%E7%A7%B0%E7%9F%A9%E9%98%B5" target="_blank" rel="external">实对称矩阵</a></p>
-</blockquote>
-<h1 id="广度优先遍历"><a href="#广度优先遍历" class="headerlink" title="广度优先遍历"></a>广度优先遍历</h1><p>主要思想就是它分两个部分，一个部分保存已经访问过的，一个部分是未访问的，未访问部分是用一个队列来存储，每次从队头出一个元素i，然后将这个元素的能够够到的节点依次加到队尾去。这一步其实就是邻接表中的第i行中为1的元素加进来</p>
-<p>先考虑简单的情况，从第1个节点出发，寻找包含1的最大联通子图，其实就是1能够直接或间接够到的所有节点，在图中我们可以直观的看到是1，2，3，三个节点。</p>
-<h2 id="错误的代码"><a href="#错误的代码" class="headerlink" title="错误的代码"></a>错误的代码</h2><figure class="highlight r"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">visited &lt;- c(<span class="number">1</span>)</div><div class="line">unvisited &lt;- m[<span class="number">1</span>,]</div><div class="line"></div><div class="line"><span class="keyword">while</span>(length(unvisited)&gt;<span class="number">0</span>)&#123;</div><div class="line">	now &lt;- unvisited[<span class="number">1</span>]</div><div class="line">	unvisited &lt;- unvisited[-<span class="number">1</span>]</div><div class="line">	candidate &lt;- m[now,]</div><div class="line">	candidate &lt;- setdiff(candidate,visited)</div><div class="line">	unvisited &lt;- union(candidate,unvisited)</div><div class="line">	visited &lt;- c(visited,now)</div><div class="line">&#125;</div><div class="line"></div><div class="line">print(visited)</div></pre></td></tr></table></figure>
-<p>这里我犯了一个错误，<code>unvisited &lt;- m[1,]</code>,这是<code>unvisited</code>里面保存的是什么？？<br><figure class="highlight r"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">&gt; unvisited</div><div class="line">[<span class="number">1</span>] <span class="number">0</span> <span class="number">1</span> <span class="number">1</span> <span class="number">0</span> <span class="number">0</span></div></pre></td></tr></table></figure></p>
-<p>那我想要的是什么？应该是<code>visisted</code>中一开始是<code>1</code>,<code>unvisisted</code>中将<code>1</code>的邻接节点加进来是<code>2,3</code>,然后后面每次循环体内做的是队头元素出队列。但是加进来的元素应该是代表这个节点的符号,反应在矩阵中的应该是下标。矩阵里面存的其实是边信息，<code>1</code>代表有边,<code>0</code>代表无边，<strong>其实要的是<code>0 1 1 0 0</code>对应的下标！！！需要的是节点信息</strong>，这其实是两个概念</p>
-<h2 id="初始化"><a href="#初始化" class="headerlink" title="初始化"></a>初始化</h2><p>我欠缺的也就是我知道我想要的是什么，但是不熟悉R语法，或者说不知道怎么用R语言来实现，虽然我熟悉python语法，但我也不能保证我能写出很优雅的代码，因为跟别人差就差在，他们不仅精通语法，还知道他们的性能，能有很多组合。</p>
-<p>这里我需要的是读进来第1行矩阵元素有<code>1</code>的下标，取下标怎么取</p>
-<p>有关下标的函数,目前只注意到下面的三个</p>
-<ul>
-<li><code>which</code>:Give the TRUE indices of a logical object, allowing for array indices.</li>
-<li><code>which.min</code>:最小值的下标</li>
-<li><code>which.max</code>:最大值的下标</li>
-</ul>
-<p>按照条条大路通罗马的理论，只要这个函数跟目标有点沾边的肯定能实现，只是看你的想象力，是否能突破天际<br>因为<code>which</code>是需要一组逻辑向量，在R中逻辑值只有<code>TRUE</code>和<code>FALSE</code>,然后它会返回<code>TRUE</code>的下标<br>只要把<code>0 1 1 0 0</code>转换为逻辑值就行了。查了一下<br><figure class="highlight r"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">&gt; as.logical(c(-<span class="number">1</span>,<span class="number">0</span>,<span class="number">1</span>,<span class="number">2</span>))</div><div class="line">[<span class="number">1</span>]  <span class="literal">TRUE</span> <span class="literal">FALSE</span>  <span class="literal">TRUE</span>  <span class="literal">TRUE</span></div></pre></td></tr></table></figure></p>
-<p>可以看到<code>as.logical</code>认为只有<code>0</code>是<code>FALSE</code>，其它为<code>TRUE</code>,这样路就通了<br><figure class="highlight r"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">visited &lt;- c(<span class="number">1</span>)</div><div class="line">unvisited &lt;- which(as.logical(m[<span class="number">1</span>,]))</div></pre></td></tr></table></figure></p>
-<p>因为只要得到逻辑向量就可以了，那逻辑操作还可以用<code>m[1,] == 1</code>来得到逻辑向量值。这也可以<br>还有没有其他方案？</p>
-<p>因为我注意到这里要么是<code>0</code>,要么是<code>1</code>,可以用向量<code>1 2 3 4 5</code>去乘，就得到了<code>0 2 3 0 0</code>,然后只要大于0的就行了<br><figure class="highlight r"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">index &lt;- c(<span class="number">1</span>:<span class="number">5</span>)</div><div class="line">edge2node &lt;- index*m[<span class="number">1</span>,]</div><div class="line">unvisited &lt;- edge2node[edge2node &gt; <span class="number">0</span>]</div></pre></td></tr></table></figure></p>
-<p><code>edge2node[edge2node &gt; 0]</code> 中的<code>edge2node&gt;0</code>计算完之后是逻辑值，然后用<code>[]</code>下标操作取逻辑值只为<code>TRUE</code>的元素</p>
-<p>上面两种得到的<br><figure class="highlight r"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">&gt; unvisited</div><div class="line">[<span class="number">1</span>] <span class="number">2</span> <span class="number">3</span></div></pre></td></tr></table></figure></p>
-<p>就是我想要的</p>
-<h2 id="遍历"><a href="#遍历" class="headerlink" title="遍历"></a>遍历</h2><p>上面一开始写的错误的代码中也就是和上面一样的问题。只要改了这一部分就行了。<br><figure class="highlight r"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">while</span>(length(unvisited)&gt;<span class="number">0</span>)&#123;</div><div class="line">	now &lt;- unvisited[<span class="number">1</span>]</div><div class="line">	unvisited &lt;- unvisited[-<span class="number">1</span>] <span class="comment"># 队头元素出队列</span></div><div class="line">	<span class="comment">#candidate &lt;- m[now,]</span></div><div class="line">	candidate &lt;- which(as.logical(m[now,]))</div><div class="line">	candidate &lt;- setdiff(candidate,visited)</div><div class="line">	unvisited &lt;- union(candidate,unvisited) <span class="comment"># 将队头元素的邻接节点加入队列</span></div><div class="line">	visited &lt;- c(visited,now)  <span class="comment"># 将队头元素加入已访问的</span></div><div class="line">&#125;</div><div class="line">print(visited)</div></pre></td></tr></table></figure></p>
-<p>这里<code>setdiff</code>和<code>union</code>是集合运算，因为可以在图上直观的看到，<code>1</code>这个节点可以找到<code>2</code>,<code>3</code>。到<code>2</code>这个节点，可以找到<code>1</code>,<code>3</code>,但此时，<code>1</code>这个节点是已经访问了的，如果不处理，还是加进队列里面的话，那就不断在循环了！！！</p>
-<p><code>setdiff</code>是取差值，注意参数的位置，<strong>是将<code>visited</code>里面有的元素从<code>candidate</code>中消掉</strong><br><code>union</code>是取并集，没什么好说的了<br>还有一个<code>intersect(x, y)</code>就是取交集</p>
-<p>最后的结果<br><figure class="highlight r"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">&gt; print(visited)</div><div class="line">[<span class="number">1</span>] <span class="number">1</span> <span class="number">2</span> <span class="number">3</span></div></pre></td></tr></table></figure></p>
-<h2 id="全图对每个节点进行同样的操作"><a href="#全图对每个节点进行同样的操作" class="headerlink" title="全图对每个节点进行同样的操作"></a>全图对每个节点进行同样的操作</h2><p>图的最大连通子图，那就对每个节点都进行上面的操作，然后图包含节点最多的就是这个图的最大联通子图了</p>
-<figure class="highlight r"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line">max_node_num &lt;- <span class="number">0</span></div><div class="line">maximal_connected_subgraph &lt;- <span class="literal">NULL</span></div><div class="line"><span class="keyword">for</span>(i <span class="keyword">in</span> <span class="number">1</span>:<span class="number">5</span>)&#123;</div><div class="line">  visited &lt;- c(i)</div><div class="line">  unvisited &lt;- which(as.logical(m[i,]))</div><div class="line">  <span class="keyword">while</span>(length(unvisited)&gt;<span class="number">0</span>)&#123;</div><div class="line">    now &lt;- unvisited[<span class="number">1</span>]</div><div class="line">    unvisited &lt;- unvisited[-<span class="number">1</span>]</div><div class="line">    candidate &lt;- which(as.logical(m[now,]))</div><div class="line">    candidate &lt;- setdiff(candidate,visited)</div><div class="line">    unvisited &lt;- union(candidate,unvisited)</div><div class="line">    visited &lt;- c(visited,now)</div><div class="line">  &#125;</div><div class="line">  current_node_num &lt;- length(visited)</div><div class="line">  <span class="keyword">if</span>(current_node_num &gt; max_node_num)&#123;</div><div class="line">    max_node_num &lt;- current_node_num</div><div class="line">    maximal_connected_subgraph &lt;- visited</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">sort(maximal_connected_subgraph)</div><div class="line">print(m[maximal_connected_subgraph,maximal_connected_subgraph])</div></pre></td></tr></table></figure>
-<p>result:<br><figure class="highlight r"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">&gt; print(m[maximal_connected_subgraph,maximal_connected_subgraph])</div><div class="line">     [,<span class="number">1</span>] [,<span class="number">2</span>] [,<span class="number">3</span>]</div><div class="line">[<span class="number">1</span>,]    <span class="number">0</span>    <span class="number">1</span>    <span class="number">1</span></div><div class="line">[<span class="number">2</span>,]    <span class="number">1</span>    <span class="number">0</span>    <span class="number">1</span></div><div class="line">[<span class="number">3</span>,]    <span class="number">1</span>    <span class="number">1</span>    <span class="number">0</span></div></pre></td></tr></table></figure></p>
-<h1 id="深度优先遍历"><a href="#深度优先遍历" class="headerlink" title="深度优先遍历"></a>深度优先遍历</h1><p>深度优先就是一条道走到底，无路可走的时候，及时浪子回头，然后又不听教诲又去浪到底，直到玩累了，回家的过程。</p>
-<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>涉及到一个回朔。这样就需要一个<code>parent_node</code>来保存父节点的信息。这里我想到，是不是要回去的时候要重新计算父节点的邻接节点，因为这样才能知道其他节点啊。</p>
-<p>同样还需要一个<code>visited</code>来保存已经访问过的节点。然后在访问完一个节点，要将这个节点加入<code>visited</code>中，在要遍历下一个节点的时候，需要取一个节点。那这个时候需要看这个节点是不是已经访问了。<br>这里我想到了两个方案：</p>
-<ol>
-<li>一个一个取。意思是下标操作，取一个对比一下是不是在<code>visited</code>中，可以用<code>any(visited == current_node)</code>如果是<code>FALSE</code>就是还未访问过。<code>visisted == current_node</code>返回的是一个逻辑向量，然后用<code>any</code>函数如果有一个是<code>TRUE</code>那返回值是<code>TRUE</code>，返回<code>FALSE</code>说明没有一个是相等的。</li>
-<li>一下子全取出来。然后用集合运算，做差，然后再取出一个。</li>
-</ol>
-<p>然后我用笔在纸上模拟的时候，发现这应该是个递归的过程。那<code>visisted</code>需要全局来维护，那这样函数体内就用循环可以了，遍历一个节点的所有邻接节点，然后对每一个节点再进入这个函数。这样就不需要<code>parent_node</code>来维护了，但是需要一个边界条件来终止递归。那就是一个节点的所有邻接节点都被访问过了。</p>
-<h2 id="发现的问题，visited全局变量"><a href="#发现的问题，visited全局变量" class="headerlink" title="发现的问题，visited全局变量"></a>发现的问题，<code>visited</code>全局变量</h2><figure class="highlight r"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line">m &lt;- matrix(<span class="number">0</span>,<span class="number">5</span>,<span class="number">5</span>)</div><div class="line">m[<span class="number">1</span>,<span class="number">2</span>] &lt;- <span class="number">1</span></div><div class="line">m[<span class="number">1</span>,<span class="number">3</span>] &lt;- <span class="number">1</span></div><div class="line">m[<span class="number">2</span>,<span class="number">3</span>] &lt;- <span class="number">1</span></div><div class="line">m[<span class="number">4</span>,<span class="number">5</span>] &lt;- <span class="number">1</span></div><div class="line"></div><div class="line">m &lt;- m + t(m)</div><div class="line"></div><div class="line">visited &lt;- c(<span class="number">1</span>)</div><div class="line"></div><div class="line">dfs &lt;- <span class="keyword">function</span>(current_node)&#123;</div><div class="line">  <span class="comment">#browser()  # 调试用的</span></div><div class="line">  </div><div class="line">  candidate_node &lt;- which(as.logical(m[current_node,]))</div><div class="line">  candidate_node &lt;- setdiff(candidate_node,visited)</div><div class="line">  <span class="comment">#print(candidate_node)</span></div><div class="line">  <span class="keyword">if</span>(length(candidate_node) == <span class="number">0</span>)&#123;</div><div class="line">    <span class="keyword">return</span>(<span class="number">0</span>) <span class="comment">#这个0返回的没有意义的，随便都可以，只是单纯的结束</span></div><div class="line">  &#125;</div><div class="line">  <span class="keyword">for</span>(i <span class="keyword">in</span> candidate_node)&#123;</div><div class="line">    visited &lt;- c(visited,i) <span class="comment">#访问i节点</span></div><div class="line">    dfs(i) <span class="comment">#递归</span></div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line">dfs(<span class="number">1</span>)</div><div class="line">print(visited)</div></pre></td></tr></table></figure>
-<p>上面的结果出错了<br><figure class="highlight r"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">Error: evaluation nested too deeply: infinite recursion / options(expressions=)?</div><div class="line">Error during wrapup: evaluation nested too deeply: infinite recursion / options(expressions=)?</div></pre></td></tr></table></figure></p>
-<p>那就是递归没返回<br>调试了一下，发现问题出现在<code>visited</code>上，<code>dfs(i)</code>进去的时候，理想中<code>visited</code>应该是全局变量，在循环中我将<code>i</code>节点加入已访问的节点中，但是发现递归进去的时候，<code>candidate_node &lt;- setdiff(candidate_node,visited)</code>这时候的<code>visited</code>值是<code>1</code>,就是初始值。可是为什么呢？？？</p>
-<blockquote>
-<p>内部函数在它的环境中查找visited的值（查找的顺序为：首先函数体的局部变量，参数；然后是外部函数中的局域变量，参数；最后是全局变量） </p>
-</blockquote>
-<p>所以当在函数内做赋值的时候，相当于就建立了一个局部变量，那在第一层的时候<code>visited &lt;- c(visited,i)</code>这个语句还没执行到的时候，此时的<code>visited</code>在函数体内还没有定义！那找到的就是外部的变量，所以调试的时候看到的是<code>1</code>，那其实相当于因为在递归的时候可以看作都是进入自己的函数，所以每一层的<code>visited</code>都是独立的。</p>
-<h2 id="方案-1-return-visited"><a href="#方案-1-return-visited" class="headerlink" title="方案 1 : return(visited)"></a>方案 1 : return(visited)</h2><figure class="highlight r"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">dfs2 &lt;- <span class="keyword">function</span>(current_node,vis=<span class="literal">NULL</span>)&#123;</div><div class="line">	candidate_node &lt;- which(as.logical(m[current_node,]))</div><div class="line">	candidate_node &lt;- setdiff(candidate_node,visited)</div><div class="line">	    </div><div class="line">	<span class="keyword">if</span>(length(candidate_node) == <span class="number">0</span>)&#123;</div><div class="line">		<span class="keyword">return</span>(<span class="literal">NULL</span>) </div><div class="line">	&#125;</div><div class="line">	<span class="keyword">for</span>(i <span class="keyword">in</span> candidate_node)&#123;</div><div class="line">		<span class="keyword">if</span>(!any(visited == i))&#123;</div><div class="line">			visited &lt;- c(visited,dfs2(i))</div><div class="line">		&#125;</div><div class="line">		<span class="keyword">return</span>(visited)</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>这么写有两个问题！！！<br>第一个是有闭环的时候，因为我在前面的代码计算<code>candidate_node</code>的时候是依赖<code>visited</code>的，在每一层的函数进去后，因为前面说了，每一层的<code>visited</code>是独立的，所以在没有赋值之前，也就是没有在下一层<code>return</code>之前，用的都是外部的<code>visited &lt;- c(1)</code>这个值，所以这时候计算的<code>candidate_node</code>肯定是不正确的，不是我们想要的，因为不能正确判断是否邻接节点已经访问过。这是根源，所以导致了在下面<code>for</code>循环的时候，在闭环的情况下，因为没有正确的将已经访问的排除掉，而无限的递归。</p>
-<p>第二个是分叉，就最简单的情况，<code>1</code>连接<code>2</code>,<code>3</code>,但后两个不连接，因为到<code>2</code>中，<code>visited</code>是外部的<code>1</code>，所以这里是恰好，凑巧，刚刚好<code>candidate_node</code>计算为空，返回，但是！！！返回的是空！这样<code>visited &lt;- c(visited,dfs2(i))</code>这个语句就没有起作用，追其根源那就是<code>return</code>写的不正确。一方面是这里连<code>return(visited)</code>都没执行到，相当于在<code>2</code>层这里直接返回<code>NULL</code>，但是并没有把<code>2</code>这个节点加入<code>visited</code>中。<br>而且，即使不管上面的情况，在<code>2</code>饭后会，后面直接<code>return(visited)</code>了，函数直接退出了。<code>3</code>根本就没做。</p>
-<p>试错：<br><figure class="highlight r"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">m &lt;- matrix(<span class="number">0</span>,<span class="number">3</span>,<span class="number">3</span>)</div><div class="line">m[<span class="number">1</span>,<span class="number">2</span>] &lt;- <span class="number">1</span></div><div class="line">m[<span class="number">1</span>,<span class="number">3</span>] &lt;- <span class="number">1</span></div><div class="line">m + t(m) -&gt; m</div><div class="line"></div><div class="line">visited &lt;- c(<span class="number">1</span>)</div><div class="line"></div><div class="line">print(dfs2(<span class="number">1</span>))</div></pre></td></tr></table></figure></p>
-<p>结果<br><figure class="highlight r"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">&gt; print(dfs2(<span class="number">1</span>))</div><div class="line">[<span class="number">1</span>] <span class="number">1</span></div></pre></td></tr></table></figure></p>
-<p>[todo] 使用return 写递归应该是可以的，那就是我整体的递归应该不是按照原来的思路了。但目前还没有想到怎么写</p>
-<h2 id="方案-2-这个visited当作一个参数传递就行了"><a href="#方案-2-这个visited当作一个参数传递就行了" class="headerlink" title="方案 2 : 这个visited当作一个参数传递就行了"></a>方案 2 : 这个<code>visited</code>当作一个参数传递就行了</h2><p>但是发现，这个只是值传递参数，不是引用传递，也就是参数变了，最后<code>visited</code>自己没有改变没有用啊，<code>print(visited)</code>就没用，最后结果就只是<code>1</code></p>
-<h2 id="lt-lt-解决"><a href="#lt-lt-解决" class="headerlink" title="&lt;&lt;-解决"></a><code>&lt;&lt;-</code>解决</h2><p>然后我<a href="https://zhangjg.github.io/blog/2015/12/25/The-Closure-in-R.html" target="_blank" rel="external">查到</a>里面提到了<code>&lt;&lt;-</code>，可能这个操作符才是将变量复制到全局变量中去，不然<code>&lt;-</code>就在函数体内生成了一个同名的局部变量<br>然后我就将上面的<code>visited &lt;- c(visited,i)</code>改为<code>visited &lt;&lt;- c(visited,i)</code><br>得到的结果是<br><figure class="highlight r"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">&gt; print(visited)</div><div class="line">[<span class="number">1</span>] <span class="number">1</span> <span class="number">2</span> <span class="number">3</span> <span class="number">3</span></div></pre></td></tr></table></figure></p>
-<p>多了一个<code>3</code>，这个是因为在第一层的时候也就是<code>current_node</code>为<code>1</code>的时候，邻接节点是<code>2</code>,<code>3</code>,在<code>for</code>循环中，先进入<code>2</code>节点，此时可以遍历的只有<code>3</code>,然后进入<code>3</code>,访问完，回朔，此时应该是在这个图下<code>1</code>,<code>2</code>,<code>3</code>都是遍历完了的，但是回朔到<code>1</code>节点的时候，<code>for</code>循环还有一个<code>3</code>没执行，所以在<code>for</code>循环里面还要再加一个条件，看是否已经遍历过。<br><figure class="highlight r"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">for</span>(i <span class="keyword">in</span> candidate_node)&#123;</div><div class="line">	<span class="keyword">if</span>(!any(visited == i))&#123;</div><div class="line">		visited &lt;&lt;- c(visited,i) <span class="comment">#访问i节点</span></div><div class="line">	&#125;</div><div class="line">	dfs(i) <span class="comment">#递归</span></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>结果：<br><figure class="highlight r"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">&gt; print(visited)</div><div class="line">[<span class="number">1</span>] <span class="number">1</span> <span class="number">2</span> <span class="number">3</span></div></pre></td></tr></table></figure></p>
-<h2 id="寻找最大连通子图"><a href="#寻找最大连通子图" class="headerlink" title="寻找最大连通子图"></a>寻找最大连通子图</h2><p>那就是再用一个<code>for</code>循环封装一下，和上面<code>BFS</code>一样。</p>
-<p>完整代码<br><figure class="highlight r"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div></pre></td><td class="code"><pre><div class="line">m &lt;- matrix(<span class="number">0</span>,<span class="number">5</span>,<span class="number">5</span>)</div><div class="line">m[<span class="number">1</span>,<span class="number">2</span>] &lt;- <span class="number">1</span></div><div class="line">m[<span class="number">1</span>,<span class="number">3</span>] &lt;- <span class="number">1</span></div><div class="line">m[<span class="number">2</span>,<span class="number">3</span>] &lt;- <span class="number">1</span></div><div class="line">m[<span class="number">4</span>,<span class="number">5</span>] &lt;- <span class="number">1</span></div><div class="line"></div><div class="line">m &lt;- m + t(m)</div><div class="line"></div><div class="line">max_length &lt;- <span class="number">0</span></div><div class="line">maximal_connected_subgraph &lt;- <span class="literal">NULL</span></div><div class="line">node_num &lt;- length(m[,<span class="number">1</span>])</div><div class="line"></div><div class="line">dfs &lt;- <span class="keyword">function</span>(current_node,vis=<span class="literal">NULL</span>)&#123;</div><div class="line">  candidate_node &lt;- which(as.logical(m[current_node,]))</div><div class="line">  candidate_node &lt;- setdiff(candidate_node,visited)</div><div class="line">  <span class="keyword">if</span>(length(candidate_node) == <span class="number">0</span>)&#123;</div><div class="line">    <span class="keyword">return</span>(<span class="literal">NULL</span>) <span class="comment">#这个0返回的没有意义的，随便都可以，只是单纯的结束</span></div><div class="line">  &#125;</div><div class="line">  <span class="keyword">for</span>(i <span class="keyword">in</span> candidate_node)&#123;</div><div class="line">    <span class="keyword">if</span>(!any(visited == i))&#123;</div><div class="line">      visited &lt;&lt;- c(visited,i) <span class="comment">#访问i节点</span></div><div class="line">    &#125;</div><div class="line">    dfs(i) <span class="comment">#递归</span></div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line"><span class="keyword">for</span>(i <span class="keyword">in</span> <span class="number">1</span>:node_num)&#123;</div><div class="line">  visited &lt;- c(i)</div><div class="line">  dfs(i)</div><div class="line">  print(visited)</div><div class="line">  current_length &lt;- length(visited)</div><div class="line">  <span class="keyword">if</span>(current_length &gt; max_length)&#123;</div><div class="line">    max_length &lt;- current_length</div><div class="line">    maximal_connected_subgraph &lt;- visited</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line">sort(maximal_connected_subgraph)</div><div class="line">print(m[maximal_connected_subgraph,maximal_connected_subgraph])</div></pre></td></tr></table></figure></p>
-<h2 id="测试复杂的用例"><a href="#测试复杂的用例" class="headerlink" title="测试复杂的用例"></a>测试复杂的用例</h2><p>构造一个新的图<br><img src="http://onexs3cnv.bkt.clouddn.com/Screen%20Shot%202017-04-11%20at%208.00.24%20PM.png" alt="new-test"><br>这么构造是因为多了一个闭环，以及让<code>1</code>,和<code>2</code>节点多了一个选择，测试回朔的过程<br><figure class="highlight r"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">&gt; sort(maximal_connected_subgraph)</div><div class="line">[<span class="number">1</span>]  <span class="number">1</span>  <span class="number">2</span>  <span class="number">3</span>  <span class="number">6</span>  <span class="number">7</span>  <span class="number">8</span>  <span class="number">9</span> <span class="number">10</span></div></pre></td></tr></table></figure></p>
-<p>结果正确，就是打印的时候有点歧义，因为打印出来的矩阵如果没指定名字，又是1,2,3..顺序来的，会误以为是那几个节点，改一下名字就可以了<br><figure class="highlight r"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">mresult &lt;- m[maximal_connected_subgraph,maximal_connected_subgraph]</div><div class="line">colnames(mresult) &lt;- maximal_connected_subgraph</div><div class="line">rownames(mresult) &lt;- maximal_connected_subgraph</div><div class="line">print(mresult)</div></pre></td></tr></table></figure></p>
-<p>结果是：<br><figure class="highlight r"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">&gt; print(mresult)</div><div class="line">   <span class="number">1</span> <span class="number">2</span> <span class="number">3</span> <span class="number">6</span> <span class="number">9</span> <span class="number">7</span> <span class="number">8</span> <span class="number">10</span></div><div class="line"><span class="number">1</span>  <span class="number">0</span> <span class="number">1</span> <span class="number">1</span> <span class="number">0</span> <span class="number">0</span> <span class="number">1</span> <span class="number">0</span>  <span class="number">1</span></div><div class="line"><span class="number">2</span>  <span class="number">1</span> <span class="number">0</span> <span class="number">1</span> <span class="number">1</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span>  <span class="number">0</span></div><div class="line"><span class="number">3</span>  <span class="number">1</span> <span class="number">1</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span>  <span class="number">0</span></div><div class="line"><span class="number">6</span>  <span class="number">0</span> <span class="number">1</span> <span class="number">0</span> <span class="number">0</span> <span class="number">1</span> <span class="number">0</span> <span class="number">0</span>  <span class="number">0</span></div><div class="line"><span class="number">9</span>  <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">1</span> <span class="number">0</span> <span class="number">1</span> <span class="number">0</span>  <span class="number">0</span></div><div class="line"><span class="number">7</span>  <span class="number">1</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">1</span> <span class="number">0</span> <span class="number">1</span>  <span class="number">0</span></div><div class="line"><span class="number">8</span>  <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">1</span> <span class="number">0</span>  <span class="number">0</span></div><div class="line"><span class="number">10</span> <span class="number">1</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span>  <span class="number">0</span></div></pre></td></tr></table></figure></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;求上图的最大连通子图，其实就是图的遍历，图的遍历有深度优先和广度优先&lt;br&gt;图有很多种对应的存储结构，在R里面最简单的就是邻接矩阵了。&lt;/p&gt;
-&lt;p&gt;-update-&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;用深度优先搜索做&lt;/li&gt;
-&lt;li&gt;在深度优先里面涉及到的R中的全局，局部变量
-    
-    </summary>
-    
-      <category term="R" scheme="http://www.mmmmmcclxxvii.cn/categories/R/"/>
-    
-    
-      <category term="R-piece" scheme="http://www.mmmmmcclxxvii.cn/tags/R-piece/"/>
-    
-      <category term="R" scheme="http://www.mmmmmcclxxvii.cn/tags/R/"/>
-    
-      <category term="BFS" scheme="http://www.mmmmmcclxxvii.cn/tags/BFS/"/>
-    
-      <category term="DFS" scheme="http://www.mmmmmcclxxvii.cn/tags/DFS/"/>
-    
-      <category term="algorithm" scheme="http://www.mmmmmcclxxvii.cn/tags/algorithm/"/>
     
   </entry>
   

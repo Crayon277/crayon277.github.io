@@ -102,14 +102,14 @@
 
 <meta name="description" content="在屏幕上用“*”显示0～360的余弦函数cos(x)的曲线。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="c_draw_cos">
+<meta property="og:title" content="用c画函数">
 <meta property="og:url" content="http://www.mmmmmcclxxvii.cn/2015/06/02/c-draw-cos/index.html">
 <meta property="og:site_name" content="MMMMMCCLXXVII">
 <meta property="og:description" content="在屏幕上用“*”显示0～360的余弦函数cos(x)的曲线。">
 <meta property="og:image" content="http://onexs3cnv.bkt.clouddn.com/Screen%20Shot%202017-06-02%20at%208.33.50%20AM.png">
-<meta property="og:updated_time" content="2017-06-02T03:52:07.000Z">
+<meta property="og:updated_time" content="2017-06-14T11:04:16.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="c_draw_cos">
+<meta name="twitter:title" content="用c画函数">
 <meta name="twitter:description" content="在屏幕上用“*”显示0～360的余弦函数cos(x)的曲线。">
 <meta name="twitter:image" content="http://onexs3cnv.bkt.clouddn.com/Screen%20Shot%202017-06-02%20at%208.33.50%20AM.png">
 
@@ -145,7 +145,7 @@
 
 
 
-  <title> c_draw_cos | MMMMMCCLXXVII </title>
+  <title> 用c画函数 | MMMMMCCLXXVII </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="en">
@@ -348,7 +348,7 @@
             
             
               
-                c_draw_cos
+                用c画函数
               
             
           </h1>
@@ -379,8 +379,8 @@
               
                 <span class="post-meta-item-text">Post modified</span>
               
-              <time title="Post modified" itemprop="dateModified" datetime="2017-06-02T11:52:07+08:00">
-                2017-06-02
+              <time title="Post modified" itemprop="dateModified" datetime="2017-06-14T19:04:16+08:00">
+                2017-06-14
               </time>
             
           </span>
@@ -425,7 +425,7 @@
 
           
           
-             <span id="/2015/06/02/c-draw-cos/" class="leancloud_visitors" data-flag-title="c_draw_cos">
+             <span id="/2015/06/02/c-draw-cos/" class="leancloud_visitors" data-flag-title="用c画函数">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -461,7 +461,7 @@
           
             <div class="post-gallery-row">
               <a class="post-gallery-img fancybox"
-                 href="http://onexs3cnv.bkt.clouddn.com/Screen%20Shot%202017-06-02%20at%208.33.50%20AM.png" rel="gallery_cj3pg3q1i0001q676vu923ech"
+                 href="http://onexs3cnv.bkt.clouddn.com/Screen%20Shot%202017-06-02%20at%208.33.50%20AM.png" rel="gallery_cj5pdt6b500019ifyt5257sd7"
                  itemscope itemtype="http://schema.org/ImageObject" itemprop="url">
                 <img src="http://onexs3cnv.bkt.clouddn.com/Screen%20Shot%202017-06-02%20at%208.33.50%20AM.png" itemprop="contentUrl"/>
               </a>
@@ -474,11 +474,25 @@
       
 
       
-        <p>c的控制台程序打印是逐行打印。所以每一行都要一次性计算出所有<em>的位置。其实就是找规律<br>主要就是两个循环，一个是纵轴的，一个是横轴的，纵轴方向控制行，横轴方向控制打印</em><br><code>cos</code>这个函数是对称的.周期是0~2pi,pi是3.1415，所以横轴方向的长度是2pi，也就是6.28，<br>纵轴方向可以通过一个for循环从1到-1,通过acos反三角函数计算出横轴。为了显示方便可以放大倍数<br>因为是对称，每行两个*的横坐标是关于pi对称的。</p>
+        <h1 id="打印cos函数"><a href="#打印cos函数" class="headerlink" title="打印cos函数"></a>打印cos函数</h1><p>c的控制台程序打印是逐行打印。所以每一行都要一次性计算出所有<em>的位置。其实就是找规律<br>主要就是两个循环，一个是纵轴的，一个是横轴的，纵轴方向控制行，横轴方向控制打印</em><br><code>cos</code>这个函数是对称的.周期是0~2pi,pi是3.1415，所以横轴方向的长度是2pi，也就是6.28，<br>纵轴方向可以通过一个for循环从1到-1,通过acos反三角函数计算出横轴。为了显示方便可以放大倍数<br>因为是对称，每行两个*的横坐标是关于pi对称的。</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">draw_cos</span><span class="params">()</span></span>&#123;</div><div class="line">    <span class="keyword">double</span> y;</div><div class="line">    <span class="keyword">int</span> m,x;</div><div class="line">    <span class="keyword">for</span>(y=<span class="number">1</span>;y&gt;=<span class="number">-1</span>;y-=<span class="number">0.1</span>)&#123;</div><div class="line">        x = <span class="built_in">acos</span>(y)*<span class="number">10</span>; <span class="comment">//这里和下面的62-x的62是对应的。放大的倍数</span></div><div class="line">        <span class="keyword">for</span>(m = <span class="number">1</span>;m&lt;x;m++) <span class="built_in">printf</span>(<span class="string">" "</span>);</div><div class="line">        <span class="built_in">printf</span>(<span class="string">"*"</span>);</div><div class="line">        <span class="keyword">for</span>(;m&lt;<span class="number">62</span>-x;m++) <span class="built_in">printf</span>(<span class="string">" "</span>); <span class="comment">//其实62表示的就是总的宽度</span></div><div class="line">        <span class="built_in">printf</span>(<span class="string">"*\n"</span>);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>如果放大了20倍，而宽度还是62的话。<br><figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">x = <span class="built_in">acos</span>(y) * <span class="number">20</span></div></pre></td></tr></table></figure></p>
 <p><img src="http://onexs3cnv.bkt.clouddn.com/Screen%20Shot%202017-06-02%20at%2011.46.38%20AM.png" alt="wrong_result"></p>
 <p>可以看到，当x计算出来的超过了31（对称线）的时候，因为m这个循环变量也已经超过31，<code>m &lt; 62 - x</code>这个控制语句已经不起作用了，所以就不正确了。<br>当要放大20倍的时候，宽度也要相应的放大2倍。</p>
+<h1 id="打印的两种思路"><a href="#打印的两种思路" class="headerlink" title="打印的两种思路"></a>打印的两种思路</h1><h2 id="for-坐标-由坐标来控制"><a href="#for-坐标-由坐标来控制" class="headerlink" title="for(坐标) 由坐标来控制"></a>for(坐标) 由坐标来控制</h2><p>也就是先计算出这一行要打印的坐标，然后控制循环，到你这之前要打印什么，到你这之后要打印什么。<br>上面打印cos的就是</p>
+<h2 id="for-范围-在范围里面询问"><a href="#for-范围-在范围里面询问" class="headerlink" title="for(范围) 在范围里面询问"></a>for(范围) 在范围里面询问</h2><p>这个范围是定义域，在定义域里面循环，到这了，比较一下这个地方是不是要打印的哪个坐标点，如果是，打印哪个，如果不是做哪些事。</p>
+<h1 id="同时打印cos和sin"><a href="#同时打印cos和sin" class="headerlink" title="同时打印cos和sin"></a>同时打印cos和sin</h1><figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">draw_cos_sin</span><span class="params">()</span></span>&#123;</div><div class="line">    <span class="keyword">double</span> y;</div><div class="line">    <span class="keyword">int</span> m,n,x;</div><div class="line">	<span class="comment">//这里将m,x声明为int类型很重要，因为，如果不是int类型，是double类型，可能图像是打印的不完整的</span></div><div class="line">	<span class="comment">//因为，接下来涉及到比较，== 符号，double型的话，因为acos，这种都是无理数，如果要完全相等，基本上不可能。</span></div><div class="line">	<span class="comment">//申明为int类型，这样从0开始遍历到62，就能保证我能“卡”住。</span></div><div class="line">    <span class="keyword">for</span>(y=<span class="number">1</span>;y&gt;=<span class="number">-1</span>;y-=<span class="number">.1</span>)&#123;</div><div class="line">        m=<span class="built_in">acos</span>(y)*<span class="number">10</span>; <span class="comment">//acos值域（0～pi／2）</span></div><div class="line">        n=<span class="built_in">asin</span>(y)*<span class="number">10</span>; <span class="comment">//asin值域（-pi／2～pi／2）</span></div><div class="line">        <span class="keyword">for</span>(x=<span class="number">0</span>;x&lt;=<span class="number">62</span>;x++)&#123;</div><div class="line">            <span class="keyword">if</span>(x==m) <span class="built_in">printf</span>(<span class="string">"*"</span>);</div><div class="line">            <span class="keyword">else</span> <span class="keyword">if</span>(x==<span class="number">62</span>-m) <span class="built_in">printf</span>(<span class="string">"*"</span>);</div><div class="line">            <span class="comment">//上面是打印COS的</span></div><div class="line">            <span class="keyword">else</span> <span class="keyword">if</span>(x==n) <span class="built_in">printf</span>(<span class="string">"+"</span>);</div><div class="line">            <span class="keyword">else</span> <span class="keyword">if</span>(x == <span class="number">31</span>-n) <span class="built_in">printf</span>(<span class="string">"+"</span>);</div><div class="line">            <span class="comment">//else if(x == 62-n) printf("+");</span></div><div class="line">            <span class="comment">//else if(x == 31+n) printf("+");</span></div><div class="line">            <span class="comment">//本来以为要计算四段，但是错误，因为asin的值域是(-PI/2~PI/2)，然后</span></div><div class="line">            <span class="comment">//y从0遍历到-1的时候，按照上面的规则是错的，上面的规则默认是从0~PI/2那段的</span></div><div class="line">            <span class="comment">//sin衍生计算出来的。</span></div><div class="line">            <span class="keyword">else</span> <span class="keyword">if</span>(x == n+<span class="number">62</span>) <span class="built_in">printf</span>(<span class="string">"+"</span>);<span class="comment">//周期性</span></div><div class="line">            <span class="comment">//上面是打印SIN的</span></div><div class="line">            <span class="comment">//因为优先打印cos所以重叠的部分是打印出cos的*状</span></div><div class="line">            <span class="keyword">else</span> <span class="built_in">printf</span>(<span class="string">" "</span>);</div><div class="line">        &#125;</div><div class="line">        <span class="built_in">printf</span>(<span class="string">"\n"</span>);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><img src="http://onexs3cnv.bkt.clouddn.com/Screen%20Shot%202017-06-14%20at%203.17.08%20PM.png" alt="result"><br>acos的值域是<code>(0,pi/2)</code><br>asin的值域是<code>(-pi/2,pi/2)</code></p>
+<p>注释里面也说明了，怎么计算出<code>sin(x)</code>的坐标点，这里要注意的就是，因为<code>y</code>从1往-1算，都在<code>acos</code>和<code>asin</code>的定义域里面，所以它的值域范围都会覆盖到，从图像上看</p>
+<p><img src="http://onexs3cnv.bkt.clouddn.com/Screen%20Shot%202017-06-14%20at%203.22.36%20PM.png" alt="cos"></p>
+<p>cos是计算出来<code>x=pi</code>这条直线的左半边，然后根据对称可以直接算出右半边，这是可以的， 因为这样覆盖了cos的我们要打印的定义域<code>(0,2pi)</code>,也没有浪费acos的值域<code>(0,pi/2)</code>.这里很关键！！！</p>
+<p><img src="http://onexs3cnv.bkt.clouddn.com/Screen%20Shot%202017-06-14%20at%203.23.05%20PM.png" alt="sin"></p>
+<p>我一开始考虑sin的时候，我只利用<code>sin</code>图像的<code>(0,pi/2)</code>部分，先是关于<code>x=pi/2</code>对称，然后在关于点<code>(pi,0)</code>对称，将<code>(pi/2,2pi)</code>部分分三个部分来计算了。(关于对点对称的计算，其实就是两点连起来中间点是这个对称点，也就是(x1+x2)/2=x,y类同)</p>
+<p><img src="http://onexs3cnv.bkt.clouddn.com/Screen%20Shot%202017-06-14%20at%203.44.36%20PM.png" alt="wrong"></p>
+<p>但是，没把当y计算到0~-1的时候，<code>asin</code>就是<code>(-pi/2,0)</code>,图像上看就是y轴的左边部分，考虑进去。因为这样安装上面的规则，当y计算到0~-1的时候，先关于<code>x=pi/2</code>对称的时候，这部分是可以计算出<code>(pi,3pi/2)</code>部分的，但是用y轴左边部分的来用关于点<code>(pi,0)</code>对称规则计算出来的，就不是sin的<code>(3pi/2,2pi)</code>部分，</p>
+<p><img src="http://onexs3cnv.bkt.clouddn.com/Screen%20Shot%202017-06-14%20at%203.26.35%20PM.png" alt="a"></p>
+<p>因为<code>asin</code>的范围是<code>(-pi/2,pi/2)</code>,也就是sin图中的<code>(-pi/2,pi/2)</code>的那部分，这部分按照关于<code>x=pi/2</code>线对称是可以算出<code>(pi/2,3pi/2)</code>部分的，然后剩下<code>(3pi/2,2pi)</code>可以按照周期性，加上一个周期，这时候问了，那y在1～0这部分周期也要算？对，但没关系啊，因为<code>for</code>循环规定了x的范围是<code>（0，62）</code>, y在1～0这部分算出的超过了这个范围，所以<strong>“询问”</strong>不到，这个词要体会。</p>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>这个打印其实就是<code>y=#</code>横线，从上往下横下去，然后碰到曲线有交点了，记录下这个坐标。<br>有条性质很重要，函数的性质，<strong>一个x只能对应一个y，但一个y可能有多个x`，也就是竖线，左右平移的话，都只有一个交点，但横线上下平移，可能会有好多个交点。</strong>这时候要注意定义域，值域，然后根据一些规则，计算出所有的交点。</p>
 
       
     </div>
@@ -523,7 +537,7 @@
     </li>
     <li class="post-copyright-link">
       <strong>Post link:</strong>
-      <a href="http://www.mmmmmcclxxvii.cn/2015/06/02/c-draw-cos/" title="c_draw_cos">http://www.mmmmmcclxxvii.cn/2015/06/02/c-draw-cos/</a>
+      <a href="http://www.mmmmmcclxxvii.cn/2015/06/02/c-draw-cos/" title="用c画函数">http://www.mmmmmcclxxvii.cn/2015/06/02/c-draw-cos/</a>
     </li>
     <li class="post-copyright-license">
       <strong>Copyright Notice: </strong>
@@ -636,8 +650,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel sidebar-panel-active">
+      <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/uploads/myface.jpg"
@@ -652,7 +675,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">33</span>
+                <span class="site-state-item-count">37</span>
                 <span class="site-state-item-name">posts</span>
               </a>
             </div>
@@ -663,7 +686,7 @@
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
-                <span class="site-state-item-count">9</span>
+                <span class="site-state-item-count">11</span>
                 <span class="site-state-item-name">categories</span>
               </a>
             </div>
@@ -674,7 +697,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">39</span>
+                <span class="site-state-item-count">45</span>
                 <span class="site-state-item-name">tags</span>
               </a>
             </div>
@@ -923,6 +946,22 @@
 
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#打印cos函数"><span class="nav-number">1.</span> <span class="nav-text">打印cos函数</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#打印的两种思路"><span class="nav-number">2.</span> <span class="nav-text">打印的两种思路</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#for-坐标-由坐标来控制"><span class="nav-number">2.1.</span> <span class="nav-text">for(坐标) 由坐标来控制</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#for-范围-在范围里面询问"><span class="nav-number">2.2.</span> <span class="nav-text">for(范围) 在范围里面询问</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#同时打印cos和sin"><span class="nav-number">3.</span> <span class="nav-text">同时打印cos和sin</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#总结"><span class="nav-number">4.</span> <span class="nav-text">总结</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
