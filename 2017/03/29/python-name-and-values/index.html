@@ -101,11 +101,13 @@
 
 
 <meta name="description" content="阅读 Facts and myths about Python names and values 做的摘记内容不是很深，只是这里面提到了一些需要注意的点。最主要还是name和value的区别">
+<meta name="keywords" content="python">
 <meta property="og:type" content="article">
 <meta property="og:title" content="python name and values">
 <meta property="og:url" content="http://www.mmmmmcclxxvii.cn/2017/03/29/python-name-and-values/index.html">
 <meta property="og:site_name" content="MMMMMCCLXXVII">
 <meta property="og:description" content="阅读 Facts and myths about Python names and values 做的摘记内容不是很深，只是这里面提到了一些需要注意的点。最主要还是name和value的区别">
+<meta property="og:locale" content="en">
 <meta property="og:image" content="http://onexs3cnv.bkt.clouddn.com/list_mutate_value.png">
 <meta property="og:image" content="http://onexs3cnv.bkt.clouddn.com/Screen%20Shot%202017-03-29%20at%2010.23.49%20PM.png">
 <meta property="og:image" content="http://onexs3cnv.bkt.clouddn.com/Screen%20Shot%202017-03-29%20at%2010.23.55%20PM.png">
@@ -492,7 +494,7 @@
 <p>关于mutable的直接截图：</p>
 <p><img src="http://onexs3cnv.bkt.clouddn.com/list_mutate_value.png" alt="list_mutate"></p>
 <hr>
-<h1 id="Fact-Python-passes-function-arguments-by-assigning-to-them"><a href="#Fact-Python-passes-function-arguments-by-assigning-to-them" class="headerlink" title="Fact: Python passes function arguments by assigning to them."></a>Fact: Python passes function arguments by assigning to them.</h1><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">def my_func(x,y)</div><div class="line">	return x+y</div><div class="line">print(my_func(8,9))</div></pre></td></tr></table></figure>
+<h1 id="Fact-Python-passes-function-arguments-by-assigning-to-them"><a href="#Fact-Python-passes-function-arguments-by-assigning-to-them" class="headerlink" title="Fact: Python passes function arguments by assigning to them."></a>Fact: Python passes function arguments by assigning to them.</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">my_func</span><span class="params">(x,y)</span></span></div><div class="line"><span class="function">	<span class="title">return</span> <span class="title">x</span>+<span class="title">y</span></span></div><div class="line"><span class="function"><span class="title">print</span><span class="params">(my_func<span class="params">(<span class="number">8</span>,<span class="number">9</span>)</span>)</span></span></div></pre></td></tr></table></figure>
 <blockquote>
 <p>The names x and y are local to the function, so when the function returns, those names go away. But if the values they refer to are still referenced by other names, the values live on.</p>
 </blockquote>
@@ -688,7 +690,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">37</span>
+                <span class="site-state-item-count">38</span>
                 <span class="site-state-item-name">posts</span>
               </a>
             </div>

@@ -82,7 +82,7 @@
 <link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="python,stackoverflow,python-piece," />
+  <meta name="keywords" content="python,python-piece,stackoverflow," />
 
 
 
@@ -101,11 +101,13 @@
 
 
 <meta name="description" content="搬运stackoverflow有关python的问题 之 小知识点 (一)、">
+<meta name="keywords" content="python,python-piece,stackoverflow">
 <meta property="og:type" content="article">
 <meta property="og:title" content="project of stackoverflow - python piece (一)">
 <meta property="og:url" content="http://www.mmmmmcclxxvii.cn/2016/02/12/stackoverflow-python-piece-1/index.html">
 <meta property="og:site_name" content="MMMMMCCLXXVII">
 <meta property="og:description" content="搬运stackoverflow有关python的问题 之 小知识点 (一)、">
+<meta property="og:locale" content="en">
 <meta property="og:updated_time" content="2016-02-12T00:11:45.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="project of stackoverflow - python piece (一)">
@@ -466,7 +468,7 @@
 <p>让我们先暂时退出python shell然后重新用一些伪造的编码设置bash的环境<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ <span class="built_in">export</span> LC_CTYPE=klingon</div><div class="line"><span class="comment"># we should get some error message here, just ignore it.</span></div></pre></td></tr></table></figure></p>
 <p>然后重新启动python shell，证实一下他确实恢复到它默认的acsii编码<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">$ python</div><div class="line"></div><div class="line">&gt;&gt;&gt; import sys</div><div class="line">&gt;&gt;&gt; <span class="built_in">print</span> sys.stdout.encoding</div><div class="line">ANSI_X3.4-1968</div></pre></td></tr></table></figure></p>
 <p>那就对了！</p>
-<p>如果现在你要打印一些在ascii码定义之外的unicode字符，你就会得到漂亮的错误提示<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&gt;&gt;&gt; <span class="built_in">print</span> u<span class="string">'\xe9'</span></div><div class="line">UnicodeEncodeError: <span class="string">'ascii'</span> codec can<span class="string">'t encode character u'</span>\xe9<span class="string">' </span></div><div class="line">in position 0: ordinal not in range(128)</div></pre></td></tr></table></figure></p>
+<p>如果现在你要打印一些在ascii码定义之外的unicode字符，你就会得到漂亮的错误提示<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&gt;&gt;&gt; <span class="built_in">print</span> u<span class="string">'\xe9'</span></div><div class="line">UnicodeEncodeError: <span class="string">'ascii'</span> codec can<span class="string">'t encode character u'</span>\xe9<span class="string">' </span></div><div class="line"><span class="string">in position 0: ordinal not in range(128)</span></div></pre></td></tr></table></figure></p>
 <hr>
 <p>让我们退出python，不要管bash shell</p>
 <p>我们现在在python输出字符后观察会发生什么。为了能够观察，我们需要在图形界面的终端启动bash shell(我使用的是Gnome Terminal)然后我们设置终端的输出编码为<code>ISO-8859-1 aka latin-1</code>(图形界面的终端通常在下拉菜单里面都有可以设置字符编码的选项)注意，<strong>这个不会改变shell 真正的环境编码。他只改变终端自己对于给出输出的解码方式，有点像浏览器的行为</strong>。因此你可以改变终端的编码，那是和shell环境的编码是相互独立的。然后启动从shell中启动python，核实一下<code>sys.stdout.encodin</code>是被设置成shell的环境编码(我的是UTF-8)：</p>
@@ -550,9 +552,9 @@
           
             <a href="/tags/python/" rel="tag"><i class="fa fa-tag"></i> python</a>
           
-            <a href="/tags/stackoverflow/" rel="tag"><i class="fa fa-tag"></i> stackoverflow</a>
-          
             <a href="/tags/python-piece/" rel="tag"><i class="fa fa-tag"></i> python-piece</a>
+          
+            <a href="/tags/stackoverflow/" rel="tag"><i class="fa fa-tag"></i> stackoverflow</a>
           
         </div>
       
@@ -665,7 +667,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">37</span>
+                <span class="site-state-item-count">38</span>
                 <span class="site-state-item-name">posts</span>
               </a>
             </div>

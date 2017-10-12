@@ -100,20 +100,14 @@
 
 
 
-<meta name="description" content="Python Types and Objects这篇文章解释了：
-
-什么是&amp;lt;type &amp;#39;type&amp;#39;&amp;gt;和
-用户自定义的类和实例是怎么联系在一起的以及和内建类型的联系
-什么是metaclass元类">
+<meta name="description" content="Python Types and Objects这篇文章解释了：  什么是&amp;lt;type &amp;#39;type&amp;#39;&amp;gt;和 用户自定义的类和实例是怎么联系在一起的以及和内建类型的联系 什么是metaclass元类">
+<meta name="keywords" content="python,object,type">
 <meta property="og:type" content="article">
 <meta property="og:title" content="python types and objects">
 <meta property="og:url" content="http://www.mmmmmcclxxvii.cn/2016/12/03/python-types-and-objects/index.html">
 <meta property="og:site_name" content="MMMMMCCLXXVII">
-<meta property="og:description" content="Python Types and Objects这篇文章解释了：
-
-什么是&amp;lt;type &amp;#39;type&amp;#39;&amp;gt;和
-用户自定义的类和实例是怎么联系在一起的以及和内建类型的联系
-什么是metaclass元类">
+<meta property="og:description" content="Python Types and Objects这篇文章解释了：  什么是&amp;lt;type &amp;#39;type&amp;#39;&amp;gt;和 用户自定义的类和实例是怎么联系在一起的以及和内建类型的联系 什么是metaclass元类">
+<meta property="og:locale" content="en">
 <meta property="og:image" content="http://onexs3cnv.bkt.clouddn.com/Screen%20Shot%202017-04-04%20at%202.56.02%20PM.png">
 <meta property="og:image" content="http://onexs3cnv.bkt.clouddn.com/Screen%20Shot%202017-04-04%20at%202.42.19%20PM.png">
 <meta property="og:image" content="http://onexs3cnv.bkt.clouddn.com/Screen%20Shot%202017-04-04%20at%203.35.31%20PM.png">
@@ -121,11 +115,7 @@
 <meta property="og:updated_time" content="2017-04-04T09:12:57.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="python types and objects">
-<meta name="twitter:description" content="Python Types and Objects这篇文章解释了：
-
-什么是&amp;lt;type &amp;#39;type&amp;#39;&amp;gt;和
-用户自定义的类和实例是怎么联系在一起的以及和内建类型的联系
-什么是metaclass元类">
+<meta name="twitter:description" content="Python Types and Objects这篇文章解释了：  什么是&amp;lt;type &amp;#39;type&amp;#39;&amp;gt;和 用户自定义的类和实例是怎么联系在一起的以及和内建类型的联系 什么是metaclass元类">
 <meta name="twitter:image" content="http://onexs3cnv.bkt.clouddn.com/Screen%20Shot%202017-04-04%20at%202.56.02%20PM.png">
 
 
@@ -529,7 +519,7 @@
 <p>如果问<code>[1,2,3]</code>是什么类型啊？列表类型啊。列表类型是什么类型啊？<code>type</code>类型啊。<code>type</code>类型是什么类型啊？<code>type</code>类型。。。当我们创建{‘a’:1,’b’:2},(1,2)这种，是从<code>&lt;type &#39;list&#39;&gt;</code>,<code>&lt;type &#39;dict&#39;&gt;</code>实例化出来的，也就是相应的<code>type</code>，包括自定义。</p>
 <h1 id="metaclass"><a href="#metaclass" class="headerlink" title="metaclass"></a>metaclass</h1><p>很重要的一点就是，当我<code>class</code>语句定义了一个类，我就自动的有了一个<code>type</code>，其实也就是说<code>__class__</code>（新式类）<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">C</span><span class="params">(object)</span>:</span></div><div class="line">	<span class="keyword">pass</span></div></pre></td></tr></table></figure></p>
 <p><code>type(C)</code>就已经定了。它是根据所继承的父类的<code>type</code>延续下来的，因为<code>object</code>的类型是<code>type</code>所以<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">&gt;&gt;&gt;type(C)</div><div class="line">&lt;type <span class="string">'type'</span>&gt;</div></pre></td></tr></table></figure></p>
-<p>那其实这样追溯下去，因为<code>object</code>类型是<code>type</code>类，所以所有的类都是<code>type</code>类。除了<code>Non-Type</code>对象的类型是相对应的类。所以那幅图的前面两列的虚线都指到<code>type</code>。<br>这里有一个问题就是它是由继承关系决定的，那如果是多重继承呢？是继承哪个？<br><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line">&gt;&gt;&gt; class M1(type):</div><div class="line">...     pass</div><div class="line">...</div><div class="line">&gt;&gt;&gt; class M2(type):</div><div class="line">...     pass</div><div class="line">...</div><div class="line">&gt;&gt;&gt; class A(object):</div><div class="line">...     __metaclass__ = M1</div><div class="line">...</div><div class="line">&gt;&gt;&gt; class B(object):</div><div class="line">...     __metaclass__ = M2</div><div class="line">...</div><div class="line">&gt;&gt;&gt; type(A)</div><div class="line">&lt;class '__main__.M1'&gt;</div><div class="line">&gt;&gt;&gt; type(B)</div><div class="line">&lt;class '__main__.M2'&gt;</div><div class="line">&gt;&gt;&gt; class C(A,B):</div><div class="line">...     pass</div><div class="line">...</div><div class="line">Traceback (most recent call last):</div><div class="line">  File "&lt;stdin&gt;", line 1, in &lt;module&gt;</div><div class="line">  TypeError: Error when calling the metaclass bases</div><div class="line">      metaclass conflict: the metaclass of a derived class must be a (non-strict) subclass of the metaclasses of all its bases</div></pre></td></tr></table></figure></p>
+<p>那其实这样追溯下去，因为<code>object</code>类型是<code>type</code>类，所以所有的类都是<code>type</code>类。除了<code>Non-Type</code>对象的类型是相对应的类。所以那幅图的前面两列的虚线都指到<code>type</code>。<br>这里有一个问题就是它是由继承关系决定的，那如果是多重继承呢？是继承哪个？<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&gt;&gt;&gt; </span><span class="class"><span class="keyword">class</span> <span class="title">M1</span><span class="params">(type)</span>:</span></div><div class="line"><span class="meta">... </span>    <span class="keyword">pass</span></div><div class="line">...</div><div class="line"><span class="meta">&gt;&gt;&gt; </span><span class="class"><span class="keyword">class</span> <span class="title">M2</span><span class="params">(type)</span>:</span></div><div class="line"><span class="meta">... </span>    <span class="keyword">pass</span></div><div class="line">...</div><div class="line"><span class="meta">&gt;&gt;&gt; </span><span class="class"><span class="keyword">class</span> <span class="title">A</span><span class="params">(object)</span>:</span></div><div class="line"><span class="meta">... </span>    __metaclass__ = M1</div><div class="line">...</div><div class="line"><span class="meta">&gt;&gt;&gt; </span><span class="class"><span class="keyword">class</span> <span class="title">B</span><span class="params">(object)</span>:</span></div><div class="line"><span class="meta">... </span>    __metaclass__ = M2</div><div class="line">...</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>type(A)</div><div class="line">&lt;<span class="class"><span class="keyword">class</span> '<span class="title">__main__</span>.<span class="title">M1</span>'&gt;</span></div><div class="line"><span class="class">&gt;&gt;&gt; <span class="title">type</span><span class="params">(B)</span></span></div><div class="line"><span class="class">&lt;<span class="title">class</span> '<span class="title">__main__</span>.<span class="title">M2</span>'&gt;</span></div><div class="line"><span class="class">&gt;&gt;&gt; <span class="title">class</span> <span class="title">C</span><span class="params">(A,B)</span>:</span></div><div class="line"><span class="meta">... </span>    <span class="keyword">pass</span></div><div class="line">...</div><div class="line">Traceback (most recent call last):</div><div class="line">  File <span class="string">"&lt;stdin&gt;"</span>, line <span class="number">1</span>, <span class="keyword">in</span> &lt;module&gt;</div><div class="line">  TypeError: Error when calling the metaclass bases</div><div class="line">      metaclass conflict: the metaclass of a derived <span class="class"><span class="keyword">class</span> <span class="title">must</span> <span class="title">be</span> <span class="title">a</span> <span class="params">(non-strict)</span> <span class="title">subclass</span> <span class="title">of</span> <span class="title">the</span> <span class="title">metaclasses</span> <span class="title">of</span> <span class="title">all</span> <span class="title">its</span> <span class="title">bases</span></span></div></pre></td></tr></table></figure></p>
 <p>如果大家的<code>metaclass</code>都一样，那就没得说了，如果不一样，那么就会混乱，这时候要指定。什么时候会不一样呢？一般情况下都是<code>type</code>，除非自己定义<code>specialType</code>然后派生。但<strong>建议是不要用这个特性</strong>。</p>
 <p>另一个问题就是，到底怎么自定义<code>specialType</code>？上面例子已经给出答案了。<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">C</span><span class="params">(object)</span>:</span></div><div class="line">	__metaclass__ = specialType</div></pre></td></tr></table></figure></p>
 <h1 id="隐式关系"><a href="#隐式关系" class="headerlink" title="隐式关系"></a>隐式关系</h1><p>图片来自文章顶部链接文章中的：<br><a href="http://www.cafepy.com/article/python_types_and_objects/python_types_and_objects.html" target="_blank" rel="external"><img src="http://www.cafepy.com/article/python_types_and_objects/images/relationships_transitivity.png" alt="transitivity of relationships"></a></p>
@@ -737,7 +727,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">37</span>
+                <span class="site-state-item-count">38</span>
                 <span class="site-state-item-name">posts</span>
               </a>
             </div>

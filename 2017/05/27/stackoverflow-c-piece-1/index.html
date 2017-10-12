@@ -101,11 +101,13 @@
 
 
 <meta name="description" content="搬运stackoverflow有关C的知识，即练英语，又可以从他人的困惑中学到新东西。">
+<meta name="keywords" content="stackoverflow,c,c-piece">
 <meta property="og:type" content="article">
 <meta property="og:title" content="project of stackoverflow - C Piece (一)">
 <meta property="og:url" content="http://www.mmmmmcclxxvii.cn/2017/05/27/stackoverflow-c-piece-1/index.html">
 <meta property="og:site_name" content="MMMMMCCLXXVII">
 <meta property="og:description" content="搬运stackoverflow有关C的知识，即练英语，又可以从他人的困惑中学到新东西。">
+<meta property="og:locale" content="en">
 <meta property="og:updated_time" content="2017-06-03T09:13:13.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="project of stackoverflow - C Piece (一)">
@@ -457,7 +459,7 @@
 
       
         <h1 id="C中的操作符优先级-precedence-of-operator-in-c"><a href="#C中的操作符优先级-precedence-of-operator-in-c" class="headerlink" title="C中的操作符优先级 precedence of operator in c"></a>C中的操作符优先级 <a href="https://stackoverflow.com/questions/25057097/precedence-of-operator-in-c" target="_blank" rel="external">precedence of operator in c</a></h1><p>我是一个变成新手，现在我正在学有关C操作符优先级的部分。我尝试着想要分析下面给出的代码</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdio.h&gt;</span></span></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></div><div class="line">&#123;</div><div class="line">   <span class="keyword">int</span> x, y, z;</div><div class="line">   x = y = z= <span class="number">-1</span>;</div><div class="line">  z = ++x&amp;&amp;++y&amp;&amp;++z;</div><div class="line">  <span class="built_in">printf</span>(<span class="string">"x = %d y = %d z = %d"</span>, x, y ,z);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdio.h&gt;</span></span></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></div><div class="line"><span class="function"></span>&#123;</div><div class="line">   <span class="keyword">int</span> x, y, z;</div><div class="line">   x = y = z= <span class="number">-1</span>;</div><div class="line">  z = ++x&amp;&amp;++y&amp;&amp;++z;</div><div class="line">  <span class="built_in">printf</span>(<span class="string">"x = %d y = %d z = %d"</span>, x, y ,z);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>在学了操作符的优先级后，我知道一元操作符(unary operator)有更高的优先级，所以在上面的代码中：<br><code>z = ++0&amp;&amp;++0&amp;&amp;++0;</code><br>所以<code>x</code>,<code>y</code>,<code>z</code>的值是0，对吧？但是编译执行后，结果是<code>x = 0 y = -1 z = 0</code><br>有人能帮我解决这个问题么？</p>
 <hr>
 <p>得票2:</p>
@@ -678,7 +680,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">37</span>
+                <span class="site-state-item-count">38</span>
                 <span class="site-state-item-name">posts</span>
               </a>
             </div>
