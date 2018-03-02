@@ -4,6 +4,41 @@
 
     
   <url>
+    <loc>http://www.mmmmmcclxxvii.cn/2018/02/25/bitcoin-troubleshoot/</loc>
+    <lastmod>2018-03-02T04:59:18.944Z</lastmod>
+    <data>
+        <display>
+        <title>比特币-自问自答（一）</title>
+        <pubTime>2018-02-25T14:41:36.000Z</pubTime>
+        
+        <tag>bitcoin</tag>
+         
+         
+           
+             
+              <breadCrumb title="blockchain" url="http://www.mmmmmcclxxvii.cn/categories/blockchain/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.mmmmmcclxxvii.cn/2017/10/12/p2p/</loc>
+    <lastmod>2017-10-12T14:25:05.000Z</lastmod>
+    <data>
+        <display>
+        <title>P2P 网络</title>
+        <pubTime>2017-10-12T03:49:05.000Z</pubTime>
+        
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://www.mmmmmcclxxvii.cn/2017/10/12/python-yield-send/</loc>
     <lastmod>2017-10-12T03:05:24.000Z</lastmod>
     <data>
@@ -33,9 +68,9 @@
         <title>比特币- 资料整理（2）</title>
         <pubTime>2017-06-21T09:12:11.000Z</pubTime>
         
-        <tag>money</tag>
-         
         <tag>bitcoin</tag>
+         
+        <tag>money</tag>
          
          
            
@@ -413,9 +448,9 @@
         
         <tag>algorithm</tag>
          
-        <tag>R-piece</tag>
-         
         <tag>R</tag>
+         
+        <tag>R-piece</tag>
          
         <tag>BFS</tag>
          
@@ -439,9 +474,9 @@
         <title>用r做一个简单的统计词频的程序</title>
         <pubTime>2017-04-08T06:31:23.000Z</pubTime>
         
-        <tag>R-piece</tag>
-         
         <tag>R</tag>
+         
+        <tag>R-piece</tag>
          
         <tag>text-mining</tag>
          
@@ -465,9 +500,9 @@
         
         <tag>python</tag>
          
-        <tag>encode</tag>
-         
         <tag>unicode</tag>
+         
+        <tag>encode</tag>
          
         <tag>utf-8</tag>
          
@@ -511,9 +546,9 @@
         <title>用R画出下面这样子的形式的图</title>
         <pubTime>2017-04-07T05:35:06.000Z</pubTime>
         
-        <tag>R-piece</tag>
-         
         <tag>R</tag>
+         
+        <tag>R-piece</tag>
          
         <tag>plot</tag>
          
