@@ -4,8 +4,30 @@
 
     
   <url>
+    <loc>http://www.mmmmmcclxxvii.cn/2018/03/05/game-shoot/</loc>
+    <lastmod>2018-03-05T15:12:18.413Z</lastmod>
+    <data>
+        <display>
+        <title>能不能一笔连成线</title>
+        <pubTime>2018-03-05T14:58:41.000Z</pubTime>
+        
+        <tag>c</tag>
+         
+        <tag>algorithm</tag>
+         
+         
+           
+             
+              <breadCrumb title="C" url="http://www.mmmmmcclxxvii.cn/categories/C/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://www.mmmmmcclxxvii.cn/2018/02/25/bitcoin-troubleshoot/</loc>
-    <lastmod>2018-03-02T04:59:18.944Z</lastmod>
+    <lastmod>2018-03-02T06:33:38.958Z</lastmod>
     <data>
         <display>
         <title>比特币-自问自答（一）</title>
@@ -334,11 +356,11 @@
         <title>project of stackoverflow - C Piece (一)</title>
         <pubTime>2017-05-27T10:55:09.000Z</pubTime>
         
-        <tag>stackoverflow</tag>
-         
         <tag>c</tag>
          
         <tag>c-piece</tag>
+         
+        <tag>stackoverflow</tag>
          
          
            
@@ -448,9 +470,9 @@
         
         <tag>algorithm</tag>
          
-        <tag>R</tag>
-         
         <tag>R-piece</tag>
+         
+        <tag>R</tag>
          
         <tag>BFS</tag>
          
@@ -474,9 +496,9 @@
         <title>用r做一个简单的统计词频的程序</title>
         <pubTime>2017-04-08T06:31:23.000Z</pubTime>
         
-        <tag>R</tag>
-         
         <tag>R-piece</tag>
+         
+        <tag>R</tag>
          
         <tag>text-mining</tag>
          
@@ -500,9 +522,9 @@
         
         <tag>python</tag>
          
-        <tag>unicode</tag>
-         
         <tag>encode</tag>
+         
+        <tag>unicode</tag>
          
         <tag>utf-8</tag>
          
@@ -546,9 +568,9 @@
         <title>用R画出下面这样子的形式的图</title>
         <pubTime>2017-04-07T05:35:06.000Z</pubTime>
         
-        <tag>R</tag>
-         
         <tag>R-piece</tag>
+         
+        <tag>R</tag>
          
         <tag>plot</tag>
          
