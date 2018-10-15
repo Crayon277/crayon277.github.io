@@ -172,8 +172,8 @@
       </categories>
       <tags>
         <tag>c</tag>
-        <tag>stackoverflow</tag>
         <tag>c-piece</tag>
+        <tag>stackoverflow</tag>
       </tags>
   </entry>
   <entry>
@@ -231,8 +231,8 @@
         <category>R</category>
       </categories>
       <tags>
-        <tag>R-piece</tag>
         <tag>R</tag>
+        <tag>R-piece</tag>
         <tag>text-mining</tag>
       </tags>
   </entry>
@@ -244,8 +244,8 @@
         <category>R</category>
       </categories>
       <tags>
-        <tag>R-piece</tag>
         <tag>R</tag>
+        <tag>R-piece</tag>
         <tag>plot</tag>
       </tags>
   </entry>
@@ -331,8 +331,8 @@
       </categories>
       <tags>
         <tag>algorithm</tag>
-        <tag>R-piece</tag>
         <tag>R</tag>
+        <tag>R-piece</tag>
         <tag>BFS</tag>
         <tag>DFS</tag>
       </tags>
@@ -446,8 +446,8 @@
       </categories>
       <tags>
         <tag>python</tag>
-        <tag>unicode</tag>
         <tag>encode</tag>
+        <tag>unicode</tag>
         <tag>utf-8</tag>
       </tags>
   </entry>

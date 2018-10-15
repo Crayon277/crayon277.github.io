@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
   <title>MMMMMCCLXXVII</title>
-  <icon>https://www.gravatar.com/avatar/6ef1a20bc4bfa013bc01a298b5d10f16</icon>
+  <icon>https://www.gravatar.com/avatar/d0bffae163a0d37f98020b3096900df4</icon>
   <subtitle>美丽的火花在恋人的周围环绕</subtitle>
   <link href="/atom.xml" rel="self"/>
   
@@ -11,7 +11,7 @@
   
   <author>
     <name>Crayon Chaney</name>
-    <email>mmmmmcclxxvii@yeah.net</email>
+    <email>mmmmmcclxxvii@gmail.com</email>
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
@@ -393,9 +393,9 @@
     
       <category term="c" scheme="http://www.mmmmmcclxxvii.cn/tags/c/"/>
     
-      <category term="stackoverflow" scheme="http://www.mmmmmcclxxvii.cn/tags/stackoverflow/"/>
-    
       <category term="c-piece" scheme="http://www.mmmmmcclxxvii.cn/tags/c-piece/"/>
+    
+      <category term="stackoverflow" scheme="http://www.mmmmmcclxxvii.cn/tags/stackoverflow/"/>
     
   </entry>
   
@@ -539,9 +539,9 @@
       <category term="R" scheme="http://www.mmmmmcclxxvii.cn/categories/R/"/>
     
     
-      <category term="R-piece" scheme="http://www.mmmmmcclxxvii.cn/tags/R-piece/"/>
-    
       <category term="R" scheme="http://www.mmmmmcclxxvii.cn/tags/R/"/>
+    
+      <category term="R-piece" scheme="http://www.mmmmmcclxxvii.cn/tags/R-piece/"/>
     
       <category term="text-mining" scheme="http://www.mmmmmcclxxvii.cn/tags/text-mining/"/>
     
